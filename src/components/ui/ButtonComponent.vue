@@ -2,7 +2,7 @@
   <button
     style="transition: all 0.15s ease 0s"
     class="
-      w-full
+      w-full  
       border-0
       px-3
       py-3

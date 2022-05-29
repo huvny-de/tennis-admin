@@ -1,14 +1,13 @@
 <template>
   <button
-    id="dropdownBottomButton"
-    data-dropdown-toggle="dropdownBottom"
+    :id="id"
+    :data-dropdown-toggle="dropDownToggle"
     data-dropdown-placement="bottom"
     class="
       text-[#747474]
       font-medium
       mt-3
       mb-3
-   
       hover:bg-[#eee6e6]
       focus:ring-2 focus:outline-none focus:ring-blue-300
       rounded-lg
@@ -26,7 +25,7 @@
 
   <!--Dropdown menu-->
   <div
-    id="dropdownBottom"
+    :id="dropDownToggle"
     class="
       z-10
       hidden
@@ -42,7 +41,7 @@
       class="py-1 text-sm text-gray-700 dark:text-gray-200"
       aria-labelledby="dropdownBottomButton"
     >
-      <li v-for="item in dropDownList" :key="item">
+      <li v-for="item in dataList" :key="item">
         <a
           href="#"
           class="
@@ -66,11 +65,27 @@ export default {
       type: Array,
       require: true,
     },
+    id: {
+      type: String,
+      require: true,
+    },
+    dropDownToggle: {
+      type: String,
+      require: true,
+    },
   },
   data() {
     return {
-      dropDownList : this.dataList
-    }
-  }
+      dropDownList: this.dataList,
+    };
+  },
 };
 </script>
+
+  <style scoped>
+#dropdownBottomButton2 {
+  border-color: #e6e7e9;
+  border: 2px solid #e6e7e9;
+  background: #f8f9ff;
+}
+</style>

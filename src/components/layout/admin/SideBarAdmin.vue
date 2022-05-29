@@ -28,25 +28,15 @@
       </div>
 
       <div class="container mx-auto h-full">
-        <!-- <div class="flex flex-col items-center justify-center w-full">
-          <div class="flex items-center mx-auto justify-center mb-4">
-            <div class="flex justify-center content-center items-center">
-              <img
-                class="w-10 h-10 rounded-full mr-2"
-                :src="require('../../../assets/img/son.jpg')"
-              />
-              <div class="flex flex-col items-left py-4">
-                <p class="text-md font-medium text-[#445262]">Henry Senior</p>
-                <p class="text-normal text-[12px] text-[#90A0B7]">Admin</p>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
         <div class="flex flex-col items-center justify-between"></div>
 
         <nav>
-          <div class="w-full bg-[#FEF5F8] flex">
+          <!--Active-->
+
+          <div
+            v-if="checkIsActive('Memberships')"
+            class="w-full bg-[#FEF5F8] flex"
+          >
             <div class="w-1 bg-[#EF3270]"></div>
 
             <router-link
@@ -60,7 +50,11 @@
             </router-link>
           </div>
 
+          <!--Not Active-->
+
           <router-link
+            v-else
+            @click="setCurrentActive('Memberships')"
             class="
               mt-4
               flex
@@ -70,6 +64,49 @@
               duration-200
               border-1-4
               text-[#C2CFE0]
+              hover:bg-red-50
+              cursor-pointer
+            "
+          >
+            <font-awesome-icon class="w-6 h-6 text-[#ACACAC]" icon="users" />
+            <span class="mx-2 text-[#334D6E] text-[14px] font-medium"
+              >Memberships</span
+            >
+          </router-link>
+
+          <!--Active-->
+          <div
+            v-if="checkIsActive('CreateAccount')"
+            class="w-full bg-[#FEF5F8] flex"
+          >
+            <div class="w-1 bg-[#EF3270]"></div>
+
+            <router-link
+              class="flex items-center px-6 py-2 mt-2 duration-200 border-1-4"
+            >
+              <font-awesome-icon class="w-6 h-6 text-[#ACACAC]" icon="user-plus" />
+
+              <span class="mx-2 text-[14px] text-[#434141] font-bold"
+                >Create Account</span
+              >
+            </router-link>
+          </div>
+
+          <!---->
+          <router-link
+            v-else
+            @click="setCurrentActive('CreateAccount')"
+            class="
+              mt-4
+              flex
+              items-center
+              px-6
+              py-2
+              duration-200
+              border-1-4
+              text-[#C2CFE0]
+              hover:bg-red-50
+              cursor-pointer
             "
           >
             <font-awesome-icon
@@ -91,6 +128,8 @@
               duration-200
               border-1-4
               text-[#C2CFE0]
+              hover:bg-red-50
+              cursor-pointer
             "
           >
             <font-awesome-icon
@@ -108,5 +147,23 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      isActive: "Memberships",
+    };
+  },
+  methods: {
+    setCurrentActive(ele) {
+      this.isActive = ele;
+    },
+    checkIsActive(ele) {
+      if (this.isActive === ele) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+};
 </script>

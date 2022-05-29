@@ -1,0 +1,6 @@
+Truyền prop cho các components 
+
+1. select list
+             :id="dropDownAccount.id"
+              :dropDownToggle="dropDownAccount.dropDownToggle"
+              :dataList="dropDownAccount.listItem"
