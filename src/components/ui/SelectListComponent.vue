@@ -43,7 +43,7 @@
     >
       <li v-for="item in dataList" :key="item">
         <a
-          href="#"
+          :href="item.link"
           class="
             block
             px-4
@@ -51,8 +51,7 @@
             hover:bg-gray-100
             dark:hover:bg-gray-600 dark:hover:text-white
           "
-          >{{ item }}</a
-        >
+          >{{ item.text }}</a>
       </li>
     </ul>
   </div>

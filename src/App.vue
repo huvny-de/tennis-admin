@@ -1,15 +1,12 @@
 <template>
-  <admin-dashboard />
+  <div>
+    <router-view />
+  </div>
 </template>
 
 <script>
-import AdminDashboard from "./components/pages/AdminDashBoard.vue";
-
 export default {
   name: "App",
-  components: {
-    AdminDashboard
-  },
 };
 </script>
 
@@ -19,5 +16,4 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
-
 </style>

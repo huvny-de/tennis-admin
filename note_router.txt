@@ -1,0 +1,18 @@
+1. Install npm install vue-router@4
+2. create a js file ==> router.js
+3.
+import {createRouter, createWebHistory} from 'vue-router'
+
+4. import các vue instance vào
+
+import Home from './components/Home.vue'
+
+5. const routes = [{path: '/', component : Home}] ==> là 1 mảng chứa các obj (bên trong obj chứa key-val path and component)
+
+// gọi callback createRouter và truyền vào 1 obj (bên trong obj gồm history và routes)
+const router = createRouter({
+    history: createWebHistory(),
+    routers
+})
+
+6. export default router

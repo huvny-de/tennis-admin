@@ -8,7 +8,6 @@
       py-3
       rounded
       text-lg
-      uppercase
       shadow
       focus:outline-none
     "
