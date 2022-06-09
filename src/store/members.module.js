@@ -42,7 +42,7 @@ export default {
         username: "lukaku123",
         fullName: "Romelu Lukaku",
         email: "romelulukaku@gmail.com",
-        phoneNumber: "010020302",
+        phoneNumber: "0100203022",
         address: "969. Khu Công Nghệ Cao, Quận 9, Thành phố Hồ Chí Minh",
         owner: "Lam Trường Tennis",
         status: "Active",

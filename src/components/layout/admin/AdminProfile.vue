@@ -86,7 +86,7 @@
           <div>
             <label class="text-[#747474]" for="username">Email</label>
             <input-component
-              class="w-full mt-2 text-xs"
+              class="w-full mt-2 text-sm"
               value="sonstarnguyen@gmail.com"
             />
           </div>

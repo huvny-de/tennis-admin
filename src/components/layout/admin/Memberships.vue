@@ -18,7 +18,30 @@
               text-left text-[#334D6E]
               bg-gray-100
               border-b border-gray-200
+              cursor-pointer
             "
+            @click="sortByField('id')"
+          >
+            ID
+            <font-awesome-icon
+              class="w-4 h-4 text-[#ACACAC]"
+              icon="arrows-up-down"
+            />
+          </th>
+          <th
+            class="
+              px-6
+              py-3
+              text-sm
+              font-medium
+              leading-4
+              tracking-wider
+              text-left text-[#334D6E]
+              bg-gray-100
+              border-b border-gray-200
+              cursor-pointer
+            "
+            @click="sortByField('fullName')"
           >
             Name
             <font-awesome-icon
@@ -37,7 +60,9 @@
               text-left text-[#334D6E]
               bg-gray-100
               border-b border-gray-200
+              cursor-pointer
             "
+            @click="sortByField('email')"
           >
             Email
             <font-awesome-icon
@@ -56,7 +81,9 @@
               text-left text-[#334D6E]
               bg-gray-100
               border-b border-gray-200
+              cursor-pointer
             "
+            @click="sortByField('phoneNumber')"
           >
             Phone Number
             <font-awesome-icon
@@ -75,7 +102,9 @@
               text-left text-[#334D6E]
               bg-gray-100
               border-b border-gray-200
+              cursor-pointer
             "
+            @click="sortByField('status')"
           >
             Status
             <font-awesome-icon
@@ -97,13 +126,14 @@
             "
           >
             Action
-            <font-awesome-icon
-              class="w-4 h-4 text-[#ACACAC]"
-              icon="arrows-up-down"
-            />
           </th>
           <tbody class="bg-white">
-            <tr v-for="member in membersList" :key="member.id">
+            <tr v-for="member in sortedList" :key="member.id">
+              <td class="px-2 py-4 border-b border-gray-200 whitespace-nowrap">
+                <div class="flex items-center">
+                  <div class="ml-4 text-[#334D6E]">{{ member.id }}</div>
+                </div>
+              </td>
               <td class="px-6 py-5 border-b border-gray-200 whitespace-nowrap">
                 <div class="flex items-center">
                   <div class="flex-shrink object-contain">
@@ -151,7 +181,6 @@
                         "
                         icon="eye"
                         @click="memberDetail(member.id)"
-                        data-modal-toggle="profile-modal"
                       />
                       <font-awesome-icon
                         class="
@@ -237,10 +266,12 @@ export default {
         listItem: ["My Account", "Sign Out"],
       },
       membersList: this.$store.getters["members/membersList"],
+      sortedList: [...this.$store.getters["members/membersList"]],
       currentPage: 1,
-      profileDetail: "",
+      profileDetail: {},
       isHiddenModal: true,
       countClick: 0,
+      checkSort: 0,
     };
   },
   methods: {
@@ -248,6 +279,30 @@ export default {
       this.profileDetail = this.membersList.find((x) => x.id == id);
       this.isHiddenModal = false;
       this.countClick++;
+    },
+    sortByField(fieldSort) {
+      console.log(fieldSort);
+      if (this.checkSort == 0) {
+        if (fieldSort === "id") {
+          this.sortedList.sort((a, b) =>
+            a[fieldSort] < b[fieldSort] ? 1 : -1
+          );
+        } else {
+          this.sortedList.sort((a, b) =>
+            a[fieldSort] > b[fieldSort] ? 1 : -1
+          );
+        }
+
+        this.checkSort = 1;
+      } else {
+        this.sortedList = [...this.membersList];
+        this.checkSort = 0;
+      }
+    },
+  },
+  watcher: {
+    membersList() {
+      return this.membersList;
     },
   },
 };

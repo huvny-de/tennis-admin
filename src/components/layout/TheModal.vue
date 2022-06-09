@@ -8,6 +8,7 @@
     <div class="mx-auto relative p-4 w-full max-w-md h-full md:h-auto">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 mt-10">
         <button
+          @click="hiddenModal"
           type="button"
           class="
             absolute
@@ -26,7 +27,6 @@
           "
         >
           <svg
-            @click="hiddenModal"
             class="w-5 h-5"
             fill="currentColor"
             viewBox="0 0 20 20"
