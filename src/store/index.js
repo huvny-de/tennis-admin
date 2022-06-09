@@ -1,11 +1,8 @@
-import Vue from 'vue';
-import Vuex from 'vuex'
-import {auth} from './auth.module';
+import { createStore } from "vuex";
+import membersModule from "./members.module";
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
-    modules: {
-        auth
-    }
-})
+export default createStore({
+  modules: {
+    members: membersModule,
+  },
+});

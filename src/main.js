@@ -5,7 +5,7 @@ import loader from "vue-ui-preloader";
 import App from "./App.vue";
 import "./index.css";
 import router from "../src/components/router/router.js";
-// import store from "./store";
+import store from "./store";
 // import VeeValidate from "vee-validate";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -18,10 +18,8 @@ import {
   faMagnifyingGlass,
   faEye,
   faTrashCan,
-  faFilePen,
-  faUpload
+  faUpload,
 } from "@fortawesome/free-solid-svg-icons";
-
 
 import TheHeader from "../src/components/layout/TheHeader.vue";
 import InputComponent from "../src/components/ui/InputComponent.vue";
@@ -38,7 +36,6 @@ library.add(
   faArrowsUpDown,
   faEye,
   faTrashCan,
-  faFilePen,
   faUpload
 );
 
@@ -46,8 +43,8 @@ const app = createApp(App);
 /** use loader */
 app.use(router);
 app.use(loader);
-// app.use(VeeValidate);s
-// app.use(store);
+// app.use(VeeValidate);
+app.use(store);
 
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.config.productionTip = false;

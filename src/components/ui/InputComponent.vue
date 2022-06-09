@@ -7,12 +7,11 @@
       place-holder-grey-400
       text-grey-700
       rounded
-      text-lg
+      text-md
       shadow
       focus:outline-none
       focus:ring
       mb-8
     "
-  />
+  >
 </template>
-

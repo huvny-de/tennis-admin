@@ -59,7 +59,7 @@
         </div>
 
         <!--information container-->
-        <div class="grid md:grid-cols-2 gap-6 mt-4 sm:grid-cols-1 text-sm">
+        <div class="grid md:grid-cols-2 gap-6 mt-4 sm:grid-cols-1 text-xs">
           <div>
             <label class="text-[#747474]" for="username">Username</label>
             <input-component
@@ -86,7 +86,7 @@
           <div>
             <label class="text-[#747474]" for="username">Email</label>
             <input-component
-              class="w-full mt-2 text-sm"
+              class="w-full mt-2 text-xs"
               value="sonstarnguyen@gmail.com"
             />
           </div>

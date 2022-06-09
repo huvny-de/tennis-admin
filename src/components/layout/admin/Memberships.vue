@@ -103,81 +103,37 @@
             />
           </th>
           <tbody class="bg-white">
-            <!--Name Content-->
-            <tr>
-              <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
+            <tr v-for="member in membersList" :key="member.id">
+              <td class="px-6 py-5 border-b border-gray-200 whitespace-nowrap">
                 <div class="flex items-center">
-                  <div class="flex=shrink w-8 h-8">
-                    <img
-                      class="rounded-2xl mr-3"
-                      :src="require('../../../assets/img/son.jpg')"
-                    />
+                  <div class="flex-shrink object-contain">
+                    <img class="rounded-2xl mr-3 w-8 h-8" :src="member.img" />
                   </div>
-                  <div class="ml-4 text-[#334D6E]">Senior Backend</div>
+                  <div class="ml-4 text-[#334D6E]">{{ member.fullName }}</div>
                 </div>
               </td>
               <td class="px-2 py-4 border-b border-gray-200 whitespace-nowrap">
                 <div class="flex items-center">
-                  <div class="ml-4 text-[#334D6E]">huysenior@gmail.com</div>
-                </div>
-              </td>
-              <td class="px-2 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="ml-4 text-[#334D6E]">0909741741</div>
-                </div>
-              </td>
-              <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <span class="font-semibold text-[#50D222]">Active</span>
+                  <div class="ml-4 text-[#334D6E]">{{ member.email }}</div>
                 </div>
               </td>
               <td class="px-2 py-4 border-b border-gray-200 whitespace-nowrap">
                 <div class="flex items-center">
                   <div class="ml-4 text-[#334D6E]">
-                    <div class="flex items-center">
-                      <font-awesome-icon
-                        class="w-5 h-5 text-[#ACACAC] mr-2"
-                        icon="eye"
-                      />
-                      <font-awesome-icon
-                        class="w-5 h-5 text-[#ACACAC] mr-2"
-                        icon="trash-can"
-                      />
-                      <font-awesome-icon
-                        class="w-5 h-5 text-[#ACACAC] mr-2"
-                        icon="file-pen"
-                      />
-                    </div>
+                    {{ member.phoneNumber }}
                   </div>
-                </div>
-              </td>
-            </tr>
-            <!--Email Content-->
-            <tr>
-              <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="flex=shrink w-8 h-8">
-                    <img
-                      class="rounded-2xl mr-3"
-                      :src="require('../../../assets/img/son.jpg')"
-                    />
-                  </div>
-                  <div class="ml-4 text-[#334D6E]">Senior Backend</div>
-                </div>
-              </td>
-              <td class="px-2 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="ml-4 text-[#334D6E]">huysenior@gmail.com</div>
-                </div>
-              </td>
-              <td class="px-2 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="ml-4 text-[#334D6E]">0909741741</div>
                 </div>
               </td>
               <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                 <div class="flex items-center">
-                  <span class="font-semibold text-[#FF8494]">Disabled</span>
+                  <span
+                    v-if="member.status === 'Active'"
+                    class="font-semibold text-[#50D222]"
+                    >Active</span
+                  >
+                  <span v-else class="font-semibold text-[#FF8494]"
+                    >Disabled</span
+                  >
                 </div>
               </td>
               <td class="px-2 py-4 border-b border-gray-200 whitespace-nowrap">
@@ -190,169 +146,23 @@
                           h-5
                           text-[#ACACAC]
                           mr-2
-                          hover:text-gray-500
                           cursor-pointer
+                          hover:text-gray-500
                         "
                         icon="eye"
+                        @click="memberDetail(member.id)"
+                        data-modal-toggle="profile-modal"
                       />
                       <font-awesome-icon
-                        class="w-5 h-5 text-[#ACACAC] mr-2"
+                        class="
+                          w-5
+                          h-5
+                          text-[#ACACAC]
+                          mr-2
+                          cursor-pointer
+                          hover:text-gray-500
+                        "
                         icon="trash-can"
-                      />
-                      <font-awesome-icon
-                        class="w-5 h-5 text-[#ACACAC] mr-2"
-                        icon="file-pen"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <!--Phone Number-->
-            <tr>
-              <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="flex=shrink w-8 h-8">
-                    <img
-                      class="rounded-2xl mr-3"
-                      :src="require('../../../assets/img/son.jpg')"
-                    />
-                  </div>
-                  <div class="ml-4 text-[#334D6E]">Senior Backend</div>
-                </div>
-              </td>
-              <td class="px-2 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="ml-4 text-[#334D6E]">huysenior@gmail.com</div>
-                </div>
-              </td>
-              <td class="px-2 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="ml-4 text-[#334D6E]">0909741741</div>
-                </div>
-              </td>
-              <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="flex items-center">
-                    <span class="font-semibold text-[#50D222]">Active</span>
-                  </div>
-                </div>
-              </td>
-              <td class="px-2 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="ml-4 text-[#334D6E]">
-                    <div class="flex items-center">
-                      <font-awesome-icon
-                        class="w-5 h-5 text-[#ACACAC] mr-2"
-                        icon="eye"
-                      />
-                      <font-awesome-icon
-                        class="w-5 h-5 text-[#ACACAC] mr-2"
-                        icon="trash-can"
-                      />
-                      <font-awesome-icon
-                        class="w-5 h-5 text-[#ACACAC] mr-2"
-                        icon="file-pen"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <!--Status-->
-            <tr>
-              <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="flex=shrink w-8 h-8">
-                    <img
-                      class="rounded-2xl mr-3"
-                      :src="require('../../../assets/img/son.jpg')"
-                    />
-                  </div>
-                  <div class="ml-4 text-[#334D6E]">Senior Backend</div>
-                </div>
-              </td>
-              <td class="px-2 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="ml-4 text-[#334D6E]">huysenior@gmail.com</div>
-                </div>
-              </td>
-              <td class="px-2 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="ml-4 text-[#334D6E]">0909741741</div>
-                </div>
-              </td>
-              <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <span class="font-semibold text-[#FF8494]">Disabled</span>
-                </div>
-              </td>
-              <td class="px-2 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="ml-4 text-[#334D6E]">
-                    <div class="flex items-center">
-                      <font-awesome-icon
-                        class="w-5 h-5 text-[#ACACAC] mr-2"
-                        icon="eye"
-                      />
-                      <font-awesome-icon
-                        class="w-5 h-5 text-[#ACACAC] mr-2"
-                        icon="trash-can"
-                      />
-                      <font-awesome-icon
-                        class="w-5 h-5 text-[#ACACAC] mr-2"
-                        icon="file-pen"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <!--Action-->
-            <tr>
-              <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="flex=shrink w-8 h-8">
-                    <img
-                      class="rounded-2xl mr-3"
-                      :src="require('../../../assets/img/son.jpg')"
-                    />
-                  </div>
-                  <div class="ml-4 text-[#334D6E]">Senior Backend</div>
-                </div>
-              </td>
-              <td class="px-2 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="ml-4 text-[#334D6E]">huysenior@gmail.com</div>
-                </div>
-              </td>
-              <td class="px-2 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="ml-4 text-[#334D6E]">0909741741</div>
-                </div>
-              </td>
-              <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="flex items-center">
-                    <span class="font-semibold text-[#50D222]">Active</span>
-                  </div>
-                </div>
-              </td>
-              <td class="px-2 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div class="ml-4 text-[#334D6E]">
-                    <div class="flex items-center">
-                      <font-awesome-icon
-                        class="w-5 h-5 text-[#ACACAC] mr-2"
-                        icon="eye"
-                      />
-                      <font-awesome-icon
-                        class="w-5 h-5 text-[#ACACAC] mr-2"
-                        icon="trash-can"
-                      />
-                      <font-awesome-icon
-                        class="w-5 h-5 text-[#ACACAC] mr-2"
-                        icon="file-pen"
                       />
                     </div>
                   </div>
@@ -363,9 +173,12 @@
         </table>
         <div class="flex flex-col container mx-auto lg:mt-8 md:mt-0">
           <p class="text-center md:my-2 my-4 text-[#334D6E]">
-            Showing 1 to 5 of 10 Member
+            Showing {{ currentPage }} to 5 of {{ membersList.length }} Members
           </p>
-          <div class="mx-auto flex items-center text-[#ACACAC] font-medium lg:mt-2">
+          <div
+            v-if="membersList.length > 5"
+            class="mx-auto flex items-center text-[#ACACAC] font-medium lg:mt-2"
+          >
             <button-component
               class="
                 bg-[#D1D5DB]
@@ -378,6 +191,7 @@
                 cursor-pointer
                 hover:bg-[#bdc3cb] hover:text-[#434141] hover:font-semibold
               "
+              @click="currentPage--"
               >Prev</button-component
             >
             <button-component
@@ -391,6 +205,7 @@
                 cursor-pointer
                 hover:bg-[#bdc3cb] hover:text-[#434141] hover:font-semibold
               "
+              @click="currentPage++"
               >Next</button-component
             >
           </div>
@@ -398,11 +213,22 @@
       </div>
     </div>
   </div>
-</template>
 
-  <script>
+  <!--The Modal-->
+  <TheModal
+    :class="isHiddenModal === true ? 'hidden' : ''"
+    :profile="profileDetail"
+    :click="countClick"
+  />
+</template>
+<script>
+import TheModal from "../TheModal.vue";
+
 export default {
-  name : "MemberShips",
+  name: "MemberShips",
+  components: {
+    TheModal,
+  },
   data() {
     return {
       dropDownAccount: {
@@ -410,7 +236,19 @@ export default {
         dropDownToggle: "dropdownBottom1",
         listItem: ["My Account", "Sign Out"],
       },
+      membersList: this.$store.getters["members/membersList"],
+      currentPage: 1,
+      profileDetail: "",
+      isHiddenModal: true,
+      countClick: 0,
     };
+  },
+  methods: {
+    memberDetail(id) {
+      this.profileDetail = this.membersList.find((x) => x.id == id);
+      this.isHiddenModal = false;
+      this.countClick++;
+    },
   },
 };
 </script>

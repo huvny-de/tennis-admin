@@ -23,31 +23,31 @@
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
               <div>
                 <label class="text-[#747474]" for="username">Username</label>
-                <input-component class="w-full mt-2 border-gray-800" />
+                <input-component class="w-full mt-2 text-sm border-gray-800" />
               </div>
               <div>
                 <label class="text-[#747474]" for="username">Full Name</label>
-                <input-component class="w-full mt-2" />
+                <input-component class="w-full mt-2 text-sm" />
               </div>
               <div>
                 <label class="text-[#747474]" for="username">Email</label>
-                <input-component type="email" class="w-full mt-2" />
+                <input-component type="email" class="w-full mt-2 text-sm" />
               </div>
               <div>
                 <label class="text-[#747474]" for="username"
                   >Phone Number</label
                 >
-                <input-component type="phone" class="w-full mt-2" />
+                <input-component type="phone" class="w-full mt-2 text-sm" />
               </div>
               <div>
                 <label class="text-[#747474]" for="username">Password</label>
-                <input-component type="password" class="w-full mt-2" />
+                <input-component type="password" class="w-full mt-2 text-sm" />
               </div>
               <div>
                 <label class="text-[#747474]" for="username"
                   >Confirm Password</label
                 >
-                <input-component type="password" class="w-full mt-2" />
+                <input-component type="password" class="w-full mt-2 text-sm" />
               </div>
             </div>
             <button

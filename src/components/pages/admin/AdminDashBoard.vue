@@ -7,7 +7,6 @@
     <div class="flex-1 bg-[#F8F9FF] flex flex-col">
       <the-header />
       <component :is="isSelectedTab" />
-      <MyAccount />
     </div>
   </div>
 </template>
