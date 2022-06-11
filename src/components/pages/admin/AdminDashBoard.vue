@@ -1,6 +1,5 @@
   <template>
   <div class="flex h-screen">
-    <preloader-component />
 
     <SideBarAdmin @changeTab="changeCurrentComponent" class="flex w-[16%]" />
 

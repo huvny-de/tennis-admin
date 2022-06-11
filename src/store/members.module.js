@@ -1,7 +1,6 @@
 export default {
   namespaced: true,
   state: {
-    currentPage: 1,
     membersList: [
       {
         id: "1",
@@ -58,14 +57,78 @@ export default {
         owner: "Nhật Huy Tennis",
         status: "Active",
       },
+      {
+        id: "6",
+        img: "https://i.ibb.co/TYHBG0K/congphuong.jpg",
+        username: "congphuong123",
+        fullName: "Nguyễn Công Phượng",
+        email: "congphuong123@gmail.com",
+        phoneNumber: "0203031234",
+        address: "Đại học FPT, Quận 9, Thành phố Hồ Chí Minh",
+        owner: "FPT Tennis",
+        status: "Active",
+      },
+      {
+        id: "7",
+        img: "https://i.ibb.co/n7wPb9k/vanhau.jpg",
+        username: "vanhau123",
+        fullName: "Đoàn Văn Hậu",
+        email: "vanhau@gmail.com",
+        phoneNumber: "08885556663",
+        address: "Đại học Hutech, Quận 9, Thành phố Hồ Chí Minh",
+        owner: "Hutech Tennis",
+        status: "Active",
+      },
+      {
+        id: "8",
+        img: "https://i.ibb.co/k5GmbsZ/quanghai2.jpg",
+        username: "quanghai123",
+        fullName: "Nguyễn Quang Hải",
+        email: "quanghai@gmail.com",
+        phoneNumber: "0111444578",
+        address: "Đại học Bách Khoa, Thủ Đức, Thành phố Hồ Chí Minh",
+        owner: "Bách Khoa Tennis",
+        status: "InActive",
+      },
+      {
+        id: "9",
+        img: "https://i.ibb.co/tBQ54Wf/lukaku.jpg",
+        username: "lukaku123",
+        fullName: "Romelu Lukaku",
+        email: "romelulukaku@gmail.com",
+        phoneNumber: "0100203022",
+        address: "969. Khu Công Nghệ Cao, Quận 9, Thành phố Hồ Chí Minh",
+        owner: "Lam Trường Tennis",
+        status: "InActive",
+      },
+      {
+        id: "10",
+        img: "https://i.ibb.co/2MDfzqc/kaka2.jpg",
+        username: "kaka123",
+        fullName: "KaKa",
+        email: "kaka@gmail.com",
+        phoneNumber: "0789456012",
+        address: "312/6/6. Linh Trung, Thủ Đức, Thành phố Hồ Chí Minh",
+        owner: "Nhật Huy Tennis",
+        status: "InActive",
+      },
     ],
   },
   getters: {
     membersList: (state) => {
       return state.membersList;
     },
-    currentPage: (state) => {
-      return state.currentPage;
+    paginate: (state) => (currentPage) => {
+      let size = 5;
+      let startIndex = (currentPage - 1) * size;
+      let endIndex = currentPage * size;
+
+      let paginated_arr = state.membersList.slice(startIndex, endIndex);
+      return paginated_arr;
     },
+    membersTotal : (state) => {
+      return state.membersList.length;
+    }
+   
   },
 };

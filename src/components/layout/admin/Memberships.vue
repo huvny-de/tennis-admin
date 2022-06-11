@@ -1,8 +1,12 @@
   <template>
-  <div class="container mx-auto px-8 h-[80%] lg:mt-8 shadow">
+  <preloader-component id="preloader" />
+
+  <div class="container mx-auto px-8 h-[80%] lg:mt-8">
     <div class="w-[100%] h-full">
       <div class="flex items-center justify-center mb-4">
-        <h2 class="mr-4 text-lg font-semibold text-[#747474]">Data Member</h2>
+        <h2 class="mr-4 text-lg font-semibold text-[#747474]">
+          Danh Sách Chủ Sân
+        </h2>
       </div>
 
       <div class="container mx-auto h-full mt-8 md:mt-0 min-w-full">
@@ -43,7 +47,7 @@
             "
             @click="sortByField('fullName')"
           >
-            Name
+            Họ Tên
             <font-awesome-icon
               class="w-4 h-4 text-[#ACACAC]"
               icon="arrows-up-down"
@@ -85,7 +89,7 @@
             "
             @click="sortByField('phoneNumber')"
           >
-            Phone Number
+            Điện Thoại
             <font-awesome-icon
               class="w-4 h-4 text-[#ACACAC]"
               icon="arrows-up-down"
@@ -106,7 +110,7 @@
             "
             @click="sortByField('status')"
           >
-            Status
+            Trạng Thái
             <font-awesome-icon
               class="w-4 h-4 text-[#ACACAC]"
               icon="arrows-up-down"
@@ -125,7 +129,7 @@
               border-b border-gray-200
             "
           >
-            Action
+            Thao Tác
           </th>
           <tbody class="bg-white">
             <tr v-for="member in sortedList" :key="member.id">
@@ -200,43 +204,152 @@
             </tr>
           </tbody>
         </table>
-        <div class="flex flex-col container mx-auto lg:mt-8 md:mt-0">
+        <div class="flex flex-col container mx-auto lg:mt-6 md:mt-0">
           <p class="text-center md:my-2 my-4 text-[#334D6E]">
-            Showing {{ currentPage }} to 5 of {{ membersList.length }} Members
+            <!-- Showing {{ currentPage }} to 5 of {{ membersList.length }} Members -->
+            Tổng số chủ sân : {{ membersTotal }}
           </p>
           <div
-            v-if="membersList.length > 5"
-            class="mx-auto flex items-center text-[#ACACAC] font-medium lg:mt-2"
+            class="
+              mx-auto
+              flex
+              items-center
+              text-[#ACACAC]
+              font-medium
+              lg:mt-4
+              text-sm
+            "
           >
-            <button-component
-              class="
-                bg-[#D1D5DB]
-                px-4
-                py-2
-                text-sm
-                rounded
-                mr-1
-                hover:outline-none
-                cursor-pointer
-                hover:bg-[#bdc3cb] hover:text-[#434141] hover:font-semibold
-              "
-              @click="currentPage--"
-              >Prev</button-component
-            >
-            <button-component
-              class="
-                bg-[#D1D5DB]
-                px-4
-                py-2
-                text-sm
-                rounded
-                hover:outline-none
-                cursor-pointer
-                hover:bg-[#bdc3cb] hover:text-[#434141] hover:font-semibold
-              "
-              @click="currentPage++"
-              >Next</button-component
-            >
+            <nav aria-label="Page navigation example">
+              <ul class="inline-flex -space-x-px">
+                <li>
+                  <span
+                    v-if="currentPage == 1"
+                    class="
+                      py-2
+                      px-3
+                      ml-0
+                      leading-tight
+                      text-gray-500
+                      bg-white
+                      rounded-l-lg
+                      border border-gray-300
+                      hover:bg-gray-100 hover:text-gray-700
+                      dark:bg-gray-800
+                      dark:border-gray-700
+                      dark:text-gray-400
+                      dark:hover:bg-gray-700
+                      dark:hover:text-white
+                      cursor-default
+                    "
+                    >Previous</span
+                  >
+                  <span
+                    v-else
+                    class="
+                      py-2
+                      px-3
+                      ml-0
+                      leading-tight
+                      text-gray-500
+                      bg-white
+                      rounded-l-lg
+                      border border-gray-300
+                      hover:bg-gray-100 hover:text-gray-700
+                      dark:bg-gray-800
+                      dark:border-gray-700
+                      dark:text-gray-400
+                      dark:hover:bg-gray-700
+                      dark:hover:text-white
+                      cursor-pointer
+                    "
+                    @click="paging(currentPage - 1)"
+                    >Previous</span
+                  >
+                </li>
+                <li v-for="page in totalPage" :key="page">
+                  <span
+                    v-if="page === currentPage"
+                    aria-current="page"
+                    class="
+                      py-2
+                      px-3
+                      text-blue-600
+                      bg-blue-50
+                      border border-gray-300
+                      hover:bg-blue-100 hover:text-blue-700
+                      dark:border-gray-700 dark:bg-gray-700 dark:text-white
+                    "
+                    >{{ page }}</span
+                  >
+                  <a
+                    v-else
+                    href="#"
+                    class="
+                      py-2
+                      px-3
+                      leading-tight
+                      text-gray-500
+                      bg-white
+                      border border-gray-300
+                      hover:bg-gray-100 hover:text-gray-700
+                      dark:bg-gray-800
+                      dark:border-gray-700
+                      dark:text-gray-400
+                      dark:hover:bg-gray-700
+                      dark:hover:text-white
+                    "
+                    @click="paging(page)"
+                    >{{ page }}</a
+                  >
+                </li>
+                <li>
+                  <span
+                    v-if="currentPage == totalPage"
+                    class="
+                      py-2
+                      px-3
+                      ml-0
+                      leading-tight
+                      text-gray-500
+                      bg-white
+                      rounded-l-lg
+                      border border-gray-300
+                      hover:bg-gray-100 hover:text-gray-700
+                      dark:bg-gray-800
+                      dark:border-gray-700
+                      dark:text-gray-400
+                      dark:hover:bg-gray-700
+                      dark:hover:text-white
+                      cursor-default
+                    "
+                    >Next</span
+                  >
+                  <span
+                    v-else
+                    class="
+                      py-2
+                      px-3
+                      ml-0
+                      leading-tight
+                      text-gray-500
+                      bg-white
+                      rounded-l-lg
+                      border border-gray-300
+                      hover:bg-gray-100 hover:text-gray-700
+                      dark:bg-gray-800
+                      dark:border-gray-700
+                      dark:text-gray-400
+                      dark:hover:bg-gray-700
+                      dark:hover:text-white
+                      cursor-pointer
+                    "
+                    @click="paging(currentPage + 1)"
+                    >Next</span
+                  >
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
       </div>
@@ -258,6 +371,14 @@ export default {
   components: {
     TheModal,
   },
+  mounted() {
+    this.sortedList = [
+      ...this.$store.getters["members/paginate"](this.currentPage),
+    ];
+
+    this.membersTotal = this.$store.getters["members/membersTotal"];
+    this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
+  },
   data() {
     return {
       dropDownAccount: {
@@ -265,9 +386,11 @@ export default {
         dropDownToggle: "dropdownBottom1",
         listItem: ["My Account", "Sign Out"],
       },
-      membersList: this.$store.getters["members/membersList"],
-      sortedList: [...this.$store.getters["members/membersList"]],
+      sortedList: [],
+      membersTotal: 0,
       currentPage: 1,
+      pageSize: 5,
+      totalPage: 0,
       profileDetail: {},
       isHiddenModal: true,
       countClick: 0,
@@ -276,16 +399,15 @@ export default {
   },
   methods: {
     memberDetail(id) {
-      this.profileDetail = this.membersList.find((x) => x.id == id);
+      this.profileDetail = this.sortedList.find((x) => x.id == id);
       this.isHiddenModal = false;
       this.countClick++;
     },
     sortByField(fieldSort) {
-      console.log(fieldSort);
       if (this.checkSort == 0) {
         if (fieldSort === "id") {
           this.sortedList.sort((a, b) =>
-            a[fieldSort] < b[fieldSort] ? 1 : -1
+            parseInt(a[fieldSort]) < parseInt(b[fieldSort]) ? 1 : -1
           );
         } else {
           this.sortedList.sort((a, b) =>
@@ -295,9 +417,18 @@ export default {
 
         this.checkSort = 1;
       } else {
-        this.sortedList = [...this.membersList];
+        this.sortedList = [
+          ...this.$store.getters["members/paginate"](this.currentPage),
+        ];
         this.checkSort = 0;
       }
+    },
+    paging(page) {
+      this.sortedList = [...this.$store.getters["members/paginate"](page)];
+      this.currentPage = page;
+
+      let preloader = document.getElementById("preloader");
+        preloader.classList.toggle('hidden');
     },
   },
   watcher: {

@@ -49,7 +49,7 @@
                 />
 
                 <span class="mx-2 text-[14px] text-[#434141] font-bold"
-                  >Memberships</span
+                  >Chủ Sân</span
                 >
               </div>
             </div>

@@ -5,7 +5,7 @@
     :class="isClose === true ? 'hidden' : ''"
   >
     <div class="modal-overlay absolute w-full h-full"></div>
-    <div class="mx-auto relative p-4 w-full max-w-md h-full md:h-auto">
+    <div class="mx-auto relative p-4 w-full max-w-5xl h-full md:h-auto">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 mt-10">
         <button
           @click="hiddenModal"
@@ -41,7 +41,7 @@
         </button>
         <div class="py-6 px-6 lg:px-8">
           <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-            Member Profile
+            Thông Tin Người Dùng
           </h3>
           <form class="space-y-8" action="#">
             <div>
@@ -63,168 +63,383 @@
                   {{ profile.fullName }}
                 </h3>
                 <div class="text-center text-gray-400 text-xs font-semibold">
-                  <p>{{ profile.owner }}</p>
+                  <p>Chủ Sân</p>
                 </div>
-                <table class="my-3">
-                  <tbody>
-                    <tr>
-                      <td
-                        class="
-                          px-2
-                          pt-0
-                          pb-2
-                          text-gray-500
-                          font-semibold
-                          text-normal
-                        "
-                      >
-                        Username
-                      </td>
-                      <td class="px-2 py-2">
-                        <div class="mb-3 pt-0">
-                          <input
-                            type="text"
-                            placeholder="Placeholder"
+                <div class="grid grid-cols-2 gap-6">
+                  <table class="my-3">
+                    <tbody>
+                      <tr>
+                        <td
+                          class="
+                            px-2
+                            pt-0
+                            pb-2
+                            text-gray-500
+                            font-semibold
+                            text-normal
+                          "
+                        >
+                          Username
+                        </td>
+                        <td class="px-2 py-2">
+                          <div class="mb-3 pt-0">
+                            <input
+                              type="text"
+                              placeholder="Placeholder"
+                              class="
+                                px-2
+                                py-1
+                                placeholder-slate-300
+                                text-slate-600
+                                relative
+                                bg-gray-200
+                                rounded
+                                text-sm
+                                border border-slate-300
+                                outline-none
+                                focus:outline-none focus:ring
+                                w-full
+                              "
+                              :value="profile.username"
+                              disabled
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          class="
+                            px-2
+                            pt-0
+                            pb-2
+                            text-gray-500
+                            font-semibold
+                            text-normal
+                          "
+                        >
+                          Địa chỉ
+                        </td>
+                        <td class="px-2 py-2 text-sm">
+                          <textarea
+                            class="resize-none w-full rounded-md text-xs"
+                            :value="profile.address"
+                          ></textarea>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          class="
+                            px-2
+                            pt-0
+                            pb-2
+                            text-gray-500
+                            font-semibold
+                            text-normal
+                          "
+                        >
+                          Điện Thoại
+                        </td>
+                        <td class="px-2 py-2 text-sm">
+                          <div class="mb-3 pt-0">
+                            <input
+                              type="text"
+                              placeholder="Placeholder"
+                              class="
+                                px-2
+                                py-1
+                                placeholder-slate-300
+                                text-slate-600
+                                relative
+                                bg-white bg-white
+                                rounded
+                                text-sm
+                                border border-slate-300
+                                outline-none
+                                focus:outline-none focus:ring-200
+                                w-full
+                              "
+                              :value="profile.phoneNumber"
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          class="
+                            px-2
+                            pt-0
+                            pb-2
+                            text-gray-500
+                            font-semibold
+                            text-normal
+                          "
+                        >
+                          Email
+                        </td>
+                        <td class="px-2 py-2 text-sm">
+                          <div class="mb-3 pt-0">
+                            <input
+                              type="text"
+                              placeholder="Placeholder"
+                              class="
+                                px-2
+                                py-1
+                                placeholder-slate-300
+                                text-slate-600
+                                relative
+                                bg-white bg-white
+                                rounded
+                                text-sm
+                                border border-slate-300
+                                outline-none
+                                focus:outline-none focus:ring-200
+                                w-full
+                              "
+                              :value="profile.email"
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          class="
+                            px-2
+                            pt-0
+                            pb-2
+                            text-gray-500
+                            font-semibold
+                            text-normal
+                          "
+                        >
+                          Ngày đăng kí
+                        </td>
+                        <td class="px-2 py-2">
+                          <div class="mb-3 pt-0">
+                            <input
+                              type="text"
+                              placeholder="Placeholder"
+                              class="
+                                px-2
+                                py-1
+                                placeholder-slate-300
+                                text-slate-600
+                                relative
+                                bg-gray-200
+                                rounded
+                                text-sm
+                                border border-slate-300
+                                outline-none
+                                focus:outline-none focus:ring
+                                w-full
+                              "
+                              :value="profile.username"
+                              disabled
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="my-3">
+                    <tbody>
+                      <tr>
+                        <td
+                          class="
+                            px-2
+                            pt-0
+                            pb-2
+                            text-gray-500
+                            font-semibold
+                            text-normal
+                          "
+                        >
+                          Tên Sân
+                        </td>
+                        <td class="px-2 py-2 text-sm">
+                          <div class="mb-3 pt-0">
+                            <input
+                              type="text"
+                              placeholder="Placeholder"
+                              class="
+                                px-2
+                                py-1
+                                placeholder-slate-300
+                                text-slate-600
+                                relative
+                                bg-white bg-white
+                                rounded
+                                text-sm
+                                border border-slate-300
+                                outline-none
+                                focus:outline-none focus:ring-200
+                                w-full
+                              "
+                              :value="profile.owner"
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          class="
+                            px-2
+                            pt-0
+                            pb-2
+                            text-gray-500
+                            font-semibold
+                            text-normal
+                          "
+                        >
+                          Sân sở hữu
+                        </td>
+                        <td class="px-2 py-2 text-sm">
+                          <div class="mb-3 pt-0">
+                            <input
+                              type="number"
+                              placeholder="Placeholder"
+                              class="
+                                px-2
+                                py-1
+                                placeholder-slate-300
+                                text-slate-600
+                                relative
+                                bg-white bg-white
+                                rounded
+                                text-sm
+                                border border-slate-300
+                                outline-none
+                                focus:outline-none focus:ring-200
+                                w-full
+                              "
+                              :value="3"
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          class="
+                            px-2
+                            py-2
+                            text-gray-500
+                            font-semibold
+                            text-normal
+                          "
+                        >
+                          Trạng thái
+                        </td>
+                        <td
+                          
+                          class="px-3 py-2 text-[#50D222] text-normal"
+                        >
+                          <select
+                            id="small"
                             class="
+                              block
                               px-2
                               py-1
-                              placeholder-slate-300
-                              text-slate-600
-                              relative
-                              bg-gray-200
-                              rounded
-                              text-sm
-                              border border-slate-300
-                              outline-none
-                              focus:outline-none focus:ring
+                              mt-2
+                              mb-2
                               w-full
-                            "
-                            :value="profile.username"
-                            disabled
-                          />
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        class="
-                          px-2
-                          pt-0
-                          pb-2
-                          text-gray-500
-                          font-semibold
-                          text-normal
-                        "
-                      >
-                        Address
-                      </td>
-                      <td class="px-2 py-2 text-sm">
-                        <textarea
-                          class="resize-none w-60 rounded-md text-xs"
-                          :value="profile.address"
-                        ></textarea>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        class="
-                          px-2
-                          pt-0
-                          pb-2
-                          text-gray-500
-                          font-semibold
-                          text-normal
-                        "
-                      >
-                        Phone
-                      </td>
-                      <td class="px-2 py-2 text-sm">
-                        <div class="mb-3 pt-0">
-                          <input
-                            type="text"
-                            placeholder="Placeholder"
-                            class="
-                              px-2
-                              py-1
-                              placeholder-slate-300
-                              text-slate-600
-                              relative
-                              bg-white bg-white
+                              text-sm text-gray-900
+                              bg-gray-50
                               rounded
-                              text-sm
-                              border border-slate-300
-                              outline-none
-                              focus:outline-none focus:ring-200
-                              w-full
+                              border border-gray-300
+                              focus:ring-blue-500 focus:border-blue-500
+                              dark:bg-gray-700
+                              dark:border-gray-600
+                              dark:placeholder-gray-400
+                              dark:text-white
+                              dark:focus:ring-blue-500
+                              dark:focus:border-blue-500
                             "
-                            :value="profile.phoneNumber"
-                          />
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        class="
-                          px-2
-                          pt-0
-                          pb-2
-                          text-gray-500
-                          font-semibold
-                          text-normal
-                        "
-                      >
-                        Email
-                      </td>
-                      <td class="px-2 py-2 text-sm">
-                        <div class="mb-3 pt-0">
-                          <input
-                            type="text"
-                            placeholder="Placeholder"
-                            class="
-                              px-2
-                              py-1
-                              placeholder-slate-300
-                              text-slate-600
-                              relative
-                              bg-white bg-white
-                              rounded
-                              text-sm
-                              border border-slate-300
-                              outline-none
-                              focus:outline-none focus:ring-200
-                              w-full
-                            "
-                            :value="profile.email"
-                          />
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        class="
-                          px-2
-                          py-2
-                          text-gray-500
-                          font-semibold
-                          text-normal
-                        "
-                      >
-                        Status
-                      </td>
-                      <td
-                        v-if="profile.status === 'Active'"
-                        class="px-3 py-2 text-[#50D222] text-normal"
-                      >
-                        {{ profile.status }}
-                      </td>
-                      <td v-else class="px-2 py-2 text-[#FF8494] text-sm">
-                        Disabled
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                          >
+                            <option v-if="profile.status === 'Active'" selected value="Active">Active</option>
+                            <option v-else value="Active">Active</option>
+                            <option v-if="profile.status === 'InActive'" selected value="InActive">InActive</option>
+                            <option v-else value="InActive">InActive</option>
+                          </select>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          class="
+                            px-2
+                            pt-0
+                            pb-2
+                            text-gray-500
+                            font-semibold
+                            text-normal
+                          "
+                        >
+                          Password
+                        </td>
+                        <td class="px-2 py-2 text-sm">
+                          <div class="mb-3 pt-0">
+                            <input
+                              type="password"
+                              placeholder="Cập nhật password"
+                              class="
+                                px-2
+                                py-1
+                                placeholder-slate-300
+                                text-slate-600
+                                relative
+                                bg-white bg-white
+                                rounded
+                                text-sm
+                                border border-slate-300
+                                outline-none
+                                focus:outline-none focus:ring-200
+                                w-full
+                              "
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td
+                          class="
+                            px-2
+                            pt-0
+                            pb-2
+                            text-gray-500
+                            font-semibold
+                            text-normal
+                          "
+                        >
+                          Confirm Password
+                        </td>
+                        <td class="px-2 py-2 text-sm">
+                          <div class="mb-3 pt-0">
+                            <input
+                              type="password"
+                              placeholder="Xác nhận password"
+                              class="
+                                px-2
+                                py-1
+                                placeholder-slate-300
+                                text-slate-600
+                                relative
+                                bg-white bg-white
+                                rounded
+                                text-sm
+                                border border-slate-300
+                                outline-none
+                                focus:outline-none focus:ring-200
+                                w-full
+                              "
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
                 <div class="flex justify-end pt-2">
                   <button
+                  type="button"
                     class="
                       px-4
                       bg-transparent
@@ -234,8 +449,9 @@
                       hover:bg-gray-100 hover:text-indigo-400
                       mr-2
                     "
+                     @click="hiddenModal"
                   >
-                    Delete
+                    Close
                   </button>
                   <button
                     class="
@@ -298,7 +514,7 @@ export default {
 }
 
 .modal-body {
-  width: 300px;
+  width: 500px;
   height: 300px;
   background: red;
   position: relative;
