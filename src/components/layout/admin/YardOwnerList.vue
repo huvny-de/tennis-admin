@@ -10,7 +10,7 @@
       </div>
 
       <div class="container mx-auto h-full mt-8 md:mt-0 min-w-full">
-        <table class="min-w-full">
+        <table v-if="sortedList.length > 0" class="min-w-full">
           <th
             class="
               px-6
@@ -206,7 +206,6 @@
         </table>
         <div class="flex flex-col container mx-auto lg:mt-6 md:mt-0">
           <p class="text-center md:my-2 my-4 text-[#334D6E]">
-            <!-- Showing {{ currentPage }} to 5 of {{ membersList.length }} Members -->
             Tổng số chủ sân : {{ membersTotal }}
           </p>
           <div
@@ -220,7 +219,7 @@
               text-sm
             "
           >
-            <nav aria-label="Page navigation example">
+            <nav v-if="membersTotal > 5" aria-label="Page navigation example">
               <ul class="inline-flex -space-x-px">
                 <li>
                   <span
@@ -313,7 +312,7 @@
                       leading-tight
                       text-gray-500
                       bg-white
-                      rounded-l-lg
+                      rounded-r-lg
                       border border-gray-300
                       hover:bg-gray-100 hover:text-gray-700
                       dark:bg-gray-800
@@ -334,7 +333,7 @@
                       leading-tight
                       text-gray-500
                       bg-white
-                      rounded-l-lg
+                      rounded-r-lg
                       border border-gray-300
                       hover:bg-gray-100 hover:text-gray-700
                       dark:bg-gray-800
@@ -371,12 +370,18 @@ export default {
   components: {
     TheModal,
   },
+  props: {
+    searchValue: {
+      type: String,
+      require: false,
+    },
+  },
   mounted() {
     this.sortedList = [
-      ...this.$store.getters["members/paginate"](this.currentPage),
+      ...this.$store.getters["yardOwner/paginate"](this.currentPage),
     ];
 
-    this.membersTotal = this.$store.getters["members/membersTotal"];
+    this.membersTotal = this.$store.getters["yardOwner/membersTotal"];
     this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
   },
   data() {
@@ -402,6 +407,8 @@ export default {
       this.profileDetail = this.sortedList.find((x) => x.id == id);
       this.isHiddenModal = false;
       this.countClick++;
+
+      console.log(this.searchValue);
     },
     sortByField(fieldSort) {
       if (this.checkSort == 0) {
@@ -417,23 +424,65 @@ export default {
 
         this.checkSort = 1;
       } else {
-        this.sortedList = [
-          ...this.$store.getters["members/paginate"](this.currentPage),
-        ];
+       
+
+         let search_obj = this.$store.getters["yardOwner/searchMembers"](
+          this.searchValue,
+          this.currentPage
+        );
+
+        //  this.sortedList = [
+        //   ...this.$store.getters["yardOwner/paginate"](this.currentPage),
+        // ];
+
+        this.sortedList = [...search_obj.search_arr];
+        // this.membersTotal = search_obj.totalSearch;
         this.checkSort = 0;
       }
     },
     paging(page) {
-      this.sortedList = [...this.$store.getters["members/paginate"](page)];
+      // this.sortedList = [...this.$store.getters["yardOwner/paginate"](page)];
       this.currentPage = page;
+      if (this.searchValue.trim().length == 0) {
+        this.sortedList = [
+          ...this.$store.getters["yardOwner/paginate"](this.currentPage),
+        ];
+      } else {
+        let search_obj = this.$store.getters["yardOwner/searchMembers"](
+          this.searchValue,
+          this.currentPage
+        );
 
-      let preloader = document.getElementById("preloader");
-        preloader.classList.toggle('hidden');
+        this.sortedList = [...search_obj.search_arr];
+        this.membersTotal = search_obj.totalSearch;
+
+        this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
+        //  this.sortedList = [...this.$store.getters["yardOwner/searchMembers"](this.searchValue)];
+      }
     },
   },
-  watcher: {
-    membersList() {
-      return this.membersList;
+  watch: {
+    searchValue() {
+      this.currentPage = 1;
+
+      if (this.searchValue.trim().length == 0) {
+        this.sortedList = [
+          ...this.$store.getters["yardOwner/paginate"](this.currentPage),
+        ];
+
+        this.membersTotal = this.$store.getters["yardOwner/membersTotal"];
+        this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
+      } else {
+        let search_obj = this.$store.getters["yardOwner/searchMembers"](
+          this.searchValue,
+          this.currentPage
+        );
+
+        this.sortedList = [...search_obj.search_arr];
+        this.membersTotal = search_obj.totalSearch;
+
+        this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
+      }
     },
   },
 };

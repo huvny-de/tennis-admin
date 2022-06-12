@@ -1,8 +1,8 @@
 import { createStore } from "vuex";
-import membersModule from "./members.module";
+import yardOwnerModule from "./dataList/yardOwner.module";
 
 export default createStore({
   modules: {
-    members: membersModule,
+    yardOwner: yardOwnerModule,
   },
 });

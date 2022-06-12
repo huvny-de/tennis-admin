@@ -112,6 +112,28 @@ export default {
         owner: "Nhật Huy Tennis",
         status: "InActive",
       },
+      {
+        id: "11",
+        img: "https://i.ibb.co/tBQ54Wf/lukaku.jpg",
+        username: "lukaku123",
+        fullName: "Romelu Lukaku",
+        email: "romelulukaku@gmail.com",
+        phoneNumber: "0100203022",
+        address: "969. Khu Công Nghệ Cao, Quận 9, Thành phố Hồ Chí Minh",
+        owner: "Lam Trường Tennis",
+        status: "InActive",
+      },
+      {
+        id: "12",
+        img: "https://i.ibb.co/2MDfzqc/kaka2.jpg",
+        username: "kaka123",
+        fullName: "KaKa",
+        email: "kaka@gmail.com",
+        phoneNumber: "0789456012",
+        address: "312/6/6. Linh Trung, Thủ Đức, Thành phố Hồ Chí Minh",
+        owner: "Nhật Huy Tennis",
+        status: "InActive",
+      },
     ],
   },
   getters: {
@@ -126,9 +148,42 @@ export default {
       let paginated_arr = state.membersList.slice(startIndex, endIndex);
       return paginated_arr;
     },
-    membersTotal : (state) => {
+    membersTotal: (state) => {
       return state.membersList.length;
-    }
-   
+    },
+    searchMembers: (state) => (searchValue,currentPage) => {
+      let search_arr = state.membersList.filter((member) => {
+        return (
+          member.username.includes(searchValue) ||
+          member.fullName.includes(searchValue) ||
+          member.email.includes(searchValue) ||
+          member.phoneNumber.includes(searchValue) ||
+          member.address.includes(searchValue) ||
+          member.owner.includes(searchValue) ||
+          member.status.includes(searchValue)
+        );
+      });
+
+      let paginated_arr = [];
+
+     
+      if(search_arr.length > 5) {
+        let size = 5;
+        let startIndex = (currentPage - 1) * size;
+        let endIndex = currentPage * size;
+        paginated_arr = search_arr.slice(startIndex, endIndex);
+  
+      }else {
+        paginated_arr = search_arr;
+      }
+
+    
+
+      let search_obj = {
+        search_arr : paginated_arr,
+        totalSearch : search_arr.length,
+      }
+      return search_obj;
+    },
   },
 };

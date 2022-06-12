@@ -4,33 +4,36 @@
     <SideBarAdmin @changeTab="changeCurrentComponent" class="flex w-[16%]" />
 
     <div class="flex-1 bg-[#F8F9FF] flex flex-col">
-      <the-header />
-      <component :is="isSelectedTab" />
+      <the-header @search="SearchMember"/>
+      <component :searchValue="searchValue" :is="isSelectedTab" />
     </div>
   </div>
 </template>
 
   <script>
 import SideBarAdmin from "../../layout/admin/SideBarAdmin.vue";
-import Memberships from "../../layout/admin/Memberships.vue";
-import CreateAccount from "../../layout/admin/CreateAccount.vue";
+import YardOwner from "../../layout/admin/YardOwnerList.vue";
+import MemberList from "../../layout/admin/MemberList.vue";
 
 export default {
   components: {
     SideBarAdmin,
-    Memberships,
-    CreateAccount,
+    YardOwner,
+    MemberList,
   },
   data() {
     return {
-      isSelectedTab: "Memberships",
+      isSelectedTab: "YardOwner",
+      searchValue : ""
     };
   },
   methods: {
     changeCurrentComponent(currentTab) {
-      sessionStorage.clear();
       this.isSelectedTab = currentTab;
     },
+    SearchMember(value) {
+      this.searchValue = value;
+    }
   },
 };
 </script>

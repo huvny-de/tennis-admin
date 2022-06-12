@@ -216,7 +216,7 @@
                         <td class="px-2 py-2">
                           <div class="mb-3 pt-0">
                             <input
-                              type="text"
+                              type="date"
                               placeholder="Placeholder"
                               class="
                                 px-2
@@ -232,7 +232,7 @@
                                 focus:outline-none focus:ring
                                 w-full
                               "
-                              :value="profile.username"
+                              :value="'12/06/2021'"
                               disabled
                             />
                           </div>

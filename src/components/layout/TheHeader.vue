@@ -12,6 +12,7 @@
             pl-3
             cursor-pointer
           "
+          @click="EmitSearchValue()"
         >
           <font-awesome-icon
             class="w-5 h-5 text-[#ACACAC]"
@@ -19,6 +20,7 @@
           />
         </span>
         <input-component
+          id="inputSearch"
           class="
             mr-8
             w-[60%]
@@ -74,6 +76,12 @@ export default {
         ],
       },
     };
+  },
+  methods: {
+    EmitSearchValue() {
+      let searchInput = document.getElementById("inputSearch");
+      this.$emit("search", searchInput.value);
+    },
   },
 };
 </script>

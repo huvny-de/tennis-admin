@@ -35,7 +35,7 @@
             <!--Active-->
 
             <div
-              v-if="checkIsActive('Memberships')"
+              v-if="checkIsActive('YardOwner')"
               class="w-full bg-[#FEF5F8] flex"
             >
               <div class="w-1 bg-[#EF3270]"></div>
@@ -43,9 +43,10 @@
               <div
                 class="flex items-center px-6 py-2 mt-2 duration-200 border-1-4"
               >
+               
                 <font-awesome-icon
                   class="w-6 h-6 text-[#ACACAC]"
-                  icon="users"
+                  icon="user-group"
                 />
 
                 <span class="mx-2 text-[14px] text-[#434141] font-bold"
@@ -58,7 +59,7 @@
 
             <div
               v-else
-              @click="setCurrentActive('Memberships')"
+              @click="setCurrentActive('YardOwner')"
               class="
                 mt-4
                 flex
@@ -74,13 +75,13 @@
             >
               <font-awesome-icon class="w-6 h-6 text-[#ACACAC]" icon="users" />
               <span class="mx-2 text-[#334D6E] text-[14px] font-medium"
-                >Memberships</span
+                >Chủ Sân</span
               >
             </div>
 
             <!--Active-->
             <div
-              v-if="checkIsActive('CreateAccount')"
+              v-if="checkIsActive('MemberList')"
               class="w-full bg-[#FEF5F8] flex"
             >
               <div class="w-1 bg-[#EF3270]"></div>
@@ -90,11 +91,11 @@
               >
                 <font-awesome-icon
                   class="w-6 h-6 text-[#ACACAC]"
-                  icon="user-plus"
+                  icon="users"
                 />
 
                 <span class="mx-2 text-[14px] text-[#434141] font-bold"
-                  >Create Account</span
+                  >Thành Viên</span
                 >
               </div>
             </div>
@@ -102,7 +103,7 @@
             <!---->
             <div
               v-else
-              @click="setCurrentActive('CreateAccount')"
+              @click="setCurrentActive('MemberList')"
               class="
                 mt-4
                 flex
@@ -116,12 +117,12 @@
                 cursor-pointer
               "
             >
-              <font-awesome-icon
-                class="w-6 h-6 text-[#ACACAC]"
-                icon="user-plus"
-              />
+               <font-awesome-icon
+                  class="w-6 h-6 text-[#ACACAC]"
+                  icon="users"
+                />
               <span class="mx-2 text-[#334D6E] text-[14px] font-medium"
-                >Create Account</span
+                >Thành Viên</span
               >
             </div>
           </nav>
@@ -135,7 +136,7 @@
 export default {
   data() {
     return {
-      isActive: "Memberships",
+      isActive: "YardOwner",
       isSelectedTab: "",
     };
   },

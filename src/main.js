@@ -10,6 +10,7 @@ import store from "./store";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
+  faUserGroup,
   faUsers,
   faUserPlus,
   faArrowRightFromBracket,
@@ -36,7 +37,8 @@ library.add(
   faArrowsUpDown,
   faEye,
   faTrashCan,
-  faUpload
+  faUpload,
+  faUserGroup
 );
 
 const app = createApp(App);
