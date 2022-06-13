@@ -11,6 +11,7 @@
       shadow
       focus:outline-none
     "
+    type="button"
   >
     <slot></slot>
   </button>

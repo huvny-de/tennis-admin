@@ -15,11 +15,12 @@
     "core-js": "^3.8.3",
     "error-ex": "github:Qix-/node-error-ex",
     "flowbite": "^1.4.7",
-    "vee-validate": "^2.2.15",
+    "vee-validate": "^4.5.11",
     "vue": "^3.2.13",
     "vue-router": "^4.0.13",
     "vue-ui-preloader": "^1.2.1",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

@@ -22,17 +22,7 @@ export default {
       show: true,
     };
   },
-  created() {
-    if (this.show) {
-      this.showToggle();
-    }
-  },
-  methods: {
-    showToggle() {
-      setTimeout(() => {
-        this.show = false;
-      }, 700);
-    },
-  },
+  
+ 
 };
 </script>

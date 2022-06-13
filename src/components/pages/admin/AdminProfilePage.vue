@@ -1,6 +1,5 @@
 <template>
   <div class="flex h-screen">
-    <preloader-component />
 
     <div class="flex-1 bg-[#F8F9FF] flex flex-col">
       <the-header />

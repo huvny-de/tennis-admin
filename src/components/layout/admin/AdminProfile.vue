@@ -65,7 +65,7 @@
             <input-component
               disabled="true"
               class="w-full mt-2 border-gray-800 text-sm text-gray-600"
-              value="Admin"
+              :value="currentUser.UserName"
             />
           </div>
           <div>
@@ -80,7 +80,7 @@
             <label class="text-[#747474]" for="username">Full Name</label>
             <input-component
               class="w-full mt-2 text-sm"
-              value="Nguyễn Công Thái Sơn"
+              :value="currentUser.FullName"
             />
           </div>
           <div>
@@ -125,7 +125,7 @@
               text-md
             "
           >
-            <a href="/" class="no-underline">Back</a>
+            <span @click="back" class="no-underline">Back</span>
           </button>
         </div>
 
@@ -160,6 +160,20 @@ import InputComponent from "@/components/ui/InputComponent.vue";
 export default {
   components: {
     InputComponent,
+  },
+  mounted() {
+    this.currentUser = JSON.parse(localStorage.getItem("user"));
+    console.log(this.currentUser.UserName);
+  },
+  data() {
+    return {
+      currentUser: "",
+    };
+  },
+  methods: {
+    back() {
+      this.$router.push("/dashboard");
+    },
   },
 };
 </script>

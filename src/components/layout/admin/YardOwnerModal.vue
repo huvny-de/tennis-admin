@@ -6,7 +6,7 @@
   >
     <div class="modal-overlay absolute w-full h-full"></div>
     <div class="mx-auto relative p-4 w-full max-w-5xl h-full md:h-auto">
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 mt-10">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 mt-3">
         <button
           @click="hiddenModal"
           type="button"
@@ -216,7 +216,7 @@
                         <td class="px-2 py-2">
                           <div class="mb-3 pt-0">
                             <input
-                              type="date"
+                              type="text"
                               placeholder="Placeholder"
                               class="
                                 px-2
@@ -232,7 +232,7 @@
                                 focus:outline-none focus:ring
                                 w-full
                               "
-                              :value="'12/06/2021'"
+                              :value="profile.createDate"
                               disabled
                             />
                           </div>
@@ -370,15 +370,14 @@
                             text-gray-500
                             font-semibold
                             text-normal
+                            invisible
                           "
                         >
                           Password
                         </td>
                         <td class="px-2 py-2 text-sm">
                           <div class="mb-3 pt-0">
-                            <input
-                              type="password"
-                              placeholder="Cập nhật password"
+                            <input                            
                               class="
                                 px-2
                                 py-1
@@ -392,6 +391,7 @@
                                 outline-none
                                 focus:outline-none focus:ring-200
                                 w-full
+                                invisible
                               "
                             />
                           </div>
@@ -406,15 +406,14 @@
                             text-gray-500
                             font-semibold
                             text-normal
+                            invisible
                           "
                         >
-                          Confirm Password
+                          Password
                         </td>
                         <td class="px-2 py-2 text-sm">
                           <div class="mb-3 pt-0">
-                            <input
-                              type="password"
-                              placeholder="Xác nhận password"
+                            <input                            
                               class="
                                 px-2
                                 py-1
@@ -428,6 +427,7 @@
                                 outline-none
                                 focus:outline-none focus:ring-200
                                 w-full
+                                invisible
                               "
                             />
                           </div>

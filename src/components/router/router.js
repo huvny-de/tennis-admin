@@ -1,14 +1,12 @@
 import {createRouter , createWebHistory} from 'vue-router';
 
-import AdminDashBoard from '../pages/admin/AdminDashBoard.vue';
 import LoginPage from '../pages/LoginPage.vue';
-import AdminProfile from '../pages/admin/AdminProfilePage.vue';
 
 const routes = [
     {
-        path: '/',
+        path: '/dashboard',
         name : 'Home',
-        component : AdminDashBoard    
+        component : () => import('../pages/admin/AdminDashBoard.vue')    
         
     },
     {
@@ -20,7 +18,7 @@ const routes = [
     {
         path: '/profile',
         name: 'Profile Page',
-        component : AdminProfile
+        component : () => import('../pages/admin/AdminProfilePage.vue')
     }
 ];
 
@@ -29,4 +27,15 @@ const router = createRouter({
     routes: routes
 })
 
+router.beforeEach((to,from,next) => {
+    const publicPage = ['/login'];
+    const authRequire = !publicPage.includes(to.path);
+    const loggedIn = localStorage.getItem('user');
+
+    if(authRequire && !loggedIn) {
+        next('/login');
+    }else {
+        next()
+    }
+})
 export default router;

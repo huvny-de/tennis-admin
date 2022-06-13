@@ -1,10 +1,9 @@
   <template>
   <div class="flex h-screen">
-
     <SideBarAdmin @changeTab="changeCurrentComponent" class="flex w-[16%]" />
 
     <div class="flex-1 bg-[#F8F9FF] flex flex-col">
-      <the-header @search="SearchMember"/>
+      <the-header :search="searchValue"  @search="SearchMember" />
       <component :searchValue="searchValue" :is="isSelectedTab" />
     </div>
   </div>
@@ -21,19 +20,23 @@ export default {
     YardOwner,
     MemberList,
   },
+
   data() {
     return {
       isSelectedTab: "YardOwner",
-      searchValue : ""
+      searchValue: "",
+      loading: false,
+      currentUser: "",
     };
   },
   methods: {
     changeCurrentComponent(currentTab) {
       this.isSelectedTab = currentTab;
+      this.searchValue = "";
     },
     SearchMember(value) {
       this.searchValue = value;
-    }
+    },
   },
 };
 </script>

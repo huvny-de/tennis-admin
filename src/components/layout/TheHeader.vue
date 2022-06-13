@@ -34,23 +34,64 @@
             placeholder:text-slate-400
           "
           placeholder="Search Member..."
+          :value="search"
         ></input-component>
       </div>
-
-      <div class="flex justify-end items-center flex-1 mr-4">
-        <select-list-component
-          :id="dropDownAccount.id"
-          :dropDownToggle="dropDownAccount.dropDownToggle"
-          :dataList="dropDownAccount.listItem"
-        >
-          <img
-            class="w-7 h-7 rounded mr-3"
-            :src="require('../../assets/img/son.jpg')" />
-          Senior Henry
-          <font-awesome-icon
-            class="w-4 h-4 ml-4 text-[#ACACAC]"
-            icon="caret-down"
-        /></select-list-component>
+      <div class="p-10">
+        <div class="dropdown inline-block relative">
+          <button
+            class="
+              text-gray-700
+              font-semibold
+              py-2
+              px-4
+              rounded
+              inline-flex
+              items-center
+            "
+          >
+            <img
+              class="w-7 h-7 rounded mr-3"
+              :src="require('../../assets/img/son.jpg')"
+            />
+            <span class="mr-1 text-normal font-normal">{{
+              currentUser.FullName
+            }}</span>
+            <font-awesome-icon
+              class="w-4 h-4 ml-1 text-[#ACACAC]"
+              icon="caret-down"
+            />
+          </button>
+          <ul
+            class="
+              dropdown-menu
+              absolute
+              hidden
+              text-gray-700
+              dark:text-gray-200
+              pt-1
+              py-1
+              text-sm
+            "
+          >
+            <li v-for="item in listDropDown" :key="item" class="">
+              <a
+                class="
+                  rounded-t
+                  bg-gray-100
+                  hover:bg-gray-300
+                  py-2
+                  px-4
+                  block
+                  whitespace-no-wrap
+                  cursor-pointer
+                "
+                @click="routerLink(item.router)"
+                >{{ item.text }}</a
+              >
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -59,22 +100,28 @@
 <script>
 export default {
   name: "TheHeader",
+  mounted() {
+    this.currentUser = JSON.parse(localStorage.getItem("user"));
+  },
+  props : {
+    search : {
+      type : String, 
+      required : true
+    }
+  },
   data() {
     return {
-      dropDownAccount: {
-        id: "dropdownBottomButton1",
-        dropDownToggle: "dropdownBottom1",
-        listItem: [
-          {
-            text: "My Account",
-            link: "/profile",
-          },
-          {
-            text: "Sign Out",
-            link: "/login",
-          },
-        ],
-      },
+      listDropDown: [
+        {
+          text: "My Account",
+          router: "/profile",
+        },
+        {
+          text: "SignOut",
+          router: "/logout",
+        },
+      ],
+      currentUser: "",
     };
   },
   methods: {
@@ -82,6 +129,24 @@ export default {
       let searchInput = document.getElementById("inputSearch");
       this.$emit("search", searchInput.value);
     },
+    routerLink(path) {
+      if (path.includes("logout")) {
+        this.$store.dispatch("auth/logout");
+        this.$router.push("/login");
+      } else {
+        this.$router.push(path);
+      }
+    },
   },
 };
 </script>
+
+<style scoped>
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu {
+  width: 200px;
+}
+</style>

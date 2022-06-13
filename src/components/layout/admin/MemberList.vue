@@ -1,80 +1,7 @@
-<template>
-  <!-- <div class="container mx-auto px-8 h-[80%] lg:mt-3 shadow">
-    <div class="w-[100%] h-full mt-4">
-      <div class="flex flex-col items-center justify-center mb-4">
-        <h2 class="mr-4 mb-4 text-lg font-semibold text-[#747474]">
-          Create Account
-        </h2>
-        <div
-          class="
-            container
-            p-6
-            rounded-md
-            shadow-md
-            bg-white
-            mx-auto
-            h-full
-            mt-8
-            md:mt-0
-            min-w-full
-          "
-        >
-          <form>
-            <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
-              <div>
-                <label class="text-[#747474]" for="username">Username</label>
-                <input-component class="w-full mt-2 text-sm border-gray-800" />
-              </div>
-              <div>
-                <label class="text-[#747474]" for="username">Full Name</label>
-                <input-component class="w-full mt-2 text-sm" />
-              </div>
-              <div>
-                <label class="text-[#747474]" for="username">Email</label>
-                <input-component type="email" class="w-full mt-2 text-sm" />
-              </div>
-              <div>
-                <label class="text-[#747474]" for="username"
-                  >Phone Number</label
-                >
-                <input-component type="phone" class="w-full mt-2 text-sm" />
-              </div>
-              <div>
-                <label class="text-[#747474]" for="username">Password</label>
-                <input-component type="password" class="w-full mt-2 text-sm" />
-              </div>
-              <div>
-                <label class="text-[#747474]" for="username"
-                  >Confirm Password</label
-                >
-                <input-component type="password" class="w-full mt-2 text-sm" />
-              </div>
-            </div>
-            <button
-              class="
-                mx-auto
-                bg-blue-500
-                hover:bg-blue-700
-                duration-200
-                text-white
-                font-medium
-                py-2
-                px-4
-                rounded
-                w-20
-                text-md
-                float-right
-              "
-            >
-              Create
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div> -->
+  <template>
+  <preloader-component :class="loading == false ? 'hidden' : ''" />
 
-   <div class="container mx-auto px-8 h-[80%] lg:mt-8">
+  <div class="container mx-auto px-8 h-[80%] lg:mt-8">
     <div class="w-[100%] h-full">
       <div class="flex items-center justify-center mb-4">
         <h2 class="mr-4 text-lg font-semibold text-[#747474]">
@@ -82,7 +9,7 @@
         </h2>
       </div>
 
-      <!-- <div class="container mx-auto h-full mt-8 md:mt-0 min-w-full">
+      <div class="container mx-auto h-full mt-8 md:mt-0 min-w-full">
         <table v-if="sortedList.length > 0" class="min-w-full">
           <th
             class="
@@ -424,12 +351,141 @@
             </nav>
           </div>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 
+  <!--The Modal-->
+  <TheModal
+    :class="isHiddenModal === true ? 'hidden' : ''"
+    :profile="profileDetail"
+    :click="countClick"
+  />
 </template>
-
 <script>
-export default {};
+import TheModal from "./YardOwnerModal.vue";
+
+export default {
+  name: "MemberShips",
+  components: {
+    TheModal,
+  },
+  props: {
+    searchValue: {
+      type: String,
+      require: false,
+    },
+  },
+  mounted() {
+    this.sortedList = [
+      ...this.$store.getters["yardOwner/paginate"](this.currentPage),
+    ];
+
+    this.membersTotal = this.$store.getters["yardOwner/membersTotal"];
+    this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
+  },
+  data() {
+    return {
+      dropDownAccount: {
+        id: "dropdownBottomButton1",
+        dropDownToggle: "dropdownBottom1",
+        listItem: ["My Account", "Sign Out"],
+      },
+      loading: false,
+      sortedList: [],
+      membersTotal: 0,
+      currentPage: 1,
+      pageSize: 5,
+      totalPage: 0,
+      profileDetail: {},
+      isHiddenModal: true,
+      countClick: 0,
+      checkSort: 0,
+    };
+  },
+  methods: {
+    memberDetail(id) {
+      this.profileDetail = this.sortedList.find((x) => x.id == id);
+      this.isHiddenModal = false;
+      this.countClick++;
+
+      console.log(this.searchValue);
+    },
+    sortByField(fieldSort) {
+      if (this.checkSort == 0) {
+        if (fieldSort === "id") {
+          this.sortedList.sort((a, b) =>
+            parseInt(a[fieldSort]) < parseInt(b[fieldSort]) ? 1 : -1
+          );
+        } else {
+          this.sortedList.sort((a, b) =>
+            a[fieldSort] > b[fieldSort] ? 1 : -1
+          );
+        }
+
+        this.checkSort = 1;
+      } else {
+       
+
+         let search_obj = this.$store.getters["yardOwner/searchMembers"](
+          this.searchValue,
+          this.currentPage
+        );
+
+        //  this.sortedList = [
+        //   ...this.$store.getters["yardOwner/paginate"](this.currentPage),
+        // ];
+
+        this.sortedList = [...search_obj.search_arr];
+        // this.membersTotal = search_obj.totalSearch;
+        this.checkSort = 0;
+      }
+    },
+    paging(page) {
+      // this.sortedList = [...this.$store.getters["yardOwner/paginate"](page)];
+      this.currentPage = page;
+      if (this.searchValue.trim().length == 0) {
+        this.sortedList = [
+          ...this.$store.getters["yardOwner/paginate"](this.currentPage),
+        ];
+      } else {
+        let search_obj = this.$store.getters["yardOwner/searchMembers"](
+          this.searchValue,
+          this.currentPage
+        );
+
+        this.sortedList = [...search_obj.search_arr];
+        this.membersTotal = search_obj.totalSearch;
+
+        this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
+        //  this.sortedList = [...this.$store.getters["yardOwner/searchMembers"](this.searchValue)];
+      }
+    },
+  },
+  watch: {
+    searchValue() {
+      this.currentPage = 1;
+
+      if (this.searchValue.trim().length == 0) {
+        this.sortedList = [
+          ...this.$store.getters["yardOwner/paginate"](this.currentPage),
+        ];
+
+        this.membersTotal = this.$store.getters["yardOwner/membersTotal"];
+        this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
+      } else {
+        let search_obj = this.$store.getters["yardOwner/searchMembers"](
+          this.searchValue,
+          this.currentPage
+        );
+
+        this.sortedList = [...search_obj.search_arr];
+        this.membersTotal = search_obj.totalSearch;
+
+        this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
+      }
+    },
+  },
+};
 </script>
+

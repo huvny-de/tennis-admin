@@ -1,5 +1,5 @@
   <template>
-  <preloader-component id="preloader" />
+  <preloader-component :class="loading == false ? 'hidden' : ''" />
 
   <div class="container mx-auto px-8 h-[80%] lg:mt-8">
     <div class="w-[100%] h-full">
@@ -363,7 +363,7 @@
   />
 </template>
 <script>
-import TheModal from "../TheModal.vue";
+import TheModal from "./YardOwnerModal.vue";
 
 export default {
   name: "MemberShips",
@@ -391,6 +391,7 @@ export default {
         dropDownToggle: "dropdownBottom1",
         listItem: ["My Account", "Sign Out"],
       },
+      loading: false,
       sortedList: [],
       membersTotal: 0,
       currentPage: 1,
