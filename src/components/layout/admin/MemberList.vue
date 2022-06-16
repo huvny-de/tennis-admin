@@ -196,6 +196,7 @@
                           hover:text-gray-500
                         "
                         icon="trash-can"
+                         @click="showAlert"
                       />
                     </div>
                   </div>
@@ -206,7 +207,7 @@
         </table>
         <div class="flex flex-col container mx-auto lg:mt-6 md:mt-0">
           <p class="text-center md:my-2 my-4 text-[#334D6E]">
-            Tổng số chủ sân : {{ membersTotal }}
+            Tổng số thành viên : {{ membersTotal }}
           </p>
           <div
             class="
@@ -363,10 +364,11 @@
   />
 </template>
 <script>
-import TheModal from "./YardOwnerModal.vue";
+import TheModal from "./MemberModal.vue";
+import swal from "sweetalert";
 
 export default {
-  name: "MemberShips",
+  name: "MemberList",
   components: {
     TheModal,
   },
@@ -378,19 +380,14 @@ export default {
   },
   mounted() {
     this.sortedList = [
-      ...this.$store.getters["yardOwner/paginate"](this.currentPage),
+      ...this.$store.getters["member/paginate"](this.currentPage),
     ];
 
-    this.membersTotal = this.$store.getters["yardOwner/membersTotal"];
+    this.membersTotal = this.$store.getters["member/membersTotal"];
     this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
   },
   data() {
     return {
-      dropDownAccount: {
-        id: "dropdownBottomButton1",
-        dropDownToggle: "dropdownBottom1",
-        listItem: ["My Account", "Sign Out"],
-      },
       loading: false,
       sortedList: [],
       membersTotal: 0,
@@ -425,31 +422,24 @@ export default {
 
         this.checkSort = 1;
       } else {
-       
-
-         let search_obj = this.$store.getters["yardOwner/searchMembers"](
+        let search_obj = this.$store.getters["member/searchMembers"](
           this.searchValue,
           this.currentPage
         );
 
-        //  this.sortedList = [
-        //   ...this.$store.getters["yardOwner/paginate"](this.currentPage),
-        // ];
-
         this.sortedList = [...search_obj.search_arr];
-        // this.membersTotal = search_obj.totalSearch;
         this.checkSort = 0;
       }
     },
     paging(page) {
-      // this.sortedList = [...this.$store.getters["yardOwner/paginate"](page)];
+      // this.sortedList = [...this.$store.getters["member/paginate"](page)];
       this.currentPage = page;
       if (this.searchValue.trim().length == 0) {
         this.sortedList = [
-          ...this.$store.getters["yardOwner/paginate"](this.currentPage),
+          ...this.$store.getters["member/paginate"](this.currentPage),
         ];
       } else {
-        let search_obj = this.$store.getters["yardOwner/searchMembers"](
+        let search_obj = this.$store.getters["member/searchMembers"](
           this.searchValue,
           this.currentPage
         );
@@ -458,8 +448,22 @@ export default {
         this.membersTotal = search_obj.totalSearch;
 
         this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
-        //  this.sortedList = [...this.$store.getters["yardOwner/searchMembers"](this.searchValue)];
+        //  this.sortedList = [...this.$store.getters["member/searchMembers"](this.searchValue)];
       }
+    },
+    showAlert() {
+      swal({
+        title: "Are you sure to disabled this account?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          swal("Disabled success !", {
+            icon: "success",
+          });
+        }
+      });
     },
   },
   watch: {
@@ -468,13 +472,13 @@ export default {
 
       if (this.searchValue.trim().length == 0) {
         this.sortedList = [
-          ...this.$store.getters["yardOwner/paginate"](this.currentPage),
+          ...this.$store.getters["member/paginate"](this.currentPage),
         ];
 
-        this.membersTotal = this.$store.getters["yardOwner/membersTotal"];
+        this.membersTotal = this.$store.getters["member/membersTotal"];
         this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
       } else {
-        let search_obj = this.$store.getters["yardOwner/searchMembers"](
+        let search_obj = this.$store.getters["member/searchMembers"](
           this.searchValue,
           this.currentPage
         );

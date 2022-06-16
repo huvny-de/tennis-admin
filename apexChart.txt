@@ -1,0 +1,2 @@
+npm install --save apexcharts
+npm install --save vue3-apexcharts

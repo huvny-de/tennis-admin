@@ -48,23 +48,28 @@
       <!--button control-->
       <div class="w-full flex items-center justify-end">
         <div>
-          <button
-            class="
-              mx-auto
-              bg-gray-500
-              hover:bg-gray-700
-              duration-200
-              text-white
-              font-medium
-              py-2
-              px-4
-              rounded
-              w-20
-              text-md
-            "
-          >
-            <a href="/" class="no-underline">Back</a>
-          </button>
+          <nav>
+            <router-link :to="{ name: 'Home' }" class="no-underline">
+              <button
+                class="
+                  mx-auto
+                  bg-gray-500
+                  hover:bg-gray-700
+                  duration-200
+                  text-white
+                  font-medium
+                  py-2
+                  px-4
+                  rounded
+                  w-20
+                  text-md
+                "
+                type="button"
+              >
+                Back
+              </button>
+            </router-link>
+          </nav>
         </div>
 
         <div>

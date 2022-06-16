@@ -5,6 +5,7 @@ import loader from "vue-ui-preloader";
 import App from "./App.vue";
 import "./index.css";
 import router from "../src/components/router/router.js";
+import VueApexCharts from "vue3-apexcharts";
 import store from "./store";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -19,6 +20,7 @@ import {
   faEye,
   faTrashCan,
   faUpload,
+  faHouse
 } from "@fortawesome/free-solid-svg-icons";
 
 import TheHeader from "../src/components/layout/TheHeader.vue";
@@ -36,7 +38,8 @@ library.add(
   faEye,
   faTrashCan,
   faUpload,
-  faUserGroup
+  faUserGroup,
+  faHouse
 );
 
 const app = createApp(App);
@@ -44,6 +47,7 @@ const app = createApp(App);
 app.use(router);
 app.use(loader);
 app.use(store);
+app.use(VueApexCharts);
 
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.config.productionTip = false;

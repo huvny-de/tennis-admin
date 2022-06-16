@@ -5,7 +5,7 @@
       <div class="container mx-auto px-4 h-full">
         <div class="flex content-center items-center justify-center h-full">
           <div class="w-full lg:w-1/3 px-4">
-            <div class="w-60 h-60 mx-auto mb-8">
+            <div class="w-60 h-60 mx-auto mb-6">
               <img class="object-cover" src="../../assets/img/logo.png" />
             </div>
             <div class="relative flex flex-col w-full">
@@ -59,7 +59,7 @@
 
                   <div
                     v-if="message"
-                    class="error-text text-center text-red-700"
+                    class="error-text text-center text-red-700 mt-2 mb-2"
                     role="alert"
                   >
                     {{ message }}
@@ -81,9 +81,15 @@
                 </div>
               </form>
               <div class="relative mt-2 w-full">
-                <p class="text-center text-gray-400">
+                <p class="text-center text-gray-400 hover:text-gray-500 duration-200">
                   <a class="no-underline" href="http://facebook.com"
                     >Forgot your password ?</a
+                  >
+                </p>
+
+                 <p class="text-center text-gray-400 hover:text-gray-500 duration-200">
+                  <router-link to="/register" class="no-underline" href="http://facebook.com"
+                    >Don't have account ? Sign Up</router-link
                   >
                 </p>
               </div>
@@ -113,10 +119,6 @@ export default {
     },
   },
   created() {
-    if (sessionStorage.getItem("err_login")) {
-      this.message = JSON.parse(sessionStorage.getItem("err_login"));
-    }
-
     if (this.loggedIn) {
       this.$router.push("/dashboard");
     }
@@ -129,11 +131,7 @@ export default {
           this.$router.push("/dashboard");
         },
         (error) => {
-          // sessionStorage.setItem(
-          //   "err_login",
-          //   JSON.stringify(error.response.data.Message)
-          // );
-          this.message = error.response.data.Message;
+          this.message =  error.response.data.Message;
           this.loading = false;
         }
       );

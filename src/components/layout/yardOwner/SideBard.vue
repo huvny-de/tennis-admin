@@ -1,0 +1,262 @@
+<template>
+  <keep-alive>
+    <div class="flex">
+      <div
+        class="
+          fixed
+          inset-0
+          lef-0
+          w-60
+          h-full
+          overflow-y-hidden
+          transition
+          duration-300
+          transform
+          shadow
+          lg:translate-x-0 lg:inset-0
+        "
+      >
+        <div class="flex items-center justify-start px-4">
+          <div class="flex content-center items-center justify-center">
+            <div class="flex flex-col items-center py-4">
+              <p class="text-xl font-medium leading-4">
+                Tennis<span class="text-[#30AF82]">Today</span>
+              </p>
+              <p class="text-normal text-[12px] text-[#9B86A8]">
+                indulge your passion
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="container mx-auto mt-2 h-[72%]">
+          <div class="flex items-center justify-center">
+            <img
+              src="../../../assets/img/son.jpg"
+              class="w-9 h-9 rounded-3xl"
+            />
+            <div class="flex flex-col ml-2">
+              <span>
+                <p class="text-md font-semibold">Thái Sơn</p>
+              </span>
+              <span>
+                <p class="text-xs">Chủ Sân</p>
+              </span>
+            </div>
+          </div>
+
+          <nav class="mt-6 h-full">
+            <!--Active-->
+            <div
+              v-if="checkIsActive('dashboard')"
+              class="w-full bg-[#FEF5F8] flex"
+            >
+              <div class="w-1 bg-[#EF3270]"></div>
+
+              <div class="flex items-center px-6 py-2 duration-200 border-1-4">
+                <font-awesome-icon
+                  class="w-6 h-6 text-[#ACACAC]"
+                  icon="house"
+                />
+
+                <span class="mx-2 text-[14px] text-[#434141] font-bold pt-1"
+                  >Trang Chủ</span
+                >
+              </div>
+            </div>
+
+            <!--Not Active-->
+
+            <div
+              v-else              
+              @click="setCurrentActive('dashboard')"
+              class="
+                mt-4
+                flex
+                items-center
+                px-6
+                py-2
+                duration-200
+                border-1-4
+                text-[#C2CFE0]
+                hover:bg-red-50
+                cursor-pointer
+              "
+            >
+              <font-awesome-icon class="w-6 h-6 text-[#ACACAC]" icon="home" />
+              <span class="mx-2 text-[#334D6E] text-[14px] font-medium pt-1"
+                >Trang Chủ</span
+              >
+            </div>
+
+            <!--Active-->
+            <div
+              v-if="checkIsActive('yardManager')"
+              class="w-full bg-[#FEF5F8] flex"
+            >
+              <div class="w-1 bg-[#EF3270]"></div>
+
+              <div
+                class="flex items-center px-6 py-2 mt-2 duration-200 border-1-4"
+              >
+                <font-awesome-icon
+                  class="w-6 h-6 text-[#ACACAC]"
+                  icon="users"
+                />
+
+                <span class="mx-2 text-[14px] text-[#434141] font-bold"
+                  >Quản Lý Sân</span
+                >
+              </div>
+            </div>
+
+            <!---->
+            <div
+              v-else
+              @click="setCurrentActive('yardManager')"
+              class="
+                mt-4
+                flex
+                items-center
+                px-6
+                py-2
+                duration-200
+                border-1-4
+                text-[#C2CFE0]
+                hover:bg-red-50
+                cursor-pointer
+              "
+            >
+              <font-awesome-icon class="w-6 h-6 text-[#ACACAC]" icon="users" />
+              <span class="mx-2 text-[#334D6E] text-[14px] font-medium"
+                >Quản Lý Sân</span
+              >
+            </div>
+
+            <!--Active-->
+            <div
+              v-if="checkIsActive('bookingManager')"
+              class="w-full bg-[#FEF5F8] flex"
+            >
+              <div class="w-1 bg-[#EF3270]"></div>
+
+              <div
+                class="flex items-center px-6 py-2 mt-2 duration-200 border-1-4"
+              >
+                <font-awesome-icon
+                  class="w-6 h-6 text-[#ACACAC]"
+                  icon="users"
+                />
+
+                <span class="mx-2 text-[14px] text-[#434141] font-bold"
+                  >Quản Lý Đặt Sân</span
+                >
+              </div>
+            </div>
+
+            <!---->
+            <div
+              v-else
+              @click="setCurrentActive('bookingManager')"
+              class="
+                mt-4
+                flex
+                items-center
+                px-6
+                py-2
+                duration-200
+                border-1-4
+                text-[#C2CFE0]
+                hover:bg-red-50
+                cursor-pointer
+              "
+            >
+              <font-awesome-icon class="w-6 h-6 text-[#ACACAC]" icon="users" />
+              <span class="mx-2 text-[#334D6E] text-[14px] font-medium"
+                >Quản Lý Đặt Sân</span
+              >
+            </div>
+
+            <!--Active-->
+            <div
+              v-if="checkIsActive('bookingHistory')"
+              class="w-full bg-[#FEF5F8] flex"
+            >
+              <div class="w-1 bg-[#EF3270]"></div>
+
+              <div
+                class="flex items-center px-6 py-2 mt-2 duration-200 border-1-4"
+              >
+                <font-awesome-icon
+                  class="w-6 h-6 text-[#ACACAC]"
+                  icon="users"
+                />
+
+                <span class="mx-2 text-[14px] text-[#434141] font-bold"
+                  >Lịch Sử Đặt Sân</span
+                >
+              </div>
+            </div>
+
+            <!---->
+            <div
+              v-else
+              @click="setCurrentActive('bookingHistory')"
+              class="
+                mt-4
+                flex
+                items-center
+                px-6
+                py-2
+                duration-200
+                border-1-4
+                text-[#C2CFE0]
+                hover:bg-red-50
+                cursor-pointer
+              "
+            >
+              <font-awesome-icon class="w-6 h-6 text-[#ACACAC]" icon="users" />
+              <span class="mx-2 text-[#334D6E] text-[14px] font-medium"
+                >Lịch Sử Đặt Sân</span
+              >
+            </div>
+
+            <!--logout-->
+          </nav>
+          <div class="px-6">
+            <span class="flex items-center justify-start cursor-pointer ">
+              <font-awesome-icon class="w-6 h-6 text-[#ACACAC] hover:font-bold" icon="arrow-right-from-bracket" />
+              <span class="mx-2 text-[#334D6E] text-[14px] font-medium hover:text-[#2b4a73] hover:font-semibold duration-200"
+                >Logout</span
+              >
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </keep-alive>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      isActive: "dashboard",
+      isSelectedTab: "",
+    };
+  },
+  methods: {
+    setCurrentActive(ele) {
+      this.isActive = ele;
+      this.$emit("changeTab", ele);
+    },
+    checkIsActive(ele) {
+      if (this.isActive === ele) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+};
+</script>

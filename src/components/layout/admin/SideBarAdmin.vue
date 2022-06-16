@@ -6,7 +6,8 @@
           fixed
           inset-0
           lef-0
-          w-[16%]
+          w-60
+          min-w-60
           overflow-y-hidden
           transition
           duration-300

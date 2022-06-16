@@ -1,4 +1,5 @@
 <template>
+  <preloader-component :class="loading == false ? 'hidden' : ''" />
   <div
     class="
       container
@@ -32,11 +33,12 @@
           >
             <img
               class="rounded mr-3 lg:w-60 object-contain md:w-40"
-              src="../../../assets/img/son.jpg"
+              :src="srcImg"
             />
             <label class="block mt-4">
               <span class="sr-only">Choose File</span>
               <input
+                @change="uploadImg"
                 type="file"
                 class="
                   block
@@ -53,6 +55,7 @@
                   file:text-blue-700
                   hover:file:bg-blue-100
                 "
+                accept="image/*"
               />
             </label>
           </div>
@@ -94,39 +97,34 @@
             <label class="text-[#747474]" for="username">Phone Number</label>
             <input-component class="w-full mt-2 text-sm" value="0978145440" />
           </div>
-          <!-- <div>
-            <label class="text-[#747474]" for="username">Password</label>
-            <input-component type="password" class="w-full mt-2 text-sm" />
-          </div>
-          <div>
-            <label class="text-[#747474]" for="username"
-              >Confirm Password</label
-            >
-            <input-component type="password" class="w-full mt-2 text-sm" />
-          </div> -->
         </div>
       </div>
 
       <!--button control-->
       <div class="w-full flex items-center justify-end">
         <div>
-          <button
-            class="
-              mx-auto
-              bg-gray-500
-              hover:bg-gray-700
-              duration-200
-              text-white
-              font-medium
-              py-2
-              px-4
-              rounded
-              w-20
-              text-md
-            "
-          >
-            <span @click="back" class="no-underline">Back</span>
-          </button>
+          <nav>
+            <button
+              class="
+                mx-auto
+                bg-gray-500
+                hover:bg-gray-700
+                duration-200
+                text-white
+                font-medium
+                py-2
+                px-4
+                rounded
+                w-20
+                text-md
+              "
+              type="button"
+            >
+              <router-link :to="{ name: 'Home' }" class="no-underline"
+                >Back</router-link
+              >
+            </button>
+          </nav>
         </div>
 
         <div>
@@ -157,22 +155,47 @@
 <script>
 import InputComponent from "@/components/ui/InputComponent.vue";
 
+import axios from "axios";
+
 export default {
   components: {
     InputComponent,
   },
   mounted() {
     this.currentUser = JSON.parse(localStorage.getItem("user"));
-    console.log(this.currentUser.UserName);
+    this.loading = false;
   },
   data() {
     return {
       currentUser: "",
+      selectedFile: null,
+      loading: true,
+      srcImg: "https://i.ibb.co/hgNrFmX/SE140371-Nguyen-Cong-Thai-Son.jpg",
     };
   },
   methods: {
-    back() {
-      this.$router.push("/dashboard");
+    uploadImg(evt) {
+      this.loading = true;
+      let apiKey = "3ce508644197fb15dcf4e916cf328c21";
+      const baseUrlImgbb = "https://api.imgbb.com/1";
+
+      this.selectedFile = evt.target.files[0];
+
+      let body = new FormData();
+      body.set("key", apiKey);
+      body.append("image", this.selectedFile);
+
+      axios
+        .post(baseUrlImgbb + "/upload", body)
+        .then((res) => {
+          this.srcImg = res.data.data.image.url;
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     },
   },
 };

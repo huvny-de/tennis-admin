@@ -1,7 +1,10 @@
 <template>
   <div class="container mx-auto h-[14.8%] mb-8 border-1 pl-1 md:mb-0">
     <div class="h-full px-4 flex bg-white items-center justify-between">
-      <div class="relative mx-4 lg:mx-0 w-[70%] flex items-center">
+      <div
+        class="relative mx-4 lg:mx-0 w-[70%] flex items-center"
+        :class="isHiddenInput === true ? 'invisible' : ''"
+      >
         <span
           class="
             absolute
@@ -35,6 +38,7 @@
           "
           placeholder="Search Member..."
           :value="search"
+          v-on:keyup.enter="EmitSearchValue"
         ></input-component>
       </div>
       <div class="p-10">
@@ -103,11 +107,15 @@ export default {
   mounted() {
     this.currentUser = JSON.parse(localStorage.getItem("user"));
   },
-  props : {
-    search : {
-      type : String, 
-      required : true
-    }
+  props: {
+    search: {
+      type: String,
+      required: true,
+    },
+    isHiddenInput: {
+      type: String,
+      required: false,
+    },
   },
   data() {
     return {

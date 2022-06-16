@@ -366,7 +366,7 @@
 import TheModal from "./YardOwnerModal.vue";
 
 export default {
-  name: "MemberShips",
+  name: "YardOwnerList",
   components: {
     TheModal,
   },

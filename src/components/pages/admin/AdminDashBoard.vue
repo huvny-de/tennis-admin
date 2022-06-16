@@ -1,6 +1,6 @@
   <template>
   <div class="flex h-screen">
-    <SideBarAdmin @changeTab="changeCurrentComponent" class="flex w-[16%]" />
+    <SideBarAdmin @changeTab="changeCurrentComponent" class="w-60" />
 
     <div class="flex-1 bg-[#F8F9FF] flex flex-col">
       <the-header :search="searchValue"  @search="SearchMember" />

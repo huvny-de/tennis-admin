@@ -1,41 +1,51 @@
-import {createRouter , createWebHistory} from 'vue-router';
+import { createRouter, createWebHistory } from "vue-router";
 
-import LoginPage from '../pages/LoginPage.vue';
+import LoginPage from "../pages/LoginPage.vue";
+import RegisterPage from "../pages/RegisterPage.vue";
 
 const routes = [
-    {
-        path: '/dashboard',
-        name : 'Home',
-        component : () => import('../pages/admin/AdminDashBoard.vue')    
-        
-    },
-    {
-        path: '/login',
-        name : 'Login Page',
-        component : LoginPage    
-        
-    },
-    {
-        path: '/profile',
-        name: 'Profile Page',
-        component : () => import('../pages/admin/AdminProfilePage.vue')
-    }
+  {
+    path: "/dashboard",
+    name: "Home",
+    component: () => import("../pages/admin/AdminDashBoard.vue"),
+  },
+  {
+    path: "/login",
+    name: "Login Page",
+    component: LoginPage,
+  },
+  {
+    path: "/register",
+    name: "Register Page",
+    component: RegisterPage,
+  },
+  {
+    path: "/profile",
+    name: "Profile Page",
+    component: () => import("../pages/admin/AdminProfilePage.vue"),
+  },
+  {
+    path: "/yardOwner",
+    name: "Yard Owner Dashboard",
+    component: () => import("../pages/yardOwner/DashBoard.vue"),
+  },
+
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes: routes
-})
+  history: createWebHistory(),
+  routes: routes,
+});
 
-router.beforeEach((to,from,next) => {
-    const publicPage = ['/login'];
-    const authRequire = !publicPage.includes(to.path);
-    const loggedIn = localStorage.getItem('user');
+router.beforeEach((to, from, next) => {
+  const publicPage = ["/login", "/register"];
+  const authRequire = !publicPage.includes(to.path);
+  const loggedIn = localStorage.getItem("user");
 
-    if(authRequire && !loggedIn) {
-        next('/login');
-    }else {
-        next()
-    }
-})
+  if ((authRequire && !loggedIn) || to.path === "/") {
+    next("/login");
+  } else {
+    next();
+  }
+});
 export default router;
