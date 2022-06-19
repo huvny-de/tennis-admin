@@ -20,7 +20,12 @@ import {
   faEye,
   faTrashCan,
   faUpload,
-  faHouse
+  faHouse,
+  faUser,
+  faCalendarCheck,
+  faClockRotateLeft,
+  faTableTennisPaddleBall,
+  faTableTennis,
 } from "@fortawesome/free-solid-svg-icons";
 
 import TheHeader from "../src/components/layout/TheHeader.vue";
@@ -39,7 +44,12 @@ library.add(
   faTrashCan,
   faUpload,
   faUserGroup,
-  faHouse
+  faHouse,
+  faUser,
+  faCalendarCheck,
+  faClockRotateLeft,
+  faTableTennisPaddleBall,
+  faTableTennis
 );
 
 const app = createApp(App);

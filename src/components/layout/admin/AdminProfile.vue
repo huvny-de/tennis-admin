@@ -62,7 +62,7 @@
         </div>
 
         <!--information container-->
-        <div class="grid md:grid-cols-2 gap-6 mt-4 sm:grid-cols-1 text-xs">
+        <div class="grid md:grid-cols-2 gap-6 mt-4 sm:grid-cols-1 text-sm">
           <div>
             <label class="text-[#747474]" for="username">Username</label>
             <input-component
@@ -174,7 +174,7 @@ export default {
     };
   },
   methods: {
-    uploadImg(evt) {
+    async uploadImg(evt) {
       this.loading = true;
       let apiKey = "3ce508644197fb15dcf4e916cf328c21";
       const baseUrlImgbb = "https://api.imgbb.com/1";
@@ -185,7 +185,7 @@ export default {
       body.set("key", apiKey);
       body.append("image", this.selectedFile);
 
-      axios
+      await axios
         .post(baseUrlImgbb + "/upload", body)
         .then((res) => {
           this.srcImg = res.data.data.image.url;

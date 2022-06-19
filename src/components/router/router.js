@@ -25,9 +25,14 @@ const routes = [
     component: () => import("../pages/admin/AdminProfilePage.vue"),
   },
   {
-    path: "/yardOwner",
+    path: "/yard-owner",
     name: "Yard Owner Dashboard",
     component: () => import("../pages/yardOwner/DashBoard.vue"),
+  },
+  {
+    path: "/store-profile",
+    name: "Store Profile",
+    component: () => import("../pages/admin/AdminDashBoard.vue"),
   },
 
 ];

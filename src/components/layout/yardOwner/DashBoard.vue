@@ -1,35 +1,5 @@
 <template>
-  <header class="bg-white p-2 border-b-2">
-    <div class="wrap-header flex items-center justify-end flex-wrap">
-      <div class="mr-5 flex float-right">
-        <button class="mr-5 text-2xl text-gray-500">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            aria-hidden="true"
-            role="img"
-            width="1em"
-            height="1em"
-            preserveAspectRatio="xMidYMid meet"
-            viewBox="0 0 36 36"
-            class="iconify iconify--clarity"
-          >
-            <path
-              fill="currentColor"
-              d="M32.51 27.83A14.4 14.4 0 0 1 30 24.9a12.63 12.63 0 0 1-1.35-4.81v-4.94A10.81 10.81 0 0 0 19.21 4.4V3.11a1.33 1.33 0 1 0-2.67 0v1.31a10.81 10.81 0 0 0-9.33 10.73v4.94a12.63 12.63 0 0 1-1.35 4.81a14.4 14.4 0 0 1-2.47 2.93a1 1 0 0 0-.34.75v1.36a1 1 0 0 0 1 1h27.8a1 1 0 0 0 1-1v-1.36a1 1 0 0 0-.34-.75ZM5.13 28.94a16.17 16.17 0 0 0 2.44-3a14.24 14.24 0 0 0 1.65-5.85v-4.94a8.74 8.74 0 1 1 17.47 0v4.94a14.24 14.24 0 0 0 1.65 5.85a16.17 16.17 0 0 0 2.44 3Z"
-              class="clr-i-outline clr-i-outline-path-1"
-            ></path>
-            <path
-              fill="currentColor"
-              d="M18 34.28A2.67 2.67 0 0 0 20.58 32h-5.26A2.67 2.67 0 0 0 18 34.28Z"
-              class="clr-i-outline clr-i-outline-path-2"
-            ></path>
-            <path fill="none" d="M0 0h36v36H0z"></path>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </header>
+ 
   <div class="dashboard p-8">
     <!-- grid wrapper card -->
     <div
@@ -99,24 +69,24 @@
               h-14
               text-lg
               p-3
-              text-green-600
+              text-green-400
               mx-auto
             "
           >
             <span class="">
               <svg
+                style="height: 30px; width: 30px; color: rgb(46, 229, 157)"
                 xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                role="img"
-                width="30px"
-                height="30px"
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 24 24"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-alarm-fill"
+                viewBox="0 0 16 16"
               >
                 <path
-                  fill="currentColor"
-                  d="M5 22h14a2 2 0 0 0 2-2V9a1 1 0 0 0-1-1h-3v-.777c0-2.609-1.903-4.945-4.5-5.198A5.005 5.005 0 0 0 7 7v1H4a1 1 0 0 0-1 1v11a2 2 0 0 0 2 2zm12-12v2h-2v-2h2zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v1H9V7zm-2 3h2v2H7v-2z"
-                />
+                  d="M6 .5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1H9v1.07a7.001 7.001 0 0 1 3.274 12.474l.601.602a.5.5 0 0 1-.707.708l-.746-.746A6.97 6.97 0 0 1 8 16a6.97 6.97 0 0 1-3.422-.892l-.746.746a.5.5 0 0 1-.707-.708l.602-.602A7.001 7.001 0 0 1 7 2.07V1h-.5A.5.5 0 0 1 6 .5zm2.5 5a.5.5 0 0 0-1 0v3.362l-1.429 2.38a.5.5 0 1 0 .858.515l1.5-2.5A.5.5 0 0 0 8.5 9V5.5zM.86 5.387A2.5 2.5 0 1 1 4.387 1.86 8.035 8.035 0 0 0 .86 5.387zM11.613 1.86a2.5 2.5 0 1 1 3.527 3.527 8.035 8.035 0 0 0-3.527-3.527z"
+                  fill="#2ee59d"
+                ></path>
               </svg>
             </span>
           </div>
@@ -126,7 +96,9 @@
           <p class="font-semibold text-gray-900 dark:text-gray-200 text-xl">
             256
           </p>
-          <h2 class="font-normal text-gray-400 text-md mt-1">Tổng số lần đặt sân</h2>
+          <h2 class="font-normal text-gray-400 text-md mt-1">
+            Tổng số lần đặt sân
+          </h2>
         </div>
       </div>
       <!-- end card -->
@@ -142,28 +114,24 @@
               h-14
               text-lg
               p-3
-              text-red-600
+              text-yellow-600
               mx-auto
             "
           >
             <span class="">
               <svg
+                style="color: rgb(245, 214, 15)"
                 xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-                role="img"
                 width="30px"
                 height="30px"
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 32 32"
+                fill="currentColor"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
               >
                 <path
-                  fill="none"
-                  d="M8.007 24.93A4.996 4.996 0 0 1 13 20h6a4.996 4.996 0 0 1 4.993 4.93a11.94 11.94 0 0 1-15.986 0ZM20.5 12.5A4.5 4.5 0 1 1 16 8a4.5 4.5 0 0 1 4.5 4.5Z"
-                />
-                <path
-                  fill="currentColor"
-                  d="M26.749 24.93A13.99 13.99 0 1 0 2 16a13.899 13.899 0 0 0 3.251 8.93l-.02.017c.07.084.15.156.222.239c.09.103.187.2.28.3c.28.304.568.596.87.87c.092.084.187.162.28.242c.32.276.649.538.99.782c.044.03.084.069.128.1v-.012a13.901 13.901 0 0 0 16 0v.012c.044-.031.083-.07.128-.1c.34-.245.67-.506.99-.782c.093-.08.188-.159.28-.242c.302-.275.59-.566.87-.87c.093-.1.189-.197.28-.3c.071-.083.152-.155.222-.24ZM16 8a4.5 4.5 0 1 1-4.5 4.5A4.5 4.5 0 0 1 16 8ZM8.007 24.93A4.996 4.996 0 0 1 13 20h6a4.996 4.996 0 0 1 4.993 4.93a11.94 11.94 0 0 1-15.986 0Z"
-                />
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                  fill="#f5d60f"
+                ></path>
               </svg>
             </span>
           </div>
@@ -171,10 +139,10 @@
 
         <div class="block p-2 w-full">
           <p class="font-semibold text-gray-900 dark:text-gray-200 text-xl">
-            3569
+            4.8
           </p>
           <h2 class="font-normal text-gray-400 text-md mt-1">
-            Tổng số lần bị hủy sân
+            Đánh giá trung bình
           </h2>
         </div>
       </div>
@@ -220,7 +188,9 @@
           <p class="font-semibold text-gray-900 dark:text-gray-200 text-xl">
             7 230
           </p>
-          <h2 class="font-normal text-gray-400 text-md mt-1">Tổng lượt truy cập</h2>
+          <h2 class="font-normal text-gray-400 text-md mt-1">
+            Tổng lượt truy cập
+          </h2>
         </div>
       </div>
       <!-- end card -->
@@ -281,7 +251,7 @@
             class="
               uppercase
               float-right
-              mt-7
+              mt-5
               border-b border-red-600
               text-red-600
             "
@@ -317,7 +287,7 @@
             </span>
           </h2>
         </span>
-        <div class="wrapper-chart mt-5">
+        <div class="wrapper-chart mt-2">
           <apexchart
             type="bar"
             height="380"
@@ -331,7 +301,7 @@
               class="
                 uppercase
                 float-right
-                -mt-7
+                mt-5
                 border-b border-red-600
                 text-red-600
               "
@@ -353,10 +323,10 @@
           shadow
         "
       >
-        <h2 class="font-bold text-lg text-gray-800 dark:text-gray-200">
-          369
-        </h2>
-        <p class="text-gray-400 font-lexend font-normal">Lượt truy cập trong tuần</p>
+        <h2 class="font-bold text-lg text-gray-800 dark:text-gray-200">369</h2>
+        <p class="text-gray-400 font-lexend font-normal">
+          Lượt truy cập trong tuần
+        </p>
         <span class="float-right">
           <h2 class="text-green-500 -mt-12 flex">
             <span class="mr-2"> 47.9% </span
@@ -376,12 +346,11 @@
           <br />
           <hr />
           <div class="wrapper-button mt-3">
-              
             <button
               class="
                 uppercase
                 float-right
-                -mt-7
+                mt-5
                 border-b border-red-600
                 text-red-600
               "
@@ -390,6 +359,149 @@
             </button>
           </div>
         </div>
+      </div>
+
+      <div
+        class="
+          mt-2
+          bg-white
+          dark:bg-gray-800
+          p-5
+          w-full
+          rounded-md
+          box-border
+          shadow
+        "
+      >
+        <h2 class="font-bold text-lg text-gray-800 dark:text-gray-200">
+          Sân Đất Nệm Được Đặt Nhiều Nhất
+        </h2>
+        <p class="text-gray-400 font-lexend font-normal">Độ Phủ Sân</p>
+
+        <div class="wrapper-chart mt-5">
+          <apexchart
+            width="100%"
+            height="380"
+            type="pie"
+            :options="optionsDonut"
+            :series="seriesDonut"
+          ></apexchart>
+          <div class="p-3"></div>
+          <br />
+          <hr />
+          <div class="wrapper-button mt-3">
+            <button
+              class="
+                uppercase
+                float-right
+                mt-5
+                border-b border-red-600
+                text-red-600
+              "
+            >
+              User Report
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="
+        mt-2
+        bg-white
+        dark:bg-gray-800
+        p-5
+        w-full
+        rounded-md
+        box-border
+        shadow
+      "
+    >
+      <h2 class="font-bold text-lg text-gray-800 dark:text-gray-200">
+        Lịch Đặt Sân
+      </h2>
+      <p class="text-gray-400 font-lexend font-normal">
+        Danh sách đặt sân mới nhất
+      </p>
+      <div class="wrapping-table mt-10">
+        <table
+          class="
+            w-full
+            text-sm text-left text-gray-500
+            dark:text-gray-400
+            lg:overflow-auto
+            overflow-x-scroll
+          "
+        >
+          <thead
+            class="
+              text-xs text-gray-700
+              uppercase
+              bg-gray-50
+              dark:bg-gray-700 dark:text-gray-400
+            "
+          >
+            <tr>
+              <th scope="col" class="uppercase px-6 py-3">Khách Hàng</th>
+              <th scope="col" class="uppercase px-6 py-3">Số điện thoại</th>
+              <th scope="col" class="uppercase px-6 py-3">Loại Sân</th>
+              <th scope="col" class="uppercase px-6 py-3">Ngày & Khung giờ</th>
+              <th scope="col" class="uppercase px-6 py-3">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class="
+                bg-white
+                border-b
+                dark:bg-gray-800 dark:border-gray-700
+                odd:bg-white
+                even:bg-gray-50
+              "
+              v-for="items in tableBooking"
+              :key="items"
+            >
+              <td class="px-6 py-4">
+                <div class="flex items-center">
+                  <div class="flex-shrink object-contain">
+                    <img class="rounded-2xl mr-3 w-8 h-8" :src="items.img" />
+                  </div>
+                  <div class="ml-4 text-[#334D6E]">{{ items.fullName }}</div>
+                </div>
+              </td>
+              <td class="px-6 py-4">
+                {{ items.phoneNumber }}
+              </td>
+              <td class="px-6 py-4">
+                {{ items.yardType }}
+              </td>
+              <td class="px-6 py-4">
+                {{ items.datetime }}
+              </td>
+              <td class="px-6 py-4">
+                <span
+                  class="text-green-800 bg-green-300 px-3 py-1 rounded-md"
+                  v-if="items.statusTransaction == 'completed'"
+                >
+                  {{ items.statusTransaction }}
+                </span>
+                <span
+                  class="text-purple-800 bg-purple-300 px-3 py-1 rounded-md"
+                  v-else-if="items.statusTransaction == 'new'"
+                >
+                  {{ items.statusTransaction }}
+                </span>
+                <span
+                  class="text-red-800 bg-red-300 px-3 py-1 rounded-md"
+                  v-else
+                >
+                  {{ items.statusTransaction }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -400,79 +512,80 @@
 
 <script>
 import { Icon } from "@iconify/vue";
+
 export default {
   components: {
     Icon,
   },
   data() {
     return {
-       // chart data area
-        optionsArea: {
-          xaxis: {
-            categories: ['Tuần 1','Tuần 2','Tuần 3','Tuần 4'],
-          },
-          fontFamily: "Segoe UI, sans-serif",
-          stroke: {
-            curve: "straight",
-          },
-          markers: {
-            size: 0,
-          },
-          yaxis: {
-            show: false,
-          },
-          fill: {
-            type: "gradient",
-            gradient: {
-              shadeIntensity: 1,
-              opacityFrom: 0.7,
-              opacityTo: 0.9,
-              stops: [0, 90, 100],
-            },
+      // chart data area
+      optionsArea: {
+        xaxis: {
+          categories: ["Tuần 1", "Tuần 2", "Tuần 3", "Tuần 4"],
+        },
+        fontFamily: "Segoe UI, sans-serif",
+        stroke: {
+          curve: "straight",
+        },
+        markers: {
+          size: 0,
+        },
+        yaxis: {
+          show: false,
+        },
+        fill: {
+          type: "gradient",
+          gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.7,
+            opacityTo: 0.9,
+            stops: [0, 90, 100],
           },
         },
+      },
+      chart: {
+        fontFamily: "lexend, sans-serif",
+      },
+      seriesArea: [
+        {
+          name: "Doanh thu",
+          data: [30, 40, 45, 50],
+        },
+        {
+          name: "Doanh thu (tháng trước)",
+          data: [20, 34, 45, 55],
+        },
+      ],
+      optionsBar: {
         chart: {
-          fontFamily: "lexend, sans-serif",
-        },
-        seriesArea: [
-          {
-            name: "Doanh thu",
-            data: [30, 40, 45, 50],
-          },
-          {
-            name: "Doanh thu (tháng trước)",
-            data: [20, 34, 45, 55],
-          },
-        ],
-        optionsBar: {
-          chart: {
-            toolbar: {
-              show: false,
-            },
-            zoom: {
-              enabled: false,
-            },
-            sparkline: {
-              enabled: true,
-            },
-          },
-          legend: {
+          toolbar: {
             show: false,
           },
-          xaxis: {
-            show: false,
-          },
-          yaxis: {
-            show: false,
-          },
-          colors: ["#4f46e5", "#DC2626"],
-          dataLabels: {
+          zoom: {
             enabled: false,
           },
-          stroke: {
-            curve: "straight",
+          sparkline: {
+            enabled: true,
           },
         },
+        legend: {
+          show: false,
+        },
+        xaxis: {
+          show: false,
+        },
+        yaxis: {
+          show: false,
+        },
+        colors: ["#4f46e5", "#DC2626"],
+        dataLabels: {
+          enabled: false,
+        },
+        stroke: {
+          curve: "straight",
+        },
+      },
 
       series: [
         {
@@ -564,8 +677,112 @@ export default {
       },
       seriesVisitor: [
         {
-          name: "Visitor ",
-          data: [22, 30, 45, 50, 42, 60, 70, 50],
+          name: "Lượt truy cập",
+          data: [
+            {
+              x: "Thứ 2",
+              y: 7,
+            },
+            {
+              x: "Thứ 3",
+              y: 5,
+            },
+            {
+              x: "Thứ 4",
+              y: 22,
+            },
+            {
+              x: "Thứ 5",
+              y: 15,
+            },
+            {
+              x: "Thứ 6",
+              y: 20,
+            },
+            {
+              x: "Thứ 7",
+              y: 33,
+            },
+            {
+              x: "Chủ Nhật",
+              y: 80,
+            },
+          ],
+        },
+      ],
+      tableBooking: [
+        {
+          img: "https://i.ibb.co/hgNrFmX/SE140371-Nguyen-Cong-Thai-Son.jpg",
+          fullName: "Nguyễn Công Thái Sơn",
+          phoneNumber: "0978145440",
+          yardType: "Sân Cỏ",
+          datetime: "18/6/2022 & Slot 1",
+          amount: "Rp.450.000",
+          statusTransaction: "new",
+        },
+        {
+          img: "https://i.ibb.co/hgNrFmX/SE140371-Nguyen-Cong-Thai-Son.jpg",
+          fullName: "Nguyễn Công Thái Sơn",
+          phoneNumber: "0978145440",
+          yardType: "Sân Đất Nệm",
+          datetime: "18/6/2022 & Slot 2",
+          amount: "Rp.250.000",
+          statusTransaction: "new",
+        },
+        {
+          img: "https://i.ibb.co/hgNrFmX/SE140371-Nguyen-Cong-Thai-Son.jpg",
+          fullName: "Nguyễn Công Thái Sơn",
+          phoneNumber: "0978145440",
+          yardType: "Sân Nhân Tạo",
+          datetime: "20/6/2022 & Slot 5",
+          amount: "Rp.150.000",
+          statusTransaction: "new",
+        },
+        {
+          img: "https://i.ibb.co/hgNrFmX/SE140371-Nguyen-Cong-Thai-Son.jpg",
+          fullName: "Nguyễn Công Thái Sơn",
+          phoneNumber: "0978145440",
+          yardType: "Sân Cỏ",
+          datetime: "22/6/2022 & Slot 1",
+          amount: "Rp.180.000",
+          statusTransaction: "new",
+        },
+      ],
+      optionsDonut: {
+        chart: {
+          type: "donut",
+        },
+        legend: false,
+        dataLabels: {
+          enabled: false,
+        },
+        labels: ["Sân Đất Nệm", "Sân Cỏ", "Sân Nhân Tạo"],
+      },
+      seriesDonut: [83, 25, 25],
+      tableTransaction: [
+        {
+          transaction: "Payment from Ike yolanda",
+          datetime: "Apr 22, 2022",
+          amount: "Rp.450.000",
+          statusTransaction: "completed",
+        },
+        {
+          transaction: "Payment from Ice Wulandari",
+          datetime: "May 2, 2022",
+          amount: "Rp.250.000",
+          statusTransaction: "completed",
+        },
+        {
+          transaction: "Payment from Alfiah Gipta Jannatil Hasanah",
+          datetime: "May 5, 2022",
+          amount: "Rp.150.000",
+          statusTransaction: "progress",
+        },
+        {
+          transaction: "Payment failed from #046577",
+          datetime: "May 5, 2022",
+          amount: "Rp.180.000",
+          statusTransaction: "cancelled",
         },
       ],
     };
