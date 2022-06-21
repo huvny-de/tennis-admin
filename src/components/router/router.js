@@ -8,6 +8,11 @@ const routes = [
     path: "/dashboard",
     name: "Home",
     component: () => import("../pages/admin/AdminDashBoard.vue"),
+    meta: {
+      requiresAuth: true,
+      adminAuth: true,
+      userAuth: false,
+    },
   },
   {
     path: "/login",
@@ -23,18 +28,31 @@ const routes = [
     path: "/profile",
     name: "Profile Page",
     component: () => import("../pages/admin/AdminProfilePage.vue"),
+    meta: {
+      requiresAuth: true,
+      adminAuth: true,
+      userAuth: false,
+    },
   },
   {
     path: "/yard-owner",
     name: "Yard Owner Dashboard",
     component: () => import("../pages/yardOwner/DashBoard.vue"),
+    meta: {
+      requiresAuth: true,
+      adminAuth: false,
+      userAuth: true,
+    },
   },
   {
     path: "/store-profile",
     name: "Store Profile",
-    component: () => import("../pages/admin/AdminDashBoard.vue"),
+    meta: {
+      requiresAuth: true,
+      adminAuth: false,
+      userAuth: true,
+    },
   },
-
 ];
 
 const router = createRouter({
@@ -45,12 +63,31 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const publicPage = ["/login", "/register"];
   const authRequire = !publicPage.includes(to.path);
-  const loggedIn = localStorage.getItem("user");
+  const loggedIn = JSON.parse(localStorage.getItem("user"));
 
-  if ((authRequire && !loggedIn) || to.path === "/") {
-    next("/login");
-  } else {
-    next();
+  if(authRequire && !loggedIn) {
+    next('/login')
+  }else if(to.path === '/') {
+    next('/login')
+  }
+  else {
+    next()
+    if(loggedIn) {
+      let RoleID = loggedIn.Token.RoleIds[0];
+      if(to.meta.adminAuth) {
+        if(RoleID === 1) {
+          next()
+        }else {
+          router.push('/login')
+        }
+      }else if(to.meta.userAuth) {
+        if(RoleID === 2) {
+          next()
+        }else {
+          router.push('/login')
+        }
+      }
+    }
   }
 });
 export default router;

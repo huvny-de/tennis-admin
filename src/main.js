@@ -49,7 +49,7 @@ library.add(
   faCalendarCheck,
   faClockRotateLeft,
   faTableTennisPaddleBall,
-  faTableTennis
+  faTableTennis,
 );
 
 const app = createApp(App);

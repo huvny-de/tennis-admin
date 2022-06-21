@@ -11,14 +11,22 @@
 
  <script>
 import SideBarAdmin from '../../layout/yardOwner/SideBard.vue';
-import Dashboard from '../../layout/yardOwner/DashBoard.vue'
-import TheHeader from '../../layout/yardOwner/TheHeader.vue'
+import Dashboard from '../../layout/yardOwner/DashBoard.vue';
+import BookingManagement from '../../layout/yardOwner/BookingManagement.vue';
+import YardManager from '../../layout/yardOwner/YardManager.vue';
+import CategoryManager from '../../layout/yardOwner/CategoryManager.vue';
+import StoreProfile from '../../layout/yardOwner/StoreProfile.vue';
+import TheHeader from '../../layout/yardOwner/TheHeader.vue';
 
 export default {
   components: {
     SideBarAdmin,
     Dashboard,
-    TheHeader
+    TheHeader,
+    BookingManagement,
+    YardManager,
+    CategoryManager,
+    StoreProfile
   },
 
   data() {

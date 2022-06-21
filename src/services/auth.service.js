@@ -1,19 +1,16 @@
 import axios from "axios";
-const API_URL = "https://eqc-demo.softek.com.vn/api/";
+const API_URL = "http://171.244.136.52:5511/api/";
 
 class AuthService {
   login(user) {
     return axios
-      .post(API_URL + "user/signIn?tenant=nwl", {
-        AutoSignIn: true,
-        ClientId: null,
-        CompanyName: "nwl",
+      .post(API_URL + "user/signIn", {
         Username: user.username,
         Password: user.password,
-        RecoveryToken: "",
+        autoSignIn: true,
       })
       .then((response) => {
-        if (response.data.AccessToken) {
+        if (response.data.Is200) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
         return response.data;

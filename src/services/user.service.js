@@ -1,6 +1,6 @@
 import axios from 'axios';
 import authHeader from './auth-header';
-const API_URL = 'https://eqc-demo.softek.com.vn/api/'
+const API_URL = 'http://171.244.136.52:5511/api/'
 
 class UserService {
 

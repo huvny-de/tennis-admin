@@ -81,14 +81,29 @@
                 </div>
               </form>
               <div class="relative mt-2 w-full">
-                <p class="text-center text-gray-400 hover:text-gray-500 duration-200">
+                <p
+                  class="
+                    text-center text-gray-400
+                    hover:text-gray-500
+                    duration-200
+                  "
+                >
                   <a class="no-underline" href="http://facebook.com"
                     >Forgot your password ?</a
                   >
                 </p>
 
-                 <p class="text-center text-gray-400 hover:text-gray-500 duration-200">
-                  <router-link to="/register" class="no-underline" href="http://facebook.com"
+                <p
+                  class="
+                    text-center text-gray-400
+                    hover:text-gray-500
+                    duration-200
+                  "
+                >
+                  <router-link
+                    to="/register"
+                    class="no-underline"
+                    href="http://facebook.com"
                     >Don't have account ? Sign Up</router-link
                   >
                 </p>
@@ -127,13 +142,22 @@ export default {
     handleLogin() {
       this.loading = true;
       this.$store.dispatch("auth/login", this.user).then(
-        () => {
-          this.$router.push("/dashboard");
-        },
-        (error) => {
-          this.message =  error.response.data.Message;
-          this.loading = false;
+        (response) => {
+          if (response.Is200) {
+            let RoleID = response.Token.RoleIds[0];
+            if (RoleID === 1) {
+              this.$router.push("/yard-owner");
+            } else {
+              this.$router.push("/dashboard");
+            }
+          } else {
+            this.message = response.Message;
+            this.loading = false;
+          }
         }
+        // (error) => {
+
+        // }
       );
     },
   },

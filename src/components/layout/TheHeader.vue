@@ -41,60 +41,94 @@
           v-on:keyup.enter="EmitSearchValue"
         ></input-component>
       </div>
-      <div class="p-10">
-        <div class="dropdown inline-block relative">
-          <button
-            class="
-              text-gray-700
-              font-semibold
-              py-2
-              px-4
-              rounded
-              inline-flex
-              items-center
-            "
-          >
-            <img
-              class="w-7 h-7 rounded mr-3"
-              :src="require('../../assets/img/son.jpg')"
-            />
-            <span class="mr-1 text-normal font-normal">{{
-              currentUser.FullName
-            }}</span>
-            <font-awesome-icon
-              class="w-4 h-4 ml-1 text-[#ACACAC]"
-              icon="caret-down"
-            />
-          </button>
-          <ul
-            class="
-              dropdown-menu
-              absolute
-              hidden
-              text-gray-700
-              dark:text-gray-200
-              pt-1
-              py-1
-              text-sm
-            "
-          >
-            <li v-for="item in listDropDown" :key="item" class="">
-              <a
+      <div class="wrap-header flex items-center justify-end flex-wrap">
+        <div class="mr-5 flex float-right relative">
+          <button @click="menuToggle" @blur="menuToggleBlur">
+            <div
+              class="
+                user-avatar
+                flex
+                hover:bg-gray-100
+                dark:hover:bg-gray-700
+                p-1
+                cursor-pointer
+                rounded-md
+              "
+            >
+              <img
+                src="../../assets/img/son.jpg"
                 class="
-                  rounded-t
-                  bg-gray-100
-                  hover:bg-gray-300
-                  py-2
-                  px-4
-                  block
-                  whitespace-no-wrap
-                  cursor-pointer
+                  rounded-full
+                  mr-4
+                  w-10
+                  h-10
+                  p-1
+                  ring-1 ring-gray-300
+                  dark:ring-gray-500
                 "
-                @click="routerLink(item.router)"
-                >{{ item.text }}</a
+                alt=""
+              />
+              <span class="text-md mt-4 text-gray-300"
+                ><Icon icon="bi:caret-down-fill"
+              /></span>
+            </div>
+          </button>
+
+          <transition name="fade">
+            <div
+              id="dropdownSmall"
+              v-show="menu"
+              class="
+                block
+                absolute
+                right-0
+                mt-12
+                z-10
+                w-44
+                border
+                dark:border-gray-700
+                bg-white
+                dark:bg-gray-800
+                rounded
+                divide-y
+                dark:divide-gray-700
+                divide-gray-100
+                shadow
+              "
+            >
+              <div class="py-3 px-4 text-sm text-gray-900 dark:text-gray-200">
+                <div>Tài khoản đăng nhập</div>
+                <div class="font-bold truncate">Thái Sơn</div>
+              </div>
+              <ul
+                class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                aria-labelledby="dropdownSmallButton"
               >
-            </li>
-          </ul>
+                <li>
+                  <span
+                    @click="routerLink('/profile')"
+                    class="block py-2 px-4 0 hover:bg-blue-500 hover:text-white cursor-pointer"
+                    >Thông Tin Tài Khoản</span
+                  >
+                </li>
+              </ul>
+              <div class="py-1">
+                <span
+                  @click="routerLink('/logout')"
+                  class="
+                    block
+                    py-2
+                    px-4
+                    text-sm text-gray-700
+                    dark:text-gray-200
+                    hover:bg-blue-500 hover:text-white
+                    cursor-pointer
+                  "
+                  >Đăng xuất</span
+                >
+              </div>
+            </div>
+          </transition>
         </div>
       </div>
     </div>
@@ -102,7 +136,11 @@
 </template>
 
 <script>
+import { Icon } from "@iconify/vue";
 export default {
+  components: {
+    Icon,
+  },
   name: "TheHeader",
   mounted() {
     this.currentUser = JSON.parse(localStorage.getItem("user"));
@@ -119,16 +157,7 @@ export default {
   },
   data() {
     return {
-      listDropDown: [
-        {
-          text: "My Account",
-          router: "/profile",
-        },
-        {
-          text: "SignOut",
-          router: "/logout",
-        },
-      ],
+      menu: false,
       currentUser: "",
     };
   },
@@ -144,6 +173,9 @@ export default {
       } else {
         this.$router.push(path);
       }
+    },
+    menuToggle: function () {
+      this.menu = !this.menu;
     },
   },
 };

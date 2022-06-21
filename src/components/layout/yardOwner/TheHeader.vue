@@ -7,6 +7,7 @@
             w-5
             h-5
             p-2
+            ml-3
             text-sm
             bg-red-600
             text-white
@@ -14,6 +15,7 @@
             rounded-2xl
             inset-0
             right-2
+            bottom-0
             absolute
             flex
             items-center
