@@ -3,18 +3,18 @@
     <div class="container mx-auto my-5 p-5 px-8">
       <div class="md:flex no-wrap md:-mx-2 pt-4">
         <!-- Left Side -->
-        <div class="w-full md:w-3/12 md:mx-2">
+        <div class="w-full md:w-1/3 md:mx-2">
           <!-- Profile Card -->
           <div class="bg-white p-3 border-t-4 border-green-400">
             <div class="image overflow-hidden">
               <img
                 class="h-auto w-full mx-auto"
-                src="https://placevietnam.com/img/600x337/san_pham/san-tennis-clb-hoang-thien.jpg"
+                src="https://i.ibb.co/Y2JLZnc/photo-1-15224582583802095482215.jpg"
                 alt=""
               />
             </div>
             <h1 class="text-gray-800 font-bold text-lg leading-8 my-1">
-              Hoàng Thiên Tennis
+              Sân Tennis Đại Học Ngân Hàng
             </h1>
             <h4
               class="

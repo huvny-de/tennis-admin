@@ -27,6 +27,7 @@ import {
   faClockRotateLeft,
   faTableTennisPaddleBall,
   faTableTennis,
+  faMoneyCheckDollar,
 } from "@fortawesome/free-solid-svg-icons";
 
 import TheHeader from "../src/components/layout/TheHeader.vue";
@@ -51,6 +52,7 @@ library.add(
   faClockRotateLeft,
   faTableTennisPaddleBall,
   faTableTennis,
+  faMoneyCheckDollar
 );
 
 const app = createApp(App);

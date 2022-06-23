@@ -16,7 +16,7 @@
         >
           <img
             class="rounded mr-3 lg:w-60 object-contain md:w-40"
-            src="https://placevietnam.com/img/600x337/san_pham/san-tennis-clb-hoang-thien.jpg"
+            src="https://i.ibb.co/Y2JLZnc/photo-1-15224582583802095482215.jpg"
           />
           <label class="block mt-4">
             <span class="sr-only">Choose File</span>

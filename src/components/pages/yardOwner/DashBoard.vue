@@ -12,21 +12,23 @@
  <script>
 import SideBarAdmin from '../../layout/yardOwner/SideBard.vue';
 import Dashboard from '../../layout/yardOwner/DashBoard.vue';
-import BookingManagement from '../../layout/yardOwner/BookingManagement.vue';
+import BookingManager from '../../layout/yardOwner/BookingManager.vue';
 import YardManager from '../../layout/yardOwner/YardManager.vue';
 import SlotManager from '../../layout/yardOwner/SlotManager.vue';
 import StoreProfile from '../../layout/yardOwner/StoreProfile.vue';
 import TheHeader from '../../layout/yardOwner/TheHeader.vue';
+import PriceManager from '../../layout/yardOwner/Slot/SettingRate.vue';
 
 export default {
   components: {
     SideBarAdmin,
     Dashboard,
     TheHeader,
-    BookingManagement,
+    BookingManager,
     YardManager,
     SlotManager,
-    StoreProfile
+    StoreProfile,
+    PriceManager
   },
 
   data() {

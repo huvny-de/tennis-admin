@@ -12,9 +12,9 @@
         w-[45%]
       "
     >
-      <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-        Cài Đặt Giờ Thuê
-      </h3>
+       <h2 class="font-semibold text-lg text-gray-800 dark:text-gray-200 mb-6">
+          Cài Đặt Giờ Thuê
+        </h2>
       <form class="w-full max-w-lg">
         <div class="flex flex-wrap -mx-3 mb-6 mx-center">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -24,7 +24,7 @@
                 uppercase
                 tracking-wide
                 text-gray-700 text-xs
-                font-bold
+                font-semibold
                 mb-2
               "
               for="gr id-first-name"
@@ -38,7 +38,7 @@
                 w-full
                 bg-gray-50
                 text-gray-700
-                border border-red-500
+                border 
                 rounded
                 py-3
                 px-4
@@ -48,10 +48,9 @@
               "
               id="grid-start-time"
               type="time"
+              value="05:00"
+              disabled="true"
             />
-            <p class="text-red-500 text-xs italic">
-              Please fill out this field.
-            </p>
           </div>
           <div class="w-full md:w-1/2 px-3">
             <label
@@ -60,7 +59,7 @@
                 uppercase
                 tracking-wide
                 text-gray-700 text-xs
-                font-bold
+                 font-semibold
                 mb-2
               "
               for="grid-end-time"
@@ -81,9 +80,10 @@
                 leading-tight
                 focus:outline-none focus:ring-100
               "
-              id="grid-last-name"
+              id="grid-end-time"
               type="time"
-              placeholder="Doe"
+              value="22:00"
+              disabled="true"
             />
           </div>
         </div>
@@ -95,7 +95,7 @@
                 uppercase
                 tracking-wide
                 text-gray-700 text-xs
-                font-bold
+                 font-semibold
                 mb-2
               "
               for="grid-password"
