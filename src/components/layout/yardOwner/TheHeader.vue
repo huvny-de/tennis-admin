@@ -80,60 +80,61 @@
           </div>
         </button>
 
-        <transition name="fade">
-          <div
-            id="dropdownSmall"
-            v-show="menu"
-            class="
-              block
-              absolute
-              right-10
-              mt-12
-              z-10
-              w-44
-              border
-              dark:border-gray-700
-              bg-white
-              dark:bg-gray-800
-              rounded
-              divide-y
-              dark:divide-gray-700
-              divide-gray-100
-              shadow
-            "
-          >
-            <div class="py-3 px-4 text-sm text-gray-900 dark:text-gray-200">
-              <div>Tài khoản đăng nhập</div>
-              <div class="font-bold truncate">Thái Sơn</div>
-            </div>
-            <ul
-              class="py-1 text-sm text-gray-700 dark:text-gray-200"
-              aria-labelledby="dropdownSmallButton"
+         <transition name="fade">
+            <div
+              id="dropdownSmall"
+              v-show="menu"
+              class="
+                block
+                absolute
+                right-0
+                mt-12
+                z-10
+                w-44
+                border
+                dark:border-gray-700
+                bg-white
+                dark:bg-gray-800
+                rounded
+                divide-y
+                dark:divide-gray-700
+                divide-gray-100
+                shadow
+              "
             >
-              <li>
-                <a
-                  href="#"
-                  class="block py-2 px-4 0 hover:bg-blue-500 hover:text-white"
-                  >Thông Tin Tài Khoản</a
-                >
-              </li>
-            </ul>
-            <div class="py-1">
-              <a
-                href="#"
-                class="
-                  block
-                  py-2
-                  px-4
-                  text-sm text-gray-700
-                  dark:text-gray-200
-                  hover:bg-blue-500 hover:text-white
-                "
-                >Đăng xuất</a
+              <div class="py-3 px-4 text-sm text-gray-900 dark:text-gray-200">
+                <div>Tài khoản đăng nhập</div>
+                <div class="font-bold truncate">{{this.currentUser.UserName}}</div>
+              </div>
+              <ul
+                class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                aria-labelledby="dropdownSmallButton"
               >
+                <li>
+                  <span
+                    @click="routerLink('/owner-profile')"
+                    class="block py-2 px-4 0 hover:bg-blue-500 hover:text-white cursor-pointer"
+                    >Thông Tin Tài Khoản</span
+                  >
+                </li>
+              </ul>
+              <div class="py-1">
+                <span
+                  @click="routerLink('/logout')"
+                  class="
+                    block
+                    py-2
+                    px-4
+                    text-sm text-gray-700
+                    dark:text-gray-200
+                    hover:bg-blue-500 hover:text-white
+                    cursor-pointer
+                  "
+                  >Đăng xuất</span
+                >
+              </div>
             </div>
-          </div>
-        </transition>
+          </transition>
       </div>
     </div>
   </header>
@@ -145,18 +146,28 @@ export default {
   components: {
     Icon,
   },
+  mounted() {
+    this.currentUser = this.$store.getters["auth/getUser"].Token;
+    console.log(this.currentUser);
+  },
   data() {
     return {
       menu: false,
+      currentUser: "",
     };
   },
   methods: {
     menuToggle: function () {
       this.menu = !this.menu;
     },
-    menuToggleBlur: function () {
-      this.menu = false;
-    },
+    routerLink(path) {
+       if (path.includes("logout")) {
+        this.$store.dispatch("auth/logout");
+        this.$router.push("/login");
+      } else {
+        this.$router.push(path);
+      }
+    }
   },
 };
 </script>

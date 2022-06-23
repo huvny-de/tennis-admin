@@ -406,7 +406,6 @@ export default {
       this.isHiddenModal = false;
       this.countClick++;
 
-      console.log(this.searchValue);
     },
     sortByField(fieldSort) {
       if (this.checkSort == 0) {

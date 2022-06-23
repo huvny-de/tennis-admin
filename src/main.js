@@ -6,6 +6,7 @@ import App from "./App.vue";
 import "./index.css";
 import router from "../src/components/router/router.js";
 import VueApexCharts from "vue3-apexcharts";
+import vuescroll from 'vue-scroll'
 import store from "./store";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -58,6 +59,7 @@ app.use(router);
 app.use(loader);
 app.use(store);
 app.use(VueApexCharts);
+app.use(vuescroll);
 
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.config.productionTip = false;

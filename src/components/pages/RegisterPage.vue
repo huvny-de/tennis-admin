@@ -3,18 +3,18 @@
     <preloader-component :class="loading == false ? 'hidden' : ''" />
     <section class="absolute w-full h-full">
       <div class="container mx-auto px-4 h-full">
-        <div class="flex content-center mt-4 justify-center h-full">
+        <div class="flex content-center mt-1 justify-center h-full">
           <div class="w-full lg:w-1/2 px-4">
-            <div class="w-60 h-60 mx-auto mb-6">
+            <div class="w-60 h-60 mx-auto mb-4">
               <img class="object-cover" src="../../assets/img/logo.png" />
             </div>
             <div class="relative flex flex-col w-full">
-              <h2 class="text-center font-bold text-[25px] mb-6">Sign Up</h2>
-              <form @submit.prevent="handleLogin">
-                <div class="relative w-full mb-8 grid grid-cols-2 gap-6">
-                  <div>
+              <h2 class="text-center font-bold text-[25px] mb-4">Đăng Ký</h2>
+              <form @submit.prevent="handleRegister">
+                <div class="relative w-full mb-8 grid grid-cols-2 gap-10">
+                  <div class="relative">
                     <input
-                      placeholder="Username"
+                      placeholder="Tên tài khoản"
                       type="text"
                       class="
                         bg-[#F0EEEE]
@@ -33,10 +33,23 @@
                       required
                       v-model="user.username"
                     />
+                    <p
+                      v-if="err.errUserName"
+                      class="
+                        absolute
+                        top-[138%]
+                        left-0
+                        error-text
+                        text-center text-red-700
+                      "
+                      role="alert"
+                    >
+                      * {{ err.errUserName }}
+                    </p>
                   </div>
-                  <div>
+                  <div class="relative">
                     <input
-                      placeholder="Full Name"
+                      placeholder="Họ Tên"
                       type="text"
                       class="
                         bg-[#F0EEEE]
@@ -53,12 +66,25 @@
                         mb-2
                       "
                       required
-                      v-model="user.username"
+                      v-model="user.fullName"
                     />
+                    <p
+                      v-if="err.errFullName"
+                      class="
+                        absolute
+                        top-[138%]
+                        left-0
+                        error-text
+                        text-center text-red-700
+                      "
+                      role="alert"
+                    >
+                      * {{ err.errFullName }}
+                    </p>
                   </div>
-                  <div class="flex flex-col justify-start items-start">
+                  <div class="relative">
                     <input
-                      placeholder="Password"
+                      placeholder="Mật khẩu"
                       type="password"
                       class="
                         bg-[#F0EEEE]
@@ -77,10 +103,22 @@
                       required
                       v-model="user.password"
                     />
+                    <!-- <p
+                      class="
+                        absolute
+                        top-[138%]
+                        left-0
+                        error-text
+                        text-center text-red-700
+                      "
+                      role="alert"
+                    >
+                      * Password is required
+                    </p> -->
                   </div>
-                  <div class="flex flex-col justify-start items-start">
+                  <div class="relative">
                     <input
-                      placeholder="Confirm Password"
+                      placeholder="Xác nhận mật khẩu"
                       type="password"
                       class="
                         bg-[#F0EEEE]
@@ -97,13 +135,26 @@
                         mb-2
                       "
                       required
-                      v-model="user.password"
+                      v-model="user.confirmPassword"
                     />
+                    <p
+                      v-if="err.errConfirmPassword"
+                      class="
+                        absolute
+                        top-[138%]
+                        left-0
+                        error-text
+                        text-center text-red-700
+                      "
+                      role="alert"
+                    >
+                      * {{ err.errConfirmPassword }}
+                    </p>
                   </div>
-                  <div class="flex flex-col justify-start items-start">
+                  <div class="relative">
                     <input
                       placeholder="Email"
-                      type="password"
+                      type="email"
                       class="
                         bg-[#F0EEEE]
                         w-full
@@ -119,13 +170,26 @@
                         mb-2
                       "
                       required
-                      v-model="user.password"
+                      v-model="user.email"
                     />
+                    <p
+                      v-if="err.errEmail"
+                      class="
+                        absolute
+                        top-[138%]
+                        left-0
+                        error-text
+                        text-center text-red-700
+                      "
+                      role="alert"
+                    >
+                      * {{ err.errEmail }}
+                    </p>
                   </div>
-                  <div class="flex flex-col justify-start items-start">
+                  <div class="relative">
                     <input
-                      placeholder="Phone Number"
-                      type="password"
+                      placeholder="Số điện thoại"
+                      type="tel"
                       class="
                         bg-[#F0EEEE]
                         w-full
@@ -141,17 +205,30 @@
                         mb-2
                       "
                       required
-                      v-model="user.password"
+                      v-model="user.phoneNumber"
                     />
-                  </div>
-                  <div
-                    v-if="message"
-                    class="error-text text-center text-red-700 mt-2 mb-2"
-                    role="alert"
-                  >
-                    {{ message }}
+                    <p
+                      v-if="err.errPhoneNumber"
+                      class="
+                        absolute
+                        top-[138%]
+                        left-0
+                        error-text
+                        text-center text-red-700
+                      "
+                      role="alert"
+                    >
+                      * {{ err.errPhoneNumber }}
+                    </p>
                   </div>
                 </div>
+                <p
+                  v-if="msgSuccess"
+                  class="text-lg font-md error-text text-center text-red-700"
+                  role="alert"
+                >
+                  {{ msgSuccess }}
+                </p>
                 <button-component
                   class="
                     font-medium
@@ -160,17 +237,18 @@
                     bg-blue-700
                     hover:bg-blue-800
                     active:bg-blue-900
+                    mt-2
                   "
                   type="submit"
                 >
-                  Sign Up
+                  Đăng ký
                 </button-component>
               </form>
               <div class="relative mt-2 w-full">
                 <p
                   class="
                     text-center text-gray-400
-                    hover:text-gray-500
+                    hover:text-gray-600
                     duration-200
                   "
                 >
@@ -178,7 +256,7 @@
                     to="/login"
                     class="no-underline"
                     href="http://facebook.com"
-                    >Already have account ? Sign In</router-link
+                    >Đã có tài khoản? Đăng nhập</router-link
                   >
                 </p>
               </div>
@@ -199,29 +277,49 @@ export default {
     return {
       user: new User(),
       loading: false,
-      message: "",
+      err: new Error(),
+      msgSuccess: "",
     };
   },
-  computed: {
-    loggedIn() {
-      return this.$store.state.auth.status.loggedIn;
-    },
-  },
-  created() {
-    if (this.loggedIn) {
-      this.$router.push("/dashboard");
+  mounted() {
+    let msg = JSON.parse(sessionStorage.getItem("register_sucess"));
+    if (msg) {
+      this.msgSuccess = msg;
     }
   },
   methods: {
-    handleLogin() {
+    handleRegister() {
       this.loading = true;
-      this.$store.dispatch("auth/login", this.user).then(
-        () => {
-          this.$router.push("/dashboard");
+      this.$store.dispatch("auth/register", this.user).then(
+        (res) => {
+          if (res) {
+            this.msgSuccess = "Đăng ký thành công !";
+            this.user = new User();
+            this.err = new Error();
+            this.loading = false;
+          }
         },
         (error) => {
-          let error_msg = error.response.data.Message;
-          this.message = error_msg;
+          let object_err = error.response.data;
+          Object.keys(object_err).forEach((key) => {
+            if (key.includes("Username")) {
+              this.err.errUserName = object_err[key][0];
+            }
+
+            if (key.includes("FullName")) {
+              this.err.errFullName = object_err[key][0];
+            }
+            if (key.includes("ConfirmPassword")) {
+              this.err.errConfirmPassword = object_err[key][0];
+            }
+            if (key.includes("Email")) {
+              this.err.errEmail = object_err[key][0];
+            }
+
+            if (key.includes("PhoneNumber")) {
+              this.err.errPhoneNumber = object_err[key][0];
+            }
+          });
           this.loading = false;
         }
       );

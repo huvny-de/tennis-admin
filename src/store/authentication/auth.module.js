@@ -8,6 +8,14 @@ const initialState = user
 export const auth = {
   namespaced: true,
   state: initialState,
+  getters : {
+    getUser : (state) => {
+      return state.user
+    },
+    getRole : (state) => {
+      return state.user.Token.RoleIds[0];
+    }
+  },
   actions: {
     login({ commit }, user) {
       return AuthService.login(user).then(
@@ -24,14 +32,12 @@ export const auth = {
       AuthService.logout();
       commit("logout");
     },
-    register({ commit }, user) {
+    register(user) {
       return AuthService.register(user).then(
         response => {
-          commit('registerSuccess');
           return Promise.resolve(response.data);
         },
         error => {
-          commit('registerFailure');
           return Promise.reject(error);
         }
       );
@@ -49,12 +55,6 @@ export const auth = {
     logout(state) {
       state.status.loggedIn = false;
       state.user = null;
-    },
-    registerSuccess(state) {
-      state.status.loggedIn = true;
-    },
-    registerFailure(state) {
-      state.status.loggedIn = false;
     },
   },
 };

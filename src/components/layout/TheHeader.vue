@@ -56,7 +56,7 @@
               "
             >
               <img
-                src="../../assets/img/son.jpg"
+                :src="currentUser.Avatar"
                 class="
                   rounded-full
                   mr-4
@@ -98,7 +98,7 @@
             >
               <div class="py-3 px-4 text-sm text-gray-900 dark:text-gray-200">
                 <div>Tài khoản đăng nhập</div>
-                <div class="font-bold truncate">Thái Sơn</div>
+                <div class="font-bold truncate">{{currentUser.UserName}}</div>
               </div>
               <ul
                 class="py-1 text-sm text-gray-700 dark:text-gray-200"
@@ -143,7 +143,7 @@ export default {
   },
   name: "TheHeader",
   mounted() {
-    this.currentUser = JSON.parse(localStorage.getItem("user"));
+    this.currentUser = this.$store.getters['auth/getUser'].Token;
   },
   props: {
     search: {
@@ -151,7 +151,7 @@ export default {
       required: true,
     },
     isHiddenInput: {
-      type: String,
+      type: Boolean,
       required: false,
     },
   },
@@ -182,11 +182,5 @@ export default {
 </script>
 
 <style scoped>
-.dropdown:hover .dropdown-menu {
-  display: block;
-}
 
-.dropdown-menu {
-  width: 200px;
-}
 </style>

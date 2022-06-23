@@ -205,7 +205,7 @@
       </div>
     </div>
 
-     <nav aria-label="Page navigation example mx-auto">
+     <!-- <nav aria-label="Page navigation example mx-auto">
       <ul class="inline-flex -space-x-px">
         <li>
           <span
@@ -334,7 +334,7 @@
           >
         </li>
       </ul>
-    </nav>
+    </nav> -->
   </div>
 
    

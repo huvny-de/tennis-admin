@@ -25,7 +25,7 @@
             <input-component
               disabled="true"
               class="w-full mt-2 border-gray-800 text-sm text-gray-600"
-              value="Admin"
+              :value="currentUser.UserName"
             />
           </div>
           <div>
@@ -102,6 +102,14 @@ import InputComponent from "@/components/ui/InputComponent.vue";
 export default {
   components: {
     InputComponent,
+  },
+  mounted() {
+    this.currentUser = this.$store.getters['auth/getUser'].Token;
+  },
+  data() {
+    return {
+      currentUser: "",
+    };
   },
 };
 </script>

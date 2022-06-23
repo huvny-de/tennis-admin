@@ -9,12 +9,12 @@
               <img class="object-cover" src="../../assets/img/logo.png" />
             </div>
             <div class="relative flex flex-col w-full">
-              <h2 class="text-center font-bold text-[25px] mb-6">Sign In</h2>
+              <h2 class="text-center font-bold text-[25px] mb-6">Đăng Nhập</h2>
               <form @submit.prevent="handleLogin">
                 <div class="relative w-full mb-8">
                   <div>
                     <input
-                      placeholder="Username"
+                      placeholder="Tên tài khoản"
                       type="text"
                       class="
                         bg-[#F0EEEE]
@@ -36,7 +36,7 @@
                   </div>
                   <div class="flex flex-col justify-start items-start">
                     <input
-                      placeholder="Password"
+                      placeholder="Mật khẩu"
                       type="password"
                       class="
                         bg-[#F0EEEE]
@@ -76,7 +76,7 @@
                     "
                     type="submit"
                   >
-                    Sign In
+                    Đăng Nhập
                   </button-component>
                 </div>
               </form>
@@ -89,7 +89,7 @@
                   "
                 >
                   <a class="no-underline" href="http://facebook.com"
-                    >Forgot your password ?</a
+                    >Quên mật khẩu?</a
                   >
                 </p>
 
@@ -104,7 +104,7 @@
                     to="/register"
                     class="no-underline"
                     href="http://facebook.com"
-                    >Don't have account ? Sign Up</router-link
+                    >Chưa có tài khoản? Đăng ký</router-link
                   >
                 </p>
               </div>
@@ -135,7 +135,16 @@ export default {
   },
   created() {
     if (this.loggedIn) {
-      this.$router.push("/dashboard");
+      let roleID = this.$store.getters["auth/getUser"].Token.RoleIds[0];
+      if (roleID) {
+        if (roleID === 1) {
+          this.$router.push("/dashboard");
+        } else if (roleID === 2) {
+          this.$router.push("/yard-owner");
+        } else {
+          this.$router.push("/login");
+        }
+      }
     }
   },
   methods: {
@@ -143,12 +152,12 @@ export default {
       this.loading = true;
       this.$store.dispatch("auth/login", this.user).then(
         (response) => {
-          if (response.Is200) {
+          if (response.Token) {
             let RoleID = response.Token.RoleIds[0];
             if (RoleID === 1) {
-              this.$router.push("/yard-owner");
-            } else {
               this.$router.push("/dashboard");
+            } else {
+              this.$router.push("/yard-owner");
             }
           } else {
             this.message = response.Message;

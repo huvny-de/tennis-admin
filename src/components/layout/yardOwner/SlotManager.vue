@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center justify-center mt-8">
     <ul
-      v-if="isSelectedTab === 'ListCategory'"
+      v-if="isSelectedTab === 'SlotList'"
       class="
         nav nav-tabs
         flex flex-col
@@ -33,13 +33,13 @@
           role="tab"
         >
           <span class="mx-2 text-[14px] text-[#434141] font-bold"
-            >Danh Sách Danh Mục</span
+            >Danh Sách Giờ Thuê</span
           >
         </div>
       </li>
 
       <li
-        @click="setSelectedTab('AddCategory')"
+        @click="setSelectedTab('SettingSlot')"
         class="nav-item"
         role="presentation"
       >
@@ -67,7 +67,7 @@
           aria-selected="false"
         >
           <span class="mx-2 text-[#334D6E] text-[14px] font-medium pt-1"
-            >Tạo Danh Mục</span
+            >Cài Đặt Giờ Thuê</span
           >
         </span>
       </li>
@@ -88,7 +88,7 @@
       role="tablist"
     >
       <li
-        @click="setSelectedTab('ListCategory')"
+        @click="setSelectedTab('SlotList')"
         class="nav-item"
         role="presentation"
       >
@@ -115,7 +115,7 @@
           aria-controls="tabs-profile3"
           aria-selected="false"
           ><span class="mx-2 text-[#334D6E] text-[14px] font-medium pt-1"
-            >Danh Sách Danh Mục</span
+            >Danh Sách Giờ Thuê</span
           ></span
         >
       </li>
@@ -139,7 +139,7 @@
           role="tab"
         >
           <span class="mx-2 text-[14px] text-[#434141] font-bold pt-1"
-            >Tạo Danh Mục</span
+            >Cài Đặt Giờ Thuê</span
           >
         </div>
       </li>
@@ -150,16 +150,16 @@
 </template>
 
 <script>
-import ListCategory from "./Category/ListCategory.vue";
-import AddCategory from "./Category/AddCategory.vue";
+import SlotList from "./Slot/SlotList.vue";
+import SettingSlot from "./Slot/SettingSlot.vue";
 export default {
   components: {
-    ListCategory,
-    AddCategory,
+    SlotList,
+    SettingSlot,
   },
   data() {
     return {
-      isSelectedTab: "ListCategory",
+      isSelectedTab: "SlotList",
     };
   },
   methods: {

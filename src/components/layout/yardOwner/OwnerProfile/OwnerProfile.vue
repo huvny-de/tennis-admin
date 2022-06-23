@@ -64,7 +64,7 @@
         <!--information container-->
         <div class="grid md:grid-cols-2 gap-6 mt-4 sm:grid-cols-1 text-normal">
           <div>
-            <label class="text-[#747474]" for="username">Username</label>
+            <label class="text-[#747474]" for="username">Tên Tài Khoản</label>
             <input-component
               disabled="true"
               class="w-full mt-2 border-gray-800 text-sm text-gray-600"
@@ -72,15 +72,15 @@
             />
           </div>
           <div>
-            <label class="text-[#747474]" for="username">Role</label>
+            <label class="text-[#747474]" for="username">Vai Trò</label>
             <input-component
               disabled="true"
               class="w-full mt-2 border-gray-800 text-sm text-gray-600"
-              value="Admin"
+              :value="roleUser"
             />
           </div>
           <div>
-            <label class="text-[#747474]" for="username">Full Name</label>
+            <label class="text-[#747474]" for="username">Họ Tên</label>
             <input-component
               class="w-full mt-2 text-sm"
               :value="currentUser.FullName"
@@ -90,12 +90,12 @@
             <label class="text-[#747474]" for="username">Email</label>
             <input-component
               class="w-full mt-2 text-sm"
-              value="sonstarnguyen@gmail.com"
+              :value="currentUser.Email"
             />
           </div>
           <div>
-            <label class="text-[#747474]" for="username">Phone Number</label>
-            <input-component class="w-full mt-2 text-sm" value="0978145440" />
+            <label class="text-[#747474]" for="username">Số Điện Thoại</label>
+            <input-component class="w-full mt-2 text-sm" :value="currentUser.PhoneNumber" />
           </div>
         </div>
       </div>
@@ -163,8 +163,17 @@ export default {
   },
   mounted() {
     this.currentUser = this.$store.getters["auth/getUser"].Token;
+    let roleUser = this.currentUser.RoleIds[0];
+    if(roleUser === 2) {
+        this.roleUser = 'Chủ Sân'
+    }
     this.loading = false;
-    this.srcImg = this.currentUser.Avatar;
+    if (this.currentUser.Avatar) {
+      this.srcImg = this.currentUser.Avatar;
+    } else {
+      this.srcImg =
+        "https://i.pinimg.com/736x/89/90/48/899048ab0cc455154006fdb9676964b3.jpg";
+    }
   },
   data() {
     return {
@@ -172,6 +181,7 @@ export default {
       selectedFile: null,
       loading: true,
       srcImg: "",
+      roleUser : ""
     };
   },
   methods: {

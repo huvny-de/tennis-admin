@@ -1,12 +1,12 @@
 <template>
   <div class="flex h-screen">
     <div class="flex-1 bg-[#F8F9FF] flex flex-col">
-      <the-header :isHiddenInput="isHiddenInput" />
+      <the-header />
       <div class="container mx-auto px-8 h-[80%] lg:mt-4">
         <div class="w-[100%] h-full mt-4">
           <div class="flex flex-col items-center justify-center mb-4">
             <ul
-              v-if="isSelectedTab === 'admin-profile'"
+              v-if="isSelectedTab === 'OwnerProfile'"
               class="
                 nav nav-tabs
                 flex flex-col
@@ -94,7 +94,7 @@
               role="tablist"
             >
               <li
-                @click="setSelectedTab('admin-profile')"
+                @click="setSelectedTab('OwnerProfile')"
                 class="nav-item"
                 role="presentation"
               >
@@ -160,24 +160,24 @@
 </template>
 
 <script>
-import AdminProfile from "../../layout/admin/AdminProfile.vue";
-import UpdatePassword from "../../layout/admin/UpdatePassword.vue";
-
+import OwnerProfile from "../../layout/yardOwner/OwnerProfile/OwnerProfile.vue";
+import UpdatePassword from "../../layout/yardOwner/OwnerProfile/UpdatePassword.vue";
+import TheHeader from "../../layout/yardOwner/TheHeader.vue";
 export default {
   components: {
-    AdminProfile,
+    OwnerProfile,
+    TheHeader,
     UpdatePassword,
   },
   data() {
     return {
-      isSelectedTab: "admin-profile",
-      isHiddenInput: true,
+      isSelectedTab: "OwnerProfile",
     };
   },
-  methods: {
+  methods : {
     setSelectedTab(tab) {
-      this.isSelectedTab = tab;
-    },
-  },
+        this.isSelectedTab = tab;
+    }
+  }
 };
 </script>

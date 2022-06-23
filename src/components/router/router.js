@@ -53,6 +53,17 @@ const routes = [
       userAuth: true,
     },
   },
+  {
+    path : '/owner-profile',
+    name  : 'Owner Profile',
+    component : () => import('../pages/yardOwner/ProfilePage.vue'),
+    meta : {
+      requiresAuth : true,
+      adminAuth : false,
+      userAuth : true,
+    }
+  },
+  { path: '/:pathMatch(.*)*', component: () => import('../pages/PageNotFound.vue')}
 ];
 
 const router = createRouter({
@@ -78,13 +89,13 @@ router.beforeEach((to, from, next) => {
         if(RoleID === 1) {
           next()
         }else {
-          router.push('/login')
+          router.push('/yard-owner')
         }
       }else if(to.meta.userAuth) {
         if(RoleID === 2) {
           next()
         }else {
-          router.push('/login')
+          router.push('/dashboard')
         }
       }
     }

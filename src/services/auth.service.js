@@ -8,9 +8,10 @@ class AuthService {
         Username: user.username,
         Password: user.password,
         autoSignIn: true,
+        clientId: 2,
       })
       .then((response) => {
-        if (response.data.Is200) {
+        if (response.data.Token) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
         return response.data;
@@ -19,19 +20,17 @@ class AuthService {
   logout() {
     localStorage.removeItem("user");
   }
-  register(user){
-    return axios.post(API_URL + "User/SignUp" , {
-        UserName : user.username,
-        Password : user.password,
-        phoneNumber : user.phoneNumber,
-        Email : user.email,
-        FirstName : user.firstName,
-        LastName : user.lastName,
-        FullName : user.lastName + user.firstName,
-        Dob : user.dob
+  register(user) {
+    return axios.post(API_URL + "User/Register", {
+      username: user.username,
+      email: user.email,
+      password: user.password,
+      confirmPassword: user.confirmPassword,
+      fullName: user.fullName,
+      phoneNumber: user.phoneNumber,
+      clientId: 2,
     });
   }
-  
 }
 
 export default new AuthService();
