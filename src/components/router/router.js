@@ -25,7 +25,7 @@ const routes = [
     component: RegisterPage,
   },
   {
-    path: "/profile",
+    path: "/admin-profile",
     name: "Profile Page",
     component: () => import("../pages/admin/AdminProfilePage.vue"),
     meta: {

@@ -43,92 +43,323 @@
       </div>
       <div class="wrap-header flex items-center justify-end flex-wrap">
         <div class="mr-5 flex float-right relative">
-          <button @click="menuToggle" @blur="menuToggleBlur">
-            <div
+          <div class="mr-5 flex float-right relative">
+            <p
               class="
-                user-avatar
-                flex
-                hover:bg-gray-100
-                dark:hover:bg-gray-700
-                p-1
-                cursor-pointer
-                rounded-md
-              "
-            >
-              <img
-                :src="currentUser.Avatar"
-                class="
-                  rounded-full
-                  mr-4
-                  w-10
-                  h-10
-                  p-1
-                  ring-1 ring-gray-300
-                  dark:ring-gray-500
-                "
-                alt=""
-              />
-              <span class="text-md mt-4 text-gray-300"
-                ><Icon icon="bi:caret-down-fill"
-              /></span>
-            </div>
-          </button>
-
-          <transition name="fade">
-            <div
-              id="dropdownSmall"
-              v-show="menu"
-              class="
-                block
+                w-5
+                h-5
+                p-2
+                ml-3
+                text-sm
+                bg-red-600
+                text-white
+                font-semibold
+                rounded-2xl
+                inset-0
+                right-2
+                bottom-0
                 absolute
-                right-0
-                mt-12
-                z-10
-                w-44
-                border
-                dark:border-gray-700
-                bg-white
-                dark:bg-gray-800
-                rounded
-                divide-y
-                dark:divide-gray-700
-                divide-gray-100
-                shadow
+                flex
+                items-center
+                justify-center
               "
             >
-              <div class="py-3 px-4 text-sm text-gray-900 dark:text-gray-200">
-                <div>Tài khoản đăng nhập</div>
-                <div class="font-bold truncate">{{currentUser.UserName}}</div>
-              </div>
-              <ul
-                class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                aria-labelledby="dropdownSmallButton"
+              2
+            </p>
+            <button
+              @click="notifyToggle"
+              class="mr-5 text-2xl text-gray-500 mt-1"
+            >
+              <Icon class="w-7 h-7" icon="clarity:bell-line" />
+            </button>
+            <transition name="fade">
+              <div
+                id="dropdownLarge"
+                v-show="notify"
+                class="
+                  pb-2
+                  px-1
+                  block
+                  absolute
+                  right-24
+                  mt-11
+                  z-10
+                  w-96
+                  border
+                  dark:border-gray-700
+                  bg-white
+                  dark:bg-gray-800
+                  rounded
+                  divide-y
+                  dark:divide-gray-700
+                  divide-gray-100
+                  shadow
+                "
               >
-                <li>
+                <div class="py-2">
                   <span
-                    @click="routerLink('/profile')"
-                    class="block py-2 px-4 0 hover:bg-blue-500 hover:text-white cursor-pointer"
-                    >Thông Tin Tài Khoản</span
+                    class="
+                      flex
+                      items-center
+                      justify-between
+                      px-4
+                      mt-1
+                      text-center text-sm text-gray-500
+                      dark:text-gray-200
+                      cursor-pointer
+                      hover:text-gray-700
+                      duration-200
+                    "
                   >
-                </li>
-              </ul>
-              <div class="py-1">
-                <span
-                  @click="routerLink('/logout')"
+                    <h3
+                      class="
+                        font-md
+                        text-md
+                        uppercase
+                        text-gray-400
+                        cursor-default
+                      "
+                    >
+                      Thông Báo
+                    </h3>
+                    <h3 class="text-blue-500 text-sm">
+                      Đánh Dấu Tất Cả Đã Đọc
+                    </h3>
+                  </span>
+                </div>
+                <ul
                   class="
-                    block
-                    py-2
-                    px-4
+                    py-3
                     text-sm text-gray-700
                     dark:text-gray-200
-                    hover:bg-blue-500 hover:text-white
-                    cursor-pointer
+                    bg-red-50
+                    mb-1
                   "
-                  >Đăng xuất</span
+                  aria-labelledby="dropdownSmallButton"
                 >
+                  <li>
+                    <span
+                      @click="routerLink('/owner-profile')"
+                      class="
+                        py-2
+                        px-4
+                        0
+                        hover:bg-blue-500 hover:text-white
+                        cursor-pointer
+                        flex
+                        items-start
+                        justify-start
+                      "
+                    >
+                      <span>
+                        <img
+                          src="../../assets/img/son.jpg"
+                          class="rounded-full mr-4 w-11 h-11 p-1"
+                          alt=""
+                        />
+                      </span>
+                      <span class="flex flex-col items-start justify-start">
+                        <h3 class="font-semibold text-green-500">Lệnh Đặt Sơn Mới</h3>
+                        <p class="text-sm">
+                          Đã yêu cầu phê duyệt thành chủ sân
+                          <span class="font-semibold">19h30</span> ngày
+                          <span class="font-semibold">26/6/2022</span>
+                        </p>
+                      </span>
+                    </span>
+                  </li>
+                </ul>
+                <ul
+                  class="
+                    py-3
+                    text-sm text-gray-700
+                    dark:text-gray-200
+                    bg-red-50
+                  "
+                  aria-labelledby="dropdownSmallButton"
+                >
+                  <li>
+                    <span
+                      @click="routerLink('/owner-profile')"
+                      class="
+                        py-2
+                        px-4
+                        0
+                        hover:bg-blue-500 hover:text-white
+                        cursor-pointer
+                        flex
+                        items-start
+                        justify-start
+                      "
+                    >
+                      <span>
+                        <img
+                          src="../../assets/img/son.jpg"
+                          class="rounded-full mr-4 w-11 h-11 p-1"
+                          alt=""
+                        />
+                      </span>
+                      <span class="flex flex-col items-start justify-start">
+                        <h3 class="font-semibold">Thái Sơn</h3>
+                        <p class="text-sm">
+                          Đã yêu cầu phê duyệt thành chủ sân
+                          <span class="font-semibold">19h30</span> ngày
+                          <span class="font-semibold">26/6/2022</span>
+                        </p>
+                      </span>
+                    </span>
+                  </li>
+                </ul>
+                <ul
+                  class="py-3 text-sm text-gray-700 dark:text-gray-200"
+                  aria-labelledby="dropdownSmallButton"
+                >
+                  <li>
+                    <span
+                      @click="routerLink('/owner-profile')"
+                      class="
+                        py-2
+                        px-4
+                        0
+                        hover:bg-blue-500 hover:text-white
+                        cursor-pointer
+                        flex
+                        items-start
+                        justify-start
+                      "
+                    >
+                      <span>
+                        <img
+                          src="../../assets/img/son.jpg"
+                          class="rounded-full mr-4 w-11 h-11 p-1"
+                          alt=""
+                        />
+                      </span>
+                      <span class="flex flex-col items-start justify-start">
+                        <h3 class="font-semibold">Thái Sơn</h3>
+                        <p class="text-sm">
+                          Đã yêu cầu phê duyệt thành chủ sân
+                          <span class="font-semibold">19h30</span> ngày
+                          <span class="font-semibold">26/6/2022</span>
+                        </p>
+                      </span>
+                    </span>
+                  </li>
+                </ul>
+                <div class="py-1">
+                  <span
+                    @click="routerLink('/logout')"
+                    class="
+                      block
+                      px-4
+                      mt-1
+                      text-center text-sm text-gray-500
+                      dark:text-gray-200
+                      cursor-pointer
+                      hover:text-gray-700
+                      duration-200
+                    "
+                    >Xem Tất Cả</span
+                  >
+                </div>
               </div>
-            </div>
-          </transition>
+            </transition>
+            <button @click="menuToggle" @blur="menuToggleBlur">
+              <div
+                class="
+                  user-avatar
+                  flex
+                  hover:bg-gray-100
+                  dark:hover:bg-gray-700
+                  p-1
+                  cursor-pointer
+                  rounded-md
+                "
+              >
+                <img
+                  src="../../assets/img/son.jpg"
+                  class="
+                    rounded-full
+                    mr-4
+                    w-10
+                    h-10
+                    p-1
+                    ring-1 ring-gray-300
+                    dark:ring-gray-500
+                  "
+                  alt=""
+                />
+                <span class="text-md mt-4 text-gray-300"
+                  ><Icon icon="bi:caret-down-fill"
+                /></span>
+              </div>
+            </button>
+
+            <transition name="fade">
+              <div
+                id="dropdownSmall"
+                v-show="menu"
+                class="
+                  block
+                  absolute
+                  right-0
+                  mt-12
+                  z-10
+                  w-44
+                  border
+                  dark:border-gray-700
+                  bg-white
+                  dark:bg-gray-800
+                  rounded
+                  divide-y
+                  dark:divide-gray-700
+                  divide-gray-100
+                  shadow
+                "
+              >
+                <div class="py-3 px-4 text-sm text-gray-900 dark:text-gray-200">
+                  <div>Tài khoản đăng nhập</div>
+                  <div class="font-bold truncate">
+                    {{ this.currentUser.UserName }}
+                  </div>
+                </div>
+                <ul
+                  class="py-1 text-sm text-gray-700 dark:text-gray-200"
+                  aria-labelledby="dropdownSmallButton"
+                >
+                  <li>
+                    <span
+                      @click="routerLink('/admin-profile')"
+                      class="
+                        block
+                        py-2
+                        px-4
+                        0
+                        hover:bg-blue-500 hover:text-white
+                        cursor-pointer
+                      "
+                      >Thông Tin Tài Khoản</span
+                    >
+                  </li>
+                </ul>
+                <div class="py-1">
+                  <span
+                    @click="routerLink('/logout')"
+                    class="
+                      block
+                      py-2
+                      px-4
+                      text-sm text-gray-700
+                      dark:text-gray-200
+                      hover:bg-blue-500 hover:text-white
+                      cursor-pointer
+                    "
+                    >Đăng xuất</span
+                  >
+                </div>
+              </div>
+            </transition>
+          </div>
         </div>
       </div>
     </div>
@@ -143,7 +374,7 @@ export default {
   },
   name: "TheHeader",
   mounted() {
-    this.currentUser = this.$store.getters['auth/getUser'].Token;
+    this.currentUser = this.$store.getters["auth/getUser"].Token;
   },
   props: {
     search: {
@@ -159,6 +390,7 @@ export default {
     return {
       menu: false,
       currentUser: "",
+      notify: false,
     };
   },
   methods: {
@@ -176,11 +408,21 @@ export default {
     },
     menuToggle: function () {
       this.menu = !this.menu;
+
+      if (this.notify) {
+        this.notify = !this.notify;
+      }
+    },
+    notifyToggle: function () {
+      this.notify = !this.notify;
+
+      if (this.menu) {
+        this.menu = !this.menu;
+      }
     },
   },
 };
 </script>
 
 <style scoped>
-
 </style>

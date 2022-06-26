@@ -4,7 +4,7 @@ const API_URL = "https://171.244.136.52:4443/api/";
 class AuthService {
   login(user) {
     return axios
-      .post(API_URL + "user/signIn", {
+      .post(API_URL + "User/SignIn", {
         Username: user.username,
         Password: user.password,
         autoSignIn: true,

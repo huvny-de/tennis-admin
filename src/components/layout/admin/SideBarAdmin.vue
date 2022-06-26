@@ -32,26 +32,22 @@
         <div class="container mx-auto h-full">
           <div class="flex flex-col items-center justify-between"></div>
 
-          <nav>
+          <nav class="mt-6 h-full">
             <!--Active-->
-
             <div
-              v-if="checkIsActive('YardOwner')"
+              v-if="checkIsActive('approveManager')"
               class="w-full bg-[#FEF5F8] flex"
             >
               <div class="w-1 bg-[#EF3270]"></div>
 
-              <div
-                class="flex items-center px-6 py-2 mt-2 duration-200 border-1-4"
-              >
-               
-                <font-awesome-icon
-                  class="w-6 h-6 text-[#ACACAC]"
-                  icon="user-group"
+              <div class="flex items-center px-6 py-2 duration-200 border-1-4">
+                <Icon
+                  class="w-7 h-7 text-[#ACACAC]"
+                  icon="akar-icons:chat-approve"
                 />
 
-                <span class="mx-2 text-[14px] text-[#434141] font-bold"
-                  >Chủ Sân</span
+                <span class="mx-2 text-[14px] text-[#434141] font-bold pt-1"
+                  >Phê Duyệt Chủ Sân</span
                 >
               </div>
             </div>
@@ -60,9 +56,9 @@
 
             <div
               v-else
-              @click="setCurrentActive('YardOwner')"
+              @click="setCurrentActive('approveManager')"
               class="
-                mt-4
+                mt-5
                 flex
                 items-center
                 px-6
@@ -74,29 +70,75 @@
                 cursor-pointer
               "
             >
-              <font-awesome-icon class="w-6 h-6 text-[#ACACAC]" icon="users" />
-              <span class="mx-2 text-[#334D6E] text-[14px] font-medium"
-                >Chủ Sân</span
+              <Icon
+                class="w-7 h-7 text-[#ACACAC]"
+                icon="akar-icons:chat-approve"
+              />
+              <span class="mx-2 text-[#334D6E] text-[14px] font-medium pt-1"
+                >Phê Duyệt Chủ Sân</span
               >
             </div>
 
             <!--Active-->
+
             <div
-              v-if="checkIsActive('MemberList')"
-              class="w-full bg-[#FEF5F8] flex"
+              v-if="checkIsActive('YardOwner')"
+              class="w-full bg-[#FEF5F8] flex mt-5"
             >
               <div class="w-1 bg-[#EF3270]"></div>
 
-              <div
-                class="flex items-center px-6 py-2 mt-2 duration-200 border-1-4"
-              >
-                <font-awesome-icon
-                  class="w-6 h-6 text-[#ACACAC]"
-                  icon="users"
+              <div class="flex items-center px-6 py-2 duration-200 border-1-4">
+                <Icon
+                  class="w-9 h-9 text-[#ACACAC]"
+                  icon="bxs:user-check"
                 />
 
-                <span class="mx-2 text-[14px] text-[#434141] font-bold"
-                  >Thành Viên</span
+                <span class="mx-2 text-[14px] text-[#434141] font-bold pt-1">
+                  Chủ Sân</span
+                >
+              </div>
+            </div>
+
+            <!--Not Active-->
+            <div
+              v-if="!checkIsActive('YardOwner')"
+              @click="setCurrentActive('YardOwner')"
+              class="
+                mt-5
+                flex
+                items-center
+                px-6
+                py-2
+                duration-200
+                border-1-4
+                text-[#C2CFE0]
+                hover:bg-red-50
+                cursor-pointer
+              "
+            >
+              <Icon
+                class="w-9 h-9 text-[#ACACAC]"
+                icon="bxs:user-check"
+              />
+
+              <span class="mx-2 text-[#334D6E] text-[14px] font-medium pt-1">
+                Chủ Sân</span
+              >
+            </div>
+
+            <div
+              v-if="checkIsActive('MemberList')"
+              class="w-full bg-[#FEF5F8] flex mt-5"
+            >
+              <div class="w-1 bg-[#EF3270]"></div>
+
+              <div class="flex items-center px-6 py-2 duration-200 border-1-4">
+                <Icon
+                  class="w-8 h-8 text-[#ACACAC]"
+                  icon="carbon:user-avatar-filled-alt"
+                />
+                <span class="mx-2 text-[14px] text-[#434141] font-bold">
+                  Thành Viên</span
                 >
               </div>
             </div>
@@ -106,7 +148,7 @@
               v-else
               @click="setCurrentActive('MemberList')"
               class="
-                mt-4
+                mt-5
                 flex
                 items-center
                 px-6
@@ -118,14 +160,15 @@
                 cursor-pointer
               "
             >
-               <font-awesome-icon
-                  class="w-6 h-6 text-[#ACACAC]"
-                  icon="users"
-                />
-              <span class="mx-2 text-[#334D6E] text-[14px] font-medium"
-                >Thành Viên</span
+              <Icon
+                class="w-8 h-8 text-[#ACACAC]"
+                icon="carbon:user-avatar-filled-alt"
+              />
+              <span class="mx-2 text-[#334D6E] text-[14px] font-medium">
+                Thành Viên</span
               >
             </div>
+
           </nav>
         </div>
       </div>
@@ -134,10 +177,14 @@
 </template>
 
 <script>
+import { Icon } from "@iconify/vue";
 export default {
+  components: {
+    Icon,
+  },
   data() {
     return {
-      isActive: "YardOwner",
+      isActive: "approveManager",
       isSelectedTab: "",
     };
   },

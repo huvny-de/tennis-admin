@@ -13,17 +13,19 @@
 import SideBarAdmin from "../../layout/admin/SideBarAdmin.vue";
 import YardOwner from "../../layout/admin/YardOwnerList.vue";
 import MemberList from "../../layout/admin/MemberList.vue";
+import ApproveManager from "../../layout/admin/ApproveManager.vue";
 
 export default {
   components: {
     SideBarAdmin,
     YardOwner,
     MemberList,
+    ApproveManager
   },
 
   data() {
     return {
-      isSelectedTab: "YardOwner",
+      isSelectedTab: "ApproveManager",
       searchValue: "",
       loading: false,
       currentUser: "",
