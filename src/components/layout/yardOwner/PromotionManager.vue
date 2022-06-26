@@ -14,7 +14,7 @@
       "
     >
       <ul
-        v-if="isSelectedTab === 'YardList'"
+        v-if="isSelectedTab === 'PromotionList'"
         class="
           nav nav-tabs
           flex flex-col
@@ -46,13 +46,13 @@
             role="tab"
           >
             <span class="mx-2 text-[13px] text-[#434141] font-bold"
-              >Danh Sách Sân Cho Thuê</span
+              >Danh Sách Khuyến Mãi</span
             >
           </div>
         </li>
 
         <li
-          @click="setSelectedTab('CreateYard')"
+          @click="setSelectedTab('CreatePromotion')"
           class="nav-item"
           role="presentation"
         >
@@ -80,7 +80,7 @@
             aria-selected="false"
           >
             <span class="mx-2 text-[#334D6E] text-[13px] font-medium pt-1"
-              >Thêm Mới Sân</span
+              >Tạo Khuyễn Mãi</span
             >
           </span>
         </li>
@@ -100,7 +100,7 @@
         role="tablist"
       >
         <li
-          @click="setSelectedTab('YardList')"
+          @click="setSelectedTab('PromotionList')"
           class="nav-item"
           role="presentation"
         >
@@ -116,7 +116,7 @@
               border-x-0 border-t-0 border-b-2 border-transparent
               px-6
               py-3
-              my-2
+              my-2  
               hover:border-transparent hover:bg-gray-100
               focus:border-transparent
             "
@@ -127,7 +127,7 @@
             aria-controls="tabs-profile3"
             aria-selected="false"
             ><span class="mx-2 text-[#334D6E] text-[13px] font-medium pt-1"
-              >Danh Sách Sân Cho Thuê</span
+              >Danh Sách Khuyễn Mãi</span
             ></span
           >
         </li>
@@ -151,28 +151,27 @@
             role="tab"
           >
             <span class="mx-2 text-[13px] text-[#434141] font-bold pt-1"
-              >Tạo Thêm Sân</span
+              >Tạo Khuyễn Mãi</span
             >
           </div>
         </li>
       </ul>
+      <component :is="isSelectedTab"></component>
     </div>
   </div>
-  <!--dynamic component-->
-  <component :is="isSelectedTab"></component>
 </template>
 
 <script>
-import YardList from "./Yard/YardList.vue";
-import CreateYard from "./Yard/CreateYard.vue";
+import PromotionList from "./Promotion/PromotionList.vue";
+import CreatePromotion from "./Promotion/CreatePromotion.vue";
 export default {
   components: {
-    CreateYard,
-    YardList,
+    PromotionList,
+    CreatePromotion
   },
   data() {
     return {
-      isSelectedTab: "YardList",
+      isSelectedTab: "PromotionList",
     };
   },
   methods: {

@@ -6,7 +6,7 @@
   >
     <div class="modal-overlay absolute w-full h-full"></div>
     <div class="mx-auto relative p-4 w-full max-w-5xl md:h-auto">
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 mt-12">
+      <div class="relative h-[73%] bg-white rounded-lg shadow dark:bg-gray-700 mt-12">
         <button
           @click="hiddenModal"
           type="button"
@@ -47,12 +47,11 @@
             Loại sân : {{ detail.typeName }}
           </p>
 
-          <div class="h-80 bg-red-5 overflow-y-auto">
-            <form class="space-y-8" action="#">
+          <div class="h-96 bg-red-5 overflow-y-auto">
+            <form  action="#">
               <table
                 class="
                   w-full
-                  h-10
                   text-sm text-left text-gray-500
                   dark:text-gray-400
                   lg:overflow-auto

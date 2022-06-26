@@ -134,7 +134,9 @@ export default {
     },
   },
   created() {
-    if (this.loggedIn) {
+    let user = JSON.parse(localStorage.getItem("user"))
+    if(user != null) {
+      if (this.loggedIn) {
       let roleID = this.$store.getters["auth/getUser"].Token.RoleIds[0];
       if (roleID) {
         if (roleID === 1) {
@@ -146,6 +148,8 @@ export default {
         }
       }
     }
+    }
+    
   },
   methods: {
     handleLogin() {

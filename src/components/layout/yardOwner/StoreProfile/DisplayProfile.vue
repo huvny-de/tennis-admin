@@ -48,7 +48,7 @@
                 <span class="ml-auto"
                   ><span
                     class="bg-green-500 py-1 px-2 rounded text-white text-sm"
-                    >Hoạt Động</span
+                    >Chưa Đăng Ký</span
                   ></span
                 >
               </li>
@@ -119,6 +119,41 @@
                 </span>
               </div>
             </div>
+
+            <!--button control-->
+            <div class="w-full flex items-center justify-end py-4">
+              <div class="flex space-x-2 justify-center">
+                <button
+                  type="button"
+                  class="
+                    flex
+                    items-center
+                    px-4
+                    py-2.5
+                    bg-[#50AE01]
+                    text-white
+                    font-medium
+                    text-sm
+                    leading-tight
+                    uppercase
+                    rounded
+                    shadow-md
+                    hover:bg-[#78d22f] hover:shadow-lg
+                    focus:bg-[#78d22f]
+                    focus:shadow-lg
+                    focus:outline-none
+                    focus:ring-0
+                    active:bg-green-700 active:shadow-lg
+                    transition
+                    duration-150
+                    ease-in-out
+                  "
+                >
+                  <Icon icon="akar-icons:sign-out"></Icon>
+                  <p class="pl-2">Đăng Ký Cửa Hàng</p>
+                </button>
+              </div>
+            </div>
           </div>
           <!-- End of about section -->
         </div>
@@ -128,5 +163,10 @@
 </template>
 
 <script>
-export default {};
+import { Icon } from "@iconify/vue";
+export default {
+  components: {
+    Icon,
+  },
+};
 </script>

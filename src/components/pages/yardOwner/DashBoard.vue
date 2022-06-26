@@ -18,6 +18,7 @@ import SlotManager from '../../layout/yardOwner/SlotManager.vue';
 import StoreProfile from '../../layout/yardOwner/StoreProfile.vue';
 import TheHeader from '../../layout/yardOwner/TheHeader.vue';
 import PriceManager from '../../layout/yardOwner/Slot/SettingRate.vue';
+import PromotionManager from '../../layout/yardOwner/PromotionManager.vue';
 
 export default {
   components: {
@@ -28,7 +29,8 @@ export default {
     YardManager,
     SlotManager,
     StoreProfile,
-    PriceManager
+    PriceManager,
+    PromotionManager
   },
 
   data() {

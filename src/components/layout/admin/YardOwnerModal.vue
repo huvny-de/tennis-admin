@@ -150,7 +150,7 @@
                                 placeholder-slate-300
                                 text-slate-600
                                 relative
-                                bg-white bg-white
+                                bg-white
                                 rounded
                                 text-sm
                                 border border-slate-300
@@ -187,7 +187,7 @@
                                 placeholder-slate-300
                                 text-slate-600
                                 relative
-                                bg-white bg-white
+                                bg-white 
                                 rounded
                                 text-sm
                                 border border-slate-300
@@ -266,7 +266,7 @@
                                 placeholder-slate-300
                                 text-slate-600
                                 relative
-                                bg-white bg-white
+                                bg-white 
                                 rounded
                                 text-sm
                                 border border-slate-300
@@ -303,7 +303,7 @@
                                 placeholder-slate-300
                                 text-slate-600
                                 relative
-                                bg-white bg-white
+                                bg-white 
                                 rounded
                                 text-sm
                                 border border-slate-300
@@ -384,7 +384,7 @@
                                 placeholder-slate-300
                                 text-slate-600
                                 relative
-                                bg-white bg-white
+                                bg-white 
                                 rounded
                                 text-sm
                                 border border-slate-300
@@ -420,7 +420,7 @@
                                 placeholder-slate-300
                                 text-slate-600
                                 relative
-                                bg-white bg-white
+                                bg-white 
                                 rounded
                                 text-sm
                                 border border-slate-300

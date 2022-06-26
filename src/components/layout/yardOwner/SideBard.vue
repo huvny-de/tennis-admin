@@ -309,7 +309,7 @@
 
             <!--Active-->
             <div
-              v-if="checkIsActive('promotionManager')"
+              v-if="checkIsActive('PromotionManager')"
               class="w-full bg-[#FEF5F8] flex mt-5"
             >
               <div class="w-1 bg-[#EF3270]"></div>
@@ -329,7 +329,7 @@
             <!---->
             <div
               v-else
-              @click="setCurrentActive('promotionManager')"
+              @click="setCurrentActive('PromotionManager')"
               class="
                 mt-5
                 flex

@@ -13,13 +13,18 @@
               <form @submit.prevent="handleRegister">
                 <div class="relative w-full mb-8 grid grid-cols-2 gap-10">
                   <div class="relative">
+                    <p
+                      v-if="!user.username"
+                      class="text-2xl text-red-500 absolute right-3 top-3"
+                    >
+                      *
+                    </p>
                     <input
                       placeholder="Tên tài khoản"
                       type="text"
                       class="
                         bg-[#F0EEEE]
                         w-full
-                        border-0
                         px-3
                         py-3
                         place-holder-grey-400
@@ -27,11 +32,17 @@
                         rounded
                         text-md
                         shadow
-                        focus:outline-none focus:ring
+                        focus:outline-none focus:ring-50
                         mb-2
+                        pr-8
                       "
                       required
                       v-model="user.username"
+                      :class="
+                        err.errUserName && !msgSuccess
+                          ? 'border-1 border-red-500'
+                          : 'border-0'
+                      "
                     />
                     <p
                       v-if="err.errUserName"
@@ -48,13 +59,18 @@
                     </p>
                   </div>
                   <div class="relative">
+                    <p
+                      v-if="!user.fullName"
+                      class="text-2xl text-red-500 absolute right-3 top-3"
+                    >
+                      *
+                    </p>
                     <input
                       placeholder="Họ Tên"
                       type="text"
                       class="
                         bg-[#F0EEEE]
                         w-full
-                        border-0
                         px-3
                         py-3
                         place-holder-grey-400
@@ -62,11 +78,16 @@
                         rounded
                         text-md
                         shadow
-                        focus:outline-none focus:ring
+                        focus:outline-none focus:ring-50
                         mb-2
                       "
                       required
                       v-model="user.fullName"
+                      :class="
+                        err.errFullName && !msgSuccess
+                          ? 'border-1 border-red-500'
+                          : 'border-0'
+                      "
                     />
                     <p
                       v-if="err.errFullName"
@@ -83,13 +104,18 @@
                     </p>
                   </div>
                   <div class="relative">
+                    <p
+                      v-if="!user.password"
+                      class="text-2xl text-red-500 absolute right-3 top-3"
+                    >
+                      *
+                    </p>
                     <input
                       placeholder="Mật khẩu"
                       type="password"
                       class="
                         bg-[#F0EEEE]
                         w-full
-                        border-0
                         px-3
                         py-3
                         place-holder-grey-400
@@ -97,33 +123,31 @@
                         rounded
                         text-md
                         shadow
-                        focus:outline-none focus:ring
+                        focus:outline-none focus:ring-50
                         mb-2
                       "
                       required
                       v-model="user.password"
-                    />
-                    <!-- <p
-                      class="
-                        absolute
-                        top-[138%]
-                        left-0
-                        error-text
-                        text-center text-red-700
+                      :class="
+                        err.errConfirmPassword && !msgSuccess
+                          ? ' border-1 border-red-500'
+                          : 'border-0'
                       "
-                      role="alert"
-                    >
-                      * Password is required
-                    </p> -->
+                    />
                   </div>
                   <div class="relative">
+                    <p
+                      v-if="!user.confirmPassword"
+                      class="text-2xl text-red-500 absolute right-3 top-3"
+                    >
+                      *
+                    </p>
                     <input
                       placeholder="Xác nhận mật khẩu"
                       type="password"
                       class="
                         bg-[#F0EEEE]
                         w-full
-                        border-0
                         px-3
                         py-3
                         place-holder-grey-400
@@ -131,11 +155,16 @@
                         rounded
                         text-md
                         shadow
-                        focus:outline-none focus:ring
+                        focus:outline-none focus:ring-50
                         mb-2
                       "
                       required
                       v-model="user.confirmPassword"
+                      :class="
+                        err.errConfirmPassword && !msgSuccess
+                          ? 'border-1 border-red-500'
+                          : 'border-0'
+                      "
                     />
                     <p
                       v-if="err.errConfirmPassword"
@@ -152,13 +181,18 @@
                     </p>
                   </div>
                   <div class="relative">
+                    <p
+                      v-if="!user.email"
+                      class="text-2xl text-red-500 absolute right-3 top-3"
+                    >
+                      *
+                    </p>
                     <input
                       placeholder="Email"
                       type="email"
                       class="
                         bg-[#F0EEEE]
                         w-full
-                        border-0
                         px-3
                         py-3
                         place-holder-grey-400
@@ -166,11 +200,15 @@
                         rounded
                         text-md
                         shadow
-                        focus:outline-none focus:ring
-                        mb-2
+                        focus:outline-none focus:ring-50
+                        pr-8
                       "
-                      required
                       v-model="user.email"
+                      :class="
+                        err.errEmail && !msgSuccess
+                          ? ' border-1 border-red-500 mb-2'
+                          : 'border-0'
+                      "
                     />
                     <p
                       v-if="err.errEmail"
@@ -187,13 +225,18 @@
                     </p>
                   </div>
                   <div class="relative">
+                    <p
+                      v-if="!user.phoneNumber"
+                      class="text-2xl text-red-500 absolute right-3 top-3"
+                    >
+                      *
+                    </p>
                     <input
                       placeholder="Số điện thoại"
                       type="tel"
                       class="
                         bg-[#F0EEEE]
                         w-full
-                        border-0
                         px-3
                         py-3
                         place-holder-grey-400
@@ -201,11 +244,15 @@
                         rounded
                         text-md
                         shadow
-                        focus:outline-none focus:ring
-                        mb-2
+                        focus:outline-none focus:ring-50
                       "
                       required
                       v-model="user.phoneNumber"
+                      :class="
+                        err.errPhoneNumber && !msgSuccess
+                          ? 'border-1 border-red-500 mb-2'
+                          : 'border-0'
+                      "
                     />
                     <p
                       v-if="err.errPhoneNumber"
@@ -223,12 +270,19 @@
                   </div>
                 </div>
                 <p
+                  v-if="!checkIsEntered"
+                  class="text-red-500 text-right text-sm italic"
+                >
+                  Ghi chú: (*) Các trường bắt buộc nhập
+                </p>
+                <p
                   v-if="msgSuccess"
                   class="text-lg font-md error-text text-center text-red-700"
                   role="alert"
                 >
                   {{ msgSuccess }}
                 </p>
+
                 <button-component
                   class="
                     font-medium
@@ -287,14 +341,31 @@ export default {
       this.msgSuccess = msg;
     }
   },
+  computed: {
+    checkIsEntered() {
+      if (
+        !this.user.username ||
+        !this.user.fullName ||
+        !this.user.password ||
+        !this.user.confirmPassword ||
+        !this.user.email ||
+        !this.user.phoneNumber
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    },
+  },
   methods: {
     handleRegister() {
+      this.err = new Error();
       this.loading = true;
       this.$store.dispatch("auth/register", this.user).then(
         (res) => {
           if (res) {
             this.msgSuccess = "Đăng ký thành công !";
-            this.user = new User();
+            this.user = new User("", "", "", "", "", "");
             this.err = new Error();
             this.loading = false;
           }

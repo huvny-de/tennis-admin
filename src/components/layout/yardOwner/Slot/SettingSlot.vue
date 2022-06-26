@@ -12,9 +12,9 @@
         w-[45%]
       "
     >
-       <h2 class="font-semibold text-lg text-gray-800 dark:text-gray-200 mb-6">
-          Cài Đặt Giờ Thuê
-        </h2>
+      <h2 class="font-semibold text-lg text-gray-800 dark:text-gray-200 mb-6">
+        Cài Đặt Giờ Thuê
+      </h2>
       <form class="w-full max-w-lg">
         <div class="flex flex-wrap -mx-3 mb-6 mx-center">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -38,7 +38,7 @@
                 w-full
                 bg-gray-50
                 text-gray-700
-                border 
+                border
                 rounded
                 py-3
                 px-4
@@ -59,7 +59,7 @@
                 uppercase
                 tracking-wide
                 text-gray-700 text-xs
-                 font-semibold
+                font-semibold
                 mb-2
               "
               for="grid-end-time"
@@ -95,14 +95,14 @@
                 uppercase
                 tracking-wide
                 text-gray-700 text-xs
-                 font-semibold
+                font-semibold
                 mb-2
               "
               for="grid-password"
             >
               Khoảng Thời Gian Thuê Mỗi Ca
             </label>
-            <select
+            <!-- <select
               id="small"
               class="
                 rounded-lg
@@ -124,7 +124,42 @@
             >
               <option value="1">1 giờ</option>
               <option value="2">1 giờ 30 phút</option>
-            </select>
+            </select> -->
+            <div class="flex items-center pt-2">
+              <input
+                class="
+                  appearance-none
+                  block
+                  w-40
+                  bg-gray-50
+                  text-gray-700
+                  border
+                  rounded
+                  py-3
+                  px-4
+                  mb-3
+                  leading-tight
+                  focus:outline-none focus:ring-100
+                "
+                id="duration-time"
+                type="number"
+                placeholder="nhập số phút"
+              />
+              <label
+                class="
+                  ml-4
+                  block
+                  uppercase
+                  tracking-wide
+                  text-gray-700 text-sm
+                  font-md
+                  mb-2
+                "
+                for="gr id-first-name"
+              >
+                Phút
+              </label>
+            </div>
           </div>
         </div>
         <div class="flex flex-wrap mx-3 mb-2 justify-end">

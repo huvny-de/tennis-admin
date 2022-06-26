@@ -15,7 +15,7 @@
         focus:outline-none focus:shadow-outline
       "
       id="username"
-      type="text"
+      type="number"
       placeholder="ví dụ 1.25"
     />
   </div>

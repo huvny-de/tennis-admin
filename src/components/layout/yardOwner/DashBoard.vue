@@ -195,7 +195,7 @@
       <!-- end card -->
     </div>
     <!-- end wrapper card -->
-    <div class="mt-2 lg:flex block lg:gap-2">
+    <!-- <div class="mt-2 lg:flex block lg:gap-2">
       <div
         class="
           bg-white
@@ -403,7 +403,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div
       class="
@@ -510,11 +510,11 @@
 </style>
 
 <script>
-import { Icon } from "@iconify/vue";
+// import { Icon } from "@iconify/vue";
 
 export default {
   components: {
-    Icon,
+    // Icon,
   },
   data() {
     return {

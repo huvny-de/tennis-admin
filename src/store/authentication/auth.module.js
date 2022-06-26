@@ -24,7 +24,6 @@ export const auth = {
           return Promise.resolve(user);
         },
         error => {
-          commit('loginFailure');
           return Promise.reject(error);
         })
     },
@@ -32,12 +31,14 @@ export const auth = {
       AuthService.logout();
       commit("logout");
     },
-    register(user) {
+    register({commit} ,user) {
       return AuthService.register(user).then(
         response => {
+          commit('registerSuccess');
           return Promise.resolve(response.data);
         },
         error => {
+          commit('registerSuccess');
           return Promise.reject(error);
         }
       );
@@ -56,5 +57,11 @@ export const auth = {
       state.status.loggedIn = false;
       state.user = null;
     },
+    registerSuccess(state) {
+      state.status.loggedIn = false;
+    },
+    registerFailure(state) {
+      state.status.loggedIn = false;
+    }
   },
 };
