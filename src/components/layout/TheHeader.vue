@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div class="container mx-auto h-[14.8%] mb-8 border-1 pl-1 md:mb-0">
     <div class="h-full px-4 flex bg-white items-center justify-between">
       <div
@@ -41,6 +41,8 @@
           v-on:keyup.enter="EmitSearchValue"
         ></input-component>
       </div>
+
+      
       <div class="wrap-header flex items-center justify-end flex-wrap">
         <div class="mr-5 flex float-right relative">
           <div class="mr-5 flex float-right relative">
@@ -384,6 +386,7 @@ export default {
     isHiddenInput: {
       type: Boolean,
       required: false,
+      default: false,
     },
   },
   data() {

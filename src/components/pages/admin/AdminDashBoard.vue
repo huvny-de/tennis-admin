@@ -3,8 +3,12 @@
     <SideBarAdmin @changeTab="changeCurrentComponent" class="w-60" />
 
     <div class="flex-1 bg-[#F8F9FF] flex flex-col">
-      <the-header :search="searchValue"  @search="SearchMember" />
-      <component :searchValue="searchValue" :is="isSelectedTab" />
+      <the-header
+        :isHiddenInput="hiddenInput"
+        :search="searchValue"
+        @search="SearchMember"
+      />
+      <component class="overflow-y-auto" :searchValue="searchValue" :is="isSelectedTab" />
     </div>
   </div>
 </template>
@@ -20,7 +24,10 @@ export default {
     SideBarAdmin,
     YardOwner,
     MemberList,
-    ApproveManager
+    ApproveManager,
+  },
+  created() {
+    this.hiddenInput = true;
   },
 
   data() {
@@ -29,6 +36,7 @@ export default {
       searchValue: "",
       loading: false,
       currentUser: "",
+      hiddenInput: false,
     };
   },
   methods: {
@@ -38,6 +46,15 @@ export default {
     },
     SearchMember(value) {
       this.searchValue = value;
+    },
+  },
+  watch: {
+    isSelectedTab() {
+      if (this.isSelectedTab === "approveManager") {
+        this.hiddenInput = true;
+      } else {
+        this.hiddenInput = false;
+      }
     },
   },
 };

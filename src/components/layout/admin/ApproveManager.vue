@@ -1,0 +1,687 @@
+<template>
+  <div class="px-6 flex flex-col items-center justify-between">
+    <div class="mt-2 dark:bg-gray-800 p-5 w-full px-4 rounded-md box-border">
+      <div class="container flex items-center justify-between">
+        <span class="pt-2">
+          <h2 class="font-bold text-lg text-gray-600 dark:text-gray-200">
+            Danh Sách Phê Duyệt
+          </h2>
+          <p class="text-gray-400 font-lexend font-normal">
+            Quản lý toàn bộ yêu cầu phê duyệt
+          </p>
+        </span>
+        <div class="flex items-center justify-between">
+          <div class="container mx-auto flex px-4">
+            <div class="mx-auto flex items-center justify-center">
+              <div class="mr-5">
+                <p class="text-gray-500 font-lexend font-normal mb-1">
+                  Từ Ngày
+                </p>
+                <input
+                  type="date"
+                  class="
+                    bg-gray-50
+                    border border-gray-500
+                    text-gray-900
+                    sm:text-sm
+                    rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600
+                    block
+                    w-full
+                    p-2.5
+                    datepicker-input
+                  "
+                />
+              </div>
+              <div class="mr-5">
+                <p class="text-gray-500 font-lexend font-normal mb-1">
+                  Đến Ngày
+                </p>
+                <input
+                  type="date"
+                  class="
+                    bg-gray-50
+                    border border-gray-500
+                    text-gray-900
+                    sm:text-sm
+                    rounded-lg
+                    focus:ring-blue-500 focus:border-blue-500
+                    block
+                    w-full
+                    p-2.5
+                    datepicker-input
+                  "
+                />
+              </div>
+              <div class="mr-5">
+                <p class="text-gray-500 font-lexend font-normal mb-1">
+                  Trạng Thái
+                </p>
+                <select
+                  id="small"
+                  class="
+                    rounded-lg
+                    text-md
+                    block
+                    pr-8
+                    W-full
+                    text-sm text-gray-900
+                    bg-gray-50
+                    border border-gray-500
+                    focus:ring-blue-500 focus:border-blue-500
+                  "
+                >
+                  <option value="Active">Tất cả</option>
+                  <option value="Active">Chờ Phê Duyệt</option>
+                  <option value="Active">Phê Duyệt</option>
+                  <option value="Active">Từ Chối</option>
+                </select>
+              </div>
+              <div class="flex items-center relative mt-6">
+                <span class="text-2xl p-2 text-gray-400 absolute right-0">
+                  <Icon icon="ei:search" />
+                </span>
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  class="
+                    pr-10
+                    rounded
+                    border border-gray-500
+                    bg-gray-50
+                    placeholder:text-sm
+                    focus:ring-600
+                  "
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrapping-table mt-10">
+        <div class="container mx-auto px-8 h-[80%] lg:mt-8">
+          <div class="w-[100%] h-full">
+            <div class="container mx-auto h-96 mt-8 md:mt-0 min-w-full">
+              <table class="min-w-full">
+                <th
+                  class="
+                    px-6
+                    py-3
+                    text-sm
+                    font-medium
+                    leading-4
+                    tracking-wider
+                    text-left text-[#334D6E]
+                    bg-gray-100
+                    border-b border-gray-200
+                    cursor-pointer
+                  "
+                >
+                  Họ Tên
+                  <font-awesome-icon
+                    class="w-4 h-4 text-[#ACACAC]"
+                    icon="arrows-up-down"
+                  />
+                </th>
+                <th
+                  class="
+                    px-6
+                    py-3
+                    text-sm
+                    font-medium
+                    leading-4
+                    tracking-wider
+                    text-left text-[#334D6E]
+                    bg-gray-100
+                    border-b border-gray-200
+                    cursor-pointer
+                  "
+                >
+                  Tên Cửa Hàng
+                  <font-awesome-icon
+                    class="w-4 h-4 text-[#ACACAC]"
+                    icon="arrows-up-down"
+                  />
+                </th>
+                <th
+                  class="
+                    px-6
+                    py-3
+                    text-sm
+                    font-medium
+                    leading-4
+                    tracking-wider
+                    text-left text-[#334D6E]
+                    bg-gray-100
+                    border-b border-gray-200
+                    cursor-pointer
+                  "
+                >
+                  Email
+                  <font-awesome-icon
+                    class="w-4 h-4 text-[#ACACAC]"
+                    icon="arrows-up-down"
+                  />
+                </th>
+                <th
+                  class="
+                    px-6
+                    py-3
+                    text-sm
+                    font-medium
+                    leading-4
+                    tracking-wider
+                    text-left text-[#334D6E]
+                    bg-gray-100
+                    border-b border-gray-200
+                    cursor-pointer
+                  "
+                >
+                  Số Điện Thoại
+                  <font-awesome-icon
+                    class="w-4 h-4 text-[#ACACAC]"
+                    icon="arrows-up-down"
+                  />
+                </th>
+                <th
+                  class="
+                    px-6
+                    py-3
+                    text-sm
+                    font-medium
+                    leading-4
+                    tracking-wider
+                    text-left text-[#334D6E]
+                    bg-gray-100
+                    border-b border-gray-200
+                    cursor-pointer
+                  "
+                >
+                  Trạng Thái
+                  <font-awesome-icon
+                    class="w-4 h-4 text-[#ACACAC]"
+                    icon="arrows-up-down"
+                  />
+                </th>
+                <th
+                  class="
+                    px-6
+                    py-3
+                    text-sm
+                    font-medium
+                    leading-4
+                    tracking-wider
+                    text-left text-[#334D6E]
+                    bg-gray-100
+                    border-b border-gray-200
+                  "
+                >
+                  Thao Tác
+                </th>
+                <tbody class="bg-white">
+                  <tr v-for="member in approveList" :key="member.id">
+                    <td
+                      class="
+                        px-6
+                        py-5
+                        border-b border-gray-200
+                        whitespace-nowrap
+                      "
+                    >
+                      <div class="flex items-center">
+                        <div class="flex-shrink object-contain">
+                          <img
+                            class="rounded-2xl mr-3 w-8 h-8"
+                            :src="member.img"
+                          />
+                        </div>
+                        <div class="ml-4 text-[#334D6E]">
+                          {{ member.owner }}
+                        </div>
+                      </div>
+                    </td>
+                    <td
+                      class="
+                        px-2
+                        py-4
+                        border-b border-gray-200
+                        whitespace-nowrap
+                      "
+                    >
+                      <div class="flex items-center">
+                        <div class="ml-4 text-[#334D6E]">
+                          {{ member.storeName }}
+                        </div>
+                      </div>
+                    </td>
+                    <td
+                      class="
+                        px-2
+                        py-4
+                        border-b border-gray-200
+                        whitespace-nowrap
+                      "
+                    >
+                      <div class="flex items-center">
+                        <div class="ml-4 text-[#334D6E]">
+                          {{ member.email }}
+                        </div>
+                      </div>
+                    </td>
+                    <td
+                      class="
+                        px-2
+                        py-4
+                        border-b border-gray-200
+                        whitespace-nowrap
+                      "
+                    >
+                      <div class="flex items-center">
+                        <div class="ml-4 text-[#334D6E]">
+                          {{ member.phoneNumber }}
+                        </div>
+                      </div>
+                    </td>
+                    <td
+                      class="
+                        px-6
+                        py-4
+                        border-b border-gray-200
+                        whitespace-nowrap
+                      "
+                    >
+                      <div class="flex items-center">
+                        <span
+                          v-if="member.status === 2"
+                          class="font-semibold text-[#50D222]"
+                          >Active</span
+                        >
+                        <span v-else class="font-semibold text-red-500"
+                          >Đang Chờ Duyệt</span
+                        >
+                      </div>
+                    </td>
+                    <td
+                      class="
+                        px-2
+                        py-4
+                        border-b border-gray-200
+                        whitespace-nowrap
+                      "
+                    >
+                      <div class="flex items-center">
+                        <div class="ml-4 text-[#334D6E]">
+                          <div class="flex items-center">
+                            <font-awesome-icon
+                              class="
+                                w-5
+                                h-5
+                                text-[#ACACAC]
+                                mr-2
+                                cursor-pointer
+                                hover:text-gray-500
+                              "
+                              icon="eye"
+                              @click="showDetail(member.id)"
+                            />
+                            <font-awesome-icon
+                              class="
+                                w-5
+                                h-5
+                                text-[#ACACAC]
+                                mr-2
+                                cursor-pointer
+                                hover:text-gray-500
+                              "
+                              icon="trash-can"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="flex flex-col container mx-auto lg:mt-8 md:mt-0">
+            <div
+              class="
+                mx-auto
+                flex
+                items-center
+                text-[#ACACAC]
+                font-medium
+                lg:mt-4
+                text-sm
+              "
+            >
+              <nav aria-label="Page navigation example mx-auto">
+                <ul class="inline-flex -space-x-px">
+                  <li>
+                    <span
+                      v-if="currentPage == 1"
+                      class="
+                        py-2
+                        px-3
+                        ml-0
+                        leading-tight
+                        text-gray-500
+                        bg-white
+                        rounded-l-lg
+                        border border-gray-300
+                        hover:bg-gray-100 hover:text-gray-700
+                        dark:bg-gray-800
+                        dark:border-gray-700
+                        dark:text-gray-400
+                        dark:hover:bg-gray-700
+                        dark:hover:text-white
+                        cursor-default
+                      "
+                      >Previous</span
+                    >
+                    <span
+                      v-else
+                      class="
+                        py-2
+                        px-3
+                        ml-0
+                        leading-tight
+                        text-gray-500
+                        bg-white
+                        rounded-l-lg
+                        border border-gray-300
+                        hover:bg-gray-100 hover:text-gray-700
+                        dark:bg-gray-800
+                        dark:border-gray-700
+                        dark:text-gray-400
+                        dark:hover:bg-gray-700
+                        dark:hover:text-white
+                        cursor-pointer
+                      "
+                      >Previous</span
+                    >
+                  </li>
+                  <li v-for="page in 5" :key="page">
+                    <span
+                      v-if="page === 1"
+                      aria-current="page"
+                      class="
+                        py-2
+                        px-3
+                        text-blue-600
+                        bg-blue-50
+                        border border-gray-300
+                        hover:bg-blue-100 hover:text-blue-700
+                        dark:border-gray-700 dark:bg-gray-700 dark:text-white
+                      "
+                      >{{ page }}</span
+                    >
+                    <a
+                      v-else
+                      href="#"
+                      class="
+                        py-2
+                        px-3
+                        leading-tight
+                        text-gray-500
+                        bg-white
+                        border border-gray-300
+                        hover:bg-gray-100 hover:text-gray-700
+                        dark:bg-gray-800
+                        dark:border-gray-700
+                        dark:text-gray-400
+                        dark:hover:bg-gray-700
+                        dark:hover:text-white
+                      "
+                      >{{ page }}</a
+                    >
+                  </li>
+                  <li>
+                    <span
+                      class="
+                        py-2
+                        px-3
+                        ml-0
+                        leading-tight
+                        text-gray-500
+                        bg-white
+                        rounded-r-lg
+                        border border-gray-300
+                        hover:bg-gray-100 hover:text-gray-700
+                        dark:bg-gray-800
+                        dark:border-gray-700
+                        dark:text-gray-400
+                        dark:hover:bg-gray-700
+                        dark:hover:text-white
+                        cursor-pointer
+                      "
+                      >Next</span
+                    >
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--The Modal-->
+  <ModalOwnerDetail
+    :class="isHiddenModal === false ? 'hidden' : ''"
+    :detail="ownerDetail"
+    :click="countClick"
+  />
+</template>
+
+<script>
+import { Icon } from "@iconify/vue";
+import ModalOwnerDetail from "./ModalOwnerDetail.vue";
+
+export default {
+  components: { Icon, ModalOwnerDetail },
+  data() {
+    return {
+      approveList: [
+        {
+          id: 1,
+          img: "https://i.ibb.co/hgNrFmX/SE140371-Nguyen-Cong-Thai-Son.jpg",
+          storeName: "Thủ Đức Tennis",
+          owner: "Nguyễn Công Thái Sơn",
+          openTime: "5:00 - 22:00",
+          address:
+            "18 Linh Trung, P. Linh Trung, quận Thủ Đức, TP. Hồ Chí Minh.",
+          email: "huysenior@gmail.com",
+          phoneNumber: "0978145440",
+          rentalNo: "3",
+          listYard: [
+            {
+              id: 1,
+              nameYard: "Sân 1",
+              typeYard: "Sân Đất Nện",
+              size: "",
+            },
+            {
+              id: 2,
+              nameYard: "Sân 2",
+              typeYard: "Sân Cỏ",
+              size: "",
+            },
+            {
+              id: 2,
+              nameYard: "Sân 3",
+              typeYard: "Sân Cứng",
+              size: "",
+            },
+          ],
+          status: 1,
+          requestTime: "20/06/2022",
+        },
+        {
+          id: 2,
+          img: "https://i.ibb.co/hgNrFmX/SE140371-Nguyen-Cong-Thai-Son.jpg",
+          storeName: "Thủ Đức Tennis",
+          owner: "Nguyễn Công Thái Sơn",
+          openTime: "5:00 - 22:00",
+          address:
+            "18 Linh Trung, P. Linh Trung, quận Thủ Đức, TP. Hồ Chí Minh.",
+          email: "huysenior@gmail.com",
+          phoneNumber: "0978145440",
+          rentalNo: "3",
+          listYard: [
+            {
+              id: 1,
+              nameYard: "Sân 1",
+              typeYard: "Sân Đất Nện",
+              size: "",
+            },
+            {
+              id: 2,
+              nameYard: "Sân 2",
+              typeYard: "Sân Cỏ",
+              size: "",
+            },
+            {
+              id: 2,
+              nameYard: "Sân 3",
+              typeYard: "Sân Cứng",
+              size: "",
+            },
+          ],
+          status: 1,
+          requestTime: "20/06/2022",
+        },
+        {
+          id: 3,
+          img: "https://i.ibb.co/hgNrFmX/SE140371-Nguyen-Cong-Thai-Son.jpg",
+          storeName: "Thủ Đức Tennis",
+          owner: "Nguyễn Công Thái Sơn",
+          openTime: "5:00 - 22:00",
+          address:
+            "18 Linh Trung, P. Linh Trung, quận Thủ Đức, TP. Hồ Chí Minh.",
+          email: "huysenior@gmail.com",
+          phoneNumber: "0978145440",
+          rentalNo: "3",
+          listYard: [
+            {
+              id: 1,
+              nameYard: "Sân 1",
+              typeYard: "Sân Đất Nện",
+              size: "",
+            },
+            {
+              id: 2,
+              nameYard: "Sân 2",
+              typeYard: "Sân Cỏ",
+              size: "",
+            },
+            {
+              id: 2,
+              nameYard: "Sân 3",
+              typeYard: "Sân Cứng",
+              size: "",
+            },
+          ],
+          status: 1,
+          requestTime: "20/06/2022",
+        },
+        {
+          id: 4,
+          img: "https://i.ibb.co/hgNrFmX/SE140371-Nguyen-Cong-Thai-Son.jpg",
+          storeName: "Thủ Đức Tennis",
+          owner: "Nguyễn Công Thái Sơn",
+          openTime: "5:00 - 22:00",
+          address:
+            "18 Linh Trung, P. Linh Trung, quận Thủ Đức, TP. Hồ Chí Minh.",
+          email: "huysenior@gmail.com",
+          phoneNumber: "0978145440",
+          rentalNo: "3",
+          listYard: [
+            {
+              id: 1,
+              nameYard: "Sân 1",
+              typeYard: "Sân Đất Nện",
+              size: "",
+            },
+            {
+              id: 2,
+              nameYard: "Sân 2",
+              typeYard: "Sân Cỏ",
+              size: "",
+            },
+            {
+              id: 2,
+              nameYard: "Sân 3",
+              typeYard: "Sân Cứng",
+              size: "",
+            },
+          ],
+          status: 1,
+
+          requestTime: "20/06/2022",
+          statusTransaction: "1",
+        },
+        {
+          id: 3,
+          img: "https://i.ibb.co/hgNrFmX/SE140371-Nguyen-Cong-Thai-Son.jpg",
+          storeName: "Thủ Đức Tennis",
+          owner: "Nguyễn Công Thái Sơn",
+          openTime: "5:00 - 22:00",
+          address:
+            "18 Linh Trung, P. Linh Trung, quận Thủ Đức, TP. Hồ Chí Minh.",
+          email: "huysenior@gmail.com",
+          phoneNumber: "0978145440",
+          rentalNo: "3",
+          listYard: [
+            {
+              id: 1,
+              nameYard: "Sân 1",
+              typeYard: "Sân Đất Nện",
+              size: "",
+            },
+            {
+              id: 2,
+              nameYard: "Sân 2",
+              typeYard: "Sân Cỏ",
+              size: "",
+            },
+            {
+              id: 2,
+              nameYard: "Sân 3",
+              typeYard: "Sân Cứng",
+              size: "",
+            },
+          ],
+          status: 1,
+
+          requestTime: "20/06/2022",
+        },
+      ],
+      isHiddenModal: false,
+      ownerDetail: {},
+      countClick: 0,
+      currentPage : 1
+    };
+  },
+  methods: {
+    showDetail(id) {
+      this.isHiddenModal = true;
+      this.countClick++;
+      this.ownerDetail = this.approveList.find((x) => x.id == id);
+    },
+  },
+};
+</script>
+
+<style scoped>
+select {
+  height: 42px;
+}
+input:focus {
+  outline: none;
+  border: none;
+}
+</style>

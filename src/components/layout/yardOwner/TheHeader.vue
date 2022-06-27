@@ -183,7 +183,7 @@
                 >
                    <span>
                     <Icon
-                      class="text-red-500 w-7 h-7 absolute top-6 left-4"
+                      class="text-red-500 w-8 h-8 absolute top-6 left-4"
                       icon="ic:baseline-cancel"
                     />
                   </span>

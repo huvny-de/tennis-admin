@@ -16,9 +16,9 @@
           lg:translate-x-0 lg:inset-0
         "
       >
-        <div class="flex items-center justify-center">
+        <div class="flex items-center justify-start px-4">
           <div class="flex content-center items-center justify-center">
-            <div class="flex flex-col items-center py-6">
+            <div class="flex flex-col items-center py-4">
               <p class="text-xl font-medium leading-4">
                 Tennis<span class="text-[#30AF82]">Today</span>
               </p>
@@ -30,7 +30,20 @@
         </div>
 
         <div class="container mx-auto h-full">
-          <div class="flex flex-col items-center justify-between"></div>
+          <div class="flex items-center justify-center mt-2">
+            <img
+              src="../../../assets/img/son.jpg"
+              class="w-9 h-9 rounded-3xl"
+            />
+            <div class="flex flex-col ml-2">
+              <span>
+                <p class="text-md font-semibold">Thái Sơn</p>
+              </span>
+              <span>
+                <p class="text-xs">Admin</p>
+              </span>
+            </div>
+          </div>
 
           <nav class="mt-6 h-full">
             <!--Active-->
@@ -88,10 +101,7 @@
               <div class="w-1 bg-[#EF3270]"></div>
 
               <div class="flex items-center px-6 py-2 duration-200 border-1-4">
-                <Icon
-                  class="w-9 h-9 text-[#ACACAC]"
-                  icon="bxs:user-check"
-                />
+                <Icon class="w-9 h-9 text-[#ACACAC]" icon="bxs:user-check" />
 
                 <span class="mx-2 text-[14px] text-[#434141] font-bold pt-1">
                   Chủ Sân</span
@@ -116,10 +126,7 @@
                 cursor-pointer
               "
             >
-              <Icon
-                class="w-9 h-9 text-[#ACACAC]"
-                icon="bxs:user-check"
-              />
+              <Icon class="w-9 h-9 text-[#ACACAC]" icon="bxs:user-check" />
 
               <span class="mx-2 text-[#334D6E] text-[14px] font-medium pt-1">
                 Chủ Sân</span
@@ -168,7 +175,6 @@
                 Thành Viên</span
               >
             </div>
-
           </nav>
         </div>
       </div>
