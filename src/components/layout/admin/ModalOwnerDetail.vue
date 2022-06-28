@@ -377,67 +377,69 @@
             </div>
             <div class="flex items-center justify-end mt-4">
               <div class="flex space-x-2 justify-center">
-                    <button
-                      type="button"
-                      class="
-                        flex
-                        items-center
-                        px-10
-                        py-2.5
-                        bg-[#50AE01]
-                        text-white
-                        font-medium
-                        text-sm
-                        leading-tight
-                        uppercase
-                        rounded-full
-                        shadow-md
-                        hover:bg-[#78d22f] hover:shadow-lg
-                        focus:bg-[#78d22f]
-                        focus:shadow-lg
-                        focus:outline-none
-                        focus:ring-0
-                        active:bg-green-700 active:shadow-lg
-                        transition
-                        duration-150
-                        ease-in-out
-                      "
-                    >
-                      <Icon icon="dashicons:update-alt"></Icon>
-                      <p class="pl-2">Phê Duyệt</p>
-                    </button>
-                  </div>
-                  <div class="flex space-x-2 justify-center ml-2">
-                    <button
-                      type="button"
-                      class="
-                        flex
-                        items-center
-                        px-11
-                        py-2.5
-                        bg-red-500
-                        text-white
-                        font-medium
-                        text-sm
-                        leading-tight
-                        uppercase
-                        rounded-full
-                        shadow-md
-                        hover:bg-red-700 hover:shadow-lg
-                        focus:bg-red-700
-                        focus:shadow-lg
-                        focus:outline-none
-                        focus:ring-0
-                        active:bg-red-800 active:shadow-lg
-                        transition
-                        duration-150
-                        ease-in-out
-                      "
-                    >
-                      <Icon icon="ic:baseline-cancel"></Icon>
-                      <p class="pl-2">Từ Chối</p>
-                    </button>
-                  </div>
+                <button
+                  @click="AcceptRequest"
+                  type="button"
+                  class="
+                    flex
+                    items-center
+                    px-10
+                    py-2.5
+                    bg-[#50AE01]
+                    text-white
+                    font-medium
+                    text-sm
+                    leading-tight
+                    uppercase
+                    rounded-full
+                    shadow-md
+                    hover:bg-[#78d22f] hover:shadow-lg
+                    focus:bg-[#78d22f]
+                    focus:shadow-lg
+                    focus:outline-none
+                    focus:ring-0
+                    active:bg-green-700 active:shadow-lg
+                    transition
+                    duration-150
+                    ease-in-out
+                  "
+                >
+                  <Icon icon="dashicons:update-alt"></Icon>
+                  <p class="pl-2">Phê Duyệt</p>
+                </button>
+              </div>
+              <div class="flex space-x-2 justify-center ml-2">
+                <button
+                  @click="DeclineRequest"
+                  type="button"
+                  class="
+                    flex
+                    items-center
+                    px-11
+                    py-2.5
+                    bg-red-500
+                    text-white
+                    font-medium
+                    text-sm
+                    leading-tight
+                    uppercase
+                    rounded-full
+                    shadow-md
+                    hover:bg-red-700 hover:shadow-lg
+                    focus:bg-red-700
+                    focus:shadow-lg
+                    focus:outline-none
+                    focus:ring-0
+                    active:bg-red-800 active:shadow-lg
+                    transition
+                    duration-150
+                    ease-in-out
+                  "
+                >
+                  <Icon icon="ic:baseline-cancel"></Icon>
+                  <p class="pl-2">Từ Chối</p>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -449,6 +451,7 @@
 import ModalOwnerProfile from "./ModalApprove/ModalOwnerProfile.vue";
 import ModalStoreProfile from "./ModalApprove/ModalStoreProfile.vue";
 import ModalRentalYardList from "./ModalApprove/ModalRentalYardList.vue";
+import swal from "sweetalert";
 
 import { Icon } from "@iconify/vue";
 
@@ -457,7 +460,7 @@ export default {
     ModalOwnerProfile,
     ModalStoreProfile,
     ModalRentalYardList,
-    Icon
+    Icon,
   },
   props: {
     detail: {
@@ -478,20 +481,45 @@ export default {
   methods: {
     hiddenModal() {
       this.isClose = true;
-      this.isSelectedTab = 'ModalOwnerProfile';
+      this.isSelectedTab = "ModalOwnerProfile";
     },
     setSelectedTab(tab) {
       this.isSelectedTab = tab;
+    },
+    AcceptRequest() {
+      swal("Bạn có chắc chắn phê duyệt chủ sân này không ?", {
+        buttons: ["Hủy", "Đồng Ý"],
+      }).then((value) => {
+        if (value) {
+          swal("Phê Duyệt Thành Công !", {
+            icon: "success",
+          });
+          sessionStorage.setItem("acceptRequest", 2);
+        }
+      });
+    },
+    DeclineRequest() {
+      swal("Bạn có chắc chắn sẽ từ chối chủ sân này không?" ,{
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+           swal("Từ Chối Thành Công !", {
+            icon: "success",
+          });
+        }
+      });
     },
   },
   watch: {
     detail() {
       this.isClose = false;
-      this.isSelectedTab = 'ModalOwnerProfile';
+      this.isSelectedTab = "ModalOwnerProfile";
     },
     click() {
       this.isClose = false;
-      this.isSelectedTab = 'ModalOwnerProfile';
+      this.isSelectedTab = "ModalOwnerProfile";
     },
   },
 };

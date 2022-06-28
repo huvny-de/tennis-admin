@@ -11,8 +11,8 @@ export default {
         phoneNumber: "0147258369",
         address: "216 Đ. Võ Văn Ngân, Bình Thọ, Thủ Đức, Thành phố Hồ Chí Minh",
         owner: "Thủ Đức Tennis",
-        createDate : "20/6/2021",
-        status: "Active",
+        createDate: "20/6/2021",
+        status: 1,
       },
       {
         id: "2",
@@ -23,8 +23,8 @@ export default {
         phoneNumber: "0258963321",
         address: "36A Đ. Võ Văn Ngân, Thủ Đức, Thành phố Hồ Chí Minh",
         owner: "Hồng Phúc Tennis",
-        createDate : "20/6/2021",
-        status: "Active",
+        createDate: "20/6/2021",
+        status: 1,
       },
       {
         id: "3",
@@ -35,8 +35,8 @@ export default {
         phoneNumber: "0285741321",
         address: "212/5 Đ. Hoàng Diệu 2, Thủ Đức, Thành phố Hồ Chí Minh",
         owner: "Đức Thịnh Tennis",
-        createDate : "20/6/2021",
-        status: "InActive",
+        createDate: "20/6/2021",
+        status: 0,
       },
       {
         id: "4",
@@ -47,8 +47,8 @@ export default {
         phoneNumber: "0100203022",
         address: "969. Khu Công Nghệ Cao, Quận 9, Thành phố Hồ Chí Minh",
         owner: "Lam Trường Tennis",
-        createDate : "20/6/2021",
-        status: "Active",
+        createDate: "20/6/2021",
+        status: 1,
       },
       {
         id: "5",
@@ -59,8 +59,8 @@ export default {
         phoneNumber: "0789456012",
         address: "312/6/6. Linh Trung, Thủ Đức, Thành phố Hồ Chí Minh",
         owner: "Nhật Huy Tennis",
-        createDate : "20/6/2021",
-        status: "Active",
+        createDate: "20/6/2021",
+        status: 1,
       },
       {
         id: "6",
@@ -71,8 +71,8 @@ export default {
         phoneNumber: "0203031234",
         address: "Đại học FPT, Quận 9, Thành phố Hồ Chí Minh",
         owner: "FPT Tennis",
-        createDate : "20/6/2021",
-        status: "Active",
+        createDate: "20/6/2021",
+        status: 1,
       },
       {
         id: "7",
@@ -83,8 +83,8 @@ export default {
         phoneNumber: "08885556663",
         address: "Đại học Hutech, Quận 9, Thành phố Hồ Chí Minh",
         owner: "Hutech Tennis",
-        createDate : "20/6/2021",
-        status: "Active",
+        createDate: "20/6/2021",
+        status: 1,
       },
       {
         id: "8",
@@ -95,8 +95,8 @@ export default {
         phoneNumber: "0111444578",
         address: "Đại học Bách Khoa, Thủ Đức, Thành phố Hồ Chí Minh",
         owner: "Bách Khoa Tennis",
-        createDate : "20/6/2021",
-        status: "InActive",
+        createDate: "20/6/2021",
+        status: 0,
       },
       {
         id: "9",
@@ -107,8 +107,8 @@ export default {
         phoneNumber: "0100203022",
         address: "969. Khu Công Nghệ Cao, Quận 9, Thành phố Hồ Chí Minh",
         owner: "Lam Trường Tennis",
-        createDate : "20/6/2021",
-        status: "InActive",
+        createDate: "20/6/2021",
+        status: 0,
       },
       {
         id: "10",
@@ -119,8 +119,8 @@ export default {
         phoneNumber: "0789456012",
         address: "312/6/6. Linh Trung, Thủ Đức, Thành phố Hồ Chí Minh",
         owner: "Nhật Huy Tennis",
-        createDate : "20/6/2021",
-        status: "InActive",
+        createDate: "20/6/2021",
+        status: 0,
       },
       {
         id: "11",
@@ -131,8 +131,8 @@ export default {
         phoneNumber: "0100203022",
         address: "969. Khu Công Nghệ Cao, Quận 9, Thành phố Hồ Chí Minh",
         owner: "Lam Trường Tennis",
-        createDate : "20/6/2021",
-        status: "InActive",
+        createDate: "20/6/2021",
+        status: 0,
       },
       {
         id: "12",
@@ -143,8 +143,8 @@ export default {
         phoneNumber: "0789456012",
         address: "312/6/6. Linh Trung, Thủ Đức, Thành phố Hồ Chí Minh",
         owner: "Nhật Huy Tennis",
-        createDate : "20/6/2021",
-        status: "InActive",
+        createDate: "20/6/2021",
+        status: 0,
       },
     ],
   },
@@ -163,7 +163,7 @@ export default {
     membersTotal: (state) => {
       return state.membersList.length;
     },
-    searchMembers: (state) => (searchValue,currentPage) => {
+    searchMembers: (state) => (searchValue, currentPage) => {
       let search_arr = state.membersList.filter((member) => {
         return (
           member.username.includes(searchValue) ||
@@ -171,30 +171,26 @@ export default {
           member.email.includes(searchValue) ||
           member.phoneNumber.includes(searchValue) ||
           member.address.includes(searchValue) ||
-          member.owner.includes(searchValue) ||
-          member.status.includes(searchValue)
+          member.owner.includes(searchValue) 
         );
       });
 
       let paginated_arr = [];
 
-     
+
       if(search_arr.length > 5) {
         let size = 5;
         let startIndex = (currentPage - 1) * size;
         let endIndex = currentPage * size;
         paginated_arr = search_arr.slice(startIndex, endIndex);
-  
+      
       }else {
         paginated_arr = search_arr;
       }
-
-    
-
       let search_obj = {
-        search_arr : paginated_arr,
-        totalSearch : search_arr.length,
-      }
+        search_arr: paginated_arr,
+        totalSearch: search_arr.length,
+      };
       return search_obj;
     },
   },

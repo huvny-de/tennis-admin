@@ -2,13 +2,13 @@
   <div class="flex h-screen">
     <SideBarAdmin @changeTab="changeCurrentComponent" class="w-60" />
 
-    <div class="flex-1 bg-[#F8F9FF] flex flex-col">
+    <div class="flex-1 w-full overflow-auto h-screen bg-[#F8F9FF] flex flex-col scroll-content">
       <the-header
         :isHiddenInput="hiddenInput"
         :search="searchValue"
         @search="SearchMember"
       />
-      <component class="overflow-y-auto" :searchValue="searchValue" :is="isSelectedTab" />
+       <component class="overflow-y-auto" :searchValue="searchValue" :is="isSelectedTab" />
     </div>
   </div>
 </template>
@@ -37,6 +37,7 @@ export default {
       loading: false,
       currentUser: "",
       hiddenInput: false,
+      triggerCount : 0
     };
   },
   methods: {
@@ -46,6 +47,8 @@ export default {
     },
     SearchMember(value) {
       this.searchValue = value;
+      this.triggerCount++;
+      
     },
   },
   watch: {

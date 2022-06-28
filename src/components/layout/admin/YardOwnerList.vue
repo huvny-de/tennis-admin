@@ -1,15 +1,57 @@
   <template>
   <preloader-component :class="loading == false ? 'hidden' : ''" />
 
-  <div class="container mx-auto px-8 h-[80%] lg:mt-8">
+  <div class="container mx-auto px-8 h-[80%] lg:mt-4">
     <div class="w-[100%] h-full">
-      <div class="flex items-center justify-center mb-4">
-        <h2 class="mr-4 text-lg font-semibold text-[#747474]">
-          Danh Sách Chủ Sân
-        </h2>
+      <div class="container flex items-center justify-between">
+        <span class="pt-4">
+          <h2 class="font-bold text-lg text-gray-600 dark:text-gray-200">
+            Danh Sách Chủ Sân
+          </h2>
+          <p class="my-2 text-[#334D6E]">
+            Tổng số chủ sân : {{ membersTotal }}
+          </p>
+        </span>
+        <div class="flex items-center justify-between">
+          <div class="container mx-auto flex px-4">
+            <div class="mx-auto flex items-center justify-center">
+              <div class="mr-5">
+                <p class="text-gray-500 font-lexend font-normal mb-1">
+                  Lọc Tài Khoản
+                </p>
+                <select
+                  @change="filterOwner($event)"
+                  id="small"
+                  class="
+                    rounded-lg
+                    text-md
+                    block
+                    pr-8
+                    W-full
+                    text-sm text-gray-900
+                    bg-gray-50
+                    border border-gray-500
+                    focus:ring-blue-500 focus:border-blue-500
+                  "
+                >
+                  <option v-if="filterSelect === '1'" selected="true" value="1">
+                    Tất cả
+                  </option>
+                  <option v-else select="false" value="1">Tất cả</option>
+                  <option value="2">Đang Hoạt Động</option>
+                  <option value="3">Ngưng Hoạt Động</option>
+                  <option value="4">Hủy Lịch Nhiều Nhất</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="container mx-auto h-full mt-8 md:mt-0 min-w-full">
+      <div class="container mx-auto h-full mt-6 min-w-full">
+        <p class="text-red-500 text-center" v-if="this.sortedList.length === 0">
+          Không có tài khoản nào phù hợp
+        </p>
         <table v-if="sortedList.length > 0" class="min-w-full">
           <th
             class="
@@ -161,12 +203,12 @@
               <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                 <div class="flex items-center">
                   <span
-                    v-if="member.status === 'Active'"
+                    v-if="member.status === 1"
                     class="font-semibold text-[#50D222]"
-                    >Active</span
+                    >Đang Hoạt Động</span
                   >
                   <span v-else class="font-semibold text-[#FF8494]"
-                    >Disabled</span
+                    >Ngưng Hoạt Động</span
                   >
                 </div>
               </td>
@@ -205,9 +247,6 @@
           </tbody>
         </table>
         <div class="flex flex-col container mx-auto lg:mt-6 md:mt-0">
-          <p class="text-center md:my-2 my-4 text-[#334D6E]">
-            Tổng số chủ sân : {{ membersTotal }}
-          </p>
           <div
             class="
               mx-auto
@@ -386,11 +425,6 @@ export default {
   },
   data() {
     return {
-      dropDownAccount: {
-        id: "dropdownBottomButton1",
-        dropDownToggle: "dropdownBottom1",
-        listItem: ["My Account", "Sign Out"],
-      },
       loading: false,
       sortedList: [],
       membersTotal: 0,
@@ -401,6 +435,8 @@ export default {
       isHiddenModal: true,
       countClick: 0,
       checkSort: 0,
+      filterSelect: "",
+      filterArr: [],
     };
   },
   methods: {
@@ -408,11 +444,10 @@ export default {
       this.profileDetail = this.sortedList.find((x) => x.id == id);
       this.isHiddenModal = false;
       this.countClick++;
-
     },
     sortByField(fieldSort) {
       if (this.checkSort == 0) {
-        if (fieldSort === "id") {
+        if (fieldSort === "id" || fieldSort === "fullName" || fieldSort === "email") {
           this.sortedList.sort((a, b) =>
             parseInt(a[fieldSort]) < parseInt(b[fieldSort]) ? 1 : -1
           );
@@ -424,24 +459,21 @@ export default {
 
         this.checkSort = 1;
       } else {
-       
-
-         let search_obj = this.$store.getters["yardOwner/searchMembers"](
+        let search_obj = this.$store.getters["yardOwner/searchMembers"](
           this.searchValue,
           this.currentPage
         );
 
-        //  this.sortedList = [
-        //   ...this.$store.getters["yardOwner/paginate"](this.currentPage),
-        // ];
-
         this.sortedList = [...search_obj.search_arr];
-        // this.membersTotal = search_obj.totalSearch;
+
+        this.filterMethod();
         this.checkSort = 0;
       }
     },
     paging(page) {
-      // this.sortedList = [...this.$store.getters["yardOwner/paginate"](page)];
+      //reset select
+      this.filterSelect = "1";
+
       this.currentPage = page;
       if (this.searchValue.trim().length == 0) {
         this.sortedList = [
@@ -454,16 +486,57 @@ export default {
         );
 
         this.sortedList = [...search_obj.search_arr];
+
+        if (this.filterSelect === "2") {
+          this.sortedList = [
+            ...this.sortedList.filter((x) => {
+              return x.status === 1;
+            }),
+          ];
+        } else if (this.filterSelect === "3") {
+          this.sortedList = [
+            ...this.sortedList.filter((x) => {
+              return x.status === 0;
+            }),
+          ];
+        }
+
         this.membersTotal = search_obj.totalSearch;
 
         this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
-        //  this.sortedList = [...this.$store.getters["yardOwner/searchMembers"](this.searchValue)];
+      }
+    },
+    filterOwner(evt) {
+      let search_obj = this.$store.getters["yardOwner/searchMembers"](
+        this.searchValue,
+        this.currentPage
+      );
+
+      this.sortedList = [...search_obj.search_arr];
+      this.filterSelect = evt.target.value;
+      this.filterMethod();
+    },
+
+    filterMethod() {
+      if (this.filterSelect === "2") {
+        this.sortedList = [
+          ...this.sortedList.filter((x) => {
+            return x.status === 1;
+          }),
+        ];
+      } else if (this.filterSelect === "3") {
+        this.sortedList = [
+          ...this.sortedList.filter((x) => {
+            return x.status === 0;
+          }),
+        ];
       }
     },
   },
   watch: {
     searchValue() {
       this.currentPage = 1;
+      this.filterSelect = '1';
 
       if (this.searchValue.trim().length == 0) {
         this.sortedList = [

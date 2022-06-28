@@ -452,13 +452,13 @@ export default {
     },
     showAlert() {
       swal({
-        title: "Are you sure to disabled this account?",
+        title: "Bạn có chắc chắn sẽ khóa tài khoản này không ?",
         icon: "warning",
         buttons: true,
         dangerMode: true,
       }).then((willDelete) => {
         if (willDelete) {
-          swal("Disabled success !", {
+          swal("Khóa Tài Khoản Thành Công !", {
             icon: "success",
           });
         }

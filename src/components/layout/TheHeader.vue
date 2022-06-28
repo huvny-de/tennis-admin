@@ -42,7 +42,6 @@
         ></input-component>
       </div>
 
-      
       <div class="wrap-header flex items-center justify-end flex-wrap">
         <div class="mr-5 flex float-right relative">
           <div class="mr-5 flex float-right relative">
@@ -141,29 +140,40 @@
                 >
                   <li>
                     <span
-                      @click="routerLink('/owner-profile')"
                       class="
                         py-2
                         px-4
                         0
-                        hover:bg-blue-500 hover:text-white
+                        hover:bg-blue-300 hover:text-white
                         cursor-pointer
                         flex
                         items-start
                         justify-start
+                        relative
+                        pl-11
                       "
                     >
                       <span>
-                        <img
-                          src="../../assets/img/son.jpg"
-                          class="rounded-full mr-4 w-11 h-11 p-1"
-                          alt=""
+                        <Icon
+                          class="text-green-500 w-7 h-7 absolute top-6 left-4"
+                          icon="akar-icons:chat-approve"
                         />
                       </span>
-                      <span class="flex flex-col items-start justify-start">
-                        <h3 class="font-semibold text-green-500">Lệnh Đặt Sơn Mới</h3>
+                      <span
+                        class="
+                          ml-4
+                          flex flex-col
+                          items-start
+                          justify-start
+                          pr-11
+                        "
+                      >
+                        <h3 class="font-semibold text-green-500 mb-1">
+                          Yêu Cầu Duyệt Chủ Sân
+                        </h3>
                         <p class="text-sm">
-                          Đã yêu cầu phê duyệt thành chủ sân
+                          <span class="font-semibold">sonnct</span> đã gửi yêu
+                          cầu duyệt sân vào lúc
                           <span class="font-semibold">19h30</span> ngày
                           <span class="font-semibold">26/6/2022</span>
                         </p>
@@ -182,29 +192,40 @@
                 >
                   <li>
                     <span
-                      @click="routerLink('/owner-profile')"
                       class="
                         py-2
                         px-4
                         0
-                        hover:bg-blue-500 hover:text-white
+                        hover:bg-blue-300 hover:text-white
                         cursor-pointer
                         flex
                         items-start
                         justify-start
+                        relative
+                        pl-11
                       "
                     >
                       <span>
-                        <img
-                          src="../../assets/img/son.jpg"
-                          class="rounded-full mr-4 w-11 h-11 p-1"
-                          alt=""
+                        <Icon
+                          class="text-green-500 w-7 h-7 absolute top-6 left-4"
+                          icon="akar-icons:chat-approve"
                         />
                       </span>
-                      <span class="flex flex-col items-start justify-start">
-                        <h3 class="font-semibold">Thái Sơn</h3>
+                      <span
+                        class="
+                          ml-4
+                          flex flex-col
+                          items-start
+                          justify-start
+                          pr-11
+                        "
+                      >
+                        <h3 class="font-semibold text-green-500 mb-1">
+                          Yêu Cầu Duyệt Chủ Sân
+                        </h3>
                         <p class="text-sm">
-                          Đã yêu cầu phê duyệt thành chủ sân
+                          <span class="font-semibold">sonnct</span> đã gửi yêu
+                          cầu duyệt sân vào lúc
                           <span class="font-semibold">19h30</span> ngày
                           <span class="font-semibold">26/6/2022</span>
                         </p>
@@ -218,29 +239,40 @@
                 >
                   <li>
                     <span
-                      @click="routerLink('/owner-profile')"
                       class="
                         py-2
                         px-4
                         0
-                        hover:bg-blue-500 hover:text-white
+                        hover:bg-blue-300 hover:text-white
                         cursor-pointer
                         flex
                         items-start
                         justify-start
+                        relative
+                        pl-11
                       "
                     >
                       <span>
-                        <img
-                          src="../../assets/img/son.jpg"
-                          class="rounded-full mr-4 w-11 h-11 p-1"
-                          alt=""
+                        <Icon
+                          class="text-green-500 w-7 h-7 absolute top-6 left-4"
+                          icon="akar-icons:chat-approve"
                         />
                       </span>
-                      <span class="flex flex-col items-start justify-start">
-                        <h3 class="font-semibold">Thái Sơn</h3>
+                      <span
+                        class="
+                          ml-4
+                          flex flex-col
+                          items-start
+                          justify-start
+                          pr-11
+                        "
+                      >
+                        <h3 class="font-semibold text-green-500 mb-1">
+                          Yêu Cầu Duyệt Chủ Sân
+                        </h3>
                         <p class="text-sm">
-                          Đã yêu cầu phê duyệt thành chủ sân
+                          <span class="font-semibold">sonnct</span> đã gửi yêu
+                          cầu duyệt sân vào lúc
                           <span class="font-semibold">19h30</span> ngày
                           <span class="font-semibold">26/6/2022</span>
                         </p>
@@ -250,7 +282,6 @@
                 </ul>
                 <div class="py-1">
                   <span
-                    @click="routerLink('/logout')"
                     class="
                       block
                       px-4

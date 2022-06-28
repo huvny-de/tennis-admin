@@ -293,12 +293,19 @@
                     >
                       <div class="flex items-center">
                         <span
-                          v-if="member.status === 2"
-                          class="font-semibold text-[#50D222]"
-                          >Active</span
-                        >
-                        <span v-else class="font-semibold text-red-500"
+                          v-if="member.status === 1"
+                          class="font-semibold text-pink-500"
                           >Đang Chờ Duyệt</span
+                        >
+                        <span
+                          v-else-if="member.status === 2"
+                          class="font-semibold text-[#50D222]"
+                          >Đã Duyệt</span
+                        >
+                        <span
+                          v-else-if="member.status === 3"
+                          class="font-semibold text-red-500"
+                          >Từ Chối</span
                         >
                       </div>
                     </td>
@@ -310,31 +317,72 @@
                         whitespace-nowrap
                       "
                     >
-                      <div class="flex items-center">
+                      <div v-if="member.status == 1" class="flex items-center">
                         <div class="ml-4 text-[#334D6E]">
                           <div class="flex items-center">
-                            <font-awesome-icon
-                              class="
-                                w-5
-                                h-5
-                                text-[#ACACAC]
-                                mr-2
-                                cursor-pointer
-                                hover:text-gray-500
-                              "
-                              icon="eye"
+                            <Icon
                               @click="showDetail(member.id)"
-                            />
-                            <font-awesome-icon
                               class="
-                                w-5
-                                h-5
-                                text-[#ACACAC]
+                                w-7
+                                h-7
                                 mr-2
                                 cursor-pointer
-                                hover:text-gray-500
+                                text-gray-500
+                                hover:text-gray-700
+                                active:text-gray-800
+                                duration-200
                               "
-                              icon="trash-can"
+                              icon="ant-design:eye-filled"
+                            />
+
+                            <Icon
+                              @click="AcceptRequest(member.id)"
+                              class="
+                                w-6
+                                h-6
+                                mr-2
+                                cursor-pointer
+                                text-green-500
+                                hover:text-green-700
+                                active:text-green-800
+                                duration-200
+                              "
+                              icon="akar-icons:circle-check-fill"
+                            />
+
+                            <Icon
+                              class="
+                                w-7
+                                h-7
+                                text-red-500
+                                mr-2
+                                cursor-pointer
+                                hover:text-red-700
+                                active:text-red-800
+                                duration-200
+                              "
+                              icon="ic:round-cancel"
+                              @click="showAlert(member.id)"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                       <div v-else class="flex items-center">
+                        <div class="ml-4 text-[#334D6E]">
+                          <div class="flex items-center">
+                            <Icon
+                              @click="showDetail(member.id)"
+                              class="
+                                w-7
+                                h-7
+                                mr-2
+                                cursor-pointer
+                                text-gray-500
+                                hover:text-gray-700
+                                active:text-gray-800
+                                duration-200
+                              "
+                              icon="ant-design:eye-filled"
                             />
                           </div>
                         </div>
@@ -480,6 +528,7 @@
 <script>
 import { Icon } from "@iconify/vue";
 import ModalOwnerDetail from "./ModalOwnerDetail.vue";
+import swal from "sweetalert";
 
 export default {
   components: { Icon, ModalOwnerDetail },
@@ -625,7 +674,7 @@ export default {
           statusTransaction: "1",
         },
         {
-          id: 3,
+          id: 5,
           img: "https://i.ibb.co/hgNrFmX/SE140371-Nguyen-Cong-Thai-Son.jpg",
           storeName: "Thủ Đức Tennis",
           owner: "Nguyễn Công Thái Sơn",
@@ -663,7 +712,7 @@ export default {
       isHiddenModal: false,
       ownerDetail: {},
       countClick: 0,
-      currentPage : 1
+      currentPage: 1,
     };
   },
   methods: {
@@ -671,6 +720,40 @@ export default {
       this.isHiddenModal = true;
       this.countClick++;
       this.ownerDetail = this.approveList.find((x) => x.id == id);
+    },
+    AcceptRequest(id) {
+      swal("Bạn có chắc chắn phê duyệt chủ sân này không ?", {
+        buttons: ["Hủy", "Đồng Ý"],
+      }).then((value) => {
+        if (value) {
+          swal("Phê Duyệt Thành Công !", {
+            icon: "success",
+          });
+          this.approveList.forEach((approve) => {
+            if (approve.id === id) {
+              approve.status = 2;
+            }
+          });
+        }
+      });
+    },
+    showAlert(id) {
+      swal("Bạn có chắc chắn sẽ từ chối chủ sân này không?", {
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          this.approveList.forEach((approve) => {
+            if (approve.id === id) {
+              approve.status = 3;
+            }
+          });
+          swal("Từ Chối Thành Công !", {
+            icon: "success",
+          });
+        }
+      });
     },
   },
 };
