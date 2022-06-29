@@ -1,7 +1,7 @@
   <template>
   <div class="container mx-auto h-[14.8%] mb-8 border-1 pl-1 md:mb-0">
-    <div class="h-full px-4 flex bg-white items-center justify-between">
-      <div
+    <div class="h-full px-4 flex bg-white items-center justify-end">
+      <!-- <div
         class="relative mx-4 lg:mx-0 w-[70%] flex items-center"
         :class="isHiddenInput === true ? 'invisible' : ''"
       >
@@ -40,7 +40,7 @@
           :value="search"
           v-on:keyup.enter="EmitSearchValue"
         ></input-component>
-      </div>
+      </div> -->
 
       <div class="wrap-header flex items-center justify-end flex-wrap">
         <div class="mr-5 flex float-right relative">

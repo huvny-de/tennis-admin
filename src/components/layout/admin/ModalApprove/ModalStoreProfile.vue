@@ -15,7 +15,7 @@
           <div class="my-4"></div>
         </div>
         <!-- Right Side -->
-        <div class="w-full md:w-3/4 mx-2 h-full">
+        <div class="w-full md:w-3/4 mx-2 h-80">
           <!-- Profile tab -->
           <!-- About Section -->
           <div class="bg-white p-3 shadow-sm rounded-sm h-full">
@@ -31,7 +31,11 @@
               <span clas="text-green-500">
                 <font-awesome-icon icon="user" class="text-lg" />
               </span>
-              <span class="tracking-wide text-lg">Thông Tin</span>
+              <div class="flex items-center justify-middle">
+                <span class="tracking-wide text-lg">Thông Tin</span>
+                <p class="ml-32 mt-1 mr-1 text-red-500 text-sm">*</p>
+                <p class="text-red-500 text-sm"> Số lần hủy lịch khách hàng : 3 lần </p>
+              </div>
             </div>
             <div class="text-gray-700 mt-4">
               <div class="grid grid-col">
@@ -39,7 +43,8 @@
                   <div class="px-4 py-2 font-semibold w-64">Tên Cửa Hàng:</div>
                   <div class="px-1 py-2">
                     <div class="px-1">
-                      <input type="text" placeholder="Placeholder"
+                      <input :disabled="disabledInput" :class="disabledInput ? 'bg-gray-50' : ''" type="text"
+                        placeholder="Placeholder"
                         class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
                         value="Sân Tennis Đại Học Ngân Hàng" />
                     </div>
@@ -50,7 +55,8 @@
                   <div class="px-1 py-2">
 
                     <div class="px-1 py-1">
-                      <textarea type="text" placeholder="Địa Chỉ Sân"
+                      <textarea :disabled="disabledInput" :class="disabledInput ? 'bg-gray-50' : ''" type="text"
+                        placeholder="Địa Chỉ Sân"
                         class="px-2 h-16 resize-none py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64">18 Linh Trung, P. Linh Trung, quận Thủ Đức, TP. Hồ Chí Minh.</textarea>
                     </div>
                   </div>
@@ -62,12 +68,12 @@
                   </div>
                   <div class="px-1 flex items-center">
                     <div class="px-1">
-                      <input-component type="time" value="05:00"
-                        class="w-32 mt-2 border-gray-800 text-sm text-gray-600" />
+                      <input-component :disabled="disabledInput" :class="disabledInput ? 'bg-gray-50' : ''" type="time"
+                        value="05:00" class="w-32 mt-2 border-gray-800 text-sm text-gray-600" />
                     </div>
                     <div class="px-1">
-                      <input-component type="time" value="22:00"
-                        class="w-32 mt-2 border-gray-800 text-sm text-gray-600" />
+                      <input-component :disabled="disabledInput" :class="disabledInput ? 'bg-gray-50' : ''" type="time"
+                        value="22:00" class="w-32 mt-2 border-gray-800 text-sm text-gray-600" />
                     </div>
                   </div>
                 </span>
@@ -75,28 +81,29 @@
                   <div class="pl-4 pr-2 font-semibold w-64 mt-[-16px]">
                     Số sân cho thuê:
                   </div>
-                  <div class="px-1 py-2  mt-[-21px]">
+                  <div class="px-1 pt-2 mt-[-21px]">
                     <div class="px-1 py-2">
                       <div class="px-1">
-                        <input type="number" placeholder="Placeholder"
+                        <input :disabled="disabledInput" :class="disabledInput ? 'bg-gray-50' : ''" type="number"
+                          placeholder="Placeholder"
                           class="px-2 py-1 w-24 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100"
                           value="3" />
                       </div>
                     </div>
                   </div>
                 </span>
-                <span v-show="showCancel" class="flex items-center">
+                <!-- <span v-show="showCancel" class="flex items-center">
                   <div class="pl-4 pr-1 py-2 font-semibold">
                     Số lần hủy yêu cầu khách hàng:
                   </div>
                   <div class="px-1 py-2">
                     <div class="px-1">
                       <input disabled type="number" placeholder="Placeholder"
-                        class="px-2 bg-gray-200 py-1 w-24 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100"
+                        class="px-2 bg-gray-50 py-1 w-24 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100"
                         value="3" />
                     </div>
                   </div>
-                </span>
+                </span> -->
               </div>
             </div>
           </div>
@@ -113,7 +120,11 @@ export default {
     showCancel: {
       type: Boolean,
       required: false,
+    },
+    disabledInput: {
+      type: Boolean,
+      required: false,
     }
-  }
+  },
 };
 </script>

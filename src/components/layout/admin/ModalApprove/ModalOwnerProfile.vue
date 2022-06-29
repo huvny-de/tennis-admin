@@ -27,44 +27,44 @@
             <div class="text-gray-700 mt-4">
               <div class="grid grid-col">
                 <span class="flex items-center">
-                  <div class="px-4 py-2 font-semibold w-32">Họ Tên:</div>
+                  <div class="px-4 py-2 font-semibold w-48">Họ Tên:</div>
                   <div class="px-1 py-2">
-                    <input type="text" placeholder="Placeholder"
+                    <input :disabled="disabledInput" :class="disabledInput ? 'bg-gray-200' : ''"  type="text" placeholder="Placeholder"
                       class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
                       value="Nguyễn Công Thái Sơn" />
                   </div>
                 </span>
 
                 <span class="flex items-center">
-                  <div class="px-4 py-2 font-semibold w-32">Email:</div>
+                  <div class="px-4 py-2 font-semibold w-48">Email:</div>
                   <div class="px-1 py-2">
-                    <input type="text" placeholder="Placeholder"
+                    <input :disabled="disabledInput" :class="disabledInput ? 'bg-gray-200' : ''"  type="text" placeholder="Placeholder"
                       class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
                       value="sonstarnguyen@gmail.com" />
                   </div>
                 </span>
 
                 <span class="flex items-center">
-                  <div class="pl-4 pr-2 py-2 font-semibold">Số điện thoại:</div>
+                  <div class="pl-4 pr-2 py-2 font-semibold w-48">Số điện thoại:</div>
                   <div class="px-1 py-2">
-                    <input type="text" placeholder="Placeholder"
+                    <input :disabled="disabledInput" :class="disabledInput ? 'bg-gray-200' : ''"  type="text" placeholder="Placeholder"
                       class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
                       value="0978-145-440" />
                   </div>
                 </span>
 
                 <span class="flex items-center">
-                  <div class="pl-4 pr-2 py-2 font-semibold w-32">Quản lí :</div>
+                  <div class="pl-4 pr-2 py-2 font-semibold w-48">Quản lí :</div>
                   <div class="px-1 py-2">
-                    <input type="text" placeholder="Placeholder"
+                    <input :disabled="disabledInput" :class="disabledInput ? 'bg-gray-200' : ''"  type="text" placeholder="Placeholder"
                       class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
                       value="Sân Tennis Đại Học Ngân Hàng" />
                   </div>
                 </span>
                 <span class="flex items-center pb-5">
-                  <div class="pl-4 pr-2 py-2 font-semibold">Ngày Đăng Kí:</div>
+                  <div class="pl-4 pr-2 py-2 font-semibold w-48">Ngày Đăng Kí:</div>
                   <div class="px-1 py-2">
-                    <input type="text" disabled placeholder="Placeholder"
+                    <input  type="text" disabled placeholder="Placeholder"
                       class="px-2 bg-gray-100  py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
                       value="20/05/2022" />
                   </div>
@@ -80,5 +80,17 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    showCancel: {
+      type: Boolean,
+      required: false,
+    },
+    disabledInput: {
+      type: Boolean,
+      required: false,
+    }
+  },
+
+};
 </script>

@@ -15,14 +15,12 @@
         <div class="flex items-center justify-between">
           <div class="container mx-auto flex px-4">
             <div class="mx-auto flex items-center justify-center">
-              <div class="mr-5">
-                <p class="text-gray-500 font-lexend font-normal mb-1">
-                  Lọc Tài Khoản
-                </p>
-                <select
-                  @change="filterOwner($event)"
-                  id="small"
-                  class="
+              <div class="mx-auto flex items-center justify-center">
+                <div class="mr-5">
+                  <p class="text-gray-500 font-lexend font-normal mb-1">
+                    Trạng Thái
+                  </p>
+                  <select @change="filterMember($event)" id="small" class="
                     rounded-lg
                     text-md
                     block
@@ -32,15 +30,29 @@
                     bg-gray-50
                     border border-gray-500
                     focus:ring-blue-500 focus:border-blue-500
-                  "
-                >
-                  <option v-if="filterSelect === '1'" selected="true" value="1">
-                    Tất cả
-                  </option>
-                  <option v-else select="false" value="1">Tất cả</option>
-                  <option value="2">Hoạt Động</option>
-                  <option value="3">Bị Khóa</option>
-                </select>
+                  ">
+                    <option v-if="filterSelect === '1'" selected="true" value="1">
+                      Tất cả
+                    </option>
+                    <option v-else select="false" value="1">Tất cả</option>
+                    <option value="2">Hoạt Động</option>
+                    <option value="3">Bị Khóa</option>
+                  </select>
+                </div>
+                <div class="flex items-center relative mt-6">
+                  <span @click="searchMember" class="text-2xl p-2 text-gray-600 absolute right-0">
+                    <Icon icon="ei:search" />
+                  </span>
+                  <input @keyup.enter="searchMember" v-model="searchValue" type="text" placeholder="Search..." class="
+                    pr-10
+                    rounded
+                    border border-gray-500
+                    bg-gray-50
+                    placeholder:text-sm
+                    focus:ring-600
+                    mt-1
+                  " />
+                </div>
               </div>
             </div>
           </div>
@@ -48,9 +60,11 @@
       </div>
 
       <div class="container mx-auto h-96 mt-6 min-w-full">
+        <p class="text-red-500 text-center" v-if="this.sortedList.length === 0">
+          Không có tài khoản nào phù hợp
+        </p>
         <table v-if="sortedList.length > 0" class="min-w-full">
-          <th
-            class="
+          <th class="
               px-6
               py-3
               text-sm
@@ -61,17 +75,11 @@
               bg-gray-100
               border-b border-gray-200
               cursor-pointer
-            "
-            @click="sortByField('id')"
-          >
+            " @click="sortByField('id')">
             ID
-            <font-awesome-icon
-              class="w-4 h-4 text-[#ACACAC]"
-              icon="arrows-up-down"
-            />
+            <font-awesome-icon class="w-4 h-4 text-[#ACACAC]" icon="arrows-up-down" />
           </th>
-          <th
-            class="
+          <th class="
               px-6
               py-3
               text-sm
@@ -82,17 +90,11 @@
               bg-gray-100
               border-b border-gray-200
               cursor-pointer
-            "
-            @click="sortByField('fullName')"
-          >
+            " @click="sortByField('fullName')">
             Họ Tên
-            <font-awesome-icon
-              class="w-4 h-4 text-[#ACACAC]"
-              icon="arrows-up-down"
-            />
+            <font-awesome-icon class="w-4 h-4 text-[#ACACAC]" icon="arrows-up-down" />
           </th>
-          <th
-            class="
+          <th class="
               px-6
               py-3
               text-sm
@@ -103,17 +105,11 @@
               bg-gray-100
               border-b border-gray-200
               cursor-pointer
-            "
-            @click="sortByField('email')"
-          >
+            " @click="sortByField('email')">
             Email
-            <font-awesome-icon
-              class="w-4 h-4 text-[#ACACAC]"
-              icon="arrows-up-down"
-            />
+            <font-awesome-icon class="w-4 h-4 text-[#ACACAC]" icon="arrows-up-down" />
           </th>
-          <th
-            class="
+          <th class="
               px-6
               py-3
               text-sm
@@ -124,17 +120,11 @@
               bg-gray-100
               border-b border-gray-200
               cursor-pointer
-            "
-            @click="sortByField('phoneNumber')"
-          >
+            " @click="sortByField('phoneNumber')">
             Điện Thoại
-            <font-awesome-icon
-              class="w-4 h-4 text-[#ACACAC]"
-              icon="arrows-up-down"
-            />
+            <font-awesome-icon class="w-4 h-4 text-[#ACACAC]" icon="arrows-up-down" />
           </th>
-          <th
-            class="
+          <th class="
               px-6
               py-3
               text-sm
@@ -145,17 +135,11 @@
               bg-gray-100
               border-b border-gray-200
               cursor-pointer
-            "
-            @click="sortByField('status')"
-          >
+            " @click="sortByField('status')">
             Trạng Thái
-            <font-awesome-icon
-              class="w-4 h-4 text-[#ACACAC]"
-              icon="arrows-up-down"
-            />
+            <font-awesome-icon class="w-4 h-4 text-[#ACACAC]" icon="arrows-up-down" />
           </th>
-          <th
-            class="
+          <th class="
               px-6
               py-3
               text-sm
@@ -165,8 +149,7 @@
               text-left text-[#334D6E]
               bg-gray-100
               border-b border-gray-200
-            "
-          >
+            ">
             Thao Tác
           </th>
           <tbody class="bg-white">
@@ -198,11 +181,7 @@
               </td>
               <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                 <div class="flex items-center">
-                  <span
-                    v-if="member.status === 1"
-                    class="font-semibold text-[#50D222]"
-                    >Hoạt Động</span
-                  >
+                  <span v-if="member.status === 1" class="font-semibold text-[#50D222]">Hoạt Động</span>
                   <span v-else class="font-semibold text-red-500">Bị Khóa</span>
                 </div>
               </td>
@@ -210,34 +189,23 @@
                 <div class="flex items-center">
                   <div class="ml-4 text-[#334D6E]">
                     <div class="flex items-center">
-                      <font-awesome-icon
-                        class="
+                      <font-awesome-icon class="
                           w-5
                           h-5
                           text-[#ACACAC]
                           mr-2
                           cursor-pointer
                           hover:text-gray-500
-                        "
-                        icon="eye"
-                        @click="memberDetail(member.id)"
-                      />
-                      <font-awesome-icon
-                        v-if="member.status !== 0"
-                        class="
+                        " icon="eye" @click="memberDetail(member.id)" />
+                      <font-awesome-icon v-if="member.status !== 0" class="
                           w-5
                           h-5
                           text-[#ACACAC]
                           mr-2
                           cursor-pointer
                           hover:text-gray-500
-                        "
-                        icon="trash-can"
-                        @click="showAlert"
-                      />
-                      <Icon
-                        v-if="member.status === 0"
-                        class="
+                        " icon="trash-can" @click="showAlert" />
+                      <Icon v-if="member.status === 0" class="
                           w-5
                           h-5
                           text-[#ACACAC]
@@ -245,9 +213,7 @@
                           cursor-pointer
                           hover:text-gray-500
                           mt-[-3px]
-                        "
-                        icon="fa-solid:unlock-alt"
-                      />
+                        " icon="fa-solid:unlock-alt" />
                     </div>
                   </div>
                 </div>
@@ -259,8 +225,7 @@
           <!-- <p class="text-center md:my-2 my-4 text-[#334D6E]">
             Tổng số thành viên : {{ membersTotal }}
           </p> -->
-          <div
-            class="
+          <div class="
               mx-auto
               flex
               items-center
@@ -268,14 +233,11 @@
               font-medium
               lg:mt-4
               text-sm
-            "
-          >
+            ">
             <nav v-if="membersTotal > 5" aria-label="Page navigation example">
               <ul class="inline-flex -space-x-px">
                 <li>
-                  <span
-                    v-if="currentPage == 1"
-                    class="
+                  <span v-if="currentPage == 1" class="
                       py-2
                       px-3
                       ml-0
@@ -291,12 +253,8 @@
                       dark:hover:bg-gray-700
                       dark:hover:text-white
                       cursor-default
-                    "
-                    >Previous</span
-                  >
-                  <span
-                    v-else
-                    class="
+                    ">Previous</span>
+                  <span v-else class="
                       py-2
                       px-3
                       ml-0
@@ -312,16 +270,10 @@
                       dark:hover:bg-gray-700
                       dark:hover:text-white
                       cursor-pointer
-                    "
-                    @click="paging(currentPage - 1)"
-                    >Previous</span
-                  >
+                    " @click="paging(currentPage - 1)">Previous</span>
                 </li>
                 <li v-for="page in totalPage" :key="page">
-                  <span
-                    v-if="page === currentPage"
-                    aria-current="page"
-                    class="
+                  <span v-if="page === currentPage" aria-current="page" class="
                       py-2
                       px-3
                       text-blue-600
@@ -329,13 +281,8 @@
                       border border-gray-300
                       hover:bg-blue-100 hover:text-blue-700
                       dark:border-gray-700 dark:bg-gray-700 dark:text-white
-                    "
-                    >{{ page }}</span
-                  >
-                  <a
-                    v-else
-                    href="#"
-                    class="
+                    ">{{ page }}</span>
+                  <a v-else href="#" class="
                       py-2
                       px-3
                       leading-tight
@@ -348,15 +295,10 @@
                       dark:text-gray-400
                       dark:hover:bg-gray-700
                       dark:hover:text-white
-                    "
-                    @click="paging(page)"
-                    >{{ page }}</a
-                  >
+                    " @click="paging(page)">{{ page }}</a>
                 </li>
                 <li>
-                  <span
-                    v-if="currentPage == totalPage"
-                    class="
+                  <span v-if="currentPage == totalPage" class="
                       py-2
                       px-3
                       ml-0
@@ -372,12 +314,8 @@
                       dark:hover:bg-gray-700
                       dark:hover:text-white
                       cursor-default
-                    "
-                    >Next</span
-                  >
-                  <span
-                    v-else
-                    class="
+                    ">Next</span>
+                  <span v-else class="
                       py-2
                       px-3
                       ml-0
@@ -393,10 +331,7 @@
                       dark:hover:bg-gray-700
                       dark:hover:text-white
                       cursor-pointer
-                    "
-                    @click="paging(currentPage + 1)"
-                    >Next</span
-                  >
+                    " @click="paging(currentPage + 1)">Next</span>
                 </li>
               </ul>
             </nav>
@@ -407,11 +342,7 @@
   </div>
 
   <!--The Modal-->
-  <TheModal
-    :class="isHiddenModal === true ? 'hidden' : ''"
-    :profile="profileDetail"
-    :click="countClick"
-  />
+  <TheModal :class="isHiddenModal === true ? 'hidden' : ''" :profile="profileDetail" :click="countClick" />
 </template>
 <script>
 import TheModal from "./MemberModal.vue";
@@ -424,16 +355,14 @@ export default {
     TheModal,
     Icon
   },
-  props: {
-    searchValue: {
-      type: String,
-      require: false,
-    },
-  },
   mounted() {
-    this.sortedList = [
-      ...this.$store.getters["member/paginate"](this.currentPage),
-    ];
+    let search_obj = this.$store.getters["member/searchMembers"](
+      this.searchValue,
+      this.currentPage,
+      this.filterSelect
+    );
+
+    this.sortedList = [...search_obj.search_arr];
 
     this.membersTotal = this.$store.getters["member/membersTotal"];
     this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
@@ -450,6 +379,8 @@ export default {
       isHiddenModal: true,
       countClick: 0,
       checkSort: 0,
+      filterSelect: '1',
+      searchValue: ''
     };
   },
   methods: {
@@ -474,7 +405,8 @@ export default {
       } else {
         let search_obj = this.$store.getters["member/searchMembers"](
           this.searchValue,
-          this.currentPage
+          this.currentPage,
+          this.filterSelect
         );
 
         this.sortedList = [...search_obj.search_arr];
@@ -482,24 +414,20 @@ export default {
       }
     },
     paging(page) {
-      // this.sortedList = [...this.$store.getters["member/paginate"](page)];
+
       this.currentPage = page;
-      if (this.searchValue.trim().length == 0) {
-        this.sortedList = [
-          ...this.$store.getters["member/paginate"](this.currentPage),
-        ];
-      } else {
-        let search_obj = this.$store.getters["member/searchMembers"](
-          this.searchValue,
-          this.currentPage
-        );
 
-        this.sortedList = [...search_obj.search_arr];
-        this.membersTotal = search_obj.totalSearch;
+      let search_obj = this.$store.getters["member/searchMembers"](
+        this.searchValue,
+        this.currentPage,
+        this.filterSelect
+      );
 
-        this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
-        //  this.sortedList = [...this.$store.getters["member/searchMembers"](this.searchValue)];
-      }
+      this.sortedList = [...search_obj.search_arr];
+
+      this.membersTotal = search_obj.totalSearch;
+
+      this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
     },
     showAlert() {
       swal({
@@ -515,22 +443,28 @@ export default {
         }
       });
     },
-  },
-  watch: {
-    searchValue() {
+    filterMember(evt) {
+      this.filterSelect = evt.target.value;
+    },
+    searchMember() {
       this.currentPage = 1;
 
       if (this.searchValue.trim().length == 0) {
-        this.sortedList = [
-          ...this.$store.getters["member/paginate"](this.currentPage),
-        ];
+        let search_obj = this.$store.getters["member/searchMembers"](
+          this.searchValue,
+          this.currentPage,
+          this.filterSelect
+        );
 
-        this.membersTotal = this.$store.getters["member/membersTotal"];
+        this.sortedList = [...search_obj.search_arr];
+        this.membersTotal = search_obj.totalSearch;
         this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
+
       } else {
         let search_obj = this.$store.getters["member/searchMembers"](
           this.searchValue,
-          this.currentPage
+          this.currentPage,
+          this.filterSelect
         );
 
         this.sortedList = [...search_obj.search_arr];
@@ -538,8 +472,18 @@ export default {
 
         this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
       }
-    },
+    }
   },
+
 };
 </script>
 
+<style scoped>
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 10px;
+  width: 150px
+}
+</style>

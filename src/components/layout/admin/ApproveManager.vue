@@ -410,7 +410,7 @@
   </div>
 
   <!--The Modal-->
-  <ModalOwnerDetail :class="isHiddenModal === false ? 'hidden' : ''" :detail="ownerDetail" :click="countClick" />
+  <ModalOwnerDetail @accept="AcceptRequest" @decline="showAlert" :hidden-button="(ownerDetail.status === 2 || ownerDetail.status === 3) ? true : false" :disabledInput="true" :class="isHiddenModal === false ? 'hidden' : ''" :detail="ownerDetail" :click="countClick" />
 </template>
 
 <script>
@@ -419,6 +419,7 @@ import ModalOwnerDetail from "./ModalOwnerDetail.vue";
 import swal from "sweetalert";
 
 export default {
+ 
   components: { Icon, ModalOwnerDetail },
   data() {
     return {
@@ -656,11 +657,6 @@ export default {
               }
 
             });
-
-
-
-
-          console.log(id);
         }
       });
     },

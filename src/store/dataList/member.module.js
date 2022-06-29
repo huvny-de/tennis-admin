@@ -152,25 +152,31 @@ export default {
     membersList: (state) => {
       return state.membersList;
     },
-    paginate: (state) => (currentPage) => {
-      let size = 5;
-      let startIndex = (currentPage - 1) * size;
-      let endIndex = currentPage * size;
-
-      let paginated_arr = state.membersList.slice(startIndex, endIndex);
-      return paginated_arr;
-    },
     membersTotal: (state) => {
       return state.membersList.length;
     },
-    searchMembers: (state) => (searchValue, currentPage) => {
-      let search_arr = state.membersList.filter((member) => {
+    searchMembers: (state) => (searchValue, currentPage, filterSelect) => {
+      let filterArr = [];
+      let search_arr = [];
+
+      if (filterSelect === "1") {
+        filterArr = [...state.membersList];
+      } else if (filterSelect === "2") {
+        filterArr = state.membersList.filter((member) => {
+          return member.status === 1;
+        });
+      } else if (filterSelect === "3") {
+        filterArr = state.membersList.filter((member) => {
+          return member.status === 0;
+        });
+      }
+
+      search_arr = filterArr.filter((member) => {
         return (
           member.username.includes(searchValue) ||
           member.fullName.includes(searchValue) ||
           member.email.includes(searchValue) ||
-          member.phoneNumber.includes(searchValue) ||
-          member.createDate.includes(searchValue)
+          member.phoneNumber.includes(searchValue)
         );
       });
 
@@ -223,7 +229,7 @@ export default {
         search_arr: paginated_arr,
         totalSearch: search_arr.length,
       };
-      
+
       return search_obj;
     },
   },
