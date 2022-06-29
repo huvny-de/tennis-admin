@@ -12,6 +12,7 @@ export default {
         address: "216 Đ. Võ Văn Ngân, Bình Thọ, Thủ Đức, Thành phố Hồ Chí Minh",
         owner: "Thủ Đức Tennis",
         createDate: "20/6/2021",
+        cancelCount : 4,
         status: 1,
       },
       {
@@ -24,6 +25,7 @@ export default {
         address: "36A Đ. Võ Văn Ngân, Thủ Đức, Thành phố Hồ Chí Minh",
         owner: "Hồng Phúc Tennis",
         createDate: "20/6/2021",
+        cancelCount : 0,
         status: 1,
       },
       {
@@ -36,7 +38,8 @@ export default {
         address: "212/5 Đ. Hoàng Diệu 2, Thủ Đức, Thành phố Hồ Chí Minh",
         owner: "Đức Thịnh Tennis",
         createDate: "20/6/2021",
-        status: 0,
+        cancelCount : 10,
+        status: 1,
       },
       {
         id: "4",
@@ -48,6 +51,7 @@ export default {
         address: "969. Khu Công Nghệ Cao, Quận 9, Thành phố Hồ Chí Minh",
         owner: "Lam Trường Tennis",
         createDate: "20/6/2021",
+        cancelCount : 20,
         status: 1,
       },
       {
@@ -60,6 +64,7 @@ export default {
         address: "312/6/6. Linh Trung, Thủ Đức, Thành phố Hồ Chí Minh",
         owner: "Nhật Huy Tennis",
         createDate: "20/6/2021",
+        cancelCount : 0,
         status: 1,
       },
       {
@@ -72,6 +77,7 @@ export default {
         address: "Đại học FPT, Quận 9, Thành phố Hồ Chí Minh",
         owner: "FPT Tennis",
         createDate: "20/6/2021",
+        cancelCount : 1,
         status: 1,
       },
       {
@@ -84,6 +90,7 @@ export default {
         address: "Đại học Hutech, Quận 9, Thành phố Hồ Chí Minh",
         owner: "Hutech Tennis",
         createDate: "20/6/2021",
+        cancelCount : 9,
         status: 1,
       },
       {
@@ -96,7 +103,8 @@ export default {
         address: "Đại học Bách Khoa, Thủ Đức, Thành phố Hồ Chí Minh",
         owner: "Bách Khoa Tennis",
         createDate: "20/6/2021",
-        status: 0,
+        cancelCount : 12,
+        status: 1,
       },
       {
         id: "9",
@@ -108,7 +116,8 @@ export default {
         address: "969. Khu Công Nghệ Cao, Quận 9, Thành phố Hồ Chí Minh",
         owner: "Lam Trường Tennis",
         createDate: "20/6/2021",
-        status: 0,
+        cancelCount : 5,
+        status: 1,
       },
       {
         id: "10",
@@ -120,6 +129,7 @@ export default {
         address: "312/6/6. Linh Trung, Thủ Đức, Thành phố Hồ Chí Minh",
         owner: "Nhật Huy Tennis",
         createDate: "20/6/2021",
+        cancelCount : 0,
         status: 0,
       },
       {
@@ -132,7 +142,8 @@ export default {
         address: "969. Khu Công Nghệ Cao, Quận 9, Thành phố Hồ Chí Minh",
         owner: "Lam Trường Tennis",
         createDate: "20/6/2021",
-        status: 0,
+        cancelCount : 10,
+        status: 1,
       },
       {
         id: "12",
@@ -144,6 +155,7 @@ export default {
         address: "312/6/6. Linh Trung, Thủ Đức, Thành phố Hồ Chí Minh",
         owner: "Nhật Huy Tennis",
         createDate: "20/6/2021",
+        cancelCount : 0,
         status: 0,
       },
     ],
@@ -193,5 +205,41 @@ export default {
       };
       return search_obj;
     },
+    memberCancelManyTimes: (state) => (searchValue, currentPage) => {
+      // filter member who has cancelCount larger than 2
+      let filterArr = state.membersList.filter((member) => {
+        return member.cancelCount > 2 && member.status === 1;
+      });
+  
+      // get arr filter by search value
+      let search_arr = filterArr.filter((member) => {
+        return (
+          member.username.includes(searchValue) ||
+          member.fullName.includes(searchValue) ||
+          member.email.includes(searchValue) ||
+          member.phoneNumber.includes(searchValue) ||
+          member.createDate.includes(searchValue)
+        );
+      });
+  
+      let paginated_arr = [];
+  
+      if (search_arr.length > 5) {
+        let size = 5;
+        let startIndex = (currentPage - 1) * size;
+        let endIndex = currentPage * size;
+        paginated_arr = search_arr.slice(startIndex, endIndex);
+      } else {
+        paginated_arr = search_arr;
+      }
+  
+      let search_obj = {
+        search_arr: paginated_arr,
+        totalSearch: search_arr.length,
+      };
+      
+      return search_obj;
+    },
   },
+ 
 };

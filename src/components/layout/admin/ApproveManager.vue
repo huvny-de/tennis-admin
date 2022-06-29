@@ -6,9 +6,7 @@
           <h2 class="font-bold text-lg text-gray-600 dark:text-gray-200">
             Danh Sách Phê Duyệt
           </h2>
-          <p class="text-gray-400 font-lexend font-normal">
-            Quản lý toàn bộ yêu cầu phê duyệt
-          </p>
+          <p class="my-2 text-[#334D6E]">Tổng số yêu cầu : 8</p>
         </span>
         <div class="flex items-center justify-between">
           <div class="container mx-auto flex px-4">
@@ -17,9 +15,7 @@
                 <p class="text-gray-500 font-lexend font-normal mb-1">
                   Từ Ngày
                 </p>
-                <input
-                  type="date"
-                  class="
+                <input type="date" class="
                     bg-gray-50
                     border border-gray-500
                     text-gray-900
@@ -30,16 +26,13 @@
                     w-full
                     p-2.5
                     datepicker-input
-                  "
-                />
+                  " />
               </div>
               <div class="mr-5">
                 <p class="text-gray-500 font-lexend font-normal mb-1">
                   Đến Ngày
                 </p>
-                <input
-                  type="date"
-                  class="
+                <input type="date" class="
                     bg-gray-50
                     border border-gray-500
                     text-gray-900
@@ -50,16 +43,13 @@
                     w-full
                     p-2.5
                     datepicker-input
-                  "
-                />
+                  " />
               </div>
               <div class="mr-5">
                 <p class="text-gray-500 font-lexend font-normal mb-1">
                   Trạng Thái
                 </p>
-                <select
-                  id="small"
-                  class="
+                <select id="small" class="
                     rounded-lg
                     text-md
                     block
@@ -69,8 +59,7 @@
                     bg-gray-50
                     border border-gray-500
                     focus:ring-blue-500 focus:border-blue-500
-                  "
-                >
+                  ">
                   <option value="Active">Tất cả</option>
                   <option value="Active">Chờ Phê Duyệt</option>
                   <option value="Active">Phê Duyệt</option>
@@ -81,18 +70,14 @@
                 <span class="text-2xl p-2 text-gray-400 absolute right-0">
                   <Icon icon="ei:search" />
                 </span>
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  class="
+                <input type="text" placeholder="Search..." class="
                     pr-10
                     rounded
                     border border-gray-500
                     bg-gray-50
                     placeholder:text-sm
                     focus:ring-600
-                  "
-                />
+                  " />
               </div>
             </div>
           </div>
@@ -104,8 +89,7 @@
           <div class="w-[100%] h-full">
             <div class="container mx-auto h-96 mt-8 md:mt-0 min-w-full">
               <table class="min-w-full">
-                <th
-                  class="
+                <th class="
                     px-6
                     py-3
                     text-sm
@@ -116,16 +100,11 @@
                     bg-gray-100
                     border-b border-gray-200
                     cursor-pointer
-                  "
-                >
+                  ">
                   Họ Tên
-                  <font-awesome-icon
-                    class="w-4 h-4 text-[#ACACAC]"
-                    icon="arrows-up-down"
-                  />
+                  <font-awesome-icon class="w-4 h-4 text-[#ACACAC]" icon="arrows-up-down" />
                 </th>
-                <th
-                  class="
+                <th class="
                     px-6
                     py-3
                     text-sm
@@ -136,16 +115,11 @@
                     bg-gray-100
                     border-b border-gray-200
                     cursor-pointer
-                  "
-                >
+                  ">
                   Tên Cửa Hàng
-                  <font-awesome-icon
-                    class="w-4 h-4 text-[#ACACAC]"
-                    icon="arrows-up-down"
-                  />
+                  <font-awesome-icon class="w-4 h-4 text-[#ACACAC]" icon="arrows-up-down" />
                 </th>
-                <th
-                  class="
+                <th class="
                     px-6
                     py-3
                     text-sm
@@ -156,16 +130,11 @@
                     bg-gray-100
                     border-b border-gray-200
                     cursor-pointer
-                  "
-                >
+                  ">
                   Email
-                  <font-awesome-icon
-                    class="w-4 h-4 text-[#ACACAC]"
-                    icon="arrows-up-down"
-                  />
+                  <font-awesome-icon class="w-4 h-4 text-[#ACACAC]" icon="arrows-up-down" />
                 </th>
-                <th
-                  class="
+                <th class="
                     px-6
                     py-3
                     text-sm
@@ -176,16 +145,11 @@
                     bg-gray-100
                     border-b border-gray-200
                     cursor-pointer
-                  "
-                >
+                  ">
                   Số Điện Thoại
-                  <font-awesome-icon
-                    class="w-4 h-4 text-[#ACACAC]"
-                    icon="arrows-up-down"
-                  />
+                  <font-awesome-icon class="w-4 h-4 text-[#ACACAC]" icon="arrows-up-down" />
                 </th>
-                <th
-                  class="
+                <th class="
                     px-6
                     py-3
                     text-sm
@@ -196,16 +160,11 @@
                     bg-gray-100
                     border-b border-gray-200
                     cursor-pointer
-                  "
-                >
+                  ">
                   Trạng Thái
-                  <font-awesome-icon
-                    class="w-4 h-4 text-[#ACACAC]"
-                    icon="arrows-up-down"
-                  />
+                  <font-awesome-icon class="w-4 h-4 text-[#ACACAC]" icon="arrows-up-down" />
                 </th>
-                <th
-                  class="
+                <th class="
                     px-6
                     py-3
                     text-sm
@@ -215,129 +174,95 @@
                     text-left text-[#334D6E]
                     bg-gray-100
                     border-b border-gray-200
-                  "
-                >
+                  ">
                   Thao Tác
                 </th>
                 <tbody class="bg-white">
                   <tr v-for="member in approveList" :key="member.id">
-                    <td
-                      class="
+                    <td class="
                         px-6
                         py-5
                         border-b border-gray-200
                         whitespace-nowrap
-                      "
-                    >
+                      ">
                       <div class="flex items-center">
                         <div class="flex-shrink object-contain">
-                          <img
-                            class="rounded-2xl mr-3 w-8 h-8"
-                            :src="member.img"
-                          />
+                          <img class="rounded-2xl mr-3 w-8 h-8" :src="member.img" />
                         </div>
                         <div class="ml-4 text-[#334D6E]">
                           {{ member.owner }}
                         </div>
                       </div>
                     </td>
-                    <td
-                      class="
+                    <td class="
                         px-2
                         py-4
                         border-b border-gray-200
                         whitespace-nowrap
-                      "
-                    >
+                      ">
                       <div class="flex items-center">
                         <div class="ml-4 text-[#334D6E]">
                           {{ member.storeName }}
                         </div>
                       </div>
                     </td>
-                    <td
-                      class="
+                    <td class="
                         px-2
                         py-4
                         border-b border-gray-200
                         whitespace-nowrap
-                      "
-                    >
+                      ">
                       <div class="flex items-center">
                         <div class="ml-4 text-[#334D6E]">
                           {{ member.email }}
                         </div>
                       </div>
                     </td>
-                    <td
-                      class="
+                    <td class="
                         px-2
                         py-4
                         border-b border-gray-200
                         whitespace-nowrap
-                      "
-                    >
+                      ">
                       <div class="flex items-center">
                         <div class="ml-4 text-[#334D6E]">
                           {{ member.phoneNumber }}
                         </div>
                       </div>
                     </td>
-                    <td
-                      class="
+                    <td class="
                         px-6
                         py-4
                         border-b border-gray-200
                         whitespace-nowrap
-                      "
-                    >
+                      ">
                       <div class="flex items-center">
-                        <span
-                          v-if="member.status === 1"
-                          class="font-semibold text-pink-500"
-                          >Đang Chờ Duyệt</span
-                        >
-                        <span
-                          v-else-if="member.status === 2"
-                          class="font-semibold text-[#50D222]"
-                          >Đã Duyệt</span
-                        >
-                        <span
-                          v-else-if="member.status === 3"
-                          class="font-semibold text-red-500"
-                          >Từ Chối</span
-                        >
+                        <span v-if="member.status === 1" class="font-semibold text-pink-500">Đang Chờ Duyệt</span>
+                        <span v-else-if="member.status === 2" class="font-semibold text-[#50D222]">Đã Duyệt</span>
+                        <span v-else-if="member.status === 3" class="font-semibold text-red-500">Từ Chối</span>
                       </div>
                     </td>
-                    <td
-                      class="
+                    <td class="
                         px-2
                         py-4
                         border-b border-gray-200
                         whitespace-nowrap
-                      "
-                    >
+                      ">
                       <div v-if="member.status == 1" class="flex items-center">
                         <div class="ml-4 text-[#334D6E]">
                           <div class="flex items-center">
-                            <Icon
-                              @click="showDetail(member.id)"
-                              class="
-                                w-7
-                                h-7
+                            <font-awesome-icon class="
+                                w-6
+                                h-6
                                 mr-2
                                 cursor-pointer
                                 text-gray-500
                                 hover:text-gray-700
                                 active:text-gray-800
                                 duration-200
-                              "
-                              icon="ant-design:eye-filled"
-                            />
+                              " icon="eye" @click="showDetail(member.id)" />
 
-                            <Icon
-                              @click="AcceptRequest(member.id)"
-                              class="
+                            <Icon @click="AcceptRequest(member.id)" class="
                                 w-6
                                 h-6
                                 mr-2
@@ -346,12 +271,9 @@
                                 hover:text-green-700
                                 active:text-green-800
                                 duration-200
-                              "
-                              icon="akar-icons:circle-check-fill"
-                            />
+                              " icon="akar-icons:circle-check-fill" />
 
-                            <Icon
-                              class="
+                            <Icon class="
                                 w-7
                                 h-7
                                 text-red-500
@@ -360,19 +282,14 @@
                                 hover:text-red-700
                                 active:text-red-800
                                 duration-200
-                              "
-                              icon="ic:round-cancel"
-                              @click="showAlert(member.id)"
-                            />
+                              " icon="ic:round-cancel" @click="showAlert(member.id)" />
                           </div>
                         </div>
                       </div>
-                       <div v-else class="flex items-center">
+                      <div v-else class="flex items-center">
                         <div class="ml-4 text-[#334D6E]">
                           <div class="flex items-center">
-                            <Icon
-                              @click="showDetail(member.id)"
-                              class="
+                            <Icon @click="showDetail(member.id)" class="
                                 w-7
                                 h-7
                                 mr-2
@@ -381,9 +298,7 @@
                                 hover:text-gray-700
                                 active:text-gray-800
                                 duration-200
-                              "
-                              icon="ant-design:eye-filled"
-                            />
+                              " icon="ant-design:eye-filled" />
                           </div>
                         </div>
                       </div>
@@ -394,8 +309,7 @@
             </div>
           </div>
           <div class="flex flex-col container mx-auto lg:mt-8 md:mt-0">
-            <div
-              class="
+            <div class="
                 mx-auto
                 flex
                 items-center
@@ -403,14 +317,11 @@
                 font-medium
                 lg:mt-4
                 text-sm
-              "
-            >
+              ">
               <nav aria-label="Page navigation example mx-auto">
                 <ul class="inline-flex -space-x-px">
                   <li>
-                    <span
-                      v-if="currentPage == 1"
-                      class="
+                    <span v-if="currentPage == 1" class="
                         py-2
                         px-3
                         ml-0
@@ -426,12 +337,8 @@
                         dark:hover:bg-gray-700
                         dark:hover:text-white
                         cursor-default
-                      "
-                      >Previous</span
-                    >
-                    <span
-                      v-else
-                      class="
+                      ">Previous</span>
+                    <span v-else class="
                         py-2
                         px-3
                         ml-0
@@ -447,15 +354,10 @@
                         dark:hover:bg-gray-700
                         dark:hover:text-white
                         cursor-pointer
-                      "
-                      >Previous</span
-                    >
+                      ">Previous</span>
                   </li>
-                  <li v-for="page in 5" :key="page">
-                    <span
-                      v-if="page === 1"
-                      aria-current="page"
-                      class="
+                  <li v-for="page in 2" :key="page">
+                    <span v-if="page === 1" aria-current="page" class="
                         py-2
                         px-3
                         text-blue-600
@@ -463,13 +365,8 @@
                         border border-gray-300
                         hover:bg-blue-100 hover:text-blue-700
                         dark:border-gray-700 dark:bg-gray-700 dark:text-white
-                      "
-                      >{{ page }}</span
-                    >
-                    <a
-                      v-else
-                      href="#"
-                      class="
+                      ">{{ page }}</span>
+                    <a v-else href="#" class="
                         py-2
                         px-3
                         leading-tight
@@ -482,13 +379,10 @@
                         dark:text-gray-400
                         dark:hover:bg-gray-700
                         dark:hover:text-white
-                      "
-                      >{{ page }}</a
-                    >
+                      ">{{ page }}</a>
                   </li>
                   <li>
-                    <span
-                      class="
+                    <span class="
                         py-2
                         px-3
                         ml-0
@@ -504,9 +398,7 @@
                         dark:hover:bg-gray-700
                         dark:hover:text-white
                         cursor-pointer
-                      "
-                      >Next</span
-                    >
+                      ">Next</span>
                   </li>
                 </ul>
               </nav>
@@ -518,11 +410,7 @@
   </div>
 
   <!--The Modal-->
-  <ModalOwnerDetail
-    :class="isHiddenModal === false ? 'hidden' : ''"
-    :detail="ownerDetail"
-    :click="countClick"
-  />
+  <ModalOwnerDetail :class="isHiddenModal === false ? 'hidden' : ''" :detail="ownerDetail" :click="countClick" />
 </template>
 
 <script>
@@ -744,14 +632,35 @@ export default {
         dangerMode: true,
       }).then((willDelete) => {
         if (willDelete) {
-          this.approveList.forEach((approve) => {
-            if (approve.id === id) {
-              approve.status = 3;
-            }
-          });
-          swal("Từ Chối Thành Công !", {
-            icon: "success",
-          });
+          swal({
+            text: "Xin Hãy Nhập Lý Do :",
+            content: {
+              element: "textarea", attributes: {
+                placeholder: "Nhập Lý Do",
+                required : true
+              }
+            },
+            button: "Xác Nhận"
+          })
+
+            .then((value) => {
+              if (value) {
+                this.approveList.forEach((approve) => {
+                  if (approve.id === id) {
+                    approve.status = 3;
+                  }
+                });
+                swal("Từ Chối Thành Công !", {
+                  icon: "success",
+                });
+              }
+
+            });
+
+
+
+
+          console.log(id);
         }
       });
     },
@@ -763,6 +672,7 @@ export default {
 select {
   height: 42px;
 }
+
 input:focus {
   outline: none;
   border: none;

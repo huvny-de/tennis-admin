@@ -1,15 +1,53 @@
   <template>
   <preloader-component :class="loading == false ? 'hidden' : ''" />
 
-  <div class="container mx-auto px-8 h-[80%] lg:mt-8">
+  <div class="container mx-auto px-8 h-[80%] lg:mt-4">
     <div class="w-[100%] h-full">
-      <div class="flex items-center justify-center mb-4">
-        <h2 class="mr-4 text-lg font-semibold text-[#747474]">
-          Danh Sách Thành Viên
-        </h2>
+      <div class="container flex items-center justify-between">
+        <span class="pt-4">
+          <h2 class="font-bold text-lg text-gray-600 dark:text-gray-200">
+            Danh Sách Thành Viên
+          </h2>
+          <p class="my-2 text-[#334D6E]">
+            Tổng số thành viên : {{ membersTotal }}
+          </p>
+        </span>
+        <div class="flex items-center justify-between">
+          <div class="container mx-auto flex px-4">
+            <div class="mx-auto flex items-center justify-center">
+              <div class="mr-5">
+                <p class="text-gray-500 font-lexend font-normal mb-1">
+                  Lọc Tài Khoản
+                </p>
+                <select
+                  @change="filterOwner($event)"
+                  id="small"
+                  class="
+                    rounded-lg
+                    text-md
+                    block
+                    pr-8
+                    W-full
+                    text-sm text-gray-900
+                    bg-gray-50
+                    border border-gray-500
+                    focus:ring-blue-500 focus:border-blue-500
+                  "
+                >
+                  <option v-if="filterSelect === '1'" selected="true" value="1">
+                    Tất cả
+                  </option>
+                  <option v-else select="false" value="1">Tất cả</option>
+                  <option value="2">Hoạt Động</option>
+                  <option value="3">Bị Khóa</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="container mx-auto h-full mt-8 md:mt-0 min-w-full">
+      <div class="container mx-auto h-96 mt-6 min-w-full">
         <table v-if="sortedList.length > 0" class="min-w-full">
           <th
             class="
@@ -161,13 +199,11 @@
               <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                 <div class="flex items-center">
                   <span
-                    v-if="member.status === 'Active'"
+                    v-if="member.status === 1"
                     class="font-semibold text-[#50D222]"
-                    >Active</span
+                    >Hoạt Động</span
                   >
-                  <span v-else class="font-semibold text-[#FF8494]"
-                    >Disabled</span
-                  >
+                  <span v-else class="font-semibold text-red-500">Bị Khóa</span>
                 </div>
               </td>
               <td class="px-2 py-4 border-b border-gray-200 whitespace-nowrap">
@@ -187,6 +223,7 @@
                         @click="memberDetail(member.id)"
                       />
                       <font-awesome-icon
+                        v-if="member.status !== 0"
                         class="
                           w-5
                           h-5
@@ -196,7 +233,20 @@
                           hover:text-gray-500
                         "
                         icon="trash-can"
-                         @click="showAlert"
+                        @click="showAlert"
+                      />
+                      <Icon
+                        v-if="member.status === 0"
+                        class="
+                          w-5
+                          h-5
+                          text-[#ACACAC]
+                          mr-2
+                          cursor-pointer
+                          hover:text-gray-500
+                          mt-[-3px]
+                        "
+                        icon="fa-solid:unlock-alt"
                       />
                     </div>
                   </div>
@@ -206,9 +256,9 @@
           </tbody>
         </table>
         <div class="flex flex-col container mx-auto lg:mt-6 md:mt-0">
-          <p class="text-center md:my-2 my-4 text-[#334D6E]">
+          <!-- <p class="text-center md:my-2 my-4 text-[#334D6E]">
             Tổng số thành viên : {{ membersTotal }}
-          </p>
+          </p> -->
           <div
             class="
               mx-auto
@@ -366,11 +416,13 @@
 <script>
 import TheModal from "./MemberModal.vue";
 import swal from "sweetalert";
+import { Icon } from "@iconify/vue";
 
 export default {
   name: "MemberList",
   components: {
     TheModal,
+    Icon
   },
   props: {
     searchValue: {
@@ -405,7 +457,6 @@ export default {
       this.profileDetail = this.sortedList.find((x) => x.id == id);
       this.isHiddenModal = false;
       this.countClick++;
-
     },
     sortByField(fieldSort) {
       if (this.checkSort == 0) {

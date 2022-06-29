@@ -373,9 +373,9 @@
                   </div>
                 </li>
               </ul>
-              <component :is="isSelectedTab"></component>
+              <component :is="isSelectedTab" :showCancel="hiddenButton"></component>
             </div>
-            <div class="flex items-center justify-end mt-4">
+            <div v-show="!hiddenButton" class="flex items-center justify-end mt-4">
               <div class="flex space-x-2 justify-center">
                 <button
                   @click="AcceptRequest"
@@ -471,6 +471,10 @@ export default {
       type: Number,
       require: true,
     },
+    hiddenButton : {
+      type: Boolean,
+      require: false,
+    }
   },
   data() {
     return {
@@ -494,7 +498,6 @@ export default {
           swal("Phê Duyệt Thành Công !", {
             icon: "success",
           });
-          sessionStorage.setItem("acceptRequest", 2);
         }
       });
     },

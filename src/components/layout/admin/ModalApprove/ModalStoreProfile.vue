@@ -7,11 +7,8 @@
           <!-- Profile Card -->
           <div class="bg-white p-3 border-t-4 border-green-400">
             <div class="image overflow-hidden">
-              <img
-                class="h-auto w-full mx-auto"
-                src="https://i.ibb.co/Y2JLZnc/photo-1-15224582583802095482215.jpg"
-                alt=""
-              />
+              <img class="h-auto w-full mx-auto" src="https://i.ibb.co/Y2JLZnc/photo-1-15224582583802095482215.jpg"
+                alt="" />
             </div>
           </div>
           <!-- End of profile card -->
@@ -22,8 +19,7 @@
           <!-- Profile tab -->
           <!-- About Section -->
           <div class="bg-white p-3 shadow-sm rounded-sm h-full">
-            <div
-              class="
+            <div class="
                 flex
                 items-center
                 space-x-2
@@ -31,8 +27,7 @@
                 text-gray-600
                 leading-8
                 px-4
-              "
-            >
+              ">
               <span clas="text-green-500">
                 <font-awesome-icon icon="user" class="text-lg" />
               </span>
@@ -41,28 +36,66 @@
             <div class="text-gray-700 mt-4">
               <div class="grid grid-col">
                 <span class="flex items-center">
-                  <div class="px-4 py-2 font-semibold">Tên Cửa Hàng:</div>
-                  <div class="px-1 py-2">Sân Tennis Đại Học Ngân Hàng</div>
+                  <div class="px-4 py-2 font-semibold w-64">Tên Cửa Hàng:</div>
+                  <div class="px-1 py-2">
+                    <div class="px-1">
+                      <input type="text" placeholder="Placeholder"
+                        class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
+                        value="Sân Tennis Đại Học Ngân Hàng" />
+                    </div>
+                  </div>
                 </span>
                 <span class="flex items-center">
-                  <div class="pl-4 pr-2 py-2 font-semibold">Địa chỉ:</div>
+                  <div class="pl-4 pr-2 py-2 font-semibold w-64">Địa chỉ:</div>
                   <div class="px-1 py-2">
-                    18 Linh Trung, P. Linh Trung, quận Thủ Đức, TP. Hồ Chí Minh.
+
+                    <div class="px-1 py-1">
+                      <textarea type="text" placeholder="Địa Chỉ Sân"
+                        class="px-2 h-16 resize-none py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64">18 Linh Trung, P. Linh Trung, quận Thủ Đức, TP. Hồ Chí Minh.</textarea>
+                    </div>
                   </div>
                 </span>
 
-
                 <span class="flex items-center">
-                  <div class="pl-4 pr-2 py-2 font-semibold">
+                  <div class="pl-4 pr-2 mt-[-18px] font-semibold w-64">
                     Khung Giờ Hoạt Động:
                   </div>
-                  <div class="py-2">5:00 - 22:00</div>
+                  <div class="px-1 flex items-center">
+                    <div class="px-1">
+                      <input-component type="time" value="05:00"
+                        class="w-32 mt-2 border-gray-800 text-sm text-gray-600" />
+                    </div>
+                    <div class="px-1">
+                      <input-component type="time" value="22:00"
+                        class="w-32 mt-2 border-gray-800 text-sm text-gray-600" />
+                    </div>
+                  </div>
                 </span>
                 <span class="flex items-center">
-                  <div class="pl-4 pr-2 py-2 font-semibold">
+                  <div class="pl-4 pr-2 font-semibold w-64 mt-[-16px]">
                     Số sân cho thuê:
                   </div>
-                  <div class="px-1 py-2">3</div>
+                  <div class="px-1 py-2  mt-[-21px]">
+                    <div class="px-1 py-2">
+                      <div class="px-1">
+                        <input type="number" placeholder="Placeholder"
+                          class="px-2 py-1 w-24 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100"
+                          value="3" />
+                      </div>
+                    </div>
+                  </div>
+                </span>
+                <span v-show="showCancel" class="flex items-center">
+                  <div class="pl-4 pr-1 py-2 font-semibold">
+                    Số lần hủy yêu cầu khách hàng:
+                  </div>
+                  <div class="px-1 py-2">
+                    <div class="px-1">
+                      <input disabled type="number" placeholder="Placeholder"
+                        class="px-2 bg-gray-200 py-1 w-24 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100"
+                        value="3" />
+                    </div>
+                  </div>
                 </span>
               </div>
             </div>
@@ -75,5 +108,12 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    showCancel: {
+      type: Boolean,
+      required: false,
+    }
+  }
+};
 </script>

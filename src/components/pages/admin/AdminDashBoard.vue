@@ -18,13 +18,20 @@ import SideBarAdmin from "../../layout/admin/SideBarAdmin.vue";
 import YardOwner from "../../layout/admin/YardOwnerList.vue";
 import MemberList from "../../layout/admin/MemberList.vue";
 import ApproveManager from "../../layout/admin/ApproveManager.vue";
+import FilterAccount from "../../layout/admin/FilterAccount.vue";
 
 export default {
+  provide() {
+    return {
+      searchValue : this.searchValue
+    }
+  },
   components: {
     SideBarAdmin,
     YardOwner,
     MemberList,
     ApproveManager,
+    FilterAccount
   },
   created() {
     this.hiddenInput = true;

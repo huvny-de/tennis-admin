@@ -38,9 +38,8 @@
                     Tất cả
                   </option>
                   <option v-else select="false" value="1">Tất cả</option>
-                  <option value="2">Đang Hoạt Động</option>
-                  <option value="3">Ngưng Hoạt Động</option>
-                  <option value="4">Hủy Lịch Nhiều Nhất</option>
+                  <option value="2">Hoạt Động</option>
+                  <option value="3">Bị Khóa</option>
                 </select>
               </div>
             </div>
@@ -48,7 +47,7 @@
         </div>
       </div>
 
-      <div class="container mx-auto h-full mt-6 min-w-full">
+      <div class="container mx-auto h-96 mt-6 min-w-full">
         <p class="text-red-500 text-center" v-if="this.sortedList.length === 0">
           Không có tài khoản nào phù hợp
         </p>
@@ -205,10 +204,10 @@
                   <span
                     v-if="member.status === 1"
                     class="font-semibold text-[#50D222]"
-                    >Đang Hoạt Động</span
+                    >Hoạt Động</span
                   >
                   <span v-else class="font-semibold text-[#FF8494]"
-                    >Ngưng Hoạt Động</span
+                    >Bị Khóa</span
                   >
                 </div>
               </td>
@@ -229,6 +228,7 @@
                         @click="memberDetail(member.id)"
                       />
                       <font-awesome-icon
+                        v-if="member.status !== 0"
                         class="
                           w-5
                           h-5
@@ -238,6 +238,20 @@
                           hover:text-gray-500
                         "
                         icon="trash-can"
+                      />
+                      <Icon
+                        @click="unLockAccount(member.id)"
+                        v-if="member.status === 0"
+                        class="
+                          w-5
+                          h-5
+                          text-[#ACACAC]
+                          mr-2
+                          cursor-pointer
+                          hover:text-gray-500
+                          mt-[-3px]
+                        "
+                        icon="fa-solid:unlock-alt"
                       />
                     </div>
                   </div>
@@ -395,19 +409,31 @@
   </div>
 
   <!--The Modal-->
-  <TheModal
+  <!-- <TheModal
     :class="isHiddenModal === true ? 'hidden' : ''"
     :profile="profileDetail"
     :click="countClick"
+  /> -->
+
+  <!--The Modal-->
+  <ModalOwnerDetail
+    :class="isHiddenModal === false ? 'hidden' : ''"
+    :detail="ownerDetail"
+    :click="countClick"
+    :hiddenButton="true"
   />
 </template>
 <script>
-import TheModal from "./YardOwnerModal.vue";
+// import TheModal from "./YardOwnerModal.vue";
+import ModalOwnerDetail from "./ModalOwnerDetail.vue";
+import { Icon } from "@iconify/vue";
+import swal from "sweetalert";
 
 export default {
   name: "YardOwnerList",
   components: {
-    TheModal,
+    ModalOwnerDetail,
+    Icon,
   },
   props: {
     searchValue: {
@@ -432,7 +458,7 @@ export default {
       pageSize: 5,
       totalPage: 0,
       profileDetail: {},
-      isHiddenModal: true,
+      isHiddenModal: false,
       countClick: 0,
       checkSort: 0,
       filterSelect: "",
@@ -442,12 +468,16 @@ export default {
   methods: {
     memberDetail(id) {
       this.profileDetail = this.sortedList.find((x) => x.id == id);
-      this.isHiddenModal = false;
+      this.isHiddenModal = true;
       this.countClick++;
     },
     sortByField(fieldSort) {
       if (this.checkSort == 0) {
-        if (fieldSort === "id" || fieldSort === "fullName" || fieldSort === "email") {
+        if (
+          fieldSort === "id" ||
+          fieldSort === "fullName" ||
+          fieldSort === "email"
+        ) {
           this.sortedList.sort((a, b) =>
             parseInt(a[fieldSort]) < parseInt(b[fieldSort]) ? 1 : -1
           );
@@ -532,11 +562,23 @@ export default {
         ];
       }
     },
+    unLockAccount(id) {
+      console.log(id);
+      swal("Bạn có chắc chắn kích hoạt lại chủ sân này không ?", {
+        buttons: ["Hủy", "Đồng Ý"],
+      }).then((value) => {
+        if (value) {
+          swal("Kích Hoạt Thành Công !", {
+            icon: "success",
+          });
+        }
+      });
+    },
   },
   watch: {
     searchValue() {
       this.currentPage = 1;
-      this.filterSelect = '1';
+      this.filterSelect = "1";
 
       if (this.searchValue.trim().length == 0) {
         this.sortedList = [

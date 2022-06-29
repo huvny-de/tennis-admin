@@ -7,11 +7,7 @@
           <!-- Profile Card -->
           <div class="bg-white p-3 border-t-4 border-green-400">
             <div class="image overflow-hidden">
-              <img
-                class="h-full w-full mx-auto"
-                src="../../../../assets/img/son.jpg"
-                alt=""
-              />
+              <img class="h-full w-full mx-auto" src="../../../../assets/img/son.jpg" alt="" />
             </div>
           </div>
           <!-- End of profile card -->
@@ -22,50 +18,56 @@
           <!-- Profile tab -->
           <!-- About Section -->
           <div class="bg-white p-3 shadow-sm rounded-sm">
-            <div
-              class="
-                flex
-                items-center
-                space-x-2
-                font-semibold
-                text-gray-600
-                leading-8
-                px-4
-              "
-            >
+            <div class="flex items-center space-x-2 font-semibold text-gray-600 leading-8 px-4">
               <span clas="text-green-500">
                 <font-awesome-icon icon="user" class="text-lg" />
               </span>
               <span class="tracking-wide text-lg">Thông Tin</span>
             </div>
-            <div class="text-gray-700 mt-4 ">
+            <div class="text-gray-700 mt-4">
               <div class="grid grid-col">
-
-                 <span class="flex items-center">
-                  <div class="px-4 py-2 font-semibold">Họ Tên:</div>
-                  <div class="px-1 py-2">Nguyễn Công Thái Sơn</div>
+                <span class="flex items-center">
+                  <div class="px-4 py-2 font-semibold w-32">Họ Tên:</div>
+                  <div class="px-1 py-2">
+                    <input type="text" placeholder="Placeholder"
+                      class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
+                      value="Nguyễn Công Thái Sơn" />
+                  </div>
                 </span>
 
                 <span class="flex items-center">
-                  <div class="px-4 py-2 font-semibold">Email:</div>
-                  <div class="px-1 py-2">thaison@gmail.com</div>
+                  <div class="px-4 py-2 font-semibold w-32">Email:</div>
+                  <div class="px-1 py-2">
+                    <input type="text" placeholder="Placeholder"
+                      class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
+                      value="sonstarnguyen@gmail.com" />
+                  </div>
                 </span>
 
                 <span class="flex items-center">
                   <div class="pl-4 pr-2 py-2 font-semibold">Số điện thoại:</div>
-                  <div class="px-1 py-2">0978-145-440</div>
+                  <div class="px-1 py-2">
+                    <input type="text" placeholder="Placeholder"
+                      class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
+                      value="0978-145-440" />
+                  </div>
                 </span>
 
-               
                 <span class="flex items-center">
-                  <div class="pl-4 pr-2 py-2 font-semibold">
-                    Quản lí :
+                  <div class="pl-4 pr-2 py-2 font-semibold w-32">Quản lí :</div>
+                  <div class="px-1 py-2">
+                    <input type="text" placeholder="Placeholder"
+                      class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
+                      value="Sân Tennis Đại Học Ngân Hàng" />
                   </div>
-                  <div class="px-1 py-2">Sân Tennis Đại Học Ngân Hàng</div>
                 </span>
                 <span class="flex items-center pb-5">
                   <div class="pl-4 pr-2 py-2 font-semibold">Ngày Đăng Kí:</div>
-                  <div class="px-1 py-2">20/05/2022</div>
+                  <div class="px-1 py-2">
+                    <input type="text" disabled placeholder="Placeholder"
+                      class="px-2 bg-gray-100  py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
+                      value="20/05/2022" />
+                  </div>
                 </span>
               </div>
             </div>
@@ -78,7 +80,5 @@
 </template>
 
 <script>
-export default {
-  
-};
+export default {};
 </script>
