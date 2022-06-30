@@ -29,7 +29,7 @@
                 <span class="flex items-center">
                   <div class="px-4 py-2 font-semibold w-48">Họ Tên:</div>
                   <div class="px-1 py-2">
-                    <input :disabled="disabledInput" :class="disabledInput ? 'bg-gray-200' : ''"  type="text" placeholder="Placeholder"
+                    <input :disabled="disabledInput" :class="disabledInput ? 'bg-gray-50' : ''"  type="text" placeholder="Placeholder"
                       class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
                       value="Nguyễn Công Thái Sơn" />
                   </div>
@@ -38,7 +38,7 @@
                 <span class="flex items-center">
                   <div class="px-4 py-2 font-semibold w-48">Email:</div>
                   <div class="px-1 py-2">
-                    <input :disabled="disabledInput" :class="disabledInput ? 'bg-gray-200' : ''"  type="text" placeholder="Placeholder"
+                    <input :disabled="disabledInput" :class="disabledInput ? 'bg-gray-50' : ''"  type="text" placeholder="Placeholder"
                       class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
                       value="sonstarnguyen@gmail.com" />
                   </div>
@@ -47,7 +47,7 @@
                 <span class="flex items-center">
                   <div class="pl-4 pr-2 py-2 font-semibold w-48">Số điện thoại:</div>
                   <div class="px-1 py-2">
-                    <input :disabled="disabledInput" :class="disabledInput ? 'bg-gray-200' : ''"  type="text" placeholder="Placeholder"
+                    <input :disabled="disabledInput" :class="disabledInput ? 'bg-gray-50' : ''"  type="text" placeholder="Placeholder"
                       class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
                       value="0978-145-440" />
                   </div>
@@ -56,7 +56,7 @@
                 <span class="flex items-center">
                   <div class="pl-4 pr-2 py-2 font-semibold w-48">Quản lí :</div>
                   <div class="px-1 py-2">
-                    <input :disabled="disabledInput" :class="disabledInput ? 'bg-gray-200' : ''"  type="text" placeholder="Placeholder"
+                    <input :disabled="disabledInput" :class="disabledInput ? 'bg-gray-50' : ''"  type="text" placeholder="Placeholder"
                       class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
                       value="Sân Tennis Đại Học Ngân Hàng" />
                   </div>
@@ -65,7 +65,7 @@
                   <div class="pl-4 pr-2 py-2 font-semibold w-48">Ngày Đăng Kí:</div>
                   <div class="px-1 py-2">
                     <input  type="text" disabled placeholder="Placeholder"
-                      class="px-2 bg-gray-100  py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
+                      class="px-2 bg-gray-50  py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
                       value="20/05/2022" />
                   </div>
                 </span>

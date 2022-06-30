@@ -17,7 +17,7 @@ const routes = [
   {
     path: "/notify",
     name : "notify",
-    component : () => import("../pages/admin/NotifyDetail.vue"),
+    component : () => import("../pages/admin/NotifyDetailPage.vue"),
     meta : {
       requiresAuth: true,
       adminAuth: true,
