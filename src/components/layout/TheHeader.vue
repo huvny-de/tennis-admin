@@ -210,6 +210,12 @@ export default {
     Icon,
   },
   name: "TheHeader",
+  props : {
+    toggleModal : {
+      type : Number,
+      require : false
+    }
+  },
   mounted() {
     this.currentUser = this.$store.getters["auth/getUser"].Token;
   },
@@ -306,6 +312,14 @@ export default {
       this.$router.push(`/notify?notifyId=${id}`);
     }
   },
+  watch : {
+    toggleModal() {
+      if(this.notify || this.menu)  {
+        this.notify = false;
+        this.menu = false;
+      }
+    }
+  }
 };
 </script>
 
