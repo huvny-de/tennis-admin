@@ -205,7 +205,7 @@
                           cursor-pointer
                           hover:text-gray-500
                         " icon="trash-can" @click="showAlert" />
-                      <Icon v-if="member.status === 0" class="
+                      <Icon @click="unLockAccount(member.id)" v-if="member.status === 0" class="
                           w-5
                           h-5
                           text-[#ACACAC]
@@ -473,6 +473,18 @@ export default {
         this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
       }
     }
+    , unLockAccount(id) {
+      console.log(id);
+      swal("Bạn có chắc chắn kích hoạt lại chủ sân này không ?", {
+        buttons: ["Hủy", "Đồng Ý"],
+      }).then((value) => {
+        if (value) {
+          swal("Kích Hoạt Thành Công !", {
+            icon: "success",
+          });
+        }
+      });
+    },
   },
 
 };

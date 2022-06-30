@@ -408,7 +408,6 @@
       </div>
     </div>
   </div>
-
   <!--The Modal-->
   <ModalOwnerDetail @accept="AcceptRequest" @decline="showAlert" :hidden-button="(ownerDetail.status === 2 || ownerDetail.status === 3) ? true : false" :disabledInput="true" :class="isHiddenModal === false ? 'hidden' : ''" :detail="ownerDetail" :click="countClick" />
 </template>
@@ -419,7 +418,6 @@ import ModalOwnerDetail from "./ModalOwnerDetail.vue";
 import swal from "sweetalert";
 
 export default {
- 
   components: { Icon, ModalOwnerDetail },
   data() {
     return {
@@ -609,6 +607,8 @@ export default {
       this.isHiddenModal = true;
       this.countClick++;
       this.ownerDetail = this.approveList.find((x) => x.id == id);
+
+      
     },
     AcceptRequest(id) {
       swal("Bạn có chắc chắn phê duyệt chủ sân này không ?", {
@@ -660,7 +660,7 @@ export default {
         }
       });
     },
-  },
+  }
 };
 </script>
 

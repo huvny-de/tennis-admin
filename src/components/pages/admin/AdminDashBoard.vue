@@ -1,14 +1,11 @@
   <template>
-  <div class="flex h-screen">
+  <div class="flex h-screen" @click="closePopUp">
     <SideBarAdmin @changeTab="changeCurrentComponent" class="w-60" />
 
     <div class="flex-1 w-full overflow-auto h-screen bg-[#F8F9FF] flex flex-col scroll-content">
       <the-header
-        :isHiddenInput="hiddenInput"
-        :search="searchValue"
-        @search="SearchMember"
       />
-       <component class="overflow-y-auto" :searchValue="searchValue" :is="isSelectedTab" />
+       <component class="overflow-y-auto" :is="isSelectedTab" />
     </div>
   </div>
 </template>
@@ -21,11 +18,6 @@ import ApproveManager from "../../layout/admin/ApproveManager.vue";
 import FilterAccount from "../../layout/admin/FilterAccount.vue";
 
 export default {
-  provide() {
-    return {
-      searchValue : this.searchValue
-    }
-  },
   components: {
     SideBarAdmin,
     YardOwner,
@@ -33,29 +25,19 @@ export default {
     ApproveManager,
     FilterAccount
   },
-  created() {
-    this.hiddenInput = true;
-  },
-
   data() {
     return {
       isSelectedTab: "ApproveManager",
       searchValue: "",
       loading: false,
       currentUser: "",
-      hiddenInput: false,
-      triggerCount : 0
+      idApprove : -1
     };
   },
   methods: {
     changeCurrentComponent(currentTab) {
       this.isSelectedTab = currentTab;
       this.searchValue = "";
-    },
-    SearchMember(value) {
-      this.searchValue = value;
-      this.triggerCount++;
-      
     },
   },
   watch: {
@@ -66,6 +48,9 @@ export default {
         this.hiddenInput = false;
       }
     },
+    closePopUp() {
+      alert('123')
+    }
   },
 };
 </script>

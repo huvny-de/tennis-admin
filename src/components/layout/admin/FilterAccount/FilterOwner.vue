@@ -2,9 +2,7 @@
   <div class="container mx-auto min-w-full">
     <div class="float-right">
       <div class="flex items-center text-right">
-        <div
-          type="button"
-          class="
+        <div type="button" class="
             flex
             items-center
             px-4
@@ -20,20 +18,14 @@
             transition
             ease-in-out
             cursor-pointer
-          "
-          @click="blockAllAccount"
-        >
-          <Icon
-            class="w-4 h-4 text-red-500 mr-2 cursor-pointer"
-            icon="ant-design:lock-filled"
-          />
+          " @click="blockAllAccount">
+          <Icon class="w-4 h-4 text-red-500 mr-2 cursor-pointer" icon="ant-design:lock-filled" />
           <p class="pl-1 text-gray-500 text-sm">Khóa</p>
         </div>
       </div>
     </div>
     <table class="min-w-full">
-      <th
-        class="
+      <th class="
           px-6
           py-3
           text-sm
@@ -44,17 +36,11 @@
           bg-gray-100
           border-b border-gray-200
           cursor-pointer
-        "
-        @click="sortByField('id')"
-      >
+        " @click="sortByField('id')">
         ID
-        <font-awesome-icon
-          class="w-4 h-4 text-[#ACACAC]"
-          icon="arrows-up-down"
-        />
+        <font-awesome-icon class="w-4 h-4 text-[#ACACAC]" icon="arrows-up-down" />
       </th>
-      <th
-        class="
+      <th class="
           px-6
           py-3
           text-sm
@@ -65,17 +51,11 @@
           bg-gray-100
           border-b border-gray-200
           cursor-pointer
-        "
-        @click="sortByField('fullName')"
-      >
+        " @click="sortByField('fullName')">
         Họ Tên
-        <font-awesome-icon
-          class="w-4 h-4 text-[#ACACAC]"
-          icon="arrows-up-down"
-        />
+        <font-awesome-icon class="w-4 h-4 text-[#ACACAC]" icon="arrows-up-down" />
       </th>
-      <th
-        class="
+      <th class="
           px-6
           py-3
           text-sm
@@ -86,17 +66,11 @@
           bg-gray-100
           border-b border-gray-200
           cursor-pointer
-        "
-        @click="sortByField('email')"
-      >
+        " @click="sortByField('email')">
         Email
-        <font-awesome-icon
-          class="w-4 h-4 text-[#ACACAC]"
-          icon="arrows-up-down"
-        />
+        <font-awesome-icon class="w-4 h-4 text-[#ACACAC]" icon="arrows-up-down" />
       </th>
-      <th
-        class="
+      <th class="
           px-6
           py-3
           text-sm
@@ -107,17 +81,11 @@
           bg-gray-100
           border-b border-gray-200
           cursor-pointer
-        "
-        @click="sortByField('phoneNumber')"
-      >
+        " @click="sortByField('phoneNumber')">
         Điện Thoại
-        <font-awesome-icon
-          class="w-4 h-4 text-[#ACACAC]"
-          icon="arrows-up-down"
-        />
+        <font-awesome-icon class="w-4 h-4 text-[#ACACAC]" icon="arrows-up-down" />
       </th>
-      <th
-        class="
+      <th class="
           px-6
           py-3
           text-sm
@@ -128,17 +96,11 @@
           bg-gray-100
           border-b border-gray-200
           cursor-pointer
-        "
-        @click="sortByField('cancelCount')"
-      >
+        " @click="sortByField('cancelCount')">
         Số lần Hủy
-        <font-awesome-icon
-          class="w-4 h-4 text-[#ACACAC]"
-          icon="arrows-up-down"
-        />
+        <font-awesome-icon class="w-4 h-4 text-[#ACACAC]" icon="arrows-up-down" />
       </th>
-      <th
-        class="
+      <th class="
           px-6
           py-3
           text-sm
@@ -149,17 +111,11 @@
           bg-gray-100
           border-b border-gray-200
           cursor-pointer
-        "
-        @click="sortByField('status')"
-      >
+        " @click="sortByField('status')">
         Trạng Thái
-        <font-awesome-icon
-          class="w-4 h-4 text-[#ACACAC]"
-          icon="arrows-up-down"
-        />
+        <font-awesome-icon class="w-4 h-4 text-[#ACACAC]" icon="arrows-up-down" />
       </th>
-      <th
-        class="
+      <th class="
           px-6
           py-3
           text-sm
@@ -171,12 +127,10 @@
           border-b border-gray-200
           flex
           items-center
-        "
-      >
+        ">
         Thao Tác
       </th>
-      <th
-        class="
+      <th class="
           px-6
           text-sm
           font-medium
@@ -186,14 +140,8 @@
           bg-gray-100
           border-b border-gray-200
           cursor-pointer
-        "
-      >
-        <input
-          v-model="isSelectAll"
-          focus:ring-100
-          type="checkbox"
-          class="mt-[-2px]"
-        />
+        ">
+        <input v-model="isSelectAll" focus:ring-100 type="checkbox" class="mt-[-2px]" />
       </th>
       <tbody class="bg-white">
         <tr v-for="member in sortedList" :key="member.id">
@@ -231,11 +179,7 @@
           </td>
           <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
             <div class="flex items-center">
-              <span
-                v-if="member.status === 1"
-                class="font-semibold text-[#50D222]"
-                >Hoạt Động</span
-              >
+              <span v-if="member.status === 1" class="font-semibold text-[#50D222]">Hoạt Động</span>
               <span v-else class="font-semibold text-red-500">Bị Khóa</span>
             </div>
           </td>
@@ -243,18 +187,14 @@
             <div class="flex items-center">
               <div class="ml-8 text-[#334D6E]">
                 <div class="flex items-center">
-                  <font-awesome-icon
-                    class="
+                  <font-awesome-icon class="
                       w-5
                       h-5
                       text-[#ACACAC]
                       mr-2
                       cursor-pointer
                       hover:text-gray-500
-                    "
-                    icon="eye"
-                    @click="memberDetail(member.id)"
-                  />
+                    " icon="eye" @click="memberDetail(member.id)" />
                 </div>
               </div>
             </div>
@@ -272,23 +212,19 @@
       <!-- <p class="text-center md:my-2 my-4 text-[#334D6E]">
             Tổng số thành viên : {{ membersTotal }}
           </p> -->
-      <div
-        class="
+      <div class="
           mx-auto
           flex
           items-center
           text-[#ACACAC]
           font-medium
-          lg:mt-4
+          lg:mt-1
           text-sm
-        "
-      >
+        ">
         <nav v-if="membersTotal > 5" aria-label="Page navigation example">
           <ul class="inline-flex -space-x-px">
             <li>
-              <span
-                v-if="currentPage == 1"
-                class="
+              <span v-if="currentPage == 1" class="
                   py-2
                   px-3
                   ml-0
@@ -304,12 +240,8 @@
                   dark:hover:bg-gray-700
                   dark:hover:text-white
                   cursor-default
-                "
-                >Previous</span
-              >
-              <span
-                v-else
-                class="
+                ">Previous</span>
+              <span v-else class="
                   py-2
                   px-3
                   ml-0
@@ -325,16 +257,10 @@
                   dark:hover:bg-gray-700
                   dark:hover:text-white
                   cursor-pointer
-                "
-                @click="paging(currentPage - 1)"
-                >Previous</span
-              >
+                " @click="paging(currentPage - 1)">Previous</span>
             </li>
             <li v-for="page in totalPage" :key="page">
-              <span
-                v-if="page === currentPage"
-                aria-current="page"
-                class="
+              <span v-if="page === currentPage" aria-current="page" class="
                   py-2
                   px-3
                   text-blue-600
@@ -342,13 +268,8 @@
                   border border-gray-300
                   hover:bg-blue-100 hover:text-blue-700
                   dark:border-gray-700 dark:bg-gray-700 dark:text-white
-                "
-                >{{ page }}</span
-              >
-              <a
-                v-else
-                href="#"
-                class="
+                ">{{ page }}</span>
+              <a v-else href="#" class="
                   py-2
                   px-3
                   leading-tight
@@ -361,15 +282,10 @@
                   dark:text-gray-400
                   dark:hover:bg-gray-700
                   dark:hover:text-white
-                "
-                @click="paging(page)"
-                >{{ page }}</a
-              >
+                " @click="paging(page)">{{ page }}</a>
             </li>
             <li>
-              <span
-                v-if="currentPage == totalPage"
-                class="
+              <span v-if="currentPage == totalPage" class="
                   py-2
                   px-3
                   ml-0
@@ -385,12 +301,8 @@
                   dark:hover:bg-gray-700
                   dark:hover:text-white
                   cursor-default
-                "
-                >Next</span
-              >
-              <span
-                v-else
-                class="
+                ">Next</span>
+              <span v-else class="
                   py-2
                   px-3
                   ml-0
@@ -406,10 +318,7 @@
                   dark:hover:bg-gray-700
                   dark:hover:text-white
                   cursor-pointer
-                "
-                @click="paging(currentPage + 1)"
-                >Next</span
-              >
+                " @click="paging(currentPage + 1)">Next</span>
             </li>
           </ul>
         </nav>
@@ -424,16 +333,13 @@ import { Icon } from "@iconify/vue";
 
 export default {
   components: { Icon },
-  inject: ["searchValue"],
   mounted() {
     let search_obj = {
       ...this.$store.getters["yardOwner/memberCancelManyTimes"](
-        this.searchValue,
         this.currentPage
       ),
     };
 
-    console.log(this.searchValue);
     this.sortedList = [...search_obj.search_arr];
 
     this.membersTotal = search_obj.totalSearch;
@@ -480,7 +386,6 @@ export default {
       } else {
         let search_obj = {
           ...this.$store.getters["yardOwner/memberCancelManyTimes"](
-            this.searchValue,
             this.currentPage
           ),
         };
@@ -494,19 +399,14 @@ export default {
 
       let search_obj = {
         ...this.$store.getters["yardOwner/memberCancelManyTimes"](
-          this.searchValue,
           this.currentPage
         ),
       };
 
-      if (this.searchValue.trim().length == 0) {
-        this.sortedList = [...search_obj.search_arr];
-      } else {
-        this.sortedList = [...search_obj.search_arr];
-        this.membersTotal = search_obj.totalSearch;
 
-        this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
-      }
+      this.sortedList = [...search_obj.search_arr];
+      this.membersTotal = search_obj.totalSearch;
+      this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
     },
     showAlert() {
       swal({

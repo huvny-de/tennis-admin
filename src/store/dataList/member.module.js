@@ -197,21 +197,10 @@ export default {
       };
       return search_obj;
     },
-    memberCancelManyTimes: (state) => (searchValue, currentPage) => {
+    memberCancelManyTimes: (state) => (currentPage) => {
       // filter member who has cancelCount larger than 2
-      let filterArr = state.membersList.filter((member) => {
+      let search_arr = state.membersList.filter((member) => {
         return member.cancelCount > 2 && member.status === 1;
-      });
-
-      // get arr filter by search value
-      let search_arr = filterArr.filter((member) => {
-        return (
-          member.username.includes(searchValue) ||
-          member.fullName.includes(searchValue) ||
-          member.email.includes(searchValue) ||
-          member.phoneNumber.includes(searchValue) ||
-          member.createDate.includes(searchValue)
-        );
       });
 
       let paginated_arr = [];
