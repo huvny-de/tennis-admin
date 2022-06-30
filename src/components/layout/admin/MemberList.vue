@@ -473,8 +473,7 @@ export default {
         this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
       }
     }
-    , unLockAccount(id) {
-      console.log(id);
+    , unLockAccount() {
       swal("Bạn có chắc chắn kích hoạt lại chủ sân này không ?", {
         buttons: ["Hủy", "Đồng Ý"],
       }).then((value) => {

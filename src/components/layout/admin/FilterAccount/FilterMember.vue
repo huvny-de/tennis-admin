@@ -221,15 +221,19 @@
           text-sm
         "></div>
     </div>
+     <!--The Modal-->
+  <TheModal :class="isHiddenModal === true ? 'hidden' : ''" :profile="profileDetail" :click="countClick" />
   </div>
+
 </template>
 
 <script>
 import swal from "sweetalert";
 import { Icon } from "@iconify/vue";
+import TheModal from "../MemberModal.vue";
 
 export default {
-  components: { Icon },
+  components: { Icon,TheModal },
   mounted() {
     let search_obj = {
       ...this.$store.getters["member/memberCancelManyTimes"](
@@ -318,8 +322,8 @@ export default {
       });
     },
     blockAllAccount() {
-      let checkboxs = document.getElementsByClassName("checkboxElement");
-      let arr_checkbox = [...checkboxs];
+      let checkboxes = document.getElementsByClassName("checkboxElement");
+      let arr_checkbox = [...checkboxes];
       let isSelect = 0;
 
       arr_checkbox.forEach((checkbox) => {
@@ -356,6 +360,21 @@ export default {
               }
             });
           }
+        });
+      }
+    },
+  },
+  watch: {
+    isSelectAll(value) {
+      let checkboxs = document.getElementsByClassName("checkboxElement");
+      let arr_checkbox = [...checkboxs];
+      if (value) {
+        arr_checkbox.forEach((checkbox) => {
+          checkbox.checked = true;
+        });
+      } else {
+        arr_checkbox.forEach((checkbox) => {
+          checkbox.checked = false;
         });
       }
     },

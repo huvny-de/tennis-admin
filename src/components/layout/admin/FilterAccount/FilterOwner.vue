@@ -325,14 +325,20 @@
       </div>
     </div>
   </div>
+
+
+  <!--The Modal-->
+  <ModalOwnerDetail :class="isHiddenModal === false ? 'hidden' : ''" :detail="profileDetail" :click="countClick"
+    :hiddenButton="true" :disabledInput="false" />
 </template>
 
 <script>
 import swal from "sweetalert";
 import { Icon } from "@iconify/vue";
+import ModalOwnerDetail from "../ModalOwnerDetail.vue";
 
 export default {
-  components: { Icon },
+  components: { Icon , ModalOwnerDetail},
   mounted() {
     let search_obj = {
       ...this.$store.getters["yardOwner/memberCancelManyTimes"](
@@ -353,7 +359,7 @@ export default {
       pageSize: 5,
       totalPage: 0,
       profileDetail: {},
-      isHiddenModal: true,
+      isHiddenModal: false,
       countClick: 0,
       checkSort: 0,
       isSelectAll: false,
@@ -362,7 +368,7 @@ export default {
   methods: {
     memberDetail(id) {
       this.profileDetail = this.sortedList.find((x) => x.id == id);
-      this.isHiddenModal = false;
+      this.isHiddenModal = true;
       this.countClick++;
     },
     sortByField(fieldSort) {
@@ -466,21 +472,6 @@ export default {
     },
   },
   watch: {
-    searchValue() {
-      this.currentPage = 1;
-
-      let search_obj = {
-        ...this.$store.getters["yardOwner/memberCancelManyTimes"](
-          this.searchValue,
-          this.currentPage
-        ),
-      };
-
-      this.sortedList = [...search_obj.search_arr];
-
-      this.membersTotal = search_obj.totalSearch;
-      this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
-    },
     isSelectAll(value) {
       let checkboxs = document.getElementsByClassName("checkboxElement");
       let arr_checkbox = [...checkboxs];

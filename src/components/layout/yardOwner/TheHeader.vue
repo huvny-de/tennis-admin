@@ -328,7 +328,6 @@ export default {
   },
   mounted() {
     this.currentUser = this.$store.getters["auth/getUser"].Token;
-    console.log(this.currentUser);
   },
   data() {
     return {

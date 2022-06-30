@@ -9,7 +9,7 @@
             right-2.5
             text-gray-400
             bg-transparent
-            hover:bg-gray-200 hover:text-gray-900
+            hover:bg-gray-50 hover:text-gray-900
             rounded-lg
             text-sm
             p-1.5
@@ -66,7 +66,7 @@
                                 placeholder-slate-300
                                 text-slate-600
                                 relative
-                                bg-gray-200
+                                bg-gray-50
                                 rounded
                                 text-sm
                                 border border-slate-300
@@ -150,19 +150,19 @@
                         </td>
                         <td class="px-2 py-2 text-sm">
                           <div class="mb-3 pt-0">
-                            <input type="number" placeholder="Placeholder" class="
+                            <input disabled type="number" placeholder="Placeholder" class="
                                 px-2
                                 py-1
                                 placeholder-slate-300
                                 text-slate-600
                                 relative
-                                bg-white
                                 rounded
                                 text-sm
                                 border border-slate-300
                                 outline-none
                                 focus:outline-none focus:ring-200
                                 w-28
+                                bg-gray-50
                               " :value="profile.cancelCount" />
                           </div>
                         </td>
@@ -190,7 +190,7 @@
                                 placeholder-slate-300
                                 text-slate-600
                                 relative
-                                bg-gray-200
+                                bg-gray-50
                                 rounded
                                 text-sm
                                 border border-slate-300
@@ -244,14 +244,13 @@
                         </td>
                         <td class="px-3 py-2 text-[#50D222] text-normal">
                           <select id="small" class="
+                              w-32
                               block
                               px-2
                               py-1
                               mt-2
                               mb-2
-                              w-full
                               text-sm text-gray-900
-                              bg-gray-50
                               rounded
                               border border-gray-300
                               focus:ring-blue-500 focus:border-blue-500
