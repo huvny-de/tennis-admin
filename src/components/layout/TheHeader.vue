@@ -335,9 +335,6 @@ export default {
         this.menu = !this.menu;
       }
     },
-    notifyToggleBlur() {
-      this.notify = false;
-    },
     showApproveDetail(id) {
       this.$router.push(`/notify?notifyId=${id}`);
     }

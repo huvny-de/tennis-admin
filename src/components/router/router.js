@@ -15,6 +15,16 @@ const routes = [
     },
   },
   {
+    path: "/notify",
+    name : "notify",
+    component : () => import("../pages/admin/NotifyDetail.vue"),
+    meta : {
+      requiresAuth: true,
+      adminAuth: true,
+      userAuth: false,
+    }
+  },
+  {
     path: "/login",
     name: "Login Page",
     component: LoginPage,
