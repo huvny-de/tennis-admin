@@ -37,6 +37,8 @@
                   mt-11
                   z-10
                   w-96
+                  h-96
+                  overflow-auto
                   border
                   dark:border-gray-700
                   bg-white
@@ -74,13 +76,14 @@
                     </h3>
                   </span>
                 </div>
-                <ul @click="showApproveDetail(1)" class="
-                    py-3
+                <ul v-for="notify in notify_list" :key="notify.id" @click="showApproveDetail(1)" class="
+                    py-2
                     text-sm text-gray-700
                     dark:text-gray-200
-                    bg-red-50
                     mb-1
-                  " aria-labelledby="dropdownSmallButton">
+                  "
+                  :class="notify.status === 0 ? 'bg-red-50' : ''"
+                  aria-labelledby="dropdownSmallButton">
                   <li>
                     <span class="
                         py-2
@@ -95,7 +98,7 @@
                         pl-11
                       ">
                       <span>
-                        <Icon class="text-green-500 w-7 h-7 absolute top-6 left-4" icon="akar-icons:chat-approve" />
+                        <Icon class="text-green-500 w-7 h-7 absolute top-6 left-4" :icon="notify.icon" />
                       </span>
                       <span class="
                           ml-4
@@ -105,109 +108,18 @@
                           pr-11
                         ">
                         <h3 class="font-semibold text-green-500 mb-1">
-                          Yêu Cầu Duyệt Chủ Sân
+                          {{notify.title}}
                         </h3>
                         <p class="text-sm">
-                          <span class="font-semibold">sonnct</span> đã gửi yêu
+                          <span class="font-semibold">{{notify.username}}</span> đã gửi yêu
                           cầu duyệt sân vào lúc
-                          <span class="font-semibold">19h30</span> ngày
-                          <span class="font-semibold">26/6/2022</span>
+                          <span class="font-semibold">{{notify.time}}</span> ngày
+                          <span class="font-semibold">{{notify.date}}</span>
                         </p>
                       </span>
                     </span>
                   </li>
                 </ul>
-                <ul class="
-                    py-3
-                    text-sm text-gray-700
-                    dark:text-gray-200
-                    bg-red-50
-                  " aria-labelledby="dropdownSmallButton">
-                  <li>
-                    <span class="
-                        py-2
-                        px-4
-                        0
-                        hover:bg-blue-300 hover:text-white
-                        cursor-pointer
-                        flex
-                        items-start
-                        justify-start
-                        relative
-                        pl-11
-                      ">
-                      <span>
-                        <Icon class="text-green-500 w-7 h-7 absolute top-6 left-4" icon="akar-icons:chat-approve" />
-                      </span>
-                      <span class="
-                          ml-4
-                          flex flex-col
-                          items-start
-                          justify-start
-                          pr-11
-                        ">
-                        <h3 class="font-semibold text-green-500 mb-1">
-                          Yêu Cầu Duyệt Chủ Sân
-                        </h3>
-                        <p class="text-sm">
-                          <span class="font-semibold">sonnct</span> đã gửi yêu
-                          cầu duyệt sân vào lúc
-                          <span class="font-semibold">19h30</span> ngày
-                          <span class="font-semibold">26/6/2022</span>
-                        </p>
-                      </span>
-                    </span>
-                  </li>
-                </ul>
-                <ul class="py-3 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownSmallButton">
-                  <li>
-                    <span class="
-                        py-2
-                        px-4
-                        0
-                        hover:bg-blue-300 hover:text-white
-                        cursor-pointer
-                        flex
-                        items-start
-                        justify-start
-                        relative
-                        pl-11
-                      ">
-                      <span>
-                        <Icon class="text-green-500 w-7 h-7 absolute top-6 left-4" icon="akar-icons:chat-approve" />
-                      </span>
-                      <span class="
-                          ml-4
-                          flex flex-col
-                          items-start
-                          justify-start
-                          pr-11
-                        ">
-                        <h3 class="font-semibold text-green-500 mb-1">
-                          Yêu Cầu Duyệt Chủ Sân
-                        </h3>
-                        <p class="text-sm">
-                          <span class="font-semibold">sonnct</span> đã gửi yêu
-                          cầu duyệt sân vào lúc
-                          <span class="font-semibold">19h30</span> ngày
-                          <span class="font-semibold">26/6/2022</span>
-                        </p>
-                      </span>
-                    </span>
-                  </li>
-                </ul>
-                <div class="py-1">
-                  <span class="
-                      block
-                      px-4
-                      mt-1
-                      text-center text-sm text-gray-500
-                      dark:text-gray-200
-                      cursor-pointer
-                      hover:text-gray-700
-                      duration-200
-                    ">Xem Tất Cả</span>
-                </div>
               </div>
             </transition>
             <button @click="menuToggle" @blur="menuToggleBlur">
@@ -306,7 +218,62 @@ export default {
       menu: false,
       currentUser: "",
       notify: false,
-      idNotify: -1
+      notify_list: [
+        {
+          id: 1,
+          icon: 'akar-icons:chat-approve',
+          title: 'Yêu Cầu Duyệt Chủ Sân',
+          username: 'sonnct',
+          date: '26/06/2022',
+          time: '19h30',
+          status: 0
+        },
+        {
+          id: 2,
+          icon: 'akar-icons:chat-approve',
+          title: 'Yêu Cầu Duyệt Chủ Sân',
+          username: 'sonnct',
+          date: '26/06/2022',
+          time: '19h30',
+          status: 0
+        },
+        {
+          id: 4,
+          icon: 'akar-icons:chat-approve',
+          title: 'Yêu Cầu Duyệt Chủ Sân',
+          username: 'sonnct',
+          date: '26/06/2022',
+          time: '19h30',
+          status: 0
+        },
+        {
+          id: 5,
+          icon: 'akar-icons:chat-approve',
+          title: 'Yêu Cầu Duyệt Chủ Sân',
+          username: 'sonnct',
+          date: '26/06/2022',
+          time: '19h30',
+          status: 1
+        },
+        {
+          id: 6,
+          icon: 'akar-icons:chat-approve',
+          title: 'Yêu Cầu Duyệt Chủ Sân',
+          username: 'sonnct',
+          date: '26/06/2022',
+          time: '19h30',
+          status: 1
+        },
+        {
+          id: 7,
+          icon: 'akar-icons:chat-approve',
+          title: 'Yêu Cầu Duyệt Chủ Sân',
+          username: 'sonnct',
+          date: '26/06/2022',
+          time: '19h30',
+          status: 1
+        }
+      ]
     };
   },
   methods: {

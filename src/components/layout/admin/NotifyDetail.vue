@@ -1,14 +1,6 @@
 <template>
   <div class="mx-auto relative pb-8 pt-2 w-full max-w-5xl h-full md:h-auto">
     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 mt-4">
-      <button @click="hiddenModal" type="button"
-        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd"
-            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-            clip-rule="evenodd"></path>
-        </svg>
-      </button>
       <div class="py-6 px-6 lg:px-8">
         <div class="py-4flex flex-col items-center justify-between">
           <div class="mt-2 bg-white dark:bg-gray-800 p-3 w-full px-4 rounded-md box-border">
@@ -102,11 +94,13 @@
           </div>
           <div v-show="!hiddenButton" class="flex items-center justify-between mt-4">
             <div class="flex space-x-2 justify-center ml-2">
-              <button @click="DeclineRequest" type="button"
-                class="flex items-center px-11 py-2.5  text-gray-500 font-medium text-sm leading-tight uppercase rounded-full shadow-md  hover:shadow-lg   active:shadow-lg transition duration-150 ease-in-out">
-                <Icon icon="bi:arrow-left-circle-fill"></Icon>
-                <p class="pl-2">Quay Lại</p>
-              </button>
+              <router-link to="/dashboard">
+                <button type="button"
+                  class="flex items-center px-11 py-2.5  text-gray-500 font-medium text-sm leading-tight uppercase rounded-full   hover:bg-gray-200  transition duration-150 ease-in-out">
+                  <Icon icon="bi:arrow-left-circle-fill"></Icon>
+                  <p class="pl-2">Quay Lại</p>
+                </button>
+              </router-link>
             </div>
             <div class="flex items-center">
               <div class="flex space-x-2 justify-center">
@@ -179,12 +173,20 @@ export default {
           });
         }
       });
-      this.hiddenModal();
-      this.$emit('decline', this.detail.id)
+      this.$emit('decline', 1)
+      this.$router.push('/dashboard')
     },
-    updateSuccess() {
-      swal("Cập Nhật Thành Công !", {
-        icon: "success",
+    AcceptRequest() {
+      swal("Bạn có chắc chắn phê duyệt chủ sân này không ?", {
+        buttons: ["Hủy", "Đồng Ý"],
+      }).then((value) => {
+        if (value) {
+          swal("Phê Duyệt Thành Công !", {
+            icon: "success",
+          });
+        }
+        this.$emit('accept', 1);
+        this.$router.push('/dashboard')
       });
     },
     setSelectedTab(tab) {

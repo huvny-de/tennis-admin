@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "https://www.tennis-today.softek.com.vn:4443/api/";
+const API_URL = "https://171.244.136.52:4443/api/";
 
 class AuthService {
   login(user) {
