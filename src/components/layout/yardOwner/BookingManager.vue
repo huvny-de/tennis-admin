@@ -95,7 +95,7 @@
                 <span class="flex items-center">
                   <font-awesome-icon
                     class="w-6 h-6 mr-2 cursor-pointer text-gray-500 hover:text-gray-700 active:text-gray-800 duration-200"
-                    icon="eye" @click="showDetail(member.id)" />
+                    icon="eye" @click="showDetail()" />
                   <Icon @click="AcceptRequest(member.id)" class="
                                 w-6
                                 h-6
@@ -153,13 +153,18 @@
       </ul>
     </nav>
   </div>
+
+  <!--The Modal-->
+  <DetailBookingModal :class="isHiddenModal === true ? 'hidden' : ''" :profile="profileDetail" :click="countClick" />
 </template>
 
 <script>
 import { Icon } from "@iconify/vue";
+import DetailBookingModal from './Booking/DetailBookingModal.vue';
+
 
 export default {
-  components: { Icon },
+  components: { Icon, DetailBookingModal },
   data() {
     return {
       tableBooking: [
@@ -227,8 +232,16 @@ export default {
           statusTransaction: "Chưa Xác Nhận",
         },
       ],
+      isHiddenModal: true,
+      countClick : 0
     };
   },
+  methods : {
+    showDetail() {
+      this.isHiddenModal = false;
+      this.countClick++;
+    }
+  }
 };
 </script>
 

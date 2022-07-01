@@ -263,7 +263,7 @@
             </div>
 
             <!--Active-->
-            <div
+            <!-- <div
               v-if="checkIsActive('bookingHistory')"
               class="w-full bg-[#FEF5F8] flex mt-5"
             >
@@ -279,10 +279,10 @@
                   >Lịch Sử Đặt Sân</span
                 >
               </div>
-            </div>
+            </div> -->
 
             <!---->
-            <div
+            <!-- <div
               v-else
               @click="setCurrentActive('bookingHistory')"
               class="
@@ -305,7 +305,7 @@
               <span class="mx-2 text-[#334D6E] text-[14px] font-medium"
                 >Lịch Sử Đặt Sân</span
               >
-            </div>
+            </div> -->
 
             <!--Active-->
             <div

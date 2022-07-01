@@ -195,7 +195,7 @@
       <!-- end card -->
     </div>
     <!-- end wrapper card -->
-    <!-- <div class="mt-2 lg:flex block lg:gap-2">
+     <!-- <div class="mt-2 lg:flex block lg:gap-2">
       <div
         class="
           bg-white

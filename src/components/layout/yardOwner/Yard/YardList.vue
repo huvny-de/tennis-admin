@@ -93,7 +93,6 @@
                         font-medium
                         text-sm
                         leading-tight
-                        uppercase
                         rounded-full
                         shadow-md
                         hover:bg-blue-500 hover:shadow-lg
@@ -107,7 +106,7 @@
                         ease-in-out
                       ">
                       <Icon icon="ant-design:eye-filled"></Icon>
-                      <p class="pl-2">Chi Tiết</p>
+                      <p class="pl-2">Đánh Giá</p>
                     </button>
                   </div>
                   <div class="flex space-x-2 justify-center my-8" @click="UpdateYard">
@@ -121,7 +120,6 @@
                         font-medium
                         text-sm
                         leading-tight
-                        uppercase
                         rounded-full
                         shadow-md
                         hover:bg-[#78d22f] hover:shadow-lg
@@ -149,7 +147,6 @@
                         font-medium
                         text-sm
                         leading-tight
-                        uppercase
                         rounded-full
                         shadow-md
                         hover:bg-red-700 hover:shadow-lg
@@ -248,7 +245,6 @@
                         font-medium
                         text-sm
                         leading-tight
-                        uppercase
                         rounded-full
                         shadow-md
                         hover:bg-blue-500 hover:shadow-lg
@@ -262,7 +258,7 @@
                         ease-in-out
                       ">
                       <Icon icon="ant-design:eye-filled"></Icon>
-                      <p class="pl-2">Chi Tiết</p>
+                      <p class="pl-2">Đánh Giá</p>
                     </button>
                   </div>
                   <div class="flex space-x-2 justify-center my-8">
@@ -276,7 +272,6 @@
                         font-medium
                         text-sm
                         leading-tight
-                        uppercase
                         rounded-full
                         shadow-md
                         hover:bg-[#78d22f] hover:shadow-lg
@@ -304,7 +299,6 @@
                         font-medium
                         text-sm
                         leading-tight
-                        uppercase
                         rounded-full
                         shadow-md
                         hover:bg-red-700 hover:shadow-lg
@@ -402,7 +396,6 @@
                         font-medium
                         text-sm
                         leading-tight
-                        uppercase
                         rounded-full
                         shadow-md
                         hover:bg-blue-500 hover:shadow-lg
@@ -416,7 +409,7 @@
                         ease-in-out
                       ">
                       <Icon icon="ant-design:eye-filled"></Icon>
-                      <p class="pl-2">Chi Tiết</p>
+                      <p class="pl-2">Đánh Giá</p>
                     </button>
                   </div>
                   <div class="flex space-x-2 justify-center my-8">
@@ -430,7 +423,6 @@
                         font-medium
                         text-sm
                         leading-tight
-                        uppercase
                         rounded-full
                         shadow-md
                         hover:bg-[#78d22f] hover:shadow-lg
@@ -458,7 +450,6 @@
                         font-medium
                         text-sm
                         leading-tight
-                        uppercase
                         rounded-full
                         shadow-md
                         hover:bg-red-700 hover:shadow-lg
