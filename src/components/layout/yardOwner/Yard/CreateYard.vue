@@ -78,27 +78,6 @@
                   <option value="2">Sân Cứng</option>
                 </select>
               </span>
-              <span>
-                <label class="text-[#747474]" for="username">Loại Kích Thước</label>
-                <select id="small" class="
-                    rounded-lg
-                    mt-2
-                    text-md
-                    block
-                    pr-8
-                    W-full
-                    text-sm text-gray-900
-                    bg-gray-50
-                    border border-gray-500
-                    focus:ring-blue-500 focus:border-blue-500
-                  ">
-                  <option selected="true" value="1">
-                    Kích Thước Lớn
-                  </option>
-                  <option value="2">Kích Thước Tiêu Chuẩn</option>
-                  <option value="2">Kích Thước Nhỏ</option>
-                </select>
-              </span>
             </div>
             <div>
               <label class="text-[#747474]" for="username">Chiều Dài</label>

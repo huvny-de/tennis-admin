@@ -354,24 +354,6 @@
 
             <!--logout-->
           </nav>
-          <div class="px-6">
-            <span class="flex items-center justify-start cursor-pointer">
-              <font-awesome-icon
-                class="w-6 h-6 text-[#ACACAC] hover:font-bold"
-                icon="arrow-right-from-bracket"
-              />
-              <span
-                class="
-                  mx-2
-                  text-[#334D6E] text-[14px]
-                  font-medium
-                  hover:text-[#2b4a73] hover:font-semibold
-                  duration-200
-                "
-                >Logout</span
-              >
-            </span>
-          </div>
         </div>
       </div>
     </div>

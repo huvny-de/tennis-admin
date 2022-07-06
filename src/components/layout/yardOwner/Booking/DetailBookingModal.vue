@@ -146,6 +146,13 @@ export default {
                 }
             });
         },
+        confirmBooking() {
+            swal("Xác Nhận Thành Công !", {
+                icon: "success",
+            });
+
+            this.hiddenModal();
+        }
     },
     watch: {
         profile() {

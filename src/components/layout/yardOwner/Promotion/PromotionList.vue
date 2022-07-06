@@ -104,6 +104,7 @@
             <tr>
               <th scope="col" class="uppercase px-6 py-3">Tên Khuyễn Mãi</th>
               <th scope="col" class="uppercase px-6 py-3">Mã Khuyễn Mãi</th>
+              <th scope="col" class="uppercase px-6 py-3">Số Tiền Giảm</th>
               <th scope="col" class="uppercase px-6 py-3">
                 Ngày Hiệu Lực - Ngày Hết Hạn
               </th>
@@ -135,6 +136,9 @@
               </td>
               <td class="px-6 py-4">
                 {{ items.code }}
+              </td>
+              <td class="px-6 py-4">
+                {{ items.discount }} đồng
               </td>
               <td class="px-6 py-4">
                 {{ items.startDate }} - {{ items.endDate }}
@@ -332,9 +336,10 @@ export default {
           img: "https://i.ibb.co/hZ6w8fH/10-percent.jpg",
           namePromotion: "Lần đâu đặt sân",
           code: "firsttime123",
-          description: "Dành cho ai lần đầu đặt sân sẽ được giảm 10%",
+          description: "Dành cho ai lần đầu đặt sân sẽ được giảm 10.000 đ",
           startDate: "30/06/2022",
           endDate: "02/07/2022",
+          discount : '10.000',
           status: 0,
         },
         {
@@ -343,9 +348,10 @@ export default {
           namePromotion: "Khách Quen Thân Yêu",
           code: "customer456",
           description:
-            "Vocher áp dụng cho khách hàng có số lần đặt từ 10 lần trở lên đặt sân cho lần tiếp theo sẽ được giảm 25%",
+            "Vocher áp dụng cho khách hàng có số lần đặt từ 10 lần trở lên đặt sân cho lần tiếp theo sẽ được giảm 20000đ",
           startDate: "30/06/2022",
           endDate: "02/07/2022",
+           discount : '20.000',
           status: 1,
         },
       ],

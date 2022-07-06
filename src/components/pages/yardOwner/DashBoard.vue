@@ -3,7 +3,7 @@
     <SideBarAdmin @changeTab="changeCurrentComponent"  class="w-60"/>
 
     <div class="flex-1 w-full overflow-auto h-screen bg-[#F8F9FF] flex flex-col scroll-content">
-       <TheHeader />
+       <TheHeader :toggleModal="toggleModal"/>
         <component :is="isSelectedTab" />
     </div>
   </div>
@@ -39,12 +39,14 @@ export default {
       searchValue: "",
       loading: false,
       currentUser: "",
+      toggleModal : 0
     };
   },
   methods: {
     changeCurrentComponent(currentTab) {
       this.isSelectedTab = currentTab;
       this.searchValue = "";
+      this.toggleModal++;
     },
     SearchMember(value) {
       this.searchValue = value;

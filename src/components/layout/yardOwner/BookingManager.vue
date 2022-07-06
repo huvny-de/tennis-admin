@@ -96,7 +96,7 @@
                   <font-awesome-icon
                     class="w-6 h-6 mr-2 cursor-pointer text-gray-500 hover:text-gray-700 active:text-gray-800 duration-200"
                     icon="eye" @click="showDetail()" />
-                  <Icon @click="AcceptRequest(member.id)" class="
+                  <Icon @click="AcceptRequest" class="
                                 w-6
                                 h-6
                                 mr-2
@@ -116,7 +116,7 @@
                                 hover:text-red-700
                                 active:text-red-800
                                 duration-200
-                              " icon="ic:round-cancel" @click="showAlert(member.id)" />
+                              " icon="ic:round-cancel" @click="showAlert" />
                 </span>
               </td>
             </tr>
@@ -160,6 +160,7 @@
 
 <script>
 import { Icon } from "@iconify/vue";
+import swal from "sweetalert";
 import DetailBookingModal from './Booking/DetailBookingModal.vue';
 
 
@@ -233,13 +234,54 @@ export default {
         },
       ],
       isHiddenModal: true,
-      countClick : 0
+      countClick: 0
     };
   },
-  methods : {
+  methods: {
     showDetail() {
       this.isHiddenModal = false;
       this.countClick++;
+    },
+    AcceptRequest() {
+      swal("Bạn có chắc chắn xác nhận yêu cầu này không ?", {
+        buttons: ["Hủy", "Đồng Ý"],
+      }).then((value) => {
+        if (value) {
+          swal("Xác Nhận Thành Công !", {
+            icon: "success",
+          });
+        }
+      });
+    },
+    showAlert() {
+      swal("Bạn có chắc chắn sẽ từ chối yêu cầu này không?", {
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          swal({
+            text: "Xin Hãy Nhập Lý Do :",
+            content: {
+              element: "textarea", attributes: {
+                placeholder: "Nhập Lý Do",
+                required: true
+              }
+            },
+            button: "Xác Nhận"
+          })
+
+            .then((value) => {
+              if (value) {
+                swal("Từ Chối Thành Công !", {
+                  icon: "success",
+                });
+
+                this.hiddenModal();
+              }
+            });
+        }
+      });
     }
   }
 };

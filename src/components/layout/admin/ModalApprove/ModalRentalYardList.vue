@@ -43,7 +43,7 @@
               </span>
             </div>
 
-            <div class="flex items-center">
+            <!-- <div class="flex items-center">
               <span class="text-gray-500 text-md font-semibold mr-3 pt-1">Loại Kích Thước:
               </span>
               <span class="text-gray-500">
@@ -68,7 +68,7 @@
                   value="Sân Cứng" />
               </span>
 
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -113,7 +113,7 @@
               </span>
             </div>
 
-            <div class="flex items-center">
+            <!-- <div class="flex items-center">
               <span class="text-gray-500 text-md font-semibold mr-3 pt-1">Loại Kích Thước:
               </span>
                <span class="text-gray-500">
@@ -137,7 +137,7 @@
                   class="ml-[7px]  px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
                   value="Sân Cứng" />
               </span>
-            </div>
+            </div> -->
           </div>
 
         </div>
@@ -182,7 +182,7 @@
               </span>
             </div>
 
-            <div class="flex items-center">
+            <!-- <div class="flex items-center">
               <span class="text-gray-500 text-md font-semibold mr-3 pt-1">Loại Kích Thước:
               </span>
               <span class="text-gray-500">
@@ -206,7 +206,7 @@
                   class="ml-[7px] py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
                   value="Sân Cứng" />
               </span>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

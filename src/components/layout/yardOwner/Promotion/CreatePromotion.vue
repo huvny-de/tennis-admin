@@ -57,7 +57,7 @@
                         </div>
                         <div>
                             <label class="text-[#747474]" for="username">Mã Code</label>
-                            <input-component class="w-[90%] mt-2 text-sm focus-ring-200" placeholder="Ví dụ : Sân 1A" />
+                            <input-component class="w-[90%] mt-2 text-sm focus-ring-200" placeholder="Ví dụ : landau123" />
                         </div>
                         <div>
                             <label class="text-[#747474]" for="username">Ngày Hiệu Lực</label>
@@ -69,9 +69,14 @@
                             <input-component type="date" placeholder="Nhập chiều rộng . Ví dụ : 32.5"
                                 class="w-[90%] mt-2 border-gray-800 text-sm text-gray-600 focus-ring-200" />
                         </div>
+                         <div>
+                            <label class="text-[#747474]" for="username">Số Tiền Giảm</label>
+                            <input-component type="number" placeholder="Nhập chiều rộng . Ví dụ : 10.000đ"
+                                class="w-[90%] mt-2 border-gray-800 text-sm text-gray-600 focus-ring-200" />
+                        </div>
                         <div>
                             <label class="text-[#747474]" for="username">Mô Tả</label>
-                            <textarea class="resize-none w-full h-18 rounded-md text-sm"></textarea>
+                            <textarea placeholder="Nhập mô tả khuyến mãi " class="resize-none w-full h-18 rounded-md text-sm"></textarea>
                         </div>
 
                     </div>
