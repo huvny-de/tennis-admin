@@ -328,6 +328,10 @@ export default {
       if(this.notify) {
         this.notify = false;
       }
+
+      if(this.menu) {
+        this.menu = false;
+      }
     }
   }
 };

@@ -1,5 +1,5 @@
 export default class User {
-    constructor(username, email, password,confirmPassword,fullName,phoneNumber,clientId) {
+    constructor(username, email, password,confirmPassword,fullName,phoneNumber,clientId,Vendor) {
       this.username = username;
       this.email = email;
       this.password = password;
@@ -7,5 +7,6 @@ export default class User {
       this.fullName = fullName;
       this.phoneNumber = phoneNumber;
       this.clientId = clientId;
+      this.Vendor = Vendor;
     }
   }

@@ -7,6 +7,10 @@ import "./index.css";
 import router from "../src/components/router/router.js";
 import VueApexCharts from "vue3-apexcharts";
 import vuescroll from 'vue-scroll'
+
+import ToastPlugin from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+
 import store from "./store";
 import setupInterceptor from "./services/token/setUpInterceptors"
 
@@ -64,6 +68,7 @@ app.use(store);
 setupInterceptor(store);
 app.use(VueApexCharts);
 app.use(vuescroll);
+app.use(ToastPlugin);
 
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.config.productionTip = false;

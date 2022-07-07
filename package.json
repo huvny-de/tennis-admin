@@ -21,6 +21,7 @@
     "vue": "^3.2.13",
     "vue-router": "^4.0.13",
     "vue-scroll": "^2.1.13",
+    "vue-toast-notification": "3.0",
     "vue-ui-preloader": "^1.2.1",
     "vue3-apexcharts": "^1.4.1",
     "vuex": "^4.0.2",

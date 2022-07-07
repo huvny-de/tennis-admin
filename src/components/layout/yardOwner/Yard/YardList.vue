@@ -86,7 +86,7 @@
                         flex
                         items-center
                         justify-evenly
-                        px-12
+                        px-10
                         py-2.5
                         bg-blue-400
                         text-white
@@ -238,7 +238,7 @@
                         flex
                         items-center
                         justify-evenly
-                        px-12
+                        px-10
                         py-2.5
                         bg-blue-400
                         text-white
@@ -389,7 +389,7 @@
                         flex
                         items-center
                         justify-evenly
-                        px-12
+                        px-10
                         py-2.5
                         bg-blue-400
                         text-white
@@ -572,7 +572,7 @@ export default {
       this.countClick++;
     },
     showAlert() {
-      swal("Bạn có chắc chắn sẽ xóa sân này không ?",{
+      swal("Bạn có chắc chắn sẽ xóa sân này không ?", {
         icon: "warning",
         buttons: true,
         dangerMode: true,

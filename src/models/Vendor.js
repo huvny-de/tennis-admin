@@ -1,13 +1,13 @@
 export default class Vendor {
-    constructor(ownerId, vendorName, avtUrl, noCourtForRent, openTime, closeTime , email , phoneNumber, address) {
-        this.ownerId = ownerId;
-        this.vendorName = vendorName;
-        this.avtUrl = avtUrl;
+    constructor(OwnerId, VendorName, AvatarUrl, noCourtForRent, OpenTime, CloseTime , Email , PhoneNumber, Address) {
+        this.OwnerId = OwnerId;
+        this.VendorName = VendorName;
+        this.AvatarUrl = AvatarUrl;
         this.noCourtForRent = noCourtForRent;
-        this.openTime = openTime;
-        this.closeTime = closeTime;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
+        this.OpenTime = OpenTime;
+        this.CloseTime = CloseTime;
+        this.Email = Email;
+        this.PhoneNumber = PhoneNumber;
+        this.Address = Address;
     }
 }

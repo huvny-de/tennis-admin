@@ -17,6 +17,20 @@ class TokenService {
     localStorage.setItem("user", JSON.stringify(user));
   }
 
+  updateLocalVendorId(id) {
+    let user = JSON.parse(localStorage.getItem("user"));
+    user.Token.VendorId = id;
+    localStorage.setItem("user", JSON.stringify(user));
+  }
+
+  updateLocalUserProfile(profile) {
+    let user = JSON.parse(localStorage.getItem("user"));
+    user.FullName = profile.fullName;
+    user.PhoneNumber = profile.phoneNumber;
+    user.Email = profile.email;
+    localStorage.setItem("user", JSON.stringify(user));
+  }
+
   setUser(user) {
     localStorage.setItem("user", JSON.stringify(user));
   }

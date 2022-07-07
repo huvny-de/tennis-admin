@@ -4,13 +4,13 @@
     object="#66fff5"
     color1="#ffffff"
     color2="#17fd3d"
-    size="3"
+    size="8"
     speed="2"
     bg="#343a40"
     objectbg="#999793"
     opacity="80"
     disableScrolling="false"
-    name="circular"
+    name="dots"
   ></loader>
 </template>
 

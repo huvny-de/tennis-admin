@@ -1,4 +1,5 @@
 <template>
+  <preloader-component :class="loading == false ? 'hidden' : ''" />
   <div class="bg-gray-100">
     <div class="container mx-auto my-5 p-5 px-8">
       <div class="md:flex no-wrap md:-mx-2 pt-4">
@@ -7,11 +8,11 @@
           <!-- Profile Card -->
           <div class="bg-white p-3 border-t-4 border-green-400">
             <div class="image overflow-hidden">
-              <img class="h-auto w-full mx-auto" src="https://i.ibb.co/Y2JLZnc/photo-1-15224582583802095482215.jpg"
+              <img class="h-auto w-full mx-auto object-contain" src="https://i.ibb.co/Y2JLZnc/photo-1-15224582583802095482215.jpg"
                 alt="" />
             </div>
-            <h1 class="text-gray-800 font-bold text-lg leading-8 my-1">
-              Sân Tennis Đại Học Ngân Hàng
+            <h1 class="text-gray-800 font-semibold text-lg leading-8 my-1">
+              Tên Cửa Hàng : {{ vendor.VendorName ? vendor.VendorName : 'Chưa Có' }}
             </h1>
             <h4 class="
                 text-gray-600
@@ -23,7 +24,7 @@
                 pb-4
               ">
               <p class="font-semibold mr-2 text-normal">Quản lý bởi :</p>
-              <p class="text-normal">Thái Sơn</p>
+              <p class="text-normal">{{ vendor.VendorName ? currentUser.Token.FullName : 'Chưa Có' }}</p>
             </h4>
             <ul class="
                 bg-gray-100
@@ -38,13 +39,11 @@
               ">
               <li class="flex items-center py-1">
                 <span>Trạng Thái</span>
-                <span class="ml-auto"><span class="bg-green-500 py-1 px-2 rounded text-white text-sm">Chưa Đăng
-                    Ký</span></span>
+                <span class="ml-auto"><span class="bg-green-500 py-1 px-2 rounded text-white text-sm">{{ vendor.Active ?
+                    'Đang Hoạt Động' : 'Chưa Đăng Ký'
+                }}
+                  </span></span>
               </li>
-              <!-- <li class="flex items-center py-3">
-                    <span>Ngày đăng kí: </span>
-                    <span class="ml-auto">15/05/2022</span>
-                  </li> -->
             </ul>
           </div>
           <!-- End of profile card -->
@@ -74,35 +73,40 @@
                 <span class="flex items-center">
                   <div class="pl-4 pr-2 py-2 font-semibold">Địa chỉ:</div>
                   <div class="px-1 py-2">
-                    18 Linh Trung, P. Linh Trung, quận Thủ Đức, TP. Hồ Chí Minh.
+                    {{ vendor.Address ? vendor.Address : 'Chưa Có' }}
                   </div>
                 </span>
 
                 <span class="flex items-center">
                   <div class="px-4 py-2 font-semibold">Email:</div>
-                  <div class="px-1 py-2">hoangthien@gmail.com</div>
+                  <div class="px-1 py-2"> {{ vendor.Email ? vendor.Email : 'Chưa Có' }}</div>
                 </span>
 
                 <span class="flex items-center">
                   <div class="pl-4 pr-2 py-2 font-semibold">Số điện thoại:</div>
-                  <div class="px-1 py-2">0978-145-440</div>
+                  <div class="px-1 py-2"> {{ vendor.PhoneNumber ? vendor.PhoneNumber : 'Chưa Có' }}</div>
                 </span>
 
                 <span class="flex items-center">
                   <div class="pl-4 pr-2 py-2 font-semibold">
                     Khung Giờ Hoạt Động:
                   </div>
-                  <div class="py-2">5:00 - 22:00</div>
+                  <div v-if="vendor.OpenTime && vendor.CloseTime" class="py-2">{{ vendor.OpenTime }} -
+                    {{ vendor.CloseTime }}</div>
+                  <div v-else class="py-2">Chưa Có</div>
                 </span>
                 <span class="flex items-center">
                   <div class="pl-4 pr-2 py-2 font-semibold">
                     Số sân cho thuê:
                   </div>
-                  <div class="px-1 py-2">3</div>
+                  <div class="px-1 py-2">0</div>
                 </span>
                 <span class="flex items-center">
                   <div class="pl-4 pr-2 py-2 font-semibold">Ngày Đăng Kí:</div>
-                  <div class="px-1 py-2">20/05/2022</div>
+                  <div v-if="vendor.InsertedDate" class="px-1 py-2">{{ new
+                      Date(this.vendor.InsertedDate).toLocaleDateString()
+                  }}</div>
+                  <div v-else class="py-2">Chưa Có</div>
                 </span>
               </div>
             </div>
@@ -136,6 +140,35 @@
                   <Icon icon="akar-icons:sign-out"></Icon>
                   <p class="pl-2">Đăng Ký Cửa Hàng</p>
                 </button>
+
+              </div>
+              <div class="flex space-x-2 justify-center ml-2">
+                <button type="button" class="
+                  flex
+                  items-center
+                  px-11
+                  py-2.5
+                  bg-red-500
+                  text-white
+                  font-medium
+                  text-sm
+                  leading-tight
+                  uppercase
+                  rounded
+                  shadow-md
+                  hover:bg-red-700 hover:shadow-lg
+                  focus:bg-red-700
+                  focus:shadow-lg
+                  focus:outline-none
+                  focus:ring-0
+                  active:bg-red-800 active:shadow-lg
+                  transition
+                  duration-150
+                  ease-in-out
+                ">
+                  <Icon icon="ant-design:delete-filled"></Icon>
+                  <p class="pl-2">Dừng Hoạt Động</p>
+                </button>
               </div>
             </div>
           </div>
@@ -148,26 +181,58 @@
 
 <script>
 import { Icon } from "@iconify/vue";
+import Vendor from "@/models/Vendor";
 import TokenService from '@/services/token/token.service';
 import UserService from '@/services/user.service';
 export default {
   components: {
     Icon,
   },
+  created() {
+    this.currentUser = TokenService.getUser();
+  },
   mounted() {
-    let user = TokenService.getUser();
-    let vendorId = user.Token.VendorId;
+    this.loading = true;
+
+    let vendorId = this.currentUser.Token.VendorId;
 
     if (vendorId !== 0) {
       UserService.getVendorProfile(vendorId)
         .then((res) => {
-          this.storeProfile = res.data
+          this.vendor = res.data
+          if (this.vendor.OpenTime && this.vendor.CloseTime) {
+            let hour_opentime = new Date(this.vendor.OpenTime).getHours().toString();
+            let minute_opentime = new Date(this.vendor.OpenTime).getMinutes().toString();
+
+            if (minute_opentime.length < 2) {
+              minute_opentime = '0' + minute_opentime;
+            }
+
+            this.vendor.OpenTime = `${hour_opentime}:${minute_opentime}`
+            console.log(this.vendor.OpenTime)
+
+
+            let hour_closetime = new Date(this.vendor.CloseTime).getHours().toString();
+            let minute_closetime = new Date(this.vendor.CloseTime).getMinutes().toString();
+
+            if (minute_closetime.length < 2) {
+              minute_closetime = '0' + minute_closetime;
+            }
+
+            this.vendor.CloseTime = `${hour_closetime}:${minute_closetime}`
+
+
+          }
         }).catch(err => console.log(err))
+
+      this.loading = false;
     }
-    },
+  },
   data() {
     return {
-      storeProfile: ''
+      vendor: new Vendor(),
+      currentUser: '',
+      loading: false
     }
   }
 

@@ -8,7 +8,7 @@
           <!-- Profile Card -->
           <div class="bg-white p-3 border-t-4 border-green-400">
             <div class="image overflow-hidden">
-              <img class="h-64 w-full mx-auto" :src="vendor.avtUrl" alt="" />
+              <img @load="closeWaiting" class="h-64 w-full mx-auto object-contain" :src="vendor.AvatarUrl" alt="" />
             </div>
             <label class="block mt-4">
               <span class="sr-only">Choose File</span>
@@ -39,7 +39,7 @@
         <div class="w-full md:w-3/4 mx-2 h-full">
           <!-- Profile tab -->
           <!-- About Section -->
-          <form @sumbit.prevent="createVendor">
+          <form @submit.prevent="createVendor">
 
             <div class="bg-white p-3 shadow-sm rounded-sm">
               <div class="
@@ -67,7 +67,7 @@
                 <div>
                   <label class="text-[#747474]" for="username">Tên Cửa Hàng</label>
                   <div class="relative">
-                    <p v-if="!vendor.vendorName" class="text-2xl text-red-500 absolute right-12 top-4">
+                    <p v-if="!vendor.VendorName" class="text-2xl text-red-500 absolute right-12 top-4">
                       *
                     </p>
                     <input placeholder="Tên Cửa Hàng" type="text" class="
@@ -83,7 +83,7 @@
                         focus:outline-none focus:ring-50
                         mb-2
                         pr-8
-                      " required v-model="vendor.vendorName" />
+                      " required v-model="vendor.VendorName" />
                     <!-- <p v-if="err.errVendorName" class="
                         absolute
                         top-[138%]
@@ -99,7 +99,7 @@
                   <label class="text-[#747474]" for="username">Email</label>
                   <!-- <input-component type="email" class="w-[90%] mt-2 text-sm" value="sonstarnguyen@gmail.com" /> -->
                   <div class="relative">
-                    <p v-if="!vendor.email" class="text-2xl text-red-500 absolute right-12 top-4">
+                    <p v-if="!vendor.Email" class="text-2xl text-red-500 absolute right-12 top-4">
                       *
                     </p>
                     <input placeholder="Email" type="email" class="
@@ -115,7 +115,7 @@
                         focus:outline-none focus:ring-50
                         mb-2
                         pr-8
-                      " required v-model="vendor.email" />
+                      " required v-model="vendor.Email" />
                     <!-- <p v-if="err.errVendorName" class="
                         absolute
                         top-[138%]
@@ -131,7 +131,7 @@
                   <label class="text-[#747474]" for="username">Giờ Mở Cửa</label>
                   <!-- <input-component type="time" class="w-[90%] mt-2 border-gray-800 text-sm text-gray-600" /> -->
                   <div class="relative">
-                    <p v-if="!vendor.openTime" class="text-2xl text-red-500 absolute right-12 top-4">
+                    <p v-if="!vendor.OpenTime" class="text-2xl text-red-500 absolute right-12 top-4">
                       *
                     </p>
                     <input placeholder="Email" type="time" class="
@@ -147,7 +147,7 @@
                         focus:outline-none focus:ring-50
                         mb-2
                         pr-8
-                      " required v-model="vendor.openTime" />
+                      " required v-model="vendor.OpenTime" />
                     <!-- <p v-if="err.errVendorName" class="
                         absolute
                         top-[138%]
@@ -165,7 +165,7 @@
                   <!-- <input-component type="time" class="w-[90%] mt-2 border-gray-800 text-sm text-gray-600" value="Admin" /> -->
 
                   <div class="relative">
-                    <p v-if="!vendor.closeTime" class="text-2xl text-red-500 absolute right-12 top-4">
+                    <p v-if="!vendor.CloseTime" class="text-2xl text-red-500 absolute right-12 top-4">
                       *
                     </p>
                     <input placeholder="Email" type="time" class="
@@ -181,7 +181,7 @@
                         focus:outline-none focus:ring-50
                         mb-2
                         pr-8
-                      " required v-model="vendor.closeTime" />
+                      " required v-model="vendor.CloseTime" />
                     <!-- <p v-if="err.errVendorName" class="
                         absolute
                         top-[138%]
@@ -199,7 +199,7 @@
                   <label class="text-[#747474]" for="phoneNumber">Số Điện Thoại</label>
                   <!-- <input-component type="tel" class="w-[90%] mt-2 text-sm" value="0978145440" /> -->
                   <div class="relative">
-                    <p v-if="!vendor.phoneNumber" class="text-2xl text-red-500 absolute right-12 top-4">
+                    <p v-if="!vendor.PhoneNumber" class="text-2xl text-red-500 absolute right-12 top-4">
                       *
                     </p>
                     <input placeholder="Số Điện Thoại" type="tel" class="
@@ -215,7 +215,7 @@
                         focus:outline-none focus:ring-50
                         mb-2
                         pr-8
-                      " required v-model="vendor.phoneNumber" />
+                      " required v-model="vendor.PhoneNumber" />
                     <!-- <p v-if="err.errVendorName" class="
                         absolute
                         top-[138%]
@@ -232,10 +232,10 @@
                   <label class="text-[#747474]" for="username">Địa chỉ</label>
                   <!-- <textarea class="w-[90%] mt-2 h-13 resize-none overflow rounded-md text-sm"></textarea> -->
                   <div class="relative w-[90%]">
-                    <p v-if="!vendor.address" class="text-2xl text-red-500 absolute right-4 top-6">
+                    <p v-if="!vendor.Address" class="text-2xl text-red-500 absolute right-4 top-6">
                       *
                     </p>
-                    <textarea v-model="vendor.address" placeholder="Địa chỉ"
+                    <textarea v-model="vendor.Address" placeholder="Địa chỉ"
                       class="w-full mt-2 h-13 resize-none overflow rounded-md text-sm" required></textarea>
                     <!-- <p v-if="err.errVendorName" class="
                         absolute
@@ -283,34 +283,7 @@
                     <p class="pl-2">Cập Nhật</p>
                   </button>
                 </div>
-                <div class="flex space-x-2 justify-center ml-2">
-                  <button type="button" class="
-                  flex
-                  items-center
-                  px-11
-                  py-2.5
-                  bg-red-500
-                  text-white
-                  font-medium
-                  text-sm
-                  leading-tight
-                  uppercase
-                  rounded
-                  shadow-md
-                  hover:bg-red-700 hover:shadow-lg
-                  focus:bg-red-700
-                  focus:shadow-lg
-                  focus:outline-none
-                  focus:ring-0
-                  active:bg-red-800 active:shadow-lg
-                  transition
-                  duration-150
-                  ease-in-out
-                ">
-                    <Icon icon="ant-design:delete-filled"></Icon>
-                    <p class="pl-2">Dừng Hoạt Động</p>
-                  </button>
-                </div>
+              
               </div>
               <div v-else class="flex space-x-2 justify-center ">
                 <button type="submit" class="
@@ -361,6 +334,8 @@ export default {
     Icon,
   },
   mounted() {
+    this.loading = true;
+
     this.userProfile = TokenService.getUser().Token;
     if (this.userProfile.VendorId !== 0) {
       this.existVendorId = true
@@ -368,6 +343,27 @@ export default {
       UserService.getVendorProfile(this.userProfile.VendorId)
         .then((res) => {
           this.vendor = res.data
+          if (this.vendor.OpenTime && this.vendor.CloseTime) {
+            let hour_opentime = new Date(this.vendor.OpenTime).getHours().toString();
+            let minute_opentime = new Date(this.vendor.OpenTime).getMinutes().toString();
+
+            if (minute_opentime.length < 2) {
+              minute_opentime = '0' + minute_opentime;
+            }
+
+            this.vendor.OpenTime = `${hour_opentime}:${minute_opentime}`
+
+
+            let hour_closetime = new Date(this.vendor.CloseTime).getHours().toString();
+            let minute_closetime = new Date(this.vendor.CloseTime).getMinutes().toString();
+
+            if (minute_closetime.length < 2) {
+              minute_closetime = '0' + minute_closetime;
+            }
+
+            this.vendor.CloseTime = `${hour_closetime}:${minute_closetime}`
+          }
+
         }).catch(err => {
           console.log(err)
         })
@@ -378,6 +374,7 @@ export default {
         this.vendor.avtUrl = this.avtUrlDefault;
       }
     }
+    this.loading = false;
   },
   data() {
     return {
@@ -391,10 +388,22 @@ export default {
   methods: {
     createVendor() {
       this.loading = true;
+      this.vendor.ownerId = this.userProfile.UserId;
 
       UserService.createVendorProfile(this.vendor)
         .then(res => {
-          console.log(res.data)
+          // reset value of form
+          this.vendor = new Vendor();
+          if (res.data) {
+            UserService.getOwnerProfile(this.userProfile.UserId)
+              .then(res => {
+                let user_profile = res.data;
+                let vendorId = user_profile.Vendor[0].Id;
+                TokenService.updateLocalVendorId(vendorId);
+              }).catch(err => {
+                console.log(err)
+              })
+          }
         }).catch(err => {
           console.log(err)
         }).finally(() => this.loading = false)
@@ -415,14 +424,16 @@ export default {
       axios
         .post(baseUrlImgbb + "/upload", body)
         .then((res) => {
-          this.vendor.avtUrl = res.data.data.image.url;
+          this.vendor.AvatarUrl = res.data.data.image.url;
         })
         .catch((err) => {
           console.log(err);
-        })
-        .finally(() => {
           this.loading = false;
-        });
+        })
+       
+    },
+    closeWaiting() {
+      this.loading = false;
     }
   }
 };

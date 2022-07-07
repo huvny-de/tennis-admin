@@ -37,7 +37,7 @@
             />
             <div class="flex flex-col ml-2">
               <span>
-                <p class="text-md font-semibold">Thái Sơn</p>
+                <p class="text-md font-semibold">{{currentUser.FullName}}</p>
               </span>
               <span>
                 <p class="text-xs">Chủ Sân</p>
@@ -362,14 +362,19 @@
 
 <script>
 import { Icon } from "@iconify/vue";
+import TokenService from '@/services/token/token.service';
 export default {
   components: {
     Icon,
+  },
+  created() {
+    this.currentUser = TokenService.getUser().Token;
   },
   data() {
     return {
       isActive: "dashboard",
       isSelectedTab: "",
+      currentUser : ''
     };
   },
   methods: {

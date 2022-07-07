@@ -1,0 +1,8 @@
+   this.$toast.open({
+      message: 'Cập Nhật Thành Công !',
+      position: 'top-left',
+      type: 'success',
+    });
+
+
+    Link tham khảo : https://github.com/ankurk91/vue-toast-notification

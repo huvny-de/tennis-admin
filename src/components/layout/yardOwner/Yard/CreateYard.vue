@@ -6,26 +6,14 @@
         <!-- Profile Card -->
         <div class="bg-white p-3 border-t-4 border-green-400">
           <div class="image overflow-hidden">
-            <img class="h-auto w-full mx-auto" src="https://i.ibb.co/Y2JLZnc/photo-1-15224582583802095482215.jpg"
-              alt="" />
+            <img class="h-64 w-full mx-auto object-contain"
+              src="https://i.ibb.co/Y2JLZnc/photo-1-15224582583802095482215.jpg" alt="" />
           </div>
           <label class="block mt-4">
             <span class="sr-only">Choose File</span>
-            <input @change="uploadImg" type="file" class="
-                  block
-                  w-full
-                  text-sm text-gray-500
-                  file:mr-4
-                  file:py-2
-                  file:px-4
-                  file:rounded-full
-                  file:border-0
-                  file:text-sm
-                  file:font-semibold
-                  file:bg-blue-50
-                  file:text-blue-700
-                  hover:file:bg-blue-100
-                " accept="image/*" />
+            <input @change="uploadImg" type="file"
+              class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+              accept="image/*" />
           </label>
         </div>
         <!-- End of profile card -->
@@ -36,15 +24,7 @@
         <!-- Profile tab -->
         <!-- About Section -->
         <div class="bg-white p-3 shadow-sm rounded-sm">
-          <div class="
-                flex
-                items-center
-                space-x-2
-                font-semibold
-                text-gray-600
-                leading-8
-                px-4
-              ">
+          <div class="flex items-center space-x-2 font-semibold text-gray-600 leading-8 px-4">
             <span clas="text-green-500">
               <font-awesome-icon icon="user" class="text-lg" />
             </span>
@@ -54,26 +34,30 @@
           <div class="grid md:grid-cols-2 gap-2 px-4 pb-5 mt-4 sm:grid-cols-1 text-normal">
             <div>
               <label class="text-[#747474]" for="username">Tên Sân</label>
-              <input-component class="w-[90%] mt-2 text-sm focus-ring-200" placeholder="Ví dụ : Sân 1A" />
+              <div class="relative">
+                <p v-if="!yard.name" class="text-2xl text-red-500 absolute right-12 top-4">
+                  *
+                </p>
+                <input placeholder="Tên Sân" type="text"
+                  class="mt-2 w-[90%] px-3 py-2 place-holder-grey-400 text-grey-700 rounded text-md shadow focus:outline-none focus:ring-50 mb-2 pr-8"
+                  required v-model="yard.name" />
+                <!-- <p v-if="err.errVendorName" class="
+                        absolute
+                        top-[138%]
+                        left-0
+                        error-text
+                        text-center text-red-700
+                      " role="alert">
+                    * {{ err.errVendorName }}
+                  </p> -->
+              </div>
             </div>
-            <div class="flex items-center justify-around mt-[-35px]">
+            <div class="flex items-center justify-start mt-[-6px]">
               <span>
                 <label class="text-[#747474]" for="username">Loại Sân</label>
-                <select id="small" class="
-                    rounded-lg
-                    mt-2
-                    text-md
-                    block
-                    pr-8
-                    W-full
-                    text-sm text-gray-900
-                    bg-gray-50
-                    border border-gray-500
-                    focus:ring-blue-500 focus:border-blue-500
-                  ">
-                  <option selected="true" value="1">
-                    Sân Đất Nện
-                  </option>
+                <select id="small"
+                  class="rounded-lg mt-2 text-md block pr-8 W-full text-sm text-gray-900 bg-gray-50 border border-gray-500 focus:ring-blue-500 focus:border-blue-500">
+                  <option selected="true" value="1">Sân Đất Nện</option>
                   <option value="2">Sân Cỏ</option>
                   <option value="2">Sân Cứng</option>
                 </select>
@@ -81,22 +65,52 @@
             </div>
             <div>
               <label class="text-[#747474]" for="username">Chiều Dài</label>
-              <input-component placeholder="Nhập chiều dài . Ví dụ : 32.5"
-                class="w-[90%] mt-2 border-gray-800 text-sm text-gray-600 focus-ring-200" />
+              <div class="relative">
+                <p v-if="!yard.width" class="text-2xl text-red-500 absolute right-12 top-4">
+                  *
+                </p>
+                <input placeholder="Chiều Dài" type="number"
+                  class="mt-2 w-[90%] px-3 py-2 place-holder-grey-400 text-grey-700 rounded text-md shadow focus:outline-none focus:ring-50 mb-2 pr-8"
+                  required v-model="yard.width" />
+                <!-- <p v-if="err.errVendorName" class="
+                        absolute
+                        top-[138%]
+                        left-0
+                        error-text
+                        text-center text-red-700
+                      " role="alert">
+                    * {{ err.errVendorName }}
+                  </p> -->
+              </div>
             </div>
             <div>
               <label class="text-[#747474]" for="username">Chiều Rộng</label>
-              <input-component placeholder="Nhập chiều rộng . Ví dụ : 32.5"
-                class="w-[90%] mt-2 border-gray-800 text-sm text-gray-600 focus-ring-200" />
+              <div class="relative">
+                <p v-if="!yard.height" class="text-2xl text-red-500 absolute right-12 top-4">
+                  *
+                </p>
+                <input placeholder="Chiều Rộng" type="number"
+                  class="mt-2 w-[90%] px-3 py-2 place-holder-grey-400 text-grey-700 rounded text-md shadow focus:outline-none focus:ring-50 mb-2 pr-8"
+                  required v-model="yard.height" />
+                <!-- <p v-if="err.errVendorName" class="
+                        absolute
+                        top-[138%]
+                        left-0
+                        error-text
+                        text-center text-red-700
+                      " role="alert">
+                    * {{ err.errVendorName }}
+                  </p> -->
+              </div>
             </div>
 
-          </div>
-        </div>
 
-        <!--button control-->
-        <div class="w-full flex items-center justify-end mt-8">
-          <div class="flex space-x-2 justify-center " @click="createYard">
-            <button type="button" class="
+          </div>
+
+          <!--button control-->
+          <div class="w-full flex items-center justify-end mt-8 pb-2">
+            <div class="flex space-x-2 justify-center " @click="createYard">
+              <button type="button" class="
                   flex
                   items-center
                   px-10
@@ -119,11 +133,15 @@
                   duration-150
                   ease-in-out
                 ">
-              <Icon icon="akar-icons:circle-plus-fill"></Icon>
-              <p class="pl-2">Tạo Sân</p>
-            </button>
+                <Icon icon="akar-icons:circle-plus-fill"></Icon>
+                <p class="pl-2">Tạo Sân</p>
+              </button>
+            </div>
           </div>
         </div>
+
+
+
         <!-- End of about section -->
       </div>
     </div>
@@ -133,18 +151,24 @@
 <script>
 import { Icon } from "@iconify/vue";
 import swal from "sweetalert";
+import Yard from "@/models/Yard.js";
 
 export default {
   components: {
     Icon,
   },
+  data() {
+    return {
+      yard: new Yard(),
+    };
+  },
   methods: {
     createYard() {
-      swal('Xóa Thành Công', {
-        icon: 'success'
-      })
-    }
-  }
+      swal("Xóa Thành Công", {
+        icon: "success",
+      });
+    },
+  },
 };
 </script>
 
@@ -154,6 +178,6 @@ select {
   -moz-appearance: none;
   appearance: none;
   padding: 10px;
-  width: 150px
+  width: 150px;
 }
 </style>
