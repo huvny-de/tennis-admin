@@ -1,4 +1,5 @@
 <template>
+  <preloader-component :class="loading == false ? 'hidden' : ''" />
   <div class="bg-gray-100">
     <div class="container mx-auto my-5 p-5 px-8">
       <div class="md:flex no-wrap md:-mx-2 pt-4">
@@ -7,18 +8,11 @@
           <!-- Profile Card -->
           <div class="bg-white p-3 border-t-4 border-green-400">
             <div class="image overflow-hidden">
-              <img
-                class="h-auto w-full mx-auto"
-                src="https://i.ibb.co/Y2JLZnc/photo-1-15224582583802095482215.jpg"
-                alt=""
-              />
+              <img class="h-64 w-full mx-auto" :src="vendor.avtUrl" alt="" />
             </div>
             <label class="block mt-4">
               <span class="sr-only">Choose File</span>
-              <input
-                @change="uploadImg"
-                type="file"
-                class="
+              <input @change="uploadImg" type="file" class="
                   block
                   w-full
                   text-sm text-gray-500
@@ -32,17 +26,11 @@
                   file:bg-blue-50
                   file:text-blue-700
                   hover:file:bg-blue-100
-                "
-                accept="image/*"
-              />
+                  pb-2
+                " accept="image/*" />
             </label>
 
-            <div class="flex flex-col items-start justify-start mt-3">
-              <label class="text-[#747474]" for="username">Địa chỉ</label>
-              <textarea
-                class="w-full mt-2 h-13 resize-none overflow rounded-md text-sm"
-              ></textarea>
-            </div>
+
           </div>
           <!-- End of profile card -->
           <div class="my-4"></div>
@@ -51,9 +39,10 @@
         <div class="w-full md:w-3/4 mx-2 h-full">
           <!-- Profile tab -->
           <!-- About Section -->
-          <div class="bg-white p-3 shadow-sm rounded-sm">
-            <div
-              class="
+          <form @sumbit.prevent="createVendor">
+
+            <div class="bg-white p-3 shadow-sm rounded-sm">
+              <div class="
                 flex
                 items-center
                 space-x-2
@@ -61,65 +50,213 @@
                 text-gray-600
                 leading-8
                 px-4
-              "
-            >
-              <span clas="text-green-500">
-                <font-awesome-icon icon="user" class="text-lg" />
-              </span>
-              <span class="tracking-wide text-lg">Thông Tin</span>
-            </div>
-            <!--information container-->
-            <div
-              class="grid md:grid-cols-2 gap- mt-4 sm:grid-cols-1 text-normal"
-            >
-              <div>
-                <label class="text-[#747474]" for="username"
-                  >Số Điện Thoại</label
-                >
-                <input-component
-                  class="w-[90%] mt-2 text-sm"
-                  value="0978145440"
-                />
-              </div>
-              <div>
-                <label class="text-[#747474]" for="username">Email</label>
-                <input-component
-                  class="w-[90%] mt-2 text-sm"
-                  value="sonstarnguyen@gmail.com"
-                />
-              </div>
-              <div>
-                <label class="text-[#747474]" for="username">Giờ Mở Cửa</label>
-                <input-component
-                  type="time"
-                  class="w-[90%] mt-2 border-gray-800 text-sm text-gray-600"
-                />
-              </div>
-              <div>
-                <label class="text-[#747474]" for="username"
-                  >Giờ Đóng Cửa</label
-                >
-                <input-component
-                  type="time"
-                  class="w-[90%] mt-2 border-gray-800 text-sm text-gray-600"
-                  value="Admin"
-                />
-              </div>
-              <div>
-                <label class="text-[#747474]" for="username"
-                  >Số Sân Cho Thuê</label
-                >
-                <input-component class="w-[90%] mt-2 text-sm" value="3" />
-              </div>
-            </div>
-          </div>
+              ">
+                <span clas="text-green-500">
+                  <font-awesome-icon icon="user" class="text-lg" />
+                </span>
+                <div class="flex items-center w-full justify-between">
+                  <span class="tracking-wide text-lg">Thông Tin</span>
+                  <p class="text-red-500 font-normal text-right text-sm italic">
+                    Ghi chú: (*) Các trường bắt buộc nhập
+                  </p>
+                </div>
 
-          <!--button control-->
-          <div class="w-full flex items-center justify-end mt-8">
-            <div class="flex space-x-2 justify-center ">
-              <button
-                type="button"
-                class="
+              </div>
+              <!--information container-->
+              <div class="grid md:grid-cols-2 gap- mt-4 sm:grid-cols-1 text-normal px-4">
+                <div>
+                  <label class="text-[#747474]" for="username">Tên Cửa Hàng</label>
+                  <div class="relative">
+                    <p v-if="!vendor.vendorName" class="text-2xl text-red-500 absolute right-12 top-4">
+                      *
+                    </p>
+                    <input placeholder="Tên Cửa Hàng" type="text" class="
+                        mt-2
+                        w-[90%]
+                        px-3
+                        py-2
+                        place-holder-grey-400
+                        text-grey-700
+                        rounded
+                        text-md
+                        shadow
+                        focus:outline-none focus:ring-50
+                        mb-2
+                        pr-8
+                      " required v-model="vendor.vendorName" />
+                    <!-- <p v-if="err.errVendorName" class="
+                        absolute
+                        top-[138%]
+                        left-0
+                        error-text
+                        text-center text-red-700
+                      " role="alert">
+                    * {{ err.errVendorName }}
+                  </p> -->
+                  </div>
+                </div>
+                <div>
+                  <label class="text-[#747474]" for="username">Email</label>
+                  <!-- <input-component type="email" class="w-[90%] mt-2 text-sm" value="sonstarnguyen@gmail.com" /> -->
+                  <div class="relative">
+                    <p v-if="!vendor.email" class="text-2xl text-red-500 absolute right-12 top-4">
+                      *
+                    </p>
+                    <input placeholder="Email" type="email" class="
+                        mt-2
+                        w-[90%]
+                        px-3
+                        py-2
+                        place-holder-grey-400
+                        text-grey-700
+                        rounded
+                        text-md
+                        shadow
+                        focus:outline-none focus:ring-50
+                        mb-2
+                        pr-8
+                      " required v-model="vendor.email" />
+                    <!-- <p v-if="err.errVendorName" class="
+                        absolute
+                        top-[138%]
+                        left-0
+                        error-text
+                        text-center text-red-700
+                      " role="alert">
+                    * {{ err.errVendorName }}
+                  </p> -->
+                  </div>
+                </div>
+                <div class="mt-2">
+                  <label class="text-[#747474]" for="username">Giờ Mở Cửa</label>
+                  <!-- <input-component type="time" class="w-[90%] mt-2 border-gray-800 text-sm text-gray-600" /> -->
+                  <div class="relative">
+                    <p v-if="!vendor.openTime" class="text-2xl text-red-500 absolute right-12 top-4">
+                      *
+                    </p>
+                    <input placeholder="Email" type="time" class="
+                        mt-2
+                        w-[90%]
+                        px-3
+                        py-2
+                        place-holder-grey-400
+                        text-grey-700
+                        rounded
+                        text-md
+                        shadow
+                        focus:outline-none focus:ring-50
+                        mb-2
+                        pr-8
+                      " required v-model="vendor.openTime" />
+                    <!-- <p v-if="err.errVendorName" class="
+                        absolute
+                        top-[138%]
+                        left-0
+                        error-text
+                        text-center text-red-700
+                      " role="alert">
+                    * {{ err.errVendorName }}
+                  </p> -->
+                  </div>
+                </div>
+
+                <div class="mt-2">
+                  <label class="text-[#747474]" for="username">Giờ Đóng Cửa</label>
+                  <!-- <input-component type="time" class="w-[90%] mt-2 border-gray-800 text-sm text-gray-600" value="Admin" /> -->
+
+                  <div class="relative">
+                    <p v-if="!vendor.closeTime" class="text-2xl text-red-500 absolute right-12 top-4">
+                      *
+                    </p>
+                    <input placeholder="Email" type="time" class="
+                        mt-2
+                        w-[90%]
+                        px-3
+                        py-2
+                        place-holder-grey-400
+                        text-grey-700
+                        rounded
+                        text-md
+                        shadow
+                        focus:outline-none focus:ring-50
+                        mb-2
+                        pr-8
+                      " required v-model="vendor.closeTime" />
+                    <!-- <p v-if="err.errVendorName" class="
+                        absolute
+                        top-[138%]
+                        left-0
+                        error-text
+                        text-center text-red-700
+                      " role="alert">
+                    * {{ err.errVendorName }}
+                  </p> -->
+                  </div>
+                </div>
+
+
+                <div class="mt-2">
+                  <label class="text-[#747474]" for="phoneNumber">Số Điện Thoại</label>
+                  <!-- <input-component type="tel" class="w-[90%] mt-2 text-sm" value="0978145440" /> -->
+                  <div class="relative">
+                    <p v-if="!vendor.phoneNumber" class="text-2xl text-red-500 absolute right-12 top-4">
+                      *
+                    </p>
+                    <input placeholder="Số Điện Thoại" type="tel" class="
+                        mt-2
+                        w-[90%]
+                        px-3
+                        py-2
+                        place-holder-grey-400
+                        text-grey-700
+                        rounded
+                        text-md
+                        shadow
+                        focus:outline-none focus:ring-50
+                        mb-2
+                        pr-8
+                      " required v-model="vendor.phoneNumber" />
+                    <!-- <p v-if="err.errVendorName" class="
+                        absolute
+                        top-[138%]
+                        left-0
+                        error-text
+                        text-center text-red-700
+                      " role="alert">
+                    * {{ err.errVendorName }}
+                  </p> -->
+                  </div>
+                </div>
+
+                <div class="flex flex-col items-start justify-start mt-3">
+                  <label class="text-[#747474]" for="username">Địa chỉ</label>
+                  <!-- <textarea class="w-[90%] mt-2 h-13 resize-none overflow rounded-md text-sm"></textarea> -->
+                  <div class="relative w-[90%]">
+                    <p v-if="!vendor.address" class="text-2xl text-red-500 absolute right-4 top-6">
+                      *
+                    </p>
+                    <textarea v-model="vendor.address" placeholder="Địa chỉ"
+                      class="w-full mt-2 h-13 resize-none overflow rounded-md text-sm" required></textarea>
+                    <!-- <p v-if="err.errVendorName" class="
+                        absolute
+                        top-[138%]
+                        left-0
+                        error-text
+                        text-center text-red-700
+                      " role="alert">
+                    * {{ err.errVendorName }}
+                  </p> -->
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!--button control-->
+            <div class="w-full flex items-center justify-end mt-8">
+              <div v-if="existVendorId" class="flex items-center">
+                <div class="flex space-x-2 justify-center ">
+                  <button type="button" class="
                   flex
                   items-center
                   px-10
@@ -141,16 +278,13 @@
                   transition
                   duration-150
                   ease-in-out
-                "
-              >
-                <Icon icon="dashicons:update-alt"></Icon>
-                <p class="pl-2">Cập Nhật</p>
-              </button>
-            </div>
-            <div class="flex space-x-2 justify-center ml-2">
-              <button
-                type="button"
-                class="
+                ">
+                    <Icon icon="dashicons:update-alt"></Icon>
+                    <p class="pl-2">Cập Nhật</p>
+                  </button>
+                </div>
+                <div class="flex space-x-2 justify-center ml-2">
+                  <button type="button" class="
                   flex
                   items-center
                   px-11
@@ -172,14 +306,44 @@
                   transition
                   duration-150
                   ease-in-out
-                "
-              >
-                <Icon icon="ant-design:delete-filled"></Icon>
-                <p class="pl-2">Dừng Hoạt Động</p>
-              </button>
+                ">
+                    <Icon icon="ant-design:delete-filled"></Icon>
+                    <p class="pl-2">Dừng Hoạt Động</p>
+                  </button>
+                </div>
+              </div>
+              <div v-else class="flex space-x-2 justify-center ">
+                <button type="submit" class="
+                  flex
+                  items-center
+                  px-10
+                  py-2.5
+                  bg-[#50AE01]
+                  text-white
+                  font-medium
+                  text-sm
+                  leading-tight
+                  uppercase
+                  rounded
+                  shadow-md
+                  hover:bg-[#78d22f] hover:shadow-lg
+                  focus:bg-[#78d22f]
+                  focus:shadow-lg
+                  focus:outline-none
+                  focus:ring-0
+                  active:bg-green-700 active:shadow-lg
+                  transition
+                  duration-150
+                  ease-in-out
+                ">
+                  <Icon icon="akar-icons:circle-plus-fill"></Icon>
+                  <p class="pl-2">Tạo Cửa Hàng</p>
+                </button>
+              </div>
             </div>
-          </div>
-          <!-- End of about section -->
+            <!-- End of about section -->
+          </form>
+
         </div>
       </div>
     </div>
@@ -188,9 +352,78 @@
 
 <script>
 import { Icon } from "@iconify/vue";
+import Vendor from "@/models/Vendor";
+import axios from 'axios'
+import UserService from "@/services/user.service";
+import TokenService from "@/services/token/token.service";
 export default {
   components: {
     Icon,
   },
+  mounted() {
+    this.userProfile = TokenService.getUser().Token;
+    if (this.userProfile.VendorId !== 0) {
+      this.existVendorId = true
+
+      UserService.getVendorProfile(this.userProfile.VendorId)
+        .then((res) => {
+          this.vendor = res.data
+        }).catch(err => {
+          console.log(err)
+        })
+
+    } else {
+      this.existVendorId = false
+      if (!this.vendor.avtUrl) {
+        this.vendor.avtUrl = this.avtUrlDefault;
+      }
+    }
+  },
+  data() {
+    return {
+      loading: false,
+      vendor: new Vendor(),
+      userProfile: '',
+      existVendorId: false,
+      avtUrlDefault: 'https://i.ibb.co/Kmr0F1Z/store.webp'
+    }
+  },
+  methods: {
+    createVendor() {
+      this.loading = true;
+
+      UserService.createVendorProfile(this.vendor)
+        .then(res => {
+          console.log(res.data)
+        }).catch(err => {
+          console.log(err)
+        }).finally(() => this.loading = false)
+
+      // location.reload();
+    },
+    uploadImg(evt) {
+      this.loading = true;
+      let apiKey = "3ce508644197fb15dcf4e916cf328c21";
+      const baseUrlImgbb = "https://api.imgbb.com/1";
+
+      this.selectedFile = evt.target.files[0];
+
+      let body = new FormData();
+      body.set("key", apiKey);
+      body.append("image", this.selectedFile);
+
+      axios
+        .post(baseUrlImgbb + "/upload", body)
+        .then((res) => {
+          this.vendor.avtUrl = res.data.data.image.url;
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    }
+  }
 };
 </script>

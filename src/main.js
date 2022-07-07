@@ -8,6 +8,7 @@ import router from "../src/components/router/router.js";
 import VueApexCharts from "vue3-apexcharts";
 import vuescroll from 'vue-scroll'
 import store from "./store";
+import setupInterceptor from "./services/token/setUpInterceptors"
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -60,6 +61,7 @@ const app = createApp(App);
 app.use(router);
 app.use(loader);
 app.use(store);
+setupInterceptor(store);
 app.use(VueApexCharts);
 app.use(vuescroll);
 

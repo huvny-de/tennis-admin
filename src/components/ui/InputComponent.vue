@@ -10,7 +10,7 @@
       text-md
       shadow
       focus:outline-none
-      focus:ring
+      focus:ring-100
       mb-8
     "
   >

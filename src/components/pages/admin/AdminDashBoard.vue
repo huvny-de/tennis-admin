@@ -35,9 +35,19 @@
     },
     methods: {
       changeCurrentComponent(currentTab) {
-        this.isSelectedTab = currentTab;
-        this.searchValue = "";
+        let user = JSON.parse(localStorage.getItem('user'));
+        if (!user) {
+          this.$store.dispatch('auth/logout');
+          this.$store.push('/login');
+        } else {
+          this.isSelectedTab = currentTab;
+          this.searchValue = "";
+        }
+  
       },
+      isLoggedIn() {
+  
+      }
     },
     watch: {
       isSelectedTab() {

@@ -1,10 +1,12 @@
-import axios from "axios";
-const API_URL = "https://171.244.136.52:4443/api/";
+import axiosIntance from "./token/api";
+import TokenService from "./token/token.service";
+
+const BASE_URL = 'https://171.244.136.52:4443/api/';
 
 class AuthService {
   login(user) {
-    return axios
-      .post(API_URL + "User/SignIn", {
+    return axiosIntance
+      .post(BASE_URL +  "User/SignIn", {
         Username: user.username,
         Password: user.password,
         autoSignIn: true,
@@ -12,16 +14,16 @@ class AuthService {
       })
       .then((response) => {
         if (response.data.Token) {
-          localStorage.setItem("user", JSON.stringify(response.data));
+          TokenService.setUser(response.data);
         }
         return response.data;
       });
   }
   logout() {
-    localStorage.removeItem("user");
+    TokenService.removeUser();
   }
   register(user) {
-    return axios.post(API_URL + "User/Register", {
+    return axiosIntance.post("/User/Register", {
       username: user.username,
       email: user.email,
       password: user.password,

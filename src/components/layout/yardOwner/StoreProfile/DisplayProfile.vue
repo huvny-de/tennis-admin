@@ -7,17 +7,13 @@
           <!-- Profile Card -->
           <div class="bg-white p-3 border-t-4 border-green-400">
             <div class="image overflow-hidden">
-              <img
-                class="h-auto w-full mx-auto"
-                src="https://i.ibb.co/Y2JLZnc/photo-1-15224582583802095482215.jpg"
-                alt=""
-              />
+              <img class="h-auto w-full mx-auto" src="https://i.ibb.co/Y2JLZnc/photo-1-15224582583802095482215.jpg"
+                alt="" />
             </div>
             <h1 class="text-gray-800 font-bold text-lg leading-8 my-1">
               Sân Tennis Đại Học Ngân Hàng
             </h1>
-            <h4
-              class="
+            <h4 class="
                 text-gray-600
                 font-lg
                 text-semibold
@@ -25,13 +21,11 @@
                 flex
                 items-center
                 pb-4
-              "
-            >
+              ">
               <p class="font-semibold mr-2 text-normal">Quản lý bởi :</p>
               <p class="text-normal">Thái Sơn</p>
             </h4>
-            <ul
-              class="
+            <ul class="
                 bg-gray-100
                 text-gray-600
                 hover:text-gray-700 hover:shadow
@@ -41,16 +35,11 @@
                 divide-y
                 rounded
                 shadow-sm
-              "
-            >
+              ">
               <li class="flex items-center py-1">
                 <span>Trạng Thái</span>
-                <span class="ml-auto"
-                  ><span
-                    class="bg-green-500 py-1 px-2 rounded text-white text-sm"
-                    >Chưa Đăng Ký</span
-                  ></span
-                >
+                <span class="ml-auto"><span class="bg-green-500 py-1 px-2 rounded text-white text-sm">Chưa Đăng
+                    Ký</span></span>
               </li>
               <!-- <li class="flex items-center py-3">
                     <span>Ngày đăng kí: </span>
@@ -66,8 +55,7 @@
           <!-- Profile tab -->
           <!-- About Section -->
           <div class="bg-white p-3 shadow-sm rounded-sm">
-            <div
-              class="
+            <div class="
                 flex
                 items-center
                 space-x-2
@@ -75,8 +63,7 @@
                 text-gray-600
                 leading-8
                 px-4
-              "
-            >
+              ">
               <span clas="text-green-500">
                 <font-awesome-icon icon="user" class="text-lg" />
               </span>
@@ -123,9 +110,7 @@
             <!--button control-->
             <div class="w-full flex items-center justify-end py-4">
               <div class="flex space-x-2 justify-center">
-                <button
-                  type="button"
-                  class="
+                <button type="button" class="
                     flex
                     items-center
                     px-4
@@ -147,8 +132,7 @@
                     transition
                     duration-150
                     ease-in-out
-                  "
-                >
+                  ">
                   <Icon icon="akar-icons:sign-out"></Icon>
                   <p class="pl-2">Đăng Ký Cửa Hàng</p>
                 </button>
@@ -164,9 +148,28 @@
 
 <script>
 import { Icon } from "@iconify/vue";
+import TokenService from '@/services/token/token.service';
+import UserService from '@/services/user.service';
 export default {
   components: {
     Icon,
   },
+  mounted() {
+    let user = TokenService.getUser();
+    let vendorId = user.Token.VendorId;
+
+    if (vendorId !== 0) {
+      UserService.getVendorProfile(vendorId)
+        .then((res) => {
+          this.storeProfile = res.data
+        }).catch(err => console.log(err))
+    }
+    },
+  data() {
+    return {
+      storeProfile: ''
+    }
+  }
+
 };
 </script>
