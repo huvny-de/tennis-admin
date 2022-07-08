@@ -183,7 +183,7 @@
 import { Icon } from "@iconify/vue";
 import Vendor from "@/models/Vendor";
 import TokenService from '@/services/token/token.service';
-import UserService from '@/services/user.service';
+import VendorService from '@/services/vendor.service';
 export default {
   components: {
     Icon,
@@ -197,7 +197,7 @@ export default {
     let vendorId = this.currentUser.Token.VendorId;
 
     if (vendorId !== 0) {
-      UserService.getVendorProfile(vendorId)
+      VendorService.getVendorProfile(vendorId)
         .then((res) => {
           this.vendor = res.data
           if (this.vendor.OpenTime && this.vendor.CloseTime) {

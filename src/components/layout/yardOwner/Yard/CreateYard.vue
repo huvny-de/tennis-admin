@@ -1,47 +1,50 @@
 <template>
+  <preloader-component :class="loading == false ? 'hidden' : ''" />
   <div class="container mx-auto my-5 px-8">
-    <div class="md:flex no-wrap md:-mx-2">
-      <!-- Left Side -->
-      <div class="w-full md:w-1/3 md:mx-2">
-        <!-- Profile Card -->
-        <div class="bg-white p-3 border-t-4 border-green-400">
-          <div class="image overflow-hidden">
-            <img class="h-64 w-full mx-auto object-contain"
-              src="https://i.ibb.co/Y2JLZnc/photo-1-15224582583802095482215.jpg" alt="" />
+    <form @submit.prevent="createYard">
+      <div class="md:flex no-wrap md:-mx-2">
+        <!-- Left Side -->
+        <div class="w-full md:w-1/3 md:mx-2">
+          <!-- Profile Card -->
+          <div class="bg-white p-3 border-t-4 border-green-400">
+            <div class="image overflow-hidden">
+              <img @load="closeWaiting" class="h-64 w-full mx-auto object-contain"
+                :src="court.imageUrl ? court.imageUrl : 'https://i.ibb.co/tZBfr3J/kich-thuoc-san-tennis-2-696x372.jpg'"
+                alt="" />
+            </div>
+            <label class="block mt-4">
+              <span class="sr-only">Choose File</span>
+              <input @change="uploadImg" type="file"
+                class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                accept="image/*" />
+            </label>
           </div>
-          <label class="block mt-4">
-            <span class="sr-only">Choose File</span>
-            <input @change="uploadImg" type="file"
-              class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-              accept="image/*" />
-          </label>
+          <!-- End of profile card -->
+          <div class="my-4"></div>
         </div>
-        <!-- End of profile card -->
-        <div class="my-4"></div>
-      </div>
-      <!-- Right Side -->
-      <div class="w-full md:w-3/4 mx-2 h-full">
-        <!-- Profile tab -->
-        <!-- About Section -->
-        <div class="bg-white p-3 shadow-sm rounded-sm">
-          <div class="flex items-center space-x-2 font-semibold text-gray-600 leading-8 px-4">
-            <span clas="text-green-500">
-              <font-awesome-icon icon="user" class="text-lg" />
-            </span>
-            <span class="tracking-wide text-lg">Thông Tin</span>
-          </div>
-          <!--information container-->
-          <div class="grid md:grid-cols-1 gap-2 px-4 pb-5 mt-4 sm:grid-cols-1 text-normal">
-            <div>
-              <label class="text-[#747474]" for="username">Tên Sân</label>
-              <div class="relative">
-                <p v-if="!court.name" class="text-2xl text-red-500 absolute right-12 top-4">
-                  *
-                </p>
-                <input placeholder="Tên Sân" type="text"
-                  class="mt-2 w-80 px-3 py-2 place-holder-grey-400 text-grey-700 rounded text-md shadow focus:outline-none focus:ring-50 mb-2 pr-8"
-                  required v-model="court.name" />
-                <!-- <p v-if="err.errVendorName" class="
+        <!-- Right Side -->
+        <div class="w-full md:w-3/4 mx-2 h-full">
+          <!-- Profile tab -->
+          <!-- About Section -->
+          <div class="bg-white p-3 shadow-sm rounded-sm">
+            <div class="flex items-center space-x-2 font-semibold text-gray-600 leading-8 px-4">
+              <span clas="text-green-500">
+                <font-awesome-icon icon="user" class="text-lg" />
+              </span>
+              <span class="tracking-wide text-lg">Thông Tin</span>
+            </div>
+            <!--information container-->
+            <div class="grid md:grid-cols-1 gap-2 px-4 pb-5 mt-4 sm:grid-cols-1 text-normal">
+              <div>
+                <label class="text-[#747474]" for="username">Tên Sân</label>
+                <div class="relative w-80">
+                  <p v-if="!court.name" class="text-2xl text-red-500 absolute right-3 top-4">
+                    *
+                  </p>
+                  <input placeholder="Tên Sân" type="text"
+                    class="mt-2 w-80 px-3 py-2 place-holder-grey-400 text-grey-700 rounded text-md shadow focus:outline-none focus:ring-50 mb-2 pr-8"
+                    required v-model="court.name" />
+                  <!-- <p v-if="err.errVendorName" class="
                         absolute
                         top-[138%]
                         left-0
@@ -50,40 +53,42 @@
                       " role="alert">
                     * {{ err.errVendorName }}
                   </p> -->
+                </div>
               </div>
+              <div class="container flex items-center mt-3">
+                <div class="flex items-center justify-start mt-[-6px] mr-4">
+                  <span>
+                    <label class="text-[#747474]" for="username">Loại Sân</label>
+                    <select v-model="court.typeId" id="courtType"
+                      class="rounded-lg mt-2 text-md block pr-8 W-full text-sm text-gray-900 bg-gray-50 border border-gray-500 focus:ring-blue-500 focus:border-blue-500">
+                      <option disabled value="-1">Chọn Loại Sân</option>
+                      <option value="1">Sân Đất Nện</option>
+                      <option value="2">Sân Cỏ</option>
+                      <option value="3">Sân Cứng</option>
+                    </select>
+                  </span>
+                </div>
+                <div class="flex items-center justify-start mt-[-6px]">
+                  <span>
+                    <label class="text-[#747474]" for="username">Kích Thước Sân</label>
+                    <select v-model="court.courtSizeId" id="courtSize"
+                      class="rounded-lg mt-2 text-md block pr-8 W-full text-sm text-gray-900 bg-gray-50 border border-gray-500 focus:ring-blue-500 focus:border-blue-500">
+                      <option disabled value="-1">Chọn Kích Thước</option>
+                      <option s value="1">Kích Thước Lớn</option>
+                      <option value="2">Kích Thước Tiêu Chuẩn</option>
+                      <option value="3">Kích Thước Nhỏ</option>
+                    </select>
+                  </span>
+                </div>
+              </div>
+
+
             </div>
-            <div class="container flex items-center mt-3">
-              <div class="flex items-center justify-start mt-[-6px] mr-4">
-                <span>
-                  <label class="text-[#747474]" for="username">Loại Sân</label>
-                  <select id="small"
-                    class="rounded-lg mt-2 text-md block pr-8 W-full text-sm text-gray-900 bg-gray-50 border border-gray-500 focus:ring-blue-500 focus:border-blue-500">
-                    <option selected="true" value="1">Sân Đất Nện</option>
-                    <option value="2">Sân Cỏ</option>
-                    <option value="2">Sân Cứng</option>
-                  </select>
-                </span>
-              </div>
-              <div class="flex items-center justify-start mt-[-6px]">
-                <span>
-                  <label class="text-[#747474]" for="username">Kích Thước Sân</label>
-                  <select id="small"
-                    class="rounded-lg mt-2 text-md block pr-8 W-full text-sm text-gray-900 bg-gray-50 border border-gray-500 focus:ring-blue-500 focus:border-blue-500">
-                    <option selected="true" value="1">Kích Thước Lớn</option>
-                    <option value="2">Kích Thước Tiêu Chuẩn</option>
-                    <option value="2">Kích Thước Nhỏ</option>
-                  </select>
-                </span>
-              </div>
-            </div>
 
-
-          </div>
-
-          <!--button control-->
-          <div class="w-full flex items-center justify-end mt-8 pb-2">
-            <div class="flex space-x-2 justify-center " @click="createcourt">
-              <button type="button" class="
+            <!--button control-->
+            <div class="w-full flex items-center justify-end mt-8 pb-2">
+              <div class="flex space-x-2 justify-center ">
+                <button type="submit" class="
                   flex
                   items-center
                   px-10
@@ -106,18 +111,20 @@
                   duration-150
                   ease-in-out
                 ">
-                <Icon icon="akar-icons:circle-plus-fill"></Icon>
-                <p class="pl-2">Tạo Sân</p>
-              </button>
+                  <Icon icon="akar-icons:circle-plus-fill"></Icon>
+                  <p class="pl-2">Tạo Sân</p>
+                </button>
+              </div>
             </div>
           </div>
+
+
+
+          <!-- End of about section -->
         </div>
-
-
-
-        <!-- End of about section -->
       </div>
-    </div>
+    </form>
+
   </div>
 </template>
 
@@ -125,6 +132,9 @@
 import { Icon } from "@iconify/vue";
 import swal from "sweetalert";
 import Court from "@/models/Court.js";
+import CourtService from "@/services/court.service";
+import TokenService from "@/services/token/token.service";
+import axios from "axios";
 
 export default {
   components: {
@@ -133,13 +143,83 @@ export default {
   data() {
     return {
       court: new Court(),
+      loading: true
     };
   },
+  mounted() {
+    if (!this.court.typeId) {
+      this.court.typeId = -1
+    }
+
+    if (!this.court.courtSizeId) {
+      this.court.courtSizeId = -1
+    }
+  },
   methods: {
-    createcourt() {
-      swal("Xóa Thành Công", {
-        icon: "success",
-      });
+    createYard() {
+      this.loading = true;
+
+      if (this.court.typeId === -1) {
+        swal("Xin hãy chọn loại sân !", {
+          icon: 'warning'
+        })
+        return;
+      }
+
+      if (this.court.courtSizeId === -1) {
+        swal("Xin hãy chọn kích thước sân !", {
+          icon: 'warning'
+        })
+        return;
+      }
+
+      let vendorId = TokenService.getUser().Token.VendorId;
+      if (vendorId !== 0) {
+        this.court.vendorId = vendorId;
+        CourtService.createCourt(this.court)
+          .then(res => {
+            if (res.data) {
+              this.court = new Court();
+              this.$toast.open({
+                message: 'Tạo Sân Thành Công !',
+                position: 'top-right',
+                type: 'success',
+              });
+            }
+          }).catch(err => {
+            console.log(err)
+          }).finally(() => {
+            this.loading = false;
+          })
+      } else {
+        swal("Xin hãy tạo cửa hàng trước khi tạo sân !", {
+          icon: 'warning'
+        })
+      }
+    },
+    uploadImg(evt) {
+      this.loading = true;
+      let apiKey = "3ce508644197fb15dcf4e916cf328c21";
+      const baseUrlImgbb = "https://api.imgbb.com/1";
+
+      this.selectedFile = evt.target.files[0];
+
+      let body = new FormData();
+      body.set("key", apiKey);
+      body.append("image", this.selectedFile);
+
+      axios
+        .post(baseUrlImgbb + "/upload", body)
+        .then((res) => {
+          this.court.imageUrl = res.data.data.image.url;
+        })
+        .catch((err) => {
+          console.log(err);
+          this.loading = false;
+        });
+    },
+    closeWaiting() {
+      this.loading = false;
     },
   },
 };
@@ -151,6 +231,6 @@ select {
   -moz-appearance: none;
   appearance: none;
   padding: 10px;
-  width: 150px;
+  width: 160px;
 }
 </style>

@@ -267,8 +267,9 @@
 import { Icon } from "@iconify/vue";
 import Vendor from "@/models/Vendor";
 import axios from "axios";
-import UserService from "@/services/user.service";
+import VendorService from "@/services/vendor.service";
 import TokenService from "@/services/token/token.service";
+import UserService from "@/services/user.service";
 export default {
   components: {
     Icon,
@@ -280,7 +281,7 @@ export default {
     if (this.userProfile.VendorId !== 0) {
       this.existVendorId = true;
 
-      UserService.getVendorProfile(this.userProfile.VendorId)
+      VendorService.getVendorProfile(this.userProfile.VendorId)
         .then((res) => {
           this.vendor = res.data;
           if (this.vendor.OpenTime && this.vendor.CloseTime) {
@@ -336,7 +337,7 @@ export default {
       this.loading = true;
       this.vendor.ownerId = this.userProfile.UserId;
 
-      UserService.createVendorProfile(this.vendor)
+      VendorService.createVendorProfile(this.vendor)
         .then((res) => {
           // reset value of form
           this.vendor = new Vendor();
