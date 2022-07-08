@@ -409,13 +409,17 @@
     </div>
   </div>
   <!--The Modal-->
-  <ModalOwnerDetail @accept="AcceptRequest" @decline="showAlert" :hidden-button="(ownerDetail.status === 2 || ownerDetail.status === 3) ? true : false" :disabledInput="true" :class="isHiddenModal === false ? 'hidden' : ''" :detail="ownerDetail" :click="countClick" />
+  <ModalOwnerDetail @accept="AcceptRequest" @decline="showAlert"
+    :hidden-button="(ownerDetail.status === 2 || ownerDetail.status === 3) ? true : false" :disabledInput="true"
+    :class="isHiddenModal === false ? 'hidden' : ''" :detail="ownerDetail" :click="countClick" />
 </template>
 
 <script>
 import { Icon } from "@iconify/vue";
 import ModalOwnerDetail from "./ModalOwnerDetail.vue";
 import swal from "sweetalert";
+
+
 
 export default {
   components: { Icon, ModalOwnerDetail },
@@ -608,7 +612,7 @@ export default {
       this.countClick++;
       this.ownerDetail = this.approveList.find((x) => x.id == id);
 
-      
+
     },
     AcceptRequest(id) {
       swal("Bạn có chắc chắn phê duyệt chủ sân này không ?", {
@@ -617,12 +621,14 @@ export default {
         if (value) {
           swal("Phê Duyệt Thành Công !", {
             icon: "success",
+          }).then(() => {
+            this.approveList.forEach((approve) => {
+              if (approve.id === id) {
+                approve.status = 2;
+              }
+            });
           });
-          this.approveList.forEach((approve) => {
-            if (approve.id === id) {
-              approve.status = 2;
-            }
-          });
+
         }
       });
     },
@@ -633,30 +639,31 @@ export default {
         dangerMode: true,
       }).then((willDelete) => {
         if (willDelete) {
-          swal({
-            text: "Xin Hãy Nhập Lý Do :",
-            content: {
-              element: "textarea", attributes: {
-                placeholder: "Nhập Lý Do",
-                required : true
+          // let text_area = html_text.html_text_area
+
+          this.$swal.fire({
+            title: 'Lý Do Từ Chối',
+            input: "textarea",
+            confirmButtonText: 'Xác Nhận',
+            focusConfirm: false,
+            preConfirm: (value) => {
+              if (!value) {
+                this.$swal.showValidationMessage(`Xin hãy nhập lý do !`)
               }
-            },
-            button: "Xác Nhận"
+              return { reason: value }
+            }
+          }).then((result) => {
+            if (result.value.reason.length > 0) {
+              this.approveList.forEach((approve) => {
+                if (approve.id === id) {
+                  approve.status = 3;
+                }
+              });
+              swal("Từ Chối Thành Công !", {
+                icon: "success",
+              });
+            }
           })
-
-            .then((value) => {
-              if (value) {
-                this.approveList.forEach((approve) => {
-                  if (approve.id === id) {
-                    approve.status = 3;
-                  }
-                });
-                swal("Từ Chối Thành Công !", {
-                  icon: "success",
-                });
-              }
-
-            });
         }
       });
     },

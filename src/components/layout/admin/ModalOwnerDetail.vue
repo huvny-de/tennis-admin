@@ -1,11 +1,11 @@
 <template>
   <div id="modal" class="flex modal fixed inset-0" :class="isClose === true ? 'hidden' : ''">
     <div class="modal-overlay absolute w-full h-full"></div>
-    <div class="mx-auto relative p-4 w-full max-w-5xl h-full md:h-auto">
+    <div class="mx-auto relative p-4 w-full max-w-6xl h-full md:h-auto">
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 mt-4">
         <button @click="hiddenModal" type="button"
           class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white">
-              <Icon class="w-6 h-6" icon="bi:x-circle-fill"/>
+          <Icon class="w-6 h-6" icon="bi:x-circle-fill" />
         </button>
         <div class="py-6 px-6 lg:px-8">
           <div class="py-4flex flex-col items-center justify-between">
@@ -177,46 +177,12 @@ export default {
       this.isSelectedTab = tab;
     },
     AcceptRequest() {
-      swal("Bạn có chắc chắn phê duyệt chủ sân này không ?", {
-        buttons: ["Hủy", "Đồng Ý"],
-      }).then((value) => {
-        if (value) {
-          swal("Phê Duyệt Thành Công !", {
-            icon: "success",
-          });
-        }
-        this.hiddenModal();
-        this.$emit('accept', this.detail.id);
-      });
+      this.hiddenModal();
+      this.$emit('accept', this.detail.id);
     },
     DeclineRequest() {
-      swal("Bạn có chắc chắn sẽ từ chối chủ sân này không?", {
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      }).then((willDelete) => {
-        if (willDelete) {
-          swal({
-            text: "Xin Hãy Nhập Lý Do :",
-            content: {
-              element: "textarea",
-              attributes: {
-                placeholder: "Nhập Lý Do",
-                required: true,
-              },
-            },
-            button: "Xác Nhận",
-          }).then((value) => {
-            if (value) {
-              swal("Từ Chối Thành Công !", {
-                icon: "success",
-              });
-            }
-          });
-        }
-      });
       this.hiddenModal();
-      this.$emit('decline',this.detail.id)
+      this.$emit('decline', this.detail.id)
     },
     updateSuccess() {
       swal("Cập Nhật Thành Công !", {

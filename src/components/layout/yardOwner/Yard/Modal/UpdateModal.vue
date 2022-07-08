@@ -196,7 +196,7 @@
 </template>
 <script>
 import { Icon } from "@iconify/vue";
-import Yard from "@/models/Yard.js";
+import Yard from "@/models/Court.js";
 import swal from "sweetalert";
 import axios from "axios";
 

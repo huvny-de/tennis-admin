@@ -31,16 +31,16 @@
             <span class="tracking-wide text-lg">Thông Tin</span>
           </div>
           <!--information container-->
-          <div class="grid md:grid-cols-2 gap-2 px-4 pb-5 mt-4 sm:grid-cols-1 text-normal">
+          <div class="grid md:grid-cols-1 gap-2 px-4 pb-5 mt-4 sm:grid-cols-1 text-normal">
             <div>
               <label class="text-[#747474]" for="username">Tên Sân</label>
               <div class="relative">
-                <p v-if="!yard.name" class="text-2xl text-red-500 absolute right-12 top-4">
+                <p v-if="!court.name" class="text-2xl text-red-500 absolute right-12 top-4">
                   *
                 </p>
                 <input placeholder="Tên Sân" type="text"
-                  class="mt-2 w-[90%] px-3 py-2 place-holder-grey-400 text-grey-700 rounded text-md shadow focus:outline-none focus:ring-50 mb-2 pr-8"
-                  required v-model="yard.name" />
+                  class="mt-2 w-80 px-3 py-2 place-holder-grey-400 text-grey-700 rounded text-md shadow focus:outline-none focus:ring-50 mb-2 pr-8"
+                  required v-model="court.name" />
                 <!-- <p v-if="err.errVendorName" class="
                         absolute
                         top-[138%]
@@ -52,55 +52,28 @@
                   </p> -->
               </div>
             </div>
-            <div class="flex items-center justify-start mt-[-6px]">
-              <span>
-                <label class="text-[#747474]" for="username">Loại Sân</label>
-                <select id="small"
-                  class="rounded-lg mt-2 text-md block pr-8 W-full text-sm text-gray-900 bg-gray-50 border border-gray-500 focus:ring-blue-500 focus:border-blue-500">
-                  <option selected="true" value="1">Sân Đất Nện</option>
-                  <option value="2">Sân Cỏ</option>
-                  <option value="2">Sân Cứng</option>
-                </select>
-              </span>
-            </div>
-            <div>
-              <label class="text-[#747474]" for="username">Chiều Dài</label>
-              <div class="relative">
-                <p v-if="!yard.width" class="text-2xl text-red-500 absolute right-12 top-4">
-                  *
-                </p>
-                <input placeholder="Chiều Dài" type="number"
-                  class="mt-2 w-[90%] px-3 py-2 place-holder-grey-400 text-grey-700 rounded text-md shadow focus:outline-none focus:ring-50 mb-2 pr-8"
-                  required v-model="yard.width" />
-                <!-- <p v-if="err.errVendorName" class="
-                        absolute
-                        top-[138%]
-                        left-0
-                        error-text
-                        text-center text-red-700
-                      " role="alert">
-                    * {{ err.errVendorName }}
-                  </p> -->
+            <div class="container flex items-center mt-3">
+              <div class="flex items-center justify-start mt-[-6px] mr-4">
+                <span>
+                  <label class="text-[#747474]" for="username">Loại Sân</label>
+                  <select id="small"
+                    class="rounded-lg mt-2 text-md block pr-8 W-full text-sm text-gray-900 bg-gray-50 border border-gray-500 focus:ring-blue-500 focus:border-blue-500">
+                    <option selected="true" value="1">Sân Đất Nện</option>
+                    <option value="2">Sân Cỏ</option>
+                    <option value="2">Sân Cứng</option>
+                  </select>
+                </span>
               </div>
-            </div>
-            <div>
-              <label class="text-[#747474]" for="username">Chiều Rộng</label>
-              <div class="relative">
-                <p v-if="!yard.height" class="text-2xl text-red-500 absolute right-12 top-4">
-                  *
-                </p>
-                <input placeholder="Chiều Rộng" type="number"
-                  class="mt-2 w-[90%] px-3 py-2 place-holder-grey-400 text-grey-700 rounded text-md shadow focus:outline-none focus:ring-50 mb-2 pr-8"
-                  required v-model="yard.height" />
-                <!-- <p v-if="err.errVendorName" class="
-                        absolute
-                        top-[138%]
-                        left-0
-                        error-text
-                        text-center text-red-700
-                      " role="alert">
-                    * {{ err.errVendorName }}
-                  </p> -->
+              <div class="flex items-center justify-start mt-[-6px]">
+                <span>
+                  <label class="text-[#747474]" for="username">Kích Thước Sân</label>
+                  <select id="small"
+                    class="rounded-lg mt-2 text-md block pr-8 W-full text-sm text-gray-900 bg-gray-50 border border-gray-500 focus:ring-blue-500 focus:border-blue-500">
+                    <option selected="true" value="1">Kích Thước Lớn</option>
+                    <option value="2">Kích Thước Tiêu Chuẩn</option>
+                    <option value="2">Kích Thước Nhỏ</option>
+                  </select>
+                </span>
               </div>
             </div>
 
@@ -109,7 +82,7 @@
 
           <!--button control-->
           <div class="w-full flex items-center justify-end mt-8 pb-2">
-            <div class="flex space-x-2 justify-center " @click="createYard">
+            <div class="flex space-x-2 justify-center " @click="createcourt">
               <button type="button" class="
                   flex
                   items-center
@@ -151,7 +124,7 @@
 <script>
 import { Icon } from "@iconify/vue";
 import swal from "sweetalert";
-import Yard from "@/models/Yard.js";
+import Court from "@/models/Court.js";
 
 export default {
   components: {
@@ -159,11 +132,11 @@ export default {
   },
   data() {
     return {
-      yard: new Yard(),
+      court: new Court(),
     };
   },
   methods: {
-    createYard() {
+    createcourt() {
       swal("Xóa Thành Công", {
         icon: "success",
       });

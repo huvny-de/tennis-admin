@@ -7,7 +7,11 @@
           <!-- Profile Card -->
           <div class="bg-white p-3 border-t-4 border-green-400">
             <div class="image overflow-hidden">
-              <img class="h-full w-full mx-auto" src="../../../../assets/img/son.jpg" alt="" />
+              <img
+                class="h-72 object-cover w-full mx-auto"
+                src="../../../../assets/img/son.jpg"
+                alt=""
+              />
             </div>
           </div>
           <!-- End of profile card -->
@@ -18,7 +22,9 @@
           <!-- Profile tab -->
           <!-- About Section -->
           <div class="bg-white p-3 shadow-sm rounded-sm">
-            <div class="flex items-center space-x-2 font-semibold text-gray-600 leading-8 px-4">
+            <div
+              class="flex items-center space-x-2 font-semibold text-gray-600 leading-8 px-4"
+            >
               <span clas="text-green-500">
                 <font-awesome-icon icon="user" class="text-lg" />
               </span>
@@ -29,44 +35,114 @@
                 <span class="flex items-center">
                   <div class="px-4 py-2 font-semibold w-48">Họ Tên:</div>
                   <div class="px-1 py-2">
-                    <input :disabled="disabledInput" :class="disabledInput ? 'bg-gray-50' : ''"  type="text" placeholder="Placeholder"
-                      class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
-                      value="Nguyễn Công Thái Sơn" />
+                    <div class="relative">
+                      <p
+                        class="text-2xl text-red-500 absolute right-4 top-[10px]"
+                      >
+                        *
+                      </p>
+                      <input
+                        :disabled="disabledInput"
+                        :class="disabledInput ? 'bg-gray-50' : ''"
+                        placeholder="Nhập họ tên"
+                        type="text"
+                        class="mt-2 w-64 px-2 py-1 place-holder-grey-400 text-grey-700 rounded text-sm shadow focus:outline-none focus:ring-50 mb-1 pr-8"
+                        required
+                      />
+                      <!-- <p v-if="err.errVendorName" class="
+                        absolute
+                        top-[138%]
+                        left-0
+                        error-text
+                        text-center text-red-700
+                      " role="alert">
+                    * {{ err.errVendorName }}
+                  </p> -->
+                    </div>
                   </div>
                 </span>
 
                 <span class="flex items-center">
                   <div class="px-4 py-2 font-semibold w-48">Email:</div>
                   <div class="px-1 py-2">
-                    <input :disabled="disabledInput" :class="disabledInput ? 'bg-gray-50' : ''"  type="text" placeholder="Placeholder"
+                    <!-- <input
+                      :disabled="disabledInput"
+                      :class="disabledInput ? 'bg-gray-50' : ''"
+                      type="text"
+                      placeholder="Placeholder"
                       class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
-                      value="sonstarnguyen@gmail.com" />
+                      value="sonstarnguyen@gmail.com"
+                    /> -->
+                    <div class="relative">
+                      <p
+                        class="text-2xl text-red-500 absolute right-4 top-[10px]"
+                      >
+                        *
+                      </p>
+                      <input
+                        :disabled="disabledInput"
+                        :class="disabledInput ? 'bg-gray-50' : ''"
+                        placeholder="Nhập email"
+                        type="text"
+                        class="mt-2 w-64 px-2 py-1 place-holder-grey-400 text-grey-700 rounded text-sm shadow focus:outline-none focus:ring-50 mb-1 pr-8"
+                        required
+                      />
+                      <!-- <p v-if="err.errVendorName" class="
+                        absolute
+                        top-[138%]
+                        left-0
+                        error-text
+                        text-center text-red-700
+                      " role="alert">
+                    * {{ err.errVendorName }}
+                  </p> -->
+                    </div>
                   </div>
                 </span>
 
                 <span class="flex items-center">
-                  <div class="pl-4 pr-2 py-2 font-semibold w-48">Số điện thoại:</div>
+                  <div class="pl-4 pr-2 py-2 font-semibold w-48">
+                    Số điện thoại:
+                  </div>
                   <div class="px-1 py-2">
-                    <input :disabled="disabledInput" :class="disabledInput ? 'bg-gray-50' : ''"  type="text" placeholder="Placeholder"
-                      class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
-                      value="0978-145-440" />
+                    <div class="relative">
+                      <p
+                        class="text-2xl text-red-500 absolute right-4 top-[10px]"
+                      >
+                        *
+                      </p>
+                      <input
+                        :disabled="disabledInput"
+                        :class="disabledInput ? 'bg-gray-50' : ''"
+                        placeholder="Nhập số điện thoại"
+                        type="text"
+                        class="mt-2 w-64 px-2 py-1 place-holder-grey-400 text-grey-700 rounded text-sm shadow focus:outline-none focus:ring-50 mb-1 pr-8"
+                        required
+                      />
+                      <!-- <p v-if="err.errVendorName" class="
+                        absolute
+                        top-[138%]
+                        left-0
+                        error-text
+                        text-center text-red-700
+                      " role="alert">
+                    * {{ err.errVendorName }}
+                  </p> -->
+                    </div>
                   </div>
                 </span>
-
-                <span class="flex items-center">
-                  <div class="pl-4 pr-2 py-2 font-semibold w-48">Quản lí :</div>
-                  <div class="px-1 py-2">
-                    <input :disabled="disabledInput" :class="disabledInput ? 'bg-gray-50' : ''"  type="text" placeholder="Placeholder"
-                      class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
-                      value="Sân Tennis Đại Học Ngân Hàng" />
+                <span class="flex items-center pb-5 mt-2">
+                  <div class="pl-4 pr-2 py-2 font-semibold w-48">
+                    Ngày Đăng Kí:
                   </div>
-                </span>
-                <span class="flex items-center pb-5">
-                  <div class="pl-4 pr-2 py-2 font-semibold w-48">Ngày Đăng Kí:</div>
-                  <div class="px-1 py-2">
-                    <input  type="text" disabled placeholder="Placeholder"
-                      class="px-2 bg-gray-50  py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
-                      value="20/05/2022" />
+                  <div class="px-1 pt-2">
+                    <input
+                      type="text"
+                      disabled
+                      placeholder="Placeholder"
+                      class="px-2 bg-gray-50 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
+                      value="20/05/2022"
+                    />
                   </div>
                 </span>
               </div>
@@ -89,8 +165,7 @@ export default {
     disabledInput: {
       type: Boolean,
       required: false,
-    }
+    },
   },
-
 };
 </script>

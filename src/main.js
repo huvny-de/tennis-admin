@@ -11,6 +11,9 @@ import vuescroll from 'vue-scroll'
 import ToastPlugin from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 import store from "./store";
 import setupInterceptor from "./services/token/setUpInterceptors"
 
@@ -69,6 +72,7 @@ setupInterceptor(store);
 app.use(VueApexCharts);
 app.use(vuescroll);
 app.use(ToastPlugin);
+app.use(VueSweetalert2);
 
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.config.productionTip = false;

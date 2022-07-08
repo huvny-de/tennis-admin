@@ -430,8 +430,7 @@ export default {
       this.totalPage = Math.ceil(this.membersTotal / this.pageSize);
     },
     showAlert() {
-      swal({
-        title: "Bạn có chắc chắn sẽ khóa tài khoản này không ?",
+      swal("Bạn có chắc chắn sẽ khóa tài khoản này không ?",{
         icon: "warning",
         buttons: true,
         dangerMode: true,
