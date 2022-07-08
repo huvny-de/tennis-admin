@@ -28,6 +28,7 @@ class TokenService {
     user.Token.FullName = profile.FullName;
     user.Token.PhoneNumber = profile.PhoneNumber;
     user.Token.Email = profile.Email;
+    user.Token.Avatar = profile.Avatar;
     localStorage.setItem("user", JSON.stringify(user));
   }
 

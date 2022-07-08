@@ -190,6 +190,12 @@ export default {
             console.log(err)
           }).finally(() => {
             this.loading = false;
+
+            this.$toast.open({
+              message: 'Đã có lỗi xảy ra !.Không thể tạo sân !',
+              position: 'top-right',
+              type: 'error',
+            });
           })
       } else {
         swal("Xin hãy tạo cửa hàng trước khi tạo sân !", {
@@ -216,6 +222,12 @@ export default {
         .catch((err) => {
           console.log(err);
           this.loading = false;
+
+          this.$toast.open({
+            message: 'Không thể tải ảnh lên !',
+            position: 'top-right',
+            type: 'error',
+          });
         });
     },
     closeWaiting() {

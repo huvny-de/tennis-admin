@@ -30,7 +30,7 @@
               md:w-40
               sm:w-20
             ">
-            <img @load="closeWaiting" class="h-64  rounded mr-3 lg:w-60 object-contain md:w-40" :src="srcImg" />
+            <img @load="closeWaiting" class="h-64  rounded mr-3 lg:w-60 object-contain md:w-40" :src="currentUser.Avatar ? currentUser.Avatar : 'https://i.pinimg.com/736x/89/90/48/899048ab0cc455154006fdb9676964b3.jpg'" />
             <label class="block mt-4">
               <span class="sr-only">Choose File</span>
               <input @change="uploadImg" type="file" class="
@@ -68,15 +68,15 @@
                         w-[90%]
                         px-3
                         py-2
+                        bg-gray-100
                         place-holder-grey-400
                         text-grey-700
                         rounded
                         text-md
-                        shadow
                         focus:outline-none focus:ring-50
                         mb-2
                         pr-8
-                      " required v-model="currentUser.UserName" />
+                      " required disabled v-model="currentUser.UserName" />
               <!-- <p v-if="err.errVendorName" class="
                         absolute
                         top-[138%]
@@ -276,22 +276,10 @@ export default {
   mounted() {
     this.loading = true;
 
-    this.$toast.open({
-      message: 'Cập Nhật Thành Công !',
-      position: 'top-right',
-      type: 'success',
-    });
-
     this.currentUser = TokenService.getUser().Token;
     let roleUser = this.currentUser.RoleIds[0];
     if (roleUser === 2) {
       this.roleUser = 'Chủ Sân'
-    }
-    if (this.currentUser.Avatar) {
-      this.srcImg = this.currentUser.Avatar;
-    } else {
-      this.srcImg =
-        "https://i.pinimg.com/736x/89/90/48/899048ab0cc455154006fdb9676964b3.jpg";
     }
 
     this.loading = false;
@@ -301,7 +289,6 @@ export default {
       currentUser: "",
       selectedFile: null,
       loading: true,
-      srcImg: "",
       roleUser: ""
     }
   },
@@ -320,7 +307,7 @@ export default {
       axios
         .post(baseUrlImgbb + "/upload", body)
         .then((res) => {
-          this.srcImg = res.data.data.image.url;
+          this.currentUser.Avatar = res.data.data.image.url;
         })
         .catch((err) => {
           console.log(err);
@@ -344,7 +331,7 @@ export default {
         fullName: this.currentUser.FullName,
         phoneNumber: this.currentUser.PhoneNumber,
         email: this.currentUser.Email,
-        avtUrl: this.currentUser.Avatar
+        avatar: this.currentUser.Avatar
       };
 
       UserService.updateOwnerProfile(update_profile)
@@ -352,12 +339,28 @@ export default {
           if (res.data) {
             TokenService.updateLocalUserProfile(res.data);
             this.currentUser = TokenService.getUser().Token
+            this.loading = false;
+
+            this.$toast.open({
+              message: 'Cập Nhật Thành Công !',
+              position: 'top-right',
+              type: 'success',
+            });
+
           }
         }).catch(err => {
           console.log(err)
-        }).finally(() => {
+
           this.loading = false;
+
+          this.$toast.open({
+            message: 'Không Cập Nhật Được!',
+            position: 'top-right',
+            type: 'error',
+          });
         })
+
+
 
     }
   },
