@@ -17,6 +17,7 @@ class UserService {
       fullName: profile.fullName,
       phoneNumber: profile.phoneNumber,
       email: profile.email,
+      avatar: profile.avtUrl
     });
   }
 }

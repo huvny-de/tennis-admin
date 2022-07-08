@@ -325,7 +325,12 @@ export default {
         .catch((err) => {
           console.log(err);
           this.loading = false;
-          alert("Tải Ảnh Bị Lỗi. Xin hãy thử lại");
+
+          this.$toast.open({
+            message: 'Không thể tải ảnh lên !',
+            position: 'top-right',
+            type: 'error',
+          });
         })
 
     },
@@ -354,7 +359,6 @@ export default {
           this.loading = false;
         })
 
-      console.log('Update Sucessfully !')
     }
   },
 };

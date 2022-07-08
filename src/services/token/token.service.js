@@ -25,9 +25,9 @@ class TokenService {
 
   updateLocalUserProfile(profile) {
     let user = JSON.parse(localStorage.getItem("user"));
-    user.FullName = profile.fullName;
-    user.PhoneNumber = profile.phoneNumber;
-    user.Email = profile.email;
+    user.Token.FullName = profile.FullName;
+    user.Token.PhoneNumber = profile.PhoneNumber;
+    user.Token.Email = profile.Email;
     localStorage.setItem("user", JSON.stringify(user));
   }
 
