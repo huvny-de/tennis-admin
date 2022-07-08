@@ -536,8 +536,8 @@
   </div>
 
   <!--The Modal-->
-  <RatingModal :class="isHiddenRating === false ? 'hidden' : ''" :profile="profileDetail" :click="countClick" />
-  <UpdateModal :class="isHiddenUpdate === false ? 'hidden' : ''" :profile="profileDetail" :click="countClick" />
+  <RatingModal :class="isHiddenRating === false ? 'hidden' : ''" :profile="profileDetail" :click="triggerRating" />
+  <UpdateModal :class="isHiddenUpdate === false ? 'hidden' : ''" :profile="profileDetail" :click="triggerUpdate" />
 
 </template>
 
@@ -557,19 +557,21 @@ export default {
     return {
       isHiddenRating: false,
       isHiddenUpdate: false,
-      countClick: 0
+      triggerRating: 0,
+      triggerUpdate: 0
+
     }
   },
   methods: {
     showRating() {
       this.isHiddenRating = true;
       this.isHiddenUpdate = false;
-      this.countClick++;
+      this.triggerRating++;
     },
     UpdateYard() {
       this.isHiddenUpdate = true;
       this.isHiddenRating = false;
-      this.countClick++;
+      this.triggerUpdate++;
     },
     showAlert() {
       swal("Bạn có chắc chắn sẽ xóa sân này không ?", {

@@ -6,7 +6,7 @@
   >
     <div class="modal-overlay absolute w-full h-full"></div>
     <div class="mx-auto relative p-4 w-full max-w-5xl md:h-auto">
-      <div class="relative h-[73%] bg-white rounded-lg shadow dark:bg-gray-700 mt-12">
+      <div class="relative h-[80%] bg-white rounded-lg shadow dark:bg-gray-700 mt-12">
         <button
           @click="hiddenModal"
           type="button"

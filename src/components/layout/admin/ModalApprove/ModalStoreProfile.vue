@@ -34,7 +34,7 @@
               <div class="flex items-center justify-middle">
                 <span class="tracking-wide text-lg">Thông Tin</span>
                 <p class="ml-32 mt-1 mr-1 text-red-500 text-sm">*</p>
-                <p class="text-red-500 text-sm"> Số lần hủy lịch khách hàng : 3 lần </p>
+                <p v-show="!disabledInput" class="text-red-500 text-sm"> Số lần hủy lịch khách hàng : 3 lần </p>
               </div>
             </div>
             <div class="text-gray-700 mt-4">
