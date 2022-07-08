@@ -32,8 +32,8 @@
         <div class="container mx-auto mt-2 h-[72%]">
           <div class="flex items-center justify-center">
             <img
-              src="../../../assets/img/son.jpg"
-              class="w-9 h-9 rounded-3xl"
+              :src="currentUser.Avatar"
+              class="w-9 h-9 rounded-3xl object-cover"
             />
             <div class="flex flex-col ml-2">
               <span>

@@ -208,11 +208,12 @@
               cursor-pointer
               rounded-md
             ">
-            <img src="../../../assets/img/son.jpg" class="
+            <img :src="currentUser.Avatar" class="
                 rounded-full
                 mr-4
                 w-10
                 h-10
+                object-cover
                 p-1
                 ring-1 ring-gray-300
                 dark:ring-gray-500
@@ -279,12 +280,13 @@
 
 <script>
 import { Icon } from "@iconify/vue";
+import TokenService from '@/services/token/token.service'
 export default {
   components: {
     Icon,
   },
   mounted() {
-    this.currentUser = this.$store.getters["auth/getUser"].Token;
+    this.currentUser = TokenService.getUser().Token;
   },
   props : {
     toggleModal : {
