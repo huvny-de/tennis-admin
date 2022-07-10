@@ -1,7 +1,7 @@
 import axiosIntance from "./token/api";
 import TokenService from "./token/token.service";
 
-const BASE_URL = 'https://171.244.136.52:4443/api/';
+const BASE_URL = 'https://coreapi.softek.com.vn/api/';
 
 class AuthService {
   login(user) {

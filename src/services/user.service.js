@@ -1,6 +1,6 @@
 import api from "./token/api";
 
-const BASE_URL = "https://171.244.136.52:4443/api/";
+const BASE_URL = "https://coreapi.softek.com.vn/api/";
 class UserService {
   // Owner
   getOwnerProfile(id) {

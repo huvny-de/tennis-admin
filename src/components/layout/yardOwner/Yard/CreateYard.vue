@@ -179,7 +179,13 @@ export default {
         CourtService.createCourt(this.court)
           .then(res => {
             if (res.data) {
+
+              //reset information
               this.court = new Court();
+              this.court.typeId = -1
+              this.court.courtSizeId = -1
+
+
               this.$toast.open({
                 message: 'Tạo Sân Thành Công !',
                 position: 'top-right',
@@ -188,14 +194,13 @@ export default {
             }
           }).catch(err => {
             console.log(err)
-          }).finally(() => {
-            this.loading = false;
-
             this.$toast.open({
               message: 'Đã có lỗi xảy ra !.Không thể tạo sân !',
               position: 'top-right',
               type: 'error',
             });
+          }).finally(() => {
+            this.loading = true;
           })
       } else {
         swal("Xin hãy tạo cửa hàng trước khi tạo sân !", {

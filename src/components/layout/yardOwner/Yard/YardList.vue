@@ -1,4 +1,5 @@
 <template>
+ <preloader-component :class="loading == false ? 'hidden' : ''" />
   <div class="dashboard p-8">
     <!-- grid wrapper card -->
     <div class="wrapper-card md:grid-cols-2 gap-2 overflow-y-auto">
@@ -545,6 +546,8 @@
 import { Icon } from "@iconify/vue";
 import RatingModal from './Modal/RatingModal.vue';
 import UpdateModal from './Modal/UpdateModal.vue';
+import CourtService from '@/services/court.service'
+import TokenService from '@/services/token/token.service'
 import swal from "sweetalert";
 
 export default {
@@ -558,9 +561,36 @@ export default {
       isHiddenRating: false,
       isHiddenUpdate: false,
       triggerRating: 0,
-      triggerUpdate: 0
+      triggerUpdate: 0,
+      loading : false,
+      courtList: [],
+      param: {
+        vendorId: 0,
+        pageSize: 3,
+        query: '',
+        currentPage: 1,
+      },
+      displayInfo : {
+        pageCount: 0,
+        totalCourt : 0
+      }
 
     }
+  },
+  mounted() {
+    this.loading = true;
+    this.param.vendorId = TokenService.getUser().Token.VendorId;
+
+    CourtService.getAllCourtOfVendor(this.param)
+      .then(res => {
+        let data = res.data;
+        this.courtList = data.Value;
+
+      }).catch(err => {
+        console.log(err)
+      }).finally(() => {
+        this.loading = false;
+      })
   },
   methods: {
     showRating() {

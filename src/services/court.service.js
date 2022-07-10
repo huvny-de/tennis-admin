@@ -1,6 +1,6 @@
 import api from "./token/api";
 
-const BASE_URL = "https://171.244.136.52:4443/api/";
+const BASE_URL = "https://coreapi.softek.com.vn/api/";
 
 class CourtService {
 
@@ -13,6 +13,17 @@ class CourtService {
       ratingAverage: 0,
       imageUrl: court.imageUrl,
     });
+  }
+
+  getAllCourtOfVendor(param) {
+    return api.get(BASE_URL + "Court/PagedList" , {
+      params : {
+        VendorId : param.vendorId,
+        PageSize : param.pageSize,
+        query : param.query,
+        CurrentPage : param.currentPage
+      }
+    })
   }
 }
 
