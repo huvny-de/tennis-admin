@@ -145,8 +145,8 @@
               </td>
               <td class="px-6 py-4">
                 <div class="mb-3 mt-2">
-                          <p class="text-normal text-green-600 font-semibold" v-if="items.status === 1">Đang Áp Dụng</p>
-                          <p class="text-normal text-red-600 font-semibold" v-else>Không Hiệu Lực</p>
+                          <p class="text-normal text-green-600 font-semibold" v-if="items.status === 1">Áp Dụng</p>
+                          <p class="text-normal text-red-600 font-semibold" v-else>Ngưng Áp Dụng</p>
                         </div>
               </td>
               <td class="px-6 py-4">
@@ -333,20 +333,20 @@ export default {
       promotionList: [
         {
           id: 1,
-          img: "https://i.ibb.co/hZ6w8fH/10-percent.jpg",
+          img: "https://thumbs.dreamstime.com/z/discount-stamp-vector-clip-art-33305813.jpg",
           namePromotion: "Lần đâu đặt sân",
-          code: "firsttime123",
-          description: "Dành cho ai lần đầu đặt sân sẽ được giảm 10.000 đ",
+          code: "LANDAU",
+          description: "Dành cho ai lần đầu đặt sân sẽ được giảm 50.000 đ",
           startDate: "30/06/2022",
           endDate: "02/07/2022",
-          discount : '10.000',
+          discount : '50.000',
           status: 0,
         },
         {
           id: 2,
-          img: "https://i.ibb.co/zR6xW9L/25-percent.png",
+          img: "https://thumbs.dreamstime.com/z/discount-stamp-vector-clip-art-33305813.jpg",
           namePromotion: "Khách Quen Thân Yêu",
-          code: "customer456",
+          code: "KHACHQUEN",
           description:
             "Vocher áp dụng cho khách hàng có số lần đặt từ 10 lần trở lên đặt sân cho lần tiếp theo sẽ được giảm 20000đ",
           startDate: "30/06/2022",

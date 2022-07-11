@@ -8,21 +8,13 @@
           <!-- Profile Card -->
           <div class="bg-white p-3 border-t-4 border-green-400">
             <div class="image overflow-hidden">
-              <img
-                @load="closeWaiting"
-                class="h-64 w-full mx-auto object-contain"
-                :src="vendor.AvatarUrl"
-                alt=""
-              />
+              <img @load="closeWaiting" class="h-64 w-full mx-auto object-contain" :src="vendor.AvatarUrl" alt="" />
             </div>
             <label class="block mt-4">
               <span class="sr-only">Choose File</span>
-              <input
-                @change="uploadImg"
-                type="file"
+              <input @change="uploadImg" type="file"
                 class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 pb-2"
-                accept="image/*"
-              />
+                accept="image/*" />
             </label>
           </div>
           <!-- End of profile card -->
@@ -34,9 +26,7 @@
           <!-- About Section -->
           <form @submit.prevent="createVendor">
             <div class="bg-white p-3 shadow-sm rounded-sm">
-              <div
-                class="flex items-center space-x-2 font-semibold text-gray-600 leading-8 px-4"
-              >
+              <div class="flex items-center space-x-2 font-semibold text-gray-600 leading-8 px-4">
                 <span clas="text-green-500">
                   <font-awesome-icon icon="user" class="text-lg" />
                 </span>
@@ -48,27 +38,16 @@
                 </div>
               </div>
               <!--information container-->
-              <div
-                class="grid md:grid-cols-2 gap- mt-4 sm:grid-cols-1 text-normal px-4"
-              >
+              <div class="grid md:grid-cols-2 gap- mt-4 sm:grid-cols-1 text-normal px-4">
                 <div>
-                  <label class="text-[#747474]" for="username"
-                    >Tên Cửa Hàng</label
-                  >
+                  <label class="text-[#747474]" for="username">Tên Cửa Hàng</label>
                   <div class="relative">
-                    <p
-                      v-if="!vendor.VendorName"
-                      class="text-2xl text-red-500 absolute right-12 top-4"
-                    >
+                    <p v-if="!vendor.VendorName" class="text-2xl text-red-500 absolute right-12 top-4">
                       *
                     </p>
-                    <input
-                      placeholder="Tên Cửa Hàng"
-                      type="text"
+                    <input placeholder="Tên Cửa Hàng" type="text"
                       class="mt-2 w-[90%] px-3 py-2 place-holder-grey-400 text-grey-700 rounded text-md shadow focus:outline-none focus:ring-50 mb-2 pr-8"
-                      required
-                      v-model="vendor.VendorName"
-                    />
+                      required v-model="vendor.VendorName" />
                     <!-- <p v-if="err.errVendorName" class="
                         absolute
                         top-[138%]
@@ -84,19 +63,12 @@
                   <label class="text-[#747474]" for="username">Email</label>
                   <!-- <input-component type="email" class="w-[90%] mt-2 text-sm" value="sonstarnguyen@gmail.com" /> -->
                   <div class="relative">
-                    <p
-                      v-if="!vendor.Email"
-                      class="text-2xl text-red-500 absolute right-12 top-4"
-                    >
+                    <p v-if="!vendor.Email" class="text-2xl text-red-500 absolute right-12 top-4">
                       *
                     </p>
-                    <input
-                      placeholder="Email"
-                      type="email"
+                    <input placeholder="Email" type="email"
                       class="mt-2 w-[90%] px-3 py-2 place-holder-grey-400 text-grey-700 rounded text-md shadow focus:outline-none focus:ring-50 mb-2 pr-8"
-                      required
-                      v-model="vendor.Email"
-                    />
+                      required v-model="vendor.Email" />
                     <!-- <p v-if="err.errVendorName" class="
                         absolute
                         top-[138%]
@@ -109,24 +81,15 @@
                   </div>
                 </div>
                 <div class="mt-2">
-                  <label class="text-[#747474]" for="username"
-                    >Giờ Mở Cửa</label
-                  >
+                  <label class="text-[#747474]" for="username">Giờ Mở Cửa</label>
                   <!-- <input-component type="time" class="w-[90%] mt-2 border-gray-800 text-sm text-gray-600" /> -->
                   <div class="relative">
-                    <p
-                      v-if="!vendor.OpenTime"
-                      class="text-2xl text-red-500 absolute right-12 top-4"
-                    >
+                    <p v-if="!vendor.OpenTime" class="text-2xl text-red-500 absolute right-12 top-4">
                       *
                     </p>
-                    <input
-                      placeholder="Email"
-                      type="time"
+                    <input placeholder="Email" type="time"
                       class="mt-2 w-[90%] px-3 py-2 place-holder-grey-400 text-grey-700 rounded text-md shadow focus:outline-none focus:ring-50 mb-2 pr-8"
-                      required
-                      v-model="vendor.OpenTime"
-                    />
+                      required v-model="vendor.OpenTime" />
                     <!-- <p v-if="err.errVendorName" class="
                         absolute
                         top-[138%]
@@ -140,25 +103,16 @@
                 </div>
 
                 <div class="mt-2">
-                  <label class="text-[#747474]" for="username"
-                    >Giờ Đóng Cửa</label
-                  >
+                  <label class="text-[#747474]" for="username">Giờ Đóng Cửa</label>
                   <!-- <input-component type="time" class="w-[90%] mt-2 border-gray-800 text-sm text-gray-600" value="Admin" /> -->
 
                   <div class="relative">
-                    <p
-                      v-if="!vendor.CloseTime"
-                      class="text-2xl text-red-500 absolute right-12 top-4"
-                    >
+                    <p v-if="!vendor.CloseTime" class="text-2xl text-red-500 absolute right-12 top-4">
                       *
                     </p>
-                    <input
-                      placeholder="Email"
-                      type="time"
+                    <input placeholder="Email" type="time"
                       class="mt-2 w-[90%] px-3 py-2 place-holder-grey-400 text-grey-700 rounded text-md shadow focus:outline-none focus:ring-50 mb-2 pr-8"
-                      required
-                      v-model="vendor.CloseTime"
-                    />
+                      required v-model="vendor.CloseTime" />
                     <!-- <p v-if="err.errVendorName" class="
                         absolute
                         top-[138%]
@@ -172,24 +126,15 @@
                 </div>
 
                 <div class="mt-2">
-                  <label class="text-[#747474]" for="phoneNumber"
-                    >Số Điện Thoại</label
-                  >
+                  <label class="text-[#747474]" for="phoneNumber">Số Điện Thoại</label>
                   <!-- <input-component type="tel" class="w-[90%] mt-2 text-sm" value="0978145440" /> -->
                   <div class="relative">
-                    <p
-                      v-if="!vendor.PhoneNumber"
-                      class="text-2xl text-red-500 absolute right-12 top-4"
-                    >
+                    <p v-if="!vendor.PhoneNumber" class="text-2xl text-red-500 absolute right-12 top-4">
                       *
                     </p>
-                    <input
-                      placeholder="Số Điện Thoại"
-                      type="tel"
+                    <input placeholder="Số Điện Thoại" type="tel"
                       class="mt-2 w-[90%] px-3 py-2 place-holder-grey-400 text-grey-700 rounded text-md shadow focus:outline-none focus:ring-50 mb-2 pr-8"
-                      required
-                      v-model="vendor.PhoneNumber"
-                    />
+                      required v-model="vendor.PhoneNumber" />
                     <!-- <p v-if="err.errVendorName" class="
                         absolute
                         top-[138%]
@@ -206,18 +151,11 @@
                   <label class="text-[#747474]" for="username">Địa chỉ</label>
                   <!-- <textarea class="w-[90%] mt-2 h-13 resize-none overflow rounded-md text-sm"></textarea> -->
                   <div class="relative w-[90%]">
-                    <p
-                      v-if="!vendor.Address"
-                      class="text-2xl text-red-500 absolute right-4 top-6"
-                    >
+                    <p v-if="!vendor.Address" class="text-2xl text-red-500 absolute right-4 top-6">
                       *
                     </p>
-                    <textarea
-                      v-model="vendor.Address"
-                      placeholder="Địa chỉ"
-                      class="w-full mt-2 h-13 resize-none overflow rounded-md text-sm"
-                      required
-                    ></textarea>
+                    <textarea v-model="vendor.Address" placeholder="Địa chỉ"
+                      class="w-full mt-2 h-13 resize-none overflow rounded-md text-sm" required></textarea>
                     <!-- <p v-if="err.errVendorName" class="
                         absolute
                         top-[138%]
@@ -236,20 +174,16 @@
             <div class="w-full flex items-center justify-end mt-8">
               <div v-if="existVendorId" class="flex items-center">
                 <div class="flex space-x-2 justify-center">
-                  <button
-                    type="button"
-                    class="flex items-center px-10 py-2.5 bg-[#50AE01] text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-[#78d22f] hover:shadow-lg focus:bg-[#78d22f] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out"
-                  >
+                  <button type="button"
+                    class="flex items-center px-10 py-2.5 bg-[#50AE01] text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-[#78d22f] hover:shadow-lg focus:bg-[#78d22f] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out">
                     <Icon icon="dashicons:update-alt"></Icon>
                     <p class="pl-2">Cập Nhật</p>
                   </button>
                 </div>
               </div>
               <div v-else class="flex space-x-2 justify-center">
-                <button
-                  type="submit"
-                  class="flex items-center px-10 py-2.5 bg-[#50AE01] text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-[#78d22f] hover:shadow-lg focus:bg-[#78d22f] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out"
-                >
+                <button type="submit"
+                  class="flex items-center px-10 py-2.5 bg-[#50AE01] text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-[#78d22f] hover:shadow-lg focus:bg-[#78d22f] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out">
                   <Icon icon="akar-icons:circle-plus-fill"></Icon>
                   <p class="pl-2">Tạo Cửa Hàng</p>
                 </button>
@@ -275,7 +209,6 @@ export default {
     Icon,
   },
   mounted() {
-    this.loading = true;
 
     this.userProfile = TokenService.getUser().Token;
     if (this.userProfile.VendorId !== 0) {
@@ -314,6 +247,8 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+        }).finally(() => {
+          this.loading = false;
         });
     } else {
       this.existVendorId = false;
@@ -321,11 +256,10 @@ export default {
         this.vendor.avtUrl = this.avtUrlDefault;
       }
     }
-    this.loading = false;
   },
   data() {
     return {
-      loading: false,
+      loading: true,
       vendor: new Vendor(),
       userProfile: "",
       existVendorId: false,

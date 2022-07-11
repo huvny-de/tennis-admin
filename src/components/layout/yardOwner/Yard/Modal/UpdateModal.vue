@@ -18,8 +18,8 @@
                     <!-- Profile Card -->
                     <div class="bg-white p-3 border-t-4 border-green-400">
                       <div class="image overflow-hidden">
-                        <img @load="closeWaiting" class="h-60 w-full mx-auto object-contain" :src="yard.imgUrl"
-                          alt="" />
+                        <img @load="closeWaiting" class="h-60 w-full mx-auto object-contain" :src="courtInfo.ImageUrl"
+                          alt="Ảnh Sân" />
                       </div>
                       <label class="block mt-4">
                         <span class="sr-only">Choose File</span>
@@ -47,12 +47,12 @@
                         <div>
                           <label class="text-[#747474]" for="username">Tên Sân</label>
                           <div class="relative w-96">
-                            <p v-if="!yard.name" class="text-2xl text-red-500 absolute right-12 top-4">
+                            <p v-if="!courtInfo.Name" class="text-2xl text-red-500 absolute right-12 top-4">
                               *
                             </p>
                             <input placeholder="Tên Sân" type="text"
                               class="mt-2 w-[90%] px-3 py-2 place-holder-grey-400 text-grey-700 rounded text-md shadow focus:outline-none focus:ring-50 mb-2 pr-8"
-                              required v-model="yard.name" />
+                              required v-model="courtInfo.Name" />
                             <!-- <p v-if="err.errVendorName" class="
                         absolute
                         top-[138%]
@@ -68,9 +68,11 @@
                           <div class="flex items-center justify-start mt-[-6px] mr-4">
                             <span>
                               <label class="text-[#747474]" for="username">Loại Sân</label>
-                              <select id="courtType"
+                              <select v-model="courtInfo.TypeId" id="courtType"
                                 class="rounded-lg mt-2 text-md block pr-8 W-full text-sm text-gray-900 bg-gray-50 border border-gray-500 focus:ring-blue-500 focus:border-blue-500">
-                                <option disabled value="-1">Chọn Loại Sân</option>
+                                <option disabled value="-1">
+                                  Chọn Loại Sân
+                                </option>
                                 <option value="1">Sân Đất Nện</option>
                                 <option value="2">Sân Cỏ</option>
                                 <option value="3">Sân Cứng</option>
@@ -80,10 +82,12 @@
                           <div class="flex items-center justify-start mt-[-6px]">
                             <span>
                               <label class="text-[#747474]" for="username">Kích Thước Sân</label>
-                              <select id="courtSize"
+                              <select v-model="courtInfo.CourtSizeId" id="courtSize"
                                 class="rounded-lg mt-2 text-md block pr-8 W-full text-sm text-gray-900 bg-gray-50 border border-gray-500 focus:ring-blue-500 focus:border-blue-500">
-                                <option disabled value="-1">Chọn Kích Thước</option>
-                                <option s value="1">Kích Thước Lớn</option>
+                                <option disabled value="-1">
+                                  Chọn Kích Thước
+                                </option>
+                                <option value="1">Kích Thước Lớn</option>
                                 <option value="2">Kích Thước Tiêu Chuẩn</option>
                                 <option value="3">Kích Thước Nhỏ</option>
                               </select>
@@ -114,13 +118,11 @@
       </div>
     </div>
   </form>
-
 </template>
 <script>
 import { Icon } from "@iconify/vue";
-import Yard from "@/models/Court.js";
-import swal from "sweetalert";
 import axios from "axios";
+import CourtService from "@/services/court.service";
 
 export default {
   components: {
@@ -139,8 +141,9 @@ export default {
   data() {
     return {
       isClose: true,
-      yard: new Yard(),
-      loading: false
+      loading: false,
+      courtInfo: {},
+      vendorId: 0,
     };
   },
   methods: {
@@ -149,13 +152,39 @@ export default {
     },
     updateYard() {
       this.loading = true;
-      swal("Cập Nhật Thành Công !", {
-        icon: "success",
-      }).then(() => {
-          
-      }).finally(() => {
-        this.loading = false;
-      });
+
+      let update_info = {
+        Id: this.courtInfo.Id,
+        Name: this.courtInfo.Name,
+        VendorId: this.courtInfo.VedorId,
+        TypeId: this.courtInfo.TypeId,
+        CourtSizeId: this.courtInfo.CourtSizeId,
+        RatingAverage: this.courtInfo.RatingAverage,
+        ImageUrl: this.courtInfo.ImageUrl,
+      };
+
+      CourtService.updateCourt(update_info)
+        .then((res) => {
+          console.log(res.data);
+          this.loading = false;
+          this.$toast.open({
+            message: 'Cập Nhật Sân Thành Công !',
+            position: 'top-right',
+            type: 'success',
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          this.$toast.open({
+            message: "Đã có lỗi xảy ra. Không thể cập nhật sân !",
+            position: "top-right",
+            type: "error",
+          });
+
+          this.loading = false;
+        });
+
+     
     },
     uploadImg(evt) {
       this.loading = true;
@@ -171,11 +200,20 @@ export default {
       axios
         .post(baseUrlImgbb + "/upload", body)
         .then((res) => {
-          this.yard.imgUrl = res.data.data.image.url;
+          this.courtInfo.ImageUrl = res.data.data.image.url;
         })
         .catch((err) => {
           console.log(err);
-          this.loading = false;
+
+          this.$toast
+            .open({
+              message: "Không thể tải ảnh lên !",
+              position: "top-right",
+              type: "error",
+            })
+            .finally(() => {
+              this.loading = false;
+            });
         });
     },
     closeWaiting() {
@@ -184,6 +222,7 @@ export default {
   },
   watch: {
     profile() {
+      this.courtInfo = this.profile;
       this.isClose = false;
     },
     click() {

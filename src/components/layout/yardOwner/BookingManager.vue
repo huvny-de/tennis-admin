@@ -31,7 +31,7 @@
                 <option value="Active">Tất cả</option>
                 <option value="Active">Xác Nhận</option>
                 <option value="Active">Chưa Xác Nhận</option>
-                <option value="Active">Hoàn Thành</option>
+                <option value="Active">Đã Thanh Toán</option>
                 <option value="Active">Hủy</option>
               </select>
             </div>
