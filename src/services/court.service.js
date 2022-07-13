@@ -10,11 +10,12 @@ class CourtService {
       typeId: court.typeId,
       courtSizeId: court.courtSizeId,
       ratingAverage: 0,
+      active: true,
       imageUrl: court.imageUrl,
     });
   }
 
-  getAllCourtOfVendor(param) {
+  getCourtOfVendor(param) {
     return api.get(BASE_URL + "Court/PagedList", {
       params: {
         VendorId: param.vendorId,
@@ -33,8 +34,13 @@ class CourtService {
       typeId: update_info.TypeId,
       courtSizeId: update_info.CourtSizeId,
       ratingAverage: update_info.RatingAverage,
-      imageUrl: update_info.ImageUrl
+      active: true,
+      imageUrl: update_info.ImageUrl,
     });
+  }
+
+  deleteCourt(court_id) {
+    return api.delete(BASE_URL + `Court/${court_id}`)
   }
 }
 

@@ -8,7 +8,11 @@
           <!-- Profile Card -->
           <div class="bg-white p-3 border-t-4 border-green-400">
             <div class="image overflow-hidden">
-              <img @load="closeWaiting" class="h-64 w-full mx-auto object-contain" :src="vendor.AvatarUrl" alt="" />
+              <img @load="closeWaiting" class="h-72 w-full mx-auto object-contain" :src="
+                vendor.AvatarUrl
+                  ? vendor.AvatarUrl
+                  : 'https://i.ibb.co/S3VjM8X/online-store-building-7737-788.webp'
+              " alt="" />
             </div>
             <label class="block mt-4">
               <span class="sr-only">Choose File</span>
@@ -87,7 +91,7 @@
                     <p v-if="!vendor.OpenTime" class="text-2xl text-red-500 absolute right-12 top-4">
                       *
                     </p>
-                    <input placeholder="Email" type="time"
+                    <input placeholder="Giờ Mở Cửa" type="time"
                       class="mt-2 w-[90%] px-3 py-2 place-holder-grey-400 text-grey-700 rounded text-md shadow focus:outline-none focus:ring-50 mb-2 pr-8"
                       required v-model="vendor.OpenTime" />
                     <!-- <p v-if="err.errVendorName" class="
@@ -155,7 +159,7 @@
                       *
                     </p>
                     <textarea v-model="vendor.Address" placeholder="Địa chỉ"
-                      class="w-full mt-2 h-13 resize-none overflow rounded-md text-sm" required></textarea>
+                      class="w-full mt-2 h-20 resize-none overflow rounded-md text-sm" required></textarea>
                     <!-- <p v-if="err.errVendorName" class="
                         absolute
                         top-[138%]
@@ -173,7 +177,7 @@
             <!--button control-->
             <div class="w-full flex items-center justify-end mt-8">
               <div v-if="existVendorId" class="flex items-center">
-                <div class="flex space-x-2 justify-center">
+                <div @click="UpdateVendor($event)" class="flex space-x-2 justify-center">
                   <button type="button"
                     class="flex items-center px-10 py-2.5 bg-[#50AE01] text-white font-medium text-sm leading-tight uppercase rounded shadow-md hover:bg-[#78d22f] hover:shadow-lg focus:bg-[#78d22f] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out">
                     <Icon icon="dashicons:update-alt"></Icon>
@@ -204,58 +208,20 @@ import axios from "axios";
 import VendorService from "@/services/vendor.service";
 import TokenService from "@/services/token/token.service";
 import UserService from "@/services/user.service";
+import swal from "sweetalert";
+
 export default {
   components: {
     Icon,
   },
   mounted() {
-
     this.userProfile = TokenService.getUser().Token;
     if (this.userProfile.VendorId !== 0) {
       this.existVendorId = true;
 
-      VendorService.getVendorProfile(this.userProfile.VendorId)
-        .then((res) => {
-          this.vendor = res.data;
-          if (this.vendor.OpenTime && this.vendor.CloseTime) {
-            let hour_opentime = new Date(this.vendor.OpenTime)
-              .getHours()
-              .toString();
-            let minute_opentime = new Date(this.vendor.OpenTime)
-              .getMinutes()
-              .toString();
-
-            if (minute_opentime.length < 2) {
-              minute_opentime = "0" + minute_opentime;
-            }
-
-            this.vendor.OpenTime = `${hour_opentime}:${minute_opentime}`;
-
-            let hour_closetime = new Date(this.vendor.CloseTime)
-              .getHours()
-              .toString();
-            let minute_closetime = new Date(this.vendor.CloseTime)
-              .getMinutes()
-              .toString();
-
-            if (minute_closetime.length < 2) {
-              minute_closetime = "0" + minute_closetime;
-            }
-
-            this.vendor.CloseTime = `${hour_closetime}:${minute_closetime}`;
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        }).finally(() => {
-          this.loading = false;
-        });
-    } else {
-      this.existVendorId = false;
-      if (!this.vendor.avtUrl) {
-        this.vendor.avtUrl = this.avtUrlDefault;
-      }
+      this.getVendorProfile(this.userProfile.VendorId);
     }
+    this.loading = false;
   },
   data() {
     return {
@@ -269,30 +235,53 @@ export default {
   methods: {
     createVendor() {
       this.loading = true;
-      this.vendor.ownerId = this.userProfile.UserId;
+      this.vendor.OwnerId = this.userProfile.UserId;
 
-      VendorService.createVendorProfile(this.vendor)
-        .then((res) => {
-          // reset value of form
-          this.vendor = new Vendor();
-          if (res.data) {
-            UserService.getOwnerProfile(this.userProfile.UserId)
-              .then((res) => {
-                let user_profile = res.data;
-                let vendorId = user_profile.Vendor[0].Id;
-                TokenService.updateLocalVendorId(vendorId);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => (this.loading = false));
+      if (!this.vendor.AvatarUrl) {
+        swal("Xin hãy chọn hình ảnh sân !", {
+          icon: "warning",
+        }).then(() => {
+          this.loading = false;
+          return;
+        });
+      }
 
-      // location.reload();
+      if (this.vendor.AvatarUrl) {
+        VendorService.createVendorProfile(this.vendor)
+          .then((res) => {
+            // reset value of form
+            this.vendor = new Vendor();
+            if (res.data) {
+              UserService.getOwnerProfile(this.userProfile.UserId)
+                .then((res) => {
+                  let user_profile = res.data;
+                  let vendorId = user_profile.Vendor[0].Id;
+                  TokenService.updateLocalVendorId(vendorId);
+
+                  this.existVendorId = true;
+
+                  this.$toast.open({
+                    message: "Tạo Sân Thành Công !",
+                    position: "top-right",
+                    type: "success",
+                  });
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+
+            this.$toast.open({
+              message: "Đã có lỗi xảy ra. Không Thể Tạo Cửa Hàng !",
+              position: "top-right",
+              type: "error",
+            });
+          })
+          .finally(() => (this.loading = false));
+      }
     },
     uploadImg(evt) {
       this.loading = true;
@@ -317,6 +306,82 @@ export default {
     },
     closeWaiting() {
       this.loading = false;
+    },
+    getVendorProfile() {
+      VendorService.getVendorProfile(this.userProfile.VendorId)
+        .then((res) => {
+          this.vendor = res.data;
+          if (this.vendor.OpenTime && this.vendor.CloseTime) {
+            let hour_opentime = new Date(this.vendor.OpenTime).getHours().toString();
+
+
+            let minute_opentime = new Date(this.vendor.OpenTime).getMinutes().toString();
+
+            if (hour_opentime.length < 2) {
+              hour_opentime = "0" + hour_opentime;
+            }
+
+
+            if (minute_opentime.length < 2) {
+              minute_opentime = "0" + minute_opentime;
+            }
+
+            this.vendor.OpenTime = `${hour_opentime}:${minute_opentime}`;
+
+            let hour_closetime = new Date(this.vendor.CloseTime).getHours().toString();
+
+
+            let minute_closetime = new Date(this.vendor.CloseTime).getMinutes().toString();
+
+
+            if (hour_closetime.length < 2) {
+              hour_closetime = "0" + hour_closetime;
+            }
+
+            if (minute_closetime.length < 2) {
+              minute_closetime = "0" + minute_closetime;
+            }
+
+            this.vendor.CloseTime = `${hour_closetime}:${minute_closetime}`;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+    UpdateVendor(evt) {
+      evt.preventDefault();
+
+      this.loading = true;
+      this.vendor['VendorId'] = this.userProfile.VendorId;
+
+      VendorService.updateVendorProfile(this.vendor)
+        .then((res) => {
+          if (res.data) {
+            this.getVendorProfile(this.userProfile.VendorId);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+
+          this.$toast.open({
+            message: "Đã có lỗi xảy ra. Không thể cập nhật cửa hàng !",
+            position: "top-right",
+            type: "error",
+          });
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+  },
+
+  watch: {
+    existVendorId() {
+      this.getVendorProfile(TokenService.getUser().Token.VendorId);
     },
   },
 };

@@ -180,136 +180,33 @@
       </div>
     </div>
 
-    <!-- <nav aria-label="Page navigation example mx-auto">
+      <p v-show="isEmpty" class="text-red-500 text-lg text-center">
+      * Hiện tại chưa có sân cho thuê
+    </p>
+
+    <nav
+      aria-label="Page navigation example mx-auto">
       <ul class="inline-flex -space-x-px">
-        <li>
+        <li @click="courtPageList(param.currentPage - 1)">
           <span
-            v-if="currentPage == 1"
-            class="
-              py-2
-              px-3
-              ml-0
-              leading-tight
-              text-gray-500
-              bg-white
-              rounded-l-lg
-              border border-gray-300
-              hover:bg-gray-100 hover:text-gray-700
-              dark:bg-gray-800
-              dark:border-gray-700
-              dark:text-gray-400
-              dark:hover:bg-gray-700
-              dark:hover:text-white
-              cursor-default
-            "
-            >Previous</span
-          >
-          <span
-            v-else
-            class="
-              py-2
-              px-3
-              ml-0
-              leading-tight
-              text-gray-500
-              bg-white
-              rounded-l-lg
-              border border-gray-300
-              hover:bg-gray-100 hover:text-gray-700
-              dark:bg-gray-800
-              dark:border-gray-700
-              dark:text-gray-400
-              dark:hover:bg-gray-700
-              dark:hover:text-white
-              cursor-pointer
-            "
-            @click="paging(currentPage - 1)"
-            >Previous</span
-          >
+            class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white cursor-pointer">Previous</span>
         </li>
-        <li v-for="page in 5" :key="page">
-          <span
-            v-if="page === currentPage"
-            aria-current="page"
-            class="
-              py-2
-              px-3
-              text-blue-600
-              bg-blue-50
-              border border-gray-300
-              hover:bg-blue-100 hover:text-blue-700
-              dark:border-gray-700 dark:bg-gray-700 dark:text-white
-            "
-            >{{ page }}</span
-          >
-          <a
-            v-else
-            href="#"
-            class="
-              py-2
-              px-3
-              leading-tight
-              text-gray-500
-              bg-white
-              border border-gray-300
-              hover:bg-gray-100 hover:text-gray-700
-              dark:bg-gray-800
-              dark:border-gray-700
-              dark:text-gray-400
-              dark:hover:bg-gray-700
-              dark:hover:text-white
-            "
-            @click="paging(page)"
-            >{{ page }}</a
-          >
+        <li v-for="page in displayInfo.pageCount" :key="page">
+          <span v-if="page === param.currentPage" aria-current="page"
+            class="py-2 px-3 text-blue-600 cursor-default bg-blue-50 border border-gray-300 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">{{
+                page
+            }}</span>
+          <a @click="courtPageList(page)" v-else
+            class="py-2 px-3 leading-tight cursor-pointer text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{
+                page
+            }}</a>
         </li>
-        <li>
+        <li @click="courtPageList(param.currentPage + 1)">
           <span
-            v-if="currentPage == totalPage"
-            class="
-              py-2
-              px-3
-              ml-0
-              leading-tight
-              text-gray-500
-              bg-white
-              rounded-r-lg
-              border border-gray-300
-              hover:bg-gray-100 hover:text-gray-700
-              dark:bg-gray-800
-              dark:border-gray-700
-              dark:text-gray-400
-              dark:hover:bg-gray-700
-              dark:hover:text-white
-              cursor-default
-            "
-            >Next</span
-          >
-          <span
-            v-else
-            class="
-              py-2
-              px-3
-              ml-0
-              leading-tight
-              text-gray-500
-              bg-white
-              rounded-r-lg
-              border border-gray-300
-              hover:bg-gray-100 hover:text-gray-700
-              dark:bg-gray-800
-              dark:border-gray-700
-              dark:text-gray-400
-              dark:hover:bg-gray-700
-              dark:hover:text-white
-              cursor-pointer
-            "
-            @click="paging(currentPage + 1)"
-            >Next</span
-          >
+            class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white cursor-pointer">Next</span>
         </li>
       </ul>
-    </nav> -->
+    </nav>
   </div>
   <!--The Modal-->
   <ModalPromotion
@@ -355,6 +252,19 @@ export default {
           status: 1,
         },
       ],
+      isEmpty: false,
+      loading: false,
+      courtList: [],
+      param: {
+        vendorId: 0,
+        pageSize: 3,
+        query: "",
+        currentPage: 1,
+      },
+      displayInfo: {
+        pageCount: 0,
+        totalPromotion: 0,
+      },
     };
   },
   methods: {

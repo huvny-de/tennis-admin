@@ -253,7 +253,7 @@ export default {
           })
 
       } else {
-        swal("Xin hãy tạo cửa hàng trước khi tạo sân !", {
+        swal("Xin hãy tạo cửa hàng trước khi tạo khuyến mãi !", {
           icon: 'warning'
         })
       }

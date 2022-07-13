@@ -12,7 +12,19 @@ class PromotionService {
       name: voucher.name,
       description: voucher.description,
       imageUrl: voucher.imageUrl,
+      active: true,
       applyTypeId: 1,
+    });
+  }
+
+  getPromotionOfVendor(param) {
+    return api.get(BASE_URL + "Voucher/PagedList", {
+      params: {
+        VendorId: param.vendorId,
+        PageSize: param.pageSize,
+        query: param.query,
+        CurrentPage: param.currentPage,
+      },
     });
   }
 }

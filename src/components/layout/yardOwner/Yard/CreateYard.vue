@@ -9,7 +9,7 @@
           <div class="bg-white p-3 border-t-4 border-green-400">
             <div class="image overflow-hidden">
               <img @load="closeWaiting" class="h-64 w-full mx-auto object-contain"
-                :src="court.imageUrl ? court.imageUrl : 'https://i.ibb.co/tZBfr3J/kich-thuoc-san-tennis-2-696x372.jpg'"
+                :src="court.imageUrl ? court.imageUrl : 'https://i.ibb.co/V2D9Tmb/istockphoto-471621500-612x612.jpg'"
                 alt="" />
             </div>
             <label class="block mt-4">
@@ -74,9 +74,9 @@
                     <select v-model="court.courtSizeId" id="courtSize"
                       class="rounded-lg mt-2 text-md block pr-8 W-full text-sm text-gray-900 bg-gray-50 border border-gray-500 focus:ring-blue-500 focus:border-blue-500">
                       <option disabled value="-1">Chọn Kích Thước</option>
-                      <option s value="1">Kích Thước Lớn</option>
-                      <option value="2">Kích Thước Tiêu Chuẩn</option>
-                      <option value="3">Kích Thước Nhỏ</option>
+                      <option s value="2">Kích Thước Lớn</option>
+                      <option value="3">Kích Thước Tiêu Chuẩn</option>
+                      <option value="4">Kích Thước Nhỏ</option>
                     </select>
                   </span>
                 </div>
@@ -162,51 +162,72 @@ export default {
       if (this.court.typeId === -1) {
         swal("Xin hãy chọn loại sân !", {
           icon: 'warning'
+        }).then(() => {
+          this.loading = false;
         })
-        return;
+
       }
 
       if (this.court.courtSizeId === -1) {
         swal("Xin hãy chọn kích thước sân !", {
           icon: 'warning'
+        }).then(() => {
+          this.loading = false;
         })
-        return;
+
       }
 
-      let vendorId = TokenService.getUser().Token.VendorId;
-      if (vendorId !== 0) {
-        this.court.vendorId = vendorId;
-        CourtService.createCourt(this.court)
-          .then(res => {
-            if (res.data) {
-
-              //reset information
-              this.court = new Court();
-              this.court.typeId = -1
-              this.court.courtSizeId = -1
-
-
-              this.$toast.open({
-                message: 'Tạo Sân Thành Công !',
-                position: 'top-right',
-                type: 'success',
-              });
-            }
-          }).catch(err => {
-            console.log(err)
-            this.$toast.open({
-              message: 'Đã có lỗi xảy ra !.Không thể tạo sân !',
-              position: 'top-right',
-              type: 'error',
-            });
-          }).finally(() => {
-            this.loading = true;
-          })
-      } else {
-        swal("Xin hãy tạo cửa hàng trước khi tạo sân !", {
+      if (!this.court.imageUrl) {
+        swal("Xin hãy chọn hình ảnh sân !", {
           icon: 'warning'
+        }).then(() => {
+          this.loading = false;
         })
       }
+
+
+      if (this.court.typeId !== -1 &&
+        this.court.courtSizeId !== -1 &&
+        this.court.imageUrl) {
+        let vendorId = TokenService.getUser().Token.VendorId;
+        if (vendorId !== 0) {
+          this.court.vendorId = vendorId;
+          CourtService.createCourt(this.court)
+            .then(res => {
+              if (res.data) {
+
+                //reset information
+                this.court = new Court();
+                this.court.typeId = -1
+                this.court.courtSizeId = -1
+
+
+                this.$toast.open({
+                  message: 'Tạo Sân Thành Công !',
+                  position: 'top-right',
+                  type: 'success',
+                });
+              }
+            }).catch(err => {
+               this.loading = true;
+              console.log(err)
+              this.$toast.open({
+                message: 'Đã có lỗi xảy ra .Không thể tạo sân !',
+                position: 'top-right',
+                type: 'error',
+              });
+            }).finally(() => {
+              this.loading = false;
+            })
+        } else {
+          swal("Xin hãy tạo cửa hàng trước khi tạo sân !", {
+            icon: 'warning'
+          })
+          this.loading = false;
+        }
+      }
+
+
     },
     uploadImg(evt) {
       this.loading = true;

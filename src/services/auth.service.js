@@ -23,7 +23,7 @@ class AuthService {
     TokenService.removeUser();
   }
   register(user) {
-    return axiosIntance.post("/User/Register", {
+    return axiosIntance.post(BASE_URL + "User/Register", {
       username: user.username,
       email: user.email,
       password: user.password,
