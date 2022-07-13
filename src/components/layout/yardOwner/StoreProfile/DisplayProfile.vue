@@ -74,7 +74,7 @@
                     Khung Giờ Hoạt Động:
                   </div>
                   <div v-if="vendor.OpenTime && vendor.CloseTime" class="py-2">
-                    {{ vendor.OpenTime }} - {{ vendor.CloseTime }}
+                    {{ new Date(vendor.OpenTime).toLocaleTimeString().slice(0,5) }} - {{ new Date(vendor.CloseTime).toLocaleTimeString().slice(0,5)}}
                   </div>
                   <div v-else class="py-2">Chưa Có</div>
                 </span>
@@ -143,38 +143,6 @@ export default {
       VendorService.getVendorProfile(vendorId)
         .then((res) => {
           this.vendor = res.data;
-          if (this.vendor.OpenTime && this.vendor.CloseTime) {
-            let hour_opentime = new Date(this.vendor.OpenTime)
-              .getHours()
-              .toString();
-            let minute_opentime = new Date(this.vendor.OpenTime)
-              .getMinutes()
-              .toString();
-
-            if (hour_opentime.length < 2) {
-              hour_opentime = "0" + hour_opentime;
-            }
-
-            if (minute_opentime.length < 2) {
-              minute_opentime = "0" + minute_opentime;
-            }
-
-            this.vendor.OpenTime = `${hour_opentime}:${minute_opentime}`;
-            console.log(this.vendor.OpenTime);
-
-            let hour_closetime = new Date(this.vendor.CloseTime)
-              .getHours()
-              .toString();
-            let minute_closetime = new Date(this.vendor.CloseTime)
-              .getMinutes()
-              .toString();
-
-            if (minute_closetime.length < 2) {
-              minute_closetime = "0" + minute_closetime;
-            }
-
-            this.vendor.CloseTime = `${hour_closetime}:${minute_closetime}`;
-          }
         })
         .catch((err) => console.log(err))
         .finally(() => {

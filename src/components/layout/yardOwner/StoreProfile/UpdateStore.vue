@@ -311,39 +311,10 @@ export default {
       VendorService.getVendorProfile(this.userProfile.VendorId)
         .then((res) => {
           this.vendor = res.data;
-          if (this.vendor.OpenTime && this.vendor.CloseTime) {
-            let hour_opentime = new Date(this.vendor.OpenTime).getHours().toString();
 
+          this.vendor.OpenTime =  new Date(this.vendor.OpenTime).toLocaleTimeString().slice(0,5);
+          this.vendor.CloseTime =  new Date(this.vendor.CloseTime).toLocaleTimeString().slice(0,5);
 
-            let minute_opentime = new Date(this.vendor.OpenTime).getMinutes().toString();
-
-            if (hour_opentime.length < 2) {
-              hour_opentime = "0" + hour_opentime;
-            }
-
-
-            if (minute_opentime.length < 2) {
-              minute_opentime = "0" + minute_opentime;
-            }
-
-            this.vendor.OpenTime = `${hour_opentime}:${minute_opentime}`;
-
-            let hour_closetime = new Date(this.vendor.CloseTime).getHours().toString();
-
-
-            let minute_closetime = new Date(this.vendor.CloseTime).getMinutes().toString();
-
-
-            if (hour_closetime.length < 2) {
-              hour_closetime = "0" + hour_closetime;
-            }
-
-            if (minute_closetime.length < 2) {
-              minute_closetime = "0" + minute_closetime;
-            }
-
-            this.vendor.CloseTime = `${hour_closetime}:${minute_closetime}`;
-          }
         })
         .catch((err) => {
           console.log(err);
