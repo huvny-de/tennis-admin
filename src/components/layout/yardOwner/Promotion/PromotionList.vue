@@ -47,7 +47,7 @@
               <td class="px-6 py-4">
                 <div class="flex items-center">
                   <div class="flex-shrink object-contain">
-                    <img class="rounded-2xl mr-3 w-10 h-10 object-cover" :src="items.ImageUrl" />
+                    <img @load="closeWaiting" class="rounded-2xl mr-3 w-10 h-10 object-cover" :src="items.ImageUrl" />
                   </div>
                   <div class="ml-4 text-[#334D6E]">
                     {{ items.Name }}
@@ -77,7 +77,8 @@
                 <span class="flex items-center">
                   <Icon @click="getPromotionDetail(items.Id)"
                     class="w-6 h-6 cursor-pointer hover:text-gray-600 duration-200" icon="ant-design:eye-filled" />
-                  <Icon class="w-6 h-6 cursor-pointer hover:text-gray-600 duration-200" icon="bxs:trash-alt" />
+                  <Icon @click="deletePromotion(items.Id)"
+                    class="w-6 h-6 cursor-pointer hover:text-gray-600 duration-200" icon="bxs:trash-alt" />
                 </span>
               </td>
             </tr>
@@ -91,7 +92,8 @@
     </p>
 
     <div class="container py-4 flex items-center justify-center">
-      <nav aria-label="Page navigation example mx-auto">
+      <nav v-show="displayInfo.pageCount > 1" :class="loading ? 'invisible' : 'visible'"
+        aria-label="Page navigation example mx-auto">
         <ul class="inline-flex -space-x-px">
           <li @click="promotionPageList(param.currentPage - 1)">
             <span
@@ -118,14 +120,17 @@
     </div>
   </div>
   <!--The Modal-->
-  <ModalPromotion :class="isHiddenModal === false ? 'hidden' : ''" :detail="promotionDetail" :click="countClick" />
+  <ModalPromotion @loadAgain="promotionPageList(this.param.currentPage)"
+    :class="isHiddenModal === false ? 'hidden' : ''" :detail="promotionDetail" :click="countClick" />
 </template>
 
 <script>
 import { Icon } from "@iconify/vue";
 import ModalPromotion from "./ModalPromotion.vue";
+import swal from "sweetalert";
 import PromotionService from "@/services/promotion.service";
 import TokenService from "@/services/token/token.service";
+
 
 export default {
   components: { Icon, ModalPromotion },
@@ -227,7 +232,50 @@ export default {
     searchPromotion(page) {
       console.log('search')
       this.promotionPageList(page)
-    }
+    },
+    deletePromotion(promotionId) {
+      this.loading = true;
+
+      swal("Bạn có chắc chắn sẽ xóa khuyến mãi này không ?", {
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+
+          PromotionService.deletePromotion(promotionId)
+            .then((res) => {
+              if (res.data) {
+                this.$toast.open({
+                  message: 'Đã xóa khuyến mãi!',
+                  position: 'top-right',
+                  type: 'success',
+                });
+
+                this.promotionPageList(this.param.currentPage);
+              }
+            }).catch((err) => {
+              console.log(err);
+              this.$toast.open({
+                message: 'Đã có lỗi xảy ra. Không thể xóa !',
+                position: 'top-right',
+                type: 'error',
+              });
+
+            }).finally(() => {
+              this.loading = false;
+            })
+
+
+
+        } else {
+          this.loading = false;
+        }
+      });
+    },
+    closeWaiting() {
+      this.loading = false;
+    },
   }
 };
 </script>

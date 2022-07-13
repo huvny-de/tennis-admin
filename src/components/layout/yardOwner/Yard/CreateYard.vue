@@ -143,7 +143,7 @@ export default {
   data() {
     return {
       court: new Court(),
-      loading: true
+      loading: false
     };
   },
   mounted() {

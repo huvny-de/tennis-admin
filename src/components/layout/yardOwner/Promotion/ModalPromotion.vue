@@ -1,4 +1,5 @@
 <template>
+  <preloader-component :class="loading == false ? 'hidden' : ''" />
   <div id="modal" class="flex modal fixed inset-0" :class="isClose === true ? 'hidden' : ''">
     <div class="modal-overlay absolute w-full h-full"></div>
     <div class="mx-auto relative p-4 w-full max-w-4xl h-full md:h-auto">
@@ -15,10 +16,16 @@
           <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
             Chi Tiết Khuyến Mãi
           </h3>
-          <form action="#">
+          <form @submit.prevent="updatePromotion">
             <div>
-              <div class="photo-wrapper p-2">
-                <img class="w-32 h-32 rounded-full mx-auto" :src="promotion.ImageUrl" alt="Ảnh Khuyến Mãi" />
+              <div class="photo-wrapper p-2 flex flex-col items-center justify-center">
+                <img @load="closeWaiting" class="w-32 h-32 rounded-full mx-auto" :src="promotion.ImageUrl" alt="Ảnh Khuyến Mãi" />
+                <label class="block mt-4 mx-center">
+                  <span class="sr-only">Choose File</span>
+                  <input @change="uploadImg" type="file"
+                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 pb-2"
+                    accept="image/*" />
+                </label>
               </div>
               <div class="p-2">
                 <h3 class="text-center text-xl text-gray-900 font-medium">
@@ -36,7 +43,7 @@
                           <div class="mb-3 pt-0">
                             <input type="text" placeholder="Mã khuyến mãi"
                               class="px-2 py-2 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-full"
-                              :value="promotion.Code" />
+                              v-model="promotion.Code" />
                           </div>
                         </td>
                       </tr>
@@ -48,7 +55,7 @@
                           <div class="mb-3 pt-0">
                             <input type="number" placeholder="Mã khuyến mãi"
                               class="px-2 py-2 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-full"
-                              :value="promotion.DiscountPrice" />
+                              v-model="promotion.DiscountPrice" />
                           </div>
                         </td>
                       </tr>
@@ -58,7 +65,7 @@
                         </td>
                         <td class="px-2 py-2 text-sm">
                           <textarea class="resize-none w-full rounded-md text-sm"
-                            :value="promotion.Description"></textarea>
+                            v-model="promotion.Description"></textarea>
                         </td>
                       </tr>
                     </tbody>
@@ -72,9 +79,9 @@
                         </td>
                         <td class="px-2 py-2 text-sm">
                           <div class="mb-3 pt-0">
-                            <input min="1997-01-01" max="2030-12-31" type="date" placeholder="Placeholder"
+                            <input :min="currentDate" max="2030-12-31" type="date" placeholder="Placeholder"
                               class="px-2 py-2 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-200 w-full"
-                              :value="promotion.EffectiveDate" />
+                              v-model="promotion.EffectiveDate" />
                           </div>
                         </td>
                       </tr>
@@ -84,9 +91,9 @@
                         </td>
                         <td class="px-2 py-2 text-sm">
                           <div class="mb-3 pt-0">
-                            <input type="date" placeholder="Placeholder"
+                            <input :min="currentDate" type="date" placeholder="Placeholder"
                               class="px-2 py-2 placeholder-slate-300 text-slate-600 relative bg-white rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-200 w-full"
-                              :value="promotion.ExpiredDate" />
+                              v-model="promotion.ExpiredDate" />
                           </div>
                         </td>
                       </tr>
@@ -119,7 +126,8 @@
                     @click="hiddenModal">
                     Đóng
                   </button>
-                  <button class="modal-close px-4 bg-indigo-500 p-1 rounded-lg text-white hover:bg-indigo-400">
+                  <button type="submit"
+                    class="modal-close px-4 bg-indigo-500 p-1 rounded-lg text-white hover:bg-indigo-400">
                     Cập Nhật
                   </button>
                 </div>
@@ -132,6 +140,9 @@
   </div>
 </template>
 <script>
+import axios from "axios"
+import TokenService from '@/services/token/token.service'
+import PromotionService from '@/services/promotion.service'
 export default {
   props: {
     detail: {
@@ -145,9 +156,14 @@ export default {
   },
   data() {
     return {
-      isClose: false,
-      promotion : {}
+      isClose: true,
+      promotion: {},
+      currentDate: '',
+      loading: false,
     };
+  },
+  mounted() {
+    this.currentDate = new Date().toISOString().slice(0, 10)
   },
   methods: {
     hiddenModal() {
@@ -164,11 +180,63 @@ export default {
 
       this.promotion.EffectiveDate = effectiveDate_string;
       this.promotion.ExpiredDate = expiredDate_string;
-    }
+    },
+    updatePromotion() {
+      this.loading = true;
+      this.promotion['UserId'] = TokenService.getUser().Token.UserId;
+      this.promotion['VendorId'] = TokenService.getUser().Token.VendorId;
+
+
+      PromotionService.updatePromotion(this.promotion)
+        .then((res) => {
+          if (res.data) {
+            this.$toast.open({
+              message: 'Cập Nhật Khuyến Mãi Thành Công !',
+              position: 'top-right',
+              type: 'success',
+            });
+
+            this.$emit('loadAgain', true)
+          }
+        }).catch(err => {
+          console.log(err);
+          this.$toast.open({
+            message: 'Đã có lỗi xảy ra. Không thể cập nhật !',
+            position: 'top-right',
+            type: 'error',
+          });
+        }).finally(() => {
+          this.loading = false;
+        })
+    },
+     uploadImg(evt) {
+      this.loading = true;
+      let apiKey = "3ce508644197fb15dcf4e916cf328c21";
+      const baseUrlImgbb = "https://api.imgbb.com/1";
+
+      this.selectedFile = evt.target.files[0];
+
+      let body = new FormData();
+      body.set("key", apiKey);
+      body.append("image", this.selectedFile);
+
+      axios
+        .post(baseUrlImgbb + "/upload", body)
+        .then((res) => {
+          this.promotion.ImageUrl = res.data.data.image.url;
+        })
+        .catch((err) => {
+          console.log(err);
+          this.loading = false;
+        });
+    },
+    closeWaiting() {
+      this.loading = false;
+    },
   },
   watch: {
     detail() {
-      this.promotion = {...this.detail}
+      this.promotion = { ...this.detail }
       this.changeFormatDatePicker(this.promotion.EffectiveDate, this.promotion.ExpiredDate)
       this.isClose = false;
     },

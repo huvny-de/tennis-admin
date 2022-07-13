@@ -9,7 +9,7 @@
           <div class="bg-white p-3 border-t-4 border-green-400">
             <div class="image overflow-hidden">
               <img @load="closeWaiting" class="h-64 w-full mx-auto object-contain"
-                :src="promotion.imageUrl ? promotion.imageUrl : 'https://i.ibb.co/8Psbxxv/download.png'"
+                :src="promotion.imageUrl ? promotion.imageUrl : 'https://i.ibb.co/t41GMzQ/discount.png'"
                 alt="ảnh khuyến mãi" />
             </div>
             <label class="block mt-4">

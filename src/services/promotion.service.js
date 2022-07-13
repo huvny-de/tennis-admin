@@ -8,12 +8,12 @@ class PromotionService {
       vendorId: voucher.vendorId,
       code: voucher.code,
       effectiveDate: voucher.effectiveDate,
-      expiredDate : voucher.expiredDate,
+      expiredDate: voucher.expiredDate,
       name: voucher.name,
       description: voucher.description,
       imageUrl: voucher.imageUrl,
       active: true,
-      discountPrice : voucher.discountPrice,
+      discountPrice: voucher.discountPrice,
       applyTypeId: 1,
     });
   }
@@ -27,6 +27,28 @@ class PromotionService {
         CurrentPage: param.currentPage,
       },
     });
+  }
+
+  updatePromotion(update_promotion) {
+    return api.put(BASE_URL + "Voucher", {
+      id: update_promotion.Id,
+      vendorId: update_promotion.VendorId,
+      code: update_promotion.Code,
+      effectiveDate: new Date(update_promotion.EffectiveDate).toISOString(),
+      expiredDate: new Date(update_promotion.ExpiredDate).toISOString(),
+      name: update_promotion.Name,
+      description: update_promotion.Description,
+      imageUrl: update_promotion.ImageUrl,
+      insertedBy: update_promotion.UserId,
+      updatedBy: update_promotion.UserId,
+      applyTypeId: 1,
+      active: true,
+      discountPrice: update_promotion.DiscountPrice
+    });
+  }
+
+  deletePromotion(id) {
+    return api.delete(BASE_URL + `Voucher/${id}`);
   }
 }
 
