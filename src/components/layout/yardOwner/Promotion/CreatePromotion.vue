@@ -8,7 +8,8 @@
           <!-- Profile Card -->
           <div class="bg-white p-3 border-t-4 border-green-400">
             <div class="image overflow-hidden">
-              <img @load="closeWaiting" class="h-64 w-full mx-auto object-contain" :src="promotion.imageUrl ? promotion.imageUrl : 'https://i.ibb.co/8Psbxxv/download.png'"
+              <img @load="closeWaiting" class="h-64 w-full mx-auto object-contain"
+                :src="promotion.imageUrl ? promotion.imageUrl : 'https://i.ibb.co/8Psbxxv/download.png'"
                 alt="ảnh khuyến mãi" />
             </div>
             <label class="block mt-4">
@@ -121,12 +122,12 @@
               <div>
                 <label class="text-[#747474]" for="username">Số Tiền Giảm</label>
                 <div class="relative">
-                  <p v-if="!promotion.discount" class="text-2xl text-red-500 absolute right-12 top-4">
+                  <p v-if="!promotion.discountPrice" class="text-2xl text-red-500 absolute right-12 top-4">
                     *
                   </p>
                   <input placeholder="Số Tiền Giảm" type="number"
                     class="mt-2 w-[90%] px-3 py-2 place-holder-grey-400 text-grey-700 rounded text-md shadow focus:outline-none focus:ring-50 mb-2 pr-8"
-                    required v-model="promotion.discount" />
+                    required v-model="promotion.discountPrice" />
                   <!-- <p v-if="err.errVendorName" class="
                         absolute
                         top-[138%]
@@ -216,7 +217,7 @@ export default {
           console.log(err);
           this.loading = false;
 
-           this.$toast.open({
+          this.$toast.open({
             message: 'Không thể tải ảnh lên !',
             position: 'top-right',
             type: 'error',
@@ -227,30 +228,45 @@ export default {
       this.loading = false;
     },
     createPromotion() {
+      this.loading = true;
+
       let vendorId = TokenService.getUser().Token.VendorId;
       if (vendorId !== 0) {
         this.promotion.vendorId = vendorId;
 
-        PromotionService.createPromotion(this.promotion)
-          .then(res => {
-            if (res.data) {
-              this.promotion = new Promotion();
-              this.$toast.open({
-                message: 'Tạo Sân Thành Công !',
-                position: 'top-right',
-                type: 'success',
-              });
-            }
-          }).catch(err => {
-            console.log(err)
-            this.$toast.open({
-              message: 'Đã có lỗi xảy ra. Không thể tạo khuyến mãi !',
-              position: 'top-right',
-              type: 'error',
-            });
-          }).finally(() => {
+        if (!this.promotion.imageUrl) {
+          swal('Xin vui lòng chọn ảnh khuyễn mãi', {
+            icon: "warning"
+          }).then(() => {
             this.loading = false;
+            return;
           })
+        } else {
+          PromotionService.createPromotion(this.promotion)
+            .then(res => {
+              if (res.data) {
+                this.promotion = new Promotion();
+                this.$toast.open({
+                  message: 'Tạo Sân Thành Công !',
+                  position: 'top-right',
+                  type: 'success',
+                });
+              }
+            }).catch(err => {
+              console.log(err)
+              this.$toast.open({
+                message: 'Đã có lỗi xảy ra. Không thể tạo khuyến mãi !',
+                position: 'top-right',
+                type: 'error',
+              });
+            }).finally(() => {
+              this.loading = false;
+            })
+        }
+
+
+
+
 
       } else {
         swal("Xin hãy tạo cửa hàng trước khi tạo khuyến mãi !", {

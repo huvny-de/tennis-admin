@@ -151,7 +151,7 @@
             role="tab"
           >
             <span class="mx-2 text-[13px] text-[#434141] font-bold pt-1"
-              >Tạo Khuyễn Mãi</span
+              >Tạo Khuyến Mãi</span
             >
           </div>
         </li>

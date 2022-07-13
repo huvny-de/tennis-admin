@@ -16,10 +16,10 @@
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datepicker-input" />
             </div>
             <div class="flex items-center relative mt-6">
-              <span class="text-2xl p-2 text-gray-400 absolute right-0">
+              <span @click="searchPromotion(1)" class="text-2xl p-2 text-gray-400 absolute right-0">
                 <Icon icon="ei:search" />
               </span>
-              <input type="text" placeholder="Tìm Kiếm..."
+              <input @keyup.enter="searchPromotion(1)" v-model="param.query" type="text" placeholder="Tìm Kiếm..."
                 class="pr-10 rounded border border-gray-300 bg-gray-50 placeholder:text-sm" />
             </div>
           </div>
@@ -59,7 +59,9 @@
               </td>
               <td class="px-6 py-4">{{ items.DiscountPrice }} đồng</td>
               <td class="px-6 py-4">
-                {{ new Date(items.EffectiveDate).toLocaleDateString() }} - {{ new Date(items.ExpiredDate).toLocaleDateString() }}
+                {{ new Date(items.EffectiveDate).toLocaleDateString() }} - {{ new
+                    Date(items.ExpiredDate).toLocaleDateString()
+                }}
               </td>
               <td class="px-6 py-4">
                 <div class="mb-3 mt-2">
@@ -163,6 +165,8 @@ export default {
         pageSize: 5,
         query: "",
         currentPage: 1,
+        effectiveDate: '',
+        expiredDate: '',
       },
       displayInfo: {
         pageCount: 0,
@@ -220,16 +224,9 @@ export default {
           });
       }
     },
-  },
-  watch: {
-    promotionList() {
-      // this.promotionList.forEach((promotion, index) => {
-      //   let effectiveDate_String = new Date(promotion.EffectiveDate)
-      //   this.promotionList[index].EffectiveDate = ((effectiveDate_String.getMonth() > 8) ? (effectiveDate_String.getMonth() + 1) : ('0' + (effectiveDate_String.getMonth() + 1))) + '/' + ((effectiveDate_String.getDate() > 9) ? effectiveDate_String.getDate() : ('0' + effectiveDate_String.getDate())) + '/' + effectiveDate_String.getFullYear();
-
-      //   let ExpiredDate_String = new Date(promotion.ExpiredDate)
-      //   this.promotionList[index].ExpiredDate = ((ExpiredDate_String.getMonth() > 8) ? (ExpiredDate_String.getMonth() + 1) : ('0' + (ExpiredDate_String.getMonth() + 1))) + '/' + ((ExpiredDate_String.getDate() > 9) ? ExpiredDate_String.getDate() : ('0' + ExpiredDate_String.getDate())) + '/' + ExpiredDate_String.getFullYear();
-      // })
+    searchPromotion(page) {
+      console.log('search')
+      this.promotionPageList(page)
     }
   }
 };

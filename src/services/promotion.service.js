@@ -13,6 +13,7 @@ class PromotionService {
       description: voucher.description,
       imageUrl: voucher.imageUrl,
       active: true,
+      discountPrice : voucher.discountPrice,
       applyTypeId: 1,
     });
   }
