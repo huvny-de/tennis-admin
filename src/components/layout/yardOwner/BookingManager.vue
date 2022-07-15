@@ -47,7 +47,8 @@
       </div>
 
       <div class="wrapping-table mt-10">
-        <table class="table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400 h-96">
+        <table
+          class="table-auto w-full text-sm text-left text-gray-500 dark:text-gray-400 lg:overflow-auto overflow-x-scroll">
           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" class="uppercase px-6 py-3">Khách Hàng</th>
@@ -123,35 +124,40 @@
           </tbody>
         </table>
       </div>
+
+      <p v-show="isEmpty" class="text-red-500 text-lg text-center">
+        * Hiện tại cửa hàng chưa có khuyến mãi
+      </p>
+
+      <div class="container mt-4 py-4 flex items-center justify-center">
+        <nav aria-label="Page navigation example mx-auto">
+          <ul class="inline-flex -space-x-px">
+            <li @click="promotionPageList(param.currentPage - 1)">
+              <span
+                class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white cursor-pointer">Trước
+                Đó</span>
+            </li>
+            <li v-for="page in 5" :key="page">
+              <span v-if="page === param.currentPage" aria-current="page"
+                class="py-2 px-3 text-blue-600 cursor-default bg-blue-50 border border-gray-300 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">{{
+                    page
+                }}</span>
+              <a @click="promotionPageList(page)" v-else
+                class="py-2 px-3 leading-tight cursor-pointer text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{
+                    page
+                }}</a>
+            </li>
+            <li @click="promotionPageList(param.currentPage + 1)">
+              <span
+                class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white cursor-pointer">Tiếp
+                Theo</span>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
 
-    <nav aria-label="Page navigation example mx-auto">
-      <ul class="inline-flex -space-x-px">
-        <li>
-          <span v-if="currentPage == 1"
-            class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white cursor-default">Previous</span>
-          <span v-else
-            class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white cursor-pointer"
-            @click="paging(currentPage - 1)">Previous</span>
-        </li>
-        <li v-for="page in 5" :key="page">
-          <span v-if="page === currentPage" aria-current="page"
-            class="py-2 px-3 text-blue-600 bg-blue-50 border border-gray-300 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">{{
-                page
-            }}</span>
-          <a v-else href="#"
-            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            @click="paging(page)">{{ page }}</a>
-        </li>
-        <li>
-          <span v-if="currentPage == totalPage"
-            class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white cursor-default">Next</span>
-          <span v-else
-            class="py-2 px-3 ml-0 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white cursor-pointer"
-            @click="paging(currentPage + 1)">Next</span>
-        </li>
-      </ul>
-    </nav>
+
   </div>
 
   <!--The Modal-->
@@ -234,7 +240,21 @@ export default {
         },
       ],
       isHiddenModal: true,
-      countClick: 0
+      countClick: 0,
+      isEmpty: false,
+      loading: true,
+      param: {
+        vendorId: 0,
+        pageSize: 5,
+        query: "",
+        currentPage: 1,
+        effectiveDate: '',
+        expiredDate: '',
+      },
+      displayInfo: {
+        pageCount: 0,
+        totalPromotion: 0,
+      },
     };
   },
   methods: {

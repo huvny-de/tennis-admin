@@ -8,7 +8,7 @@
           <!-- Profile Card -->
           <div class="bg-white p-3 border-t-4 border-green-400">
             <div class="image overflow-hidden">
-              <img @load="closeWaiting" class="h-72 w-full mx-auto object-contain" :src="
+              <img @load="closeWaiting" class="h-72 w-full mx-auto object-cover" :src="
                 vendor.AvatarUrl
                   ? vendor.AvatarUrl
                   : 'https://i.ibb.co/S3VjM8X/online-store-building-7737-788.webp'
@@ -312,8 +312,10 @@ export default {
         .then((res) => {
           this.vendor = res.data;
 
-          this.vendor.OpenTime =  new Date(this.vendor.OpenTime).toLocaleTimeString().slice(0,5);
-          this.vendor.CloseTime =  new Date(this.vendor.CloseTime).toLocaleTimeString().slice(0,5);
+
+          this.vendor.OpenTime = new Date(this.vendor.OpenTime).toLocaleTimeString().slice(0, 5);
+          this.vendor.CloseTime = new Date(this.vendor.CloseTime).toLocaleTimeString().slice(0, 5);
+
 
         })
         .catch((err) => {
@@ -328,6 +330,25 @@ export default {
 
       this.loading = true;
       this.vendor['VendorId'] = this.userProfile.VendorId;
+
+      let today = new Date();
+
+      console.log(this.vendor.OpenTime)
+      console.log(this.vendor.CloseTime)
+
+      // Use the substring() function to extract hours and minutes
+      let time_open = this.vendor.OpenTime;
+      let hours_open = time_open.substring(0, 2);
+      let minutes_open = time_open.substring(3, 5);
+
+      this.vendor.OpenTime = new Date(today.setHours(hours_open, minutes_open)).toISOString();
+
+      let time_close = this.vendor.CloseTime;
+      let hours_close = time_close.substring(0, 2);
+      let minutes_close = time_close.substring(3, 5);
+
+      this.vendor.CloseTime = new Date(today.setHours(hours_close, minutes_close)).toISOString();
+
 
       VendorService.updateVendorProfile(this.vendor)
         .then((res) => {

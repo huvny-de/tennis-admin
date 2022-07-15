@@ -47,7 +47,7 @@
               <td class="px-6 py-4">
                 <div class="flex items-center">
                   <div class="flex-shrink object-contain">
-                    <img @load="closeWaiting" class="rounded-2xl mr-3 w-10 h-10 object-cover" :src="items.ImageUrl" />
+                    <img @load="closeWaiting" class="rounded-2xl mr-3 w-10 h-10 object-contain" :src="items.ImageUrl" />
                   </div>
                   <div class="ml-4 text-[#334D6E]">
                     {{ items.Name }}

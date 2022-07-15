@@ -177,6 +177,7 @@ export default {
     RatingModal,
     UpdateModal,
   },
+  props: ["searchValue"],
   data() {
     return {
       isHiddenRating: false,
@@ -271,6 +272,9 @@ export default {
       });
     },
     courtPageList(page) {
+
+      this.loading = true;
+
       this.param = { ...this.param, currentPage: page };
       if (this.param.currentPage > this.displayInfo.pageCount) {
         this.param = { ...this.param, currentPage: this.displayInfo.pageCount };
@@ -309,7 +313,15 @@ export default {
             this.loading = false;
           });
       }
+
+      this.loading = false;
     },
   },
+  watch: {
+    searchValue() {
+      this.param = { ...this.param, query: this.searchValue }
+      this.courtPageList(1)
+    }
+  }
 };
 </script>
