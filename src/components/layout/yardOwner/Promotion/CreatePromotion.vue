@@ -247,7 +247,7 @@ export default {
               if (res.data) {
                 this.promotion = new Promotion();
                 this.$toast.open({
-                  message: 'Tạo Sân Thành Công !',
+                  message: 'Tạo Khuyến Mãi Thành Công !',
                   position: 'top-right',
                   type: 'success',
                 });

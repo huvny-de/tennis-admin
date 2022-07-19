@@ -1,4 +1,5 @@
 <template>
+  <preloader-component :class="loading == false ? 'hidden' : ''" />
   <div class="px-6 flex flex-col items-center justify-between">
     <div class="mt-2 dark:bg-gray-800 p-5 w-full px-4 rounded-md box-border">
       <div class="container flex items-center justify-between">
@@ -6,45 +7,13 @@
           <h2 class="font-bold text-lg text-gray-600 dark:text-gray-200">
             Danh Sách Phê Duyệt
           </h2>
-          <p class="my-2 text-[#334D6E]">Tổng số yêu cầu : 8</p>
+          <p class="my-2 text-[#334D6E]">
+            Tổng số yêu cầu : {{ displayInfo.totalRequest }}
+          </p>
         </span>
         <div class="flex items-center justify-between">
           <div class="container mx-auto flex px-4">
             <div class="mx-auto flex items-center justify-center">
-              <div class="mr-5">
-                <p class="text-gray-500 font-lexend font-normal mb-1">
-                  Từ Ngày
-                </p>
-                <input type="date" class="
-                    bg-gray-50
-                    border border-gray-500
-                    text-gray-900
-                    sm:text-sm
-                    rounded-lg
-                    focus:ring-blue-600 focus:border-blue-600
-                    block
-                    w-full
-                    p-2.5
-                    datepicker-input
-                  " />
-              </div>
-              <div class="mr-5">
-                <p class="text-gray-500 font-lexend font-normal mb-1">
-                  Đến Ngày
-                </p>
-                <input type="date" class="
-                    bg-gray-50
-                    border border-gray-500
-                    text-gray-900
-                    sm:text-sm
-                    rounded-lg
-                    focus:ring-blue-500 focus:border-blue-500
-                    block
-                    w-full
-                    p-2.5
-                    datepicker-input
-                  " />
-              </div>
               <div class="mr-5">
                 <p class="text-gray-500 font-lexend font-normal mb-1">
                   Trạng Thái
@@ -178,7 +147,7 @@
                   Thao Tác
                 </th>
                 <tbody class="bg-white">
-                  <tr v-for="member in approveList" :key="member.id">
+                  <tr v-for="member in approveRequestInfo" :key="member.id">
                     <td class="
                         px-6
                         py-5
@@ -187,22 +156,10 @@
                       ">
                       <div class="flex items-center">
                         <div class="flex-shrink object-contain">
-                          <img class="rounded-2xl mr-3 w-8 h-8" :src="member.img" />
+                          <img @load="closeWaiting" class="rounded-2xl mr-3 w-8 h-8" :src="member.Avatar" />
                         </div>
                         <div class="ml-4 text-[#334D6E]">
-                          {{ member.owner }}
-                        </div>
-                      </div>
-                    </td>
-                    <td class="
-                        px-2
-                        py-4
-                        border-b border-gray-200
-                        whitespace-nowrap
-                      ">
-                      <div class="flex items-center">
-                        <div class="ml-4 text-[#334D6E]">
-                          {{ member.storeName }}
+                          {{ member.FullName }}
                         </div>
                       </div>
                     </td>
@@ -214,7 +171,7 @@
                       ">
                       <div class="flex items-center">
                         <div class="ml-4 text-[#334D6E]">
-                          {{ member.email }}
+                          {{ member.Vendor[0].VendorName }}
                         </div>
                       </div>
                     </td>
@@ -226,7 +183,19 @@
                       ">
                       <div class="flex items-center">
                         <div class="ml-4 text-[#334D6E]">
-                          {{ member.phoneNumber }}
+                          {{ member.Email }}
+                        </div>
+                      </div>
+                    </td>
+                    <td class="
+                        px-2
+                        py-4
+                        border-b border-gray-200
+                        whitespace-nowrap
+                      ">
+                      <div class="flex items-center">
+                        <div class="ml-4 text-[#334D6E]">
+                          {{ member.PhoneNumber }}
                         </div>
                       </div>
                     </td>
@@ -237,9 +206,12 @@
                         whitespace-nowrap
                       ">
                       <div class="flex items-center">
-                        <span v-if="member.status === 1" class="font-semibold text-pink-500">Đang Chờ Duyệt</span>
-                        <span v-else-if="member.status === 2" class="font-semibold text-[#50D222]">Đã Duyệt</span>
-                        <span v-else-if="member.status === 3" class="font-semibold text-red-500">Từ Chối</span>
+                        <span v-if="member.Vendor[0].StatusId == 2" class="font-semibold text-pink-500">Đang Chờ
+                          Duyệt</span>
+                        <span v-else-if="member.Vendor[0].StatusId == 3" class="font-semibold text-[#50D222]">Đã
+                          Duyệt</span>
+                        <span v-else-if="member.Vendor[0].StatusId == 4" class="font-semibold text-red-500">Từ
+                          Chối</span>
                       </div>
                     </td>
                     <td class="
@@ -289,7 +261,7 @@
                       <div v-else class="flex items-center">
                         <div class="ml-4 text-[#334D6E]">
                           <div class="flex items-center">
-                            <Icon @click="showDetail(member.id)" class="
+                            <Icon @click="showDetail(member.Id)" class="
                                 w-7
                                 h-7
                                 mr-2
@@ -318,7 +290,7 @@
                 lg:mt-4
                 text-sm
               ">
-              <nav aria-label="Page navigation example mx-auto">
+              <nav v-show="pageCount > 1" aria-label="Page navigation example mx-auto">
                 <ul class="inline-flex -space-x-px">
                   <li>
                     <span v-if="currentPage == 1" class="
@@ -409,17 +381,18 @@
     </div>
   </div>
   <!--The Modal-->
-  <ModalOwnerDetail @accept="AcceptRequest" @decline="showAlert"
-    :hidden-button="(ownerDetail.status === 2 || ownerDetail.status === 3) ? true : false" :disabledInput="true"
-    :class="isHiddenModal === false ? 'hidden' : ''" :detail="ownerDetail" :click="countClick" />
+  <ModalOwnerDetail @accept="AcceptRequest" @decline="showAlert" :hidden-button="
+    ownerDetail.status === 2 || ownerDetail.status === 3 ? true : false
+  " :disabledInput="true" :class="isHiddenModal === false ? 'hidden' : ''" :detail="ownerDetail" :click="countClick" />
 </template>
 
 <script>
 import { Icon } from "@iconify/vue";
 import ModalOwnerDetail from "./ModalOwnerDetail.vue";
+// import TokenService from "@/services/token/token.service";
+import UserService from "@/services/user.service";
+import VendorService from "@/services/vendor.service";
 import swal from "sweetalert";
-
-
 
 export default {
   components: { Icon, ModalOwnerDetail },
@@ -601,34 +574,97 @@ export default {
         },
       ],
       isHiddenModal: false,
-      ownerDetail: {},
+      ownerDetail: "",
       countClick: 0,
-      currentPage: 1,
+      param: {
+        pageSize: 5,
+        query: "",
+        currentPage: 1,
+      },
+      displayInfo: {
+        pageCount: 0,
+        totalRequest: 0,
+      },
+      loading: true,
+
+      requestList: {},
+      approveRequestInfo: [],
     };
   },
+  created() {
+    this.loadApproveRequest();
+  },
   methods: {
-    showDetail(id) {
+    showDetail(Id) {
       this.isHiddenModal = true;
       this.countClick++;
-      this.ownerDetail = this.approveList.find((x) => x.id == id);
+      this.ownerDetail = this.approveRequestInfo.find((x) => x.Id == Id);
 
+      
 
     },
+    loadApproveRequest() {
+      VendorService.loadVendorRequestApprove(this.param)
+        .then((res) => {
+          this.requestList = { ...res.data };
+          this.displayInfo.totalRequest = this.requestList.Count;
+          this.displayInfo.pageCount = this.requestList.PageCount;
+
+
+
+          this.requestList.Value.forEach((info) => {
+            UserService.getOwnerProfile(info.InsertedBy)
+              .then((res) => {
+                if (res.data) {
+                  this.approveRequestInfo.push(res.data);
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
     AcceptRequest(id) {
+      this.loading = true;
+      let idRequest = 0;
+
+      this.requestList.Value.forEach((info) => {
+        if (info.InsertedBy == id) {
+          idRequest = info.RecordId
+        }
+      })
+
       swal("Bạn có chắc chắn phê duyệt chủ sân này không ?", {
         buttons: ["Hủy", "Đồng Ý"],
       }).then((value) => {
         if (value) {
-          swal("Phê Duyệt Thành Công !", {
-            icon: "success",
-          }).then(() => {
-            this.approveList.forEach((approve) => {
-              if (approve.id === id) {
-                approve.status = 2;
+          VendorService.approveVendorRequest(idRequest)
+            .then((res) => {
+              if (res.data) {
+                this.$toast.open({
+                  message: "Phê Duyệt Thành Công !",
+                  position: "top-right",
+                  type: "success",
+                });
               }
+              this.approveRequestInfo = [];
+              this.loadApproveRequest();
+            })
+            .catch((err) => {
+              console.log(err);
+              this.$toast.open({
+                message: "Đã có lỗi xảy ra !",
+                position: "top-right",
+                type: "error",
+              });
             });
-          });
-
         }
       });
     },
@@ -639,35 +675,38 @@ export default {
         dangerMode: true,
       }).then((willDelete) => {
         if (willDelete) {
-          // let text_area = html_text.html_text_area
-
-          this.$swal.fire({
-            title: 'Lý Do Từ Chối',
-            input: "textarea",
-            confirmButtonText: 'Xác Nhận',
-            focusConfirm: false,
-            preConfirm: (value) => {
-              if (!value) {
-                this.$swal.showValidationMessage(`Xin hãy nhập lý do !`)
-              }
-              return { reason: value }
-            }
-          }).then((result) => {
-            if (result.value.reason.length > 0) {
-              this.approveList.forEach((approve) => {
-                if (approve.id === id) {
-                  approve.status = 3;
+          this.$swal
+            .fire({
+              title: "Lý Do Từ Chối",
+              input: "textarea",
+              confirmButtonText: "Xác Nhận",
+              focusConfirm: false,
+              preConfirm: (value) => {
+                if (!value) {
+                  this.$swal.showValidationMessage(`Xin hãy nhập lý do !`);
                 }
-              });
-              swal("Từ Chối Thành Công !", {
-                icon: "success",
-              });
-            }
-          })
+                return { reason: value };
+              },
+            })
+            .then((result) => {
+              if (result.value.reason.length > 0) {
+                this.approveList.forEach((approve) => {
+                  if (approve.id === id) {
+                    approve.status = 3;
+                  }
+                });
+                swal("Từ Chối Thành Công !", {
+                  icon: "success",
+                });
+              }
+            });
         }
       });
     },
-  }
+    closeWaiting() {
+      this.loading = false;
+    },
+  },
 };
 </script>
 

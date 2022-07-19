@@ -17,41 +17,19 @@
       id="username"
       type="number"
       placeholder="ví dụ 1.25"
+      v-model="normalDate_rating.coefficient"
     />
   </div>
-  <div class="flex justify-end pt-4 px-8">
-    <button
-      type="button"
-      class="
-        px-4
-        bg-transparent
-        p-1
-        rounded-lg
-        text-indigo-500
-        hover:bg-gray-100 hover:text-indigo-400
-        mr-2
-      "
-      @click="hiddenModal"
-    >
-      Đóng
-    </button>
-    <button
-      class="
-        modal-close
-        px-4
-        bg-indigo-500
-        p-1
-        py-2
-        rounded-lg
-        text-white
-        hover:bg-indigo-400
-      "
-    >
-      Áp Dụng
-    </button>
-  </div>
+  
 </template>
 
 <script>
-export default {};
+export default {
+  props : ['rate_setting'],
+  data() {
+    return {
+      normalDate_rating : this.rate_setting[0]
+    }
+  },
+};
 </script>

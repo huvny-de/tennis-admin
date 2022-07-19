@@ -8,8 +8,8 @@
           <div class="bg-white p-3 border-t-4 border-green-400">
             <div class="image overflow-hidden">
               <img
-                class="h-72 object-cover w-full mx-auto"
-                src="../../../../assets/img/son.jpg"
+                class="h-64 object-cover w-full mx-auto"
+                :src="userProfile.Avatar"
                 alt=""
               />
             </div>
@@ -36,28 +36,9 @@
                   <div class="px-4 py-2 font-semibold w-48">Họ Tên:</div>
                   <div class="px-1 py-2">
                     <div class="relative">
-                      <p
-                        class="text-2xl text-red-500 absolute right-4 top-[10px]"
-                      >
-                        *
-                      </p>
-                      <input
-                        :disabled="disabledInput"
-                        :class="disabledInput ? 'bg-gray-50' : ''"
-                        placeholder="Nhập họ tên"
-                        type="text"
-                        class="mt-2 w-64 px-2 py-1 place-holder-grey-400 text-grey-700 rounded text-sm shadow focus:outline-none focus:ring-50 mb-1 pr-8"
-                        required
-                      />
-                      <!-- <p v-if="err.errVendorName" class="
-                        absolute
-                        top-[138%]
-                        left-0
-                        error-text
-                        text-center text-red-700
-                      " role="alert">
-                    * {{ err.errVendorName }}
-                  </p> -->
+                      <div class="px-1 py-1 text-left">
+                        {{ userProfile.FullName }}
+                      </div>
                     </div>
                   </div>
                 </span>
@@ -65,37 +46,10 @@
                 <span class="flex items-center">
                   <div class="px-4 py-2 font-semibold w-48">Email:</div>
                   <div class="px-1 py-2">
-                    <!-- <input
-                      :disabled="disabledInput"
-                      :class="disabledInput ? 'bg-gray-50' : ''"
-                      type="text"
-                      placeholder="Placeholder"
-                      class="px-2 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
-                      value="sonstarnguyen@gmail.com"
-                    /> -->
                     <div class="relative">
-                      <p
-                        class="text-2xl text-red-500 absolute right-4 top-[10px]"
-                      >
-                        *
-                      </p>
-                      <input
-                        :disabled="disabledInput"
-                        :class="disabledInput ? 'bg-gray-50' : ''"
-                        placeholder="Nhập email"
-                        type="text"
-                        class="mt-2 w-64 px-2 py-1 place-holder-grey-400 text-grey-700 rounded text-sm shadow focus:outline-none focus:ring-50 mb-1 pr-8"
-                        required
-                      />
-                      <!-- <p v-if="err.errVendorName" class="
-                        absolute
-                        top-[138%]
-                        left-0
-                        error-text
-                        text-center text-red-700
-                      " role="alert">
-                    * {{ err.errVendorName }}
-                  </p> -->
+                      <div class="px-1 py-1 text-left">
+                        {{ userProfile.Email }}
+                      </div>
                     </div>
                   </div>
                 </span>
@@ -106,43 +60,22 @@
                   </div>
                   <div class="px-1 py-2">
                     <div class="relative">
-                      <p
-                        class="text-2xl text-red-500 absolute right-4 top-[10px]"
-                      >
-                        *
-                      </p>
-                      <input
-                        :disabled="disabledInput"
-                        :class="disabledInput ? 'bg-gray-50' : ''"
-                        placeholder="Nhập số điện thoại"
-                        type="text"
-                        class="mt-2 w-64 px-2 py-1 place-holder-grey-400 text-grey-700 rounded text-sm shadow focus:outline-none focus:ring-50 mb-1 pr-8"
-                        required
-                      />
-                      <!-- <p v-if="err.errVendorName" class="
-                        absolute
-                        top-[138%]
-                        left-0
-                        error-text
-                        text-center text-red-700
-                      " role="alert">
-                    * {{ err.errVendorName }}
-                  </p> -->
+                      <div class="px-1 py-1 text-left">
+                        {{ userProfile.PhoneNumber }}
+                      </div>
                     </div>
                   </div>
                 </span>
                 <span class="flex items-center pb-5 mt-2">
-                  <div class="pl-4 pr-2 py-2 font-semibold w-48">
+                  <div class="pl-4 pr-2 py-2 font-semibold w-48 mt-1">
                     Ngày Đăng Kí:
                   </div>
                   <div class="px-1 pt-2">
-                    <input
-                      type="text"
-                      disabled
-                      placeholder="Placeholder"
-                      class="px-2 bg-gray-50 py-1 placeholder-slate-300 text-slate-600 relative rounded text-sm border border-slate-300 outline-none focus:outline-none focus:ring-100 w-64"
-                      value="20/05/2022"
-                    />
+                    <div class="px-1 py-1 text-left">
+                      {{
+                        new Date(userProfile.InsertedDate).toLocaleDateString()
+                      }}
+                    </div>
                   </div>
                 </span>
               </div>
@@ -165,6 +98,15 @@ export default {
     disabledInput: {
       type: Boolean,
       required: false,
+    },
+    userProfile: {
+      type: Object,
+      required: false,
+    },
+  },
+  watch: {
+    profileRequest() {
+      console.log(this.profileRequest);
     },
   },
 };

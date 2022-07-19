@@ -1,16 +1,17 @@
 export default class Vendor {
-    constructor(OwnerId, VendorName, AvatarUrl, noCourtForRent, OpenTime, CloseTime , Email , PhoneNumber, Address,StatusId,businessStatusId,RatingAverage) {
-        this.OwnerId = OwnerId;
-        this.VendorName = VendorName;
+    constructor(Id,AvatarUrl, PhoneNumber, Address, Active, OwnerId, OpenTime, CloseTime, RatingAverage, StatusId, BusinessStatusId, VendorName, Email) {
+        this.Id = Id;
         this.AvatarUrl = AvatarUrl;
-        this.noCourtForRent = noCourtForRent;
-        this.OpenTime = OpenTime;
-        this.CloseTime = CloseTime;
-        this.Email = Email;
         this.PhoneNumber = PhoneNumber;
         this.Address = Address;
-        this.StatusId = StatusId;
-        this.businessStatusId = businessStatusId;
+        this.Active = Active;
+        this.OwnerId = OwnerId;
+        this.OpenTime = OpenTime;
+        this.CloseTime = CloseTime;
         this.RatingAverage = RatingAverage;
+        this.StatusId = StatusId;
+        this.BusinessStatusId = BusinessStatusId;
+        this.VendorName = VendorName;
+        this.Email = Email;
     }
 }

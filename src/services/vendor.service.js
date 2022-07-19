@@ -30,7 +30,7 @@ class VendorService {
   }
 
   updateVendorProfile(vendor) {
-    return api.put(BASE_URL + "Vendor", {
+    return api.put(BASE_URL + "Vendor/UpdateAsync", {
       id: vendor.VendorId,
       avatarUrl: vendor.AvatarUrl,
       phoneNumber: vendor.PhoneNumber,
@@ -45,8 +45,38 @@ class VendorService {
       statusId: vendor.StatusId,
       businessStatusId: vendor.BusinessStatusId,
       vendorName: vendor.VendorName,
+      email: vendor.Email,
     });
   }
+
+  sendRequestToApprove(vendor) {
+    return api.post(BASE_URL + "VendorApprovement/SendRequest", {
+      vendorId: vendor.Id,
+    });
+  }
+
+  loadVendorRequestApprove(param) {
+    return api.get(BASE_URL + "VendorApprovement/PagedList", {
+      PageSize: param.pageSize,
+      queryString: param.queryString,
+      CurrentPage: param.currentPage,
+    });
+  }
+
+  approveVendorRequest(vendorId) {
+    return api.post(BASE_URL + "VendorApprovement/Approve", {
+      vendorId : vendorId
+    });
+  }
+  
+  rejectVendorRequest(vendorId , reasonText) {
+    return api.post((BASE_URL + "VendorApprovement/Reject", {
+      vendorId : vendorId,
+      reason : reasonText
+    }));
+  }
+
+
 }
 
 export default new VendorService();

@@ -96,7 +96,7 @@
                   </div>
                 </li>
               </ul>
-              <component :disabledInput="disabledInput" :is="isSelectedTab" :showCancel="hiddenButton"></component>
+              <component :userProfile="detail" :disabledInput="disabledInput" :is="isSelectedTab" :showCancel="hiddenButton"></component>
             </div>
             <div v-show="!hiddenButton" class="flex items-center justify-end mt-4">
               <div class="flex space-x-2 justify-center">
@@ -172,32 +172,32 @@ export default {
     hiddenModal() {
       this.isClose = true;
       this.isSelectedTab = "ModalOwnerProfile";
+      sessionStorage.removeItem('user_profile')
+
     },
     setSelectedTab(tab) {
       this.isSelectedTab = tab;
     },
     AcceptRequest() {
       this.hiddenModal();
-      this.$emit('accept', this.detail.id);
+      this.$emit("accept", this.detail.Id);
     },
     DeclineRequest() {
       this.hiddenModal();
-      this.$emit('decline', this.detail.id)
+      this.$emit("decline", this.detail.Id);
     },
     updateSuccess() {
       swal("Cập Nhật Thành Công !", {
         icon: "success",
       });
-    }
+    },
   },
   watch: {
     detail() {
       this.isClose = false;
-      this.isSelectedTab = "ModalOwnerProfile";
     },
     click() {
       this.isClose = false;
-      this.isSelectedTab = "ModalOwnerProfile";
     },
   },
 };

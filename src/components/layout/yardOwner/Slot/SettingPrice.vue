@@ -80,6 +80,7 @@
   <ModalSetting
     :class="isHiddenModal === true ? 'hidden' : ''"
     :detail="slotDetail"
+    :idType="idTypeCourt"
     :click="countClick"
   />
 </template>
@@ -95,6 +96,7 @@ export default {
   },
   data() {
     return {
+      idTypeCourt : '',
       isHiddenModal: true,
       countClick: 0, // using for display again when choose the same yard type
       listTypeYard: [
@@ -104,7 +106,7 @@ export default {
           yardType: "Sân Đất Nện",
         },
         {
-          img: "https://suasantennis.com/uploads/news/2014_08/santennisdangco.jpg",
+          img: "https://i.ibb.co/F0B5CqT/tennis-grass.jpg",
           id: 2,
           yardType: "Sân Cỏ",
         },
@@ -118,203 +120,19 @@ export default {
         {
           id: "1",
           typeName: "Sân Đất Nện",
-          slotDetail: [
-            {
-              slot: 1,
-              time: "5:00 AM - 6:30 AM",
-              basicPrice: "",
-            },
-            {
-              slot: 2,
-              time: "6:30 AM - 8:00 AM",
-              basicPrice: "",
-            },
-            {
-              slot: 3,
-              time: "8:00 AM - 9:30 AM",
-              basicPrice: "",
-            },
-            {
-              slot: 4,
-              time: "9:30 AM - 11:00 AM",
-              basicPrice: "",
-            },
-            {
-              slot: 5,
-              time: "11:00 AM - 12:00 AM",
-              basicPrice: "",
-            },
-            {
-              slot: 6,
-              time: "12:00 AM - 01:30 PM",
-              basicPrice: "",
-            },
-            {
-              slot: 7,
-              time: "01:30 PM - 03:00 PM",
-              basicPrice: "",
-            },
-            {
-              slot: 8,
-              time: "03:00 PM - 04:30 PM",
-              basicPrice: "",
-            },
-            {
-              slot: 9,
-              time: "04:30 PM - 06:00 PM",
-              basicPrice: "",
-            },
-            {
-              slot: 10,
-              time: "06:00 PM - 07:30 PM",
-              basicPrice: "",
-            },
-            {
-              slot: 11,
-              time: "07:30 PM - 09:00 PM",
-              basicPrice: "",
-            },
-            {
-              slot: 12,
-              time: "09:00 PM - 10:00 PM",
-              basicPrice: "",
-            },
-          ],
+          slotDetail : JSON.parse(sessionStorage.getItem('slot_array'))
         },
         {
           id: "2",
           typeName: "Sân Cỏ",
-          slotDetail: [
-            {
-              slot: 1,
-              time: "5:00 AM - 6:30 AM",
-              basicPrice: "",
-            },
-            {
-              slot: 2,
-              time: "6:30 AM - 8:00 AM",
-              basicPrice: "",
-            },
-            {
-              slot: 3,
-              time: "8:00 AM - 9:30 AM",
-              basicPrice: "",
-            },
-            {
-              slot: 4,
-              time: "9:30 AM - 11:00 AM",
-              basicPrice: "",
-            },
-            {
-              slot: 5,
-              time: "11:00 AM - 12:00 AM",
-              basicPrice: "",
-            },
-            {
-              slot: 6,
-              time: "12:00 AM - 01:30 PM",
-              basicPrice: "",
-            },
-            {
-              slot: 7,
-              time: "01:30 PM - 03:00 PM",
-              basicPrice: "",
-            },
-            {
-              slot: 8,
-              time: "03:00 PM - 04:30 PM",
-              basicPrice: "",
-            },
-            {
-              slot: 9,
-              time: "04:30 PM - 06:00 PM",
-              basicPrice: "",
-            },
-            {
-              slot: 10,
-              time: "06:00 PM - 07:30 PM",
-              basicPrice: "",
-            },
-            {
-              slot: 11,
-              time: "07:30 PM - 09:00 PM",
-              basicPrice: "",
-            },
-            {
-              slot: 12,
-              time: "09:00 PM - 10:00 PM",
-              basicPrice: "",
-            },
-          ],
+          slotDetail : JSON.parse(sessionStorage.getItem('slot_array'))
         },
         {
           id: "3",
           typeName: "Sân Cứng",
-          slotDetail: [
-            {
-              slot: 1,
-              time: "5:00 AM - 6:30 AM",
-              basicPrice: "",
-            },
-            {
-              slot: 2,
-              time: "6:30 AM - 8:00 AM",
-              basicPrice: "",
-            },
-            {
-              slot: 3,
-              time: "8:00 AM - 9:30 AM",
-              basicPrice: "",
-            },
-            {
-              slot: 4,
-              time: "9:30 AM - 11:00 AM",
-              basicPrice: "",
-            },
-            {
-              slot: 5,
-              time: "11:00 AM - 12:00 AM",
-              basicPrice: "",
-            },
-            {
-              slot: 6,
-              time: "12:00 AM - 01:30 PM",
-              basicPrice: "",
-            },
-            {
-              slot: 7,
-              time: "01:30 PM - 03:00 PM",
-              basicPrice: "",
-            },
-            {
-              slot: 8,
-              time: "03:00 PM - 04:30 PM",
-              basicPrice: "",
-            },
-            {
-              slot: 9,
-              time: "04:30 PM - 06:00 PM",
-              basicPrice: "",
-            },
-            {
-              slot: 10,
-              time: "06:00 PM - 07:30 PM",
-              basicPrice: "",
-            },
-            {
-              slot: 11,
-              time: "07:30 PM - 09:00 PM",
-              basicPrice: "",
-            },
-            {
-              slot: 12,
-              time: "09:00 PM - 10:00 PM",
-              basicPrice: "",
-            },
-          ],
+          slotDetail : JSON.parse(sessionStorage.getItem('slot_array'))
         },
       ],
-      slotDetail: {},
     };
   },
   methods: {
@@ -322,6 +140,7 @@ export default {
       this.isHiddenModal =false,
       this.countClick++;
       this.slotDetail = this.yards.find((yard) => yard.id == id);
+      this.idTypeCourt =  this.slotDetail.id
     },
   },
 };

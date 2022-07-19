@@ -114,7 +114,7 @@
                     <p v-if="!vendor.CloseTime" class="text-2xl text-red-500 absolute right-12 top-4">
                       *
                     </p>
-                    <input placeholder="Email" type="time"
+                    <input placeholder="Giờ Đóng Cửa" type="time"
                       class="mt-2 w-[90%] px-3 py-2 place-holder-grey-400 text-grey-700 rounded text-md shadow focus:outline-none focus:ring-50 mb-2 pr-8"
                       required v-model="vendor.CloseTime" />
                     <!-- <p v-if="err.errVendorName" class="
@@ -221,7 +221,6 @@ export default {
 
       this.getVendorProfile(this.userProfile.VendorId);
     }
-    this.loading = false;
   },
   data() {
     return {
@@ -308,6 +307,8 @@ export default {
       this.loading = false;
     },
     getVendorProfile() {
+      this.loading = true;
+      
       VendorService.getVendorProfile(this.userProfile.VendorId)
         .then((res) => {
           this.vendor = res.data;
@@ -353,6 +354,13 @@ export default {
       VendorService.updateVendorProfile(this.vendor)
         .then((res) => {
           if (res.data) {
+
+            this.$toast.open({
+              message: 'Cập Nhật Thành Công !',
+              position: 'top-right',
+              type: 'success',
+            });
+
             this.getVendorProfile(this.userProfile.VendorId);
           }
         })
