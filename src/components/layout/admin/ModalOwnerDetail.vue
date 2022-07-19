@@ -98,7 +98,7 @@
               </ul>
               <component :userProfile="detail" :disabledInput="disabledInput" :is="isSelectedTab" :showCancel="hiddenButton"></component>
             </div>
-            <div v-show="!hiddenButton" class="flex items-center justify-end mt-4">
+            <div v-show="detail.StatusTicked == 1" class="flex items-center justify-end mt-4">
               <div class="flex space-x-2 justify-center">
                 <button @click="AcceptRequest" type="button"
                   class="flex items-center px-10 py-2.5 bg-[#50AE01] text-white font-medium text-sm leading-tight uppercase rounded-full shadow-md hover:bg-[#78d22f] hover:shadow-lg focus:bg-[#78d22f] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out">
@@ -111,15 +111,6 @@
                   class="flex items-center px-11 py-2.5 bg-red-500 text-white font-medium text-sm leading-tight uppercase rounded-full shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out">
                   <Icon icon="ic:baseline-cancel"></Icon>
                   <p class="pl-2">Từ Chối</p>
-                </button>
-              </div>
-            </div>
-            <div v-show="!disabledInput" class="flex items-center justify-end mt-4">
-              <div class="flex space-x-2 justify-center">
-                <button @click="updateSuccess" type="button"
-                  class="flex items-center px-10 py-2.5 bg-[#50AE01] text-white font-medium text-sm leading-tight uppercase rounded-full shadow-md hover:bg-[#78d22f] hover:shadow-lg focus:bg-[#78d22f] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-lg transition duration-150 ease-in-out">
-                  <Icon icon="dashicons:update-alt"></Icon>
-                  <p class="pl-2">Cập Nhật</p>
                 </button>
               </div>
             </div>
@@ -153,10 +144,6 @@ export default {
       type: Number,
       require: true,
     },
-    hiddenButton: {
-      type: Boolean,
-      require: false,
-    },
     disabledInput: {
       type: Boolean,
       require: false,
@@ -172,7 +159,6 @@ export default {
     hiddenModal() {
       this.isClose = true;
       this.isSelectedTab = "ModalOwnerProfile";
-      sessionStorage.removeItem('user_profile')
 
     },
     setSelectedTab(tab) {
@@ -180,11 +166,11 @@ export default {
     },
     AcceptRequest() {
       this.hiddenModal();
-      this.$emit("accept", this.detail.Id);
+      this.$emit("accept", this.detail.VendorId);
     },
     DeclineRequest() {
       this.hiddenModal();
-      this.$emit("decline", this.detail.Id);
+      this.$emit("decline", this.detail.VendorId);
     },
     updateSuccess() {
       swal("Cập Nhật Thành Công !", {
@@ -195,6 +181,8 @@ export default {
   watch: {
     detail() {
       this.isClose = false;
+
+      console.log(this.detail)
     },
     click() {
       this.isClose = false;

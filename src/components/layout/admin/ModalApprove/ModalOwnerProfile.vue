@@ -7,11 +7,7 @@
           <!-- Profile Card -->
           <div class="bg-white p-3 border-t-4 border-green-400">
             <div class="image overflow-hidden">
-              <img
-                class="h-64 object-cover w-full mx-auto"
-                :src="userProfile.Avatar"
-                alt=""
-              />
+              <img class="h-64 object-cover w-full mx-auto" :src="userProfile.Avatar" alt="" />
             </div>
           </div>
           <!-- End of profile card -->
@@ -22,9 +18,7 @@
           <!-- Profile tab -->
           <!-- About Section -->
           <div class="bg-white p-3 shadow-sm rounded-sm">
-            <div
-              class="flex items-center space-x-2 font-semibold text-gray-600 leading-8 px-4"
-            >
+            <div class="flex items-center space-x-2 font-semibold text-gray-600 leading-8 px-4">
               <span clas="text-green-500">
                 <font-awesome-icon icon="user" class="text-lg" />
               </span>
@@ -73,7 +67,7 @@
                   <div class="px-1 pt-2">
                     <div class="px-1 py-1 text-left">
                       {{
-                        new Date(userProfile.InsertedDate).toLocaleDateString()
+                          new Date(userProfile.InsertedDate).toLocaleDateString()
                       }}
                     </div>
                   </div>
@@ -103,6 +97,7 @@ export default {
       type: Object,
       required: false,
     },
+   
   },
   watch: {
     profileRequest() {

@@ -70,12 +70,19 @@ class VendorService {
   }
   
   rejectVendorRequest(vendorId , reasonText) {
-    return api.post((BASE_URL + "VendorApprovement/Reject", {
+    return api.post(BASE_URL + "VendorApprovement/Reject" ,{
       vendorId : vendorId,
       reason : reasonText
-    }));
+    })
   }
 
+  getTicketApprove(vendorId) {
+    return api.get(BASE_URL + "VendorApprovement/GetByVendorId", {
+      params : {
+        vendorId : vendorId
+      }
+    })
+  }
 
 }
 

@@ -206,11 +206,11 @@
                         whitespace-nowrap
                       ">
                       <div class="flex items-center">
-                        <span v-if="member.Vendor[0].StatusId == 2" class="font-semibold text-pink-500">Đang Chờ
+                        <span v-if="member.StatusTicked == 1" class="font-semibold text-pink-500">Đang Chờ
                           Duyệt</span>
-                        <span v-else-if="member.Vendor[0].StatusId == 3" class="font-semibold text-[#50D222]">Đã
+                        <span v-else-if="member.StatusTicked == 2" class="font-semibold text-[#50D222]">Đã
                           Duyệt</span>
-                        <span v-else-if="member.Vendor[0].StatusId == 4" class="font-semibold text-red-500">Từ
+                        <span v-else-if="member.StatusTicked == 3" class="font-semibold text-red-500">Từ
                           Chối</span>
                       </div>
                     </td>
@@ -383,7 +383,8 @@
   <!--The Modal-->
   <ModalOwnerDetail @accept="AcceptRequest" @decline="showAlert" :hidden-button="
     ownerDetail.status === 2 || ownerDetail.status === 3 ? true : false
-  " :disabledInput="true" :class="isHiddenModal === false ? 'hidden' : ''" :detail="ownerDetail" :click="countClick" />
+  " :disabledInput="true" :class="isHiddenModal === false ? 'hidden' : ''" 
+    :detail="ownerDetail" :click="countClick" />
 </template>
 
 <script>
@@ -589,6 +590,7 @@ export default {
 
       requestList: {},
       approveRequestInfo: [],
+      hiddenButton: false
     };
   },
   created() {
@@ -600,7 +602,7 @@ export default {
       this.countClick++;
       this.ownerDetail = this.approveRequestInfo.find((x) => x.Id == Id);
 
-      
+
 
     },
     loadApproveRequest() {
@@ -612,10 +614,16 @@ export default {
 
 
 
+
           this.requestList.Value.forEach((info) => {
             UserService.getOwnerProfile(info.InsertedBy)
               .then((res) => {
                 if (res.data) {
+                  let object_request = res.data;
+                  object_request['IdTicket'] = info.Id;
+                  object_request['StatusTicked'] = info.StatusId;
+                  object_request['IdTicket'] = info.Id;
+                  object_request['VendorId'] = info.RecordId;
                   this.approveRequestInfo.push(res.data);
                 }
               })
@@ -630,22 +638,17 @@ export default {
         .finally(() => {
           this.loading = false;
         });
+
+
     },
     AcceptRequest(id) {
       this.loading = true;
-      let idRequest = 0;
-
-      this.requestList.Value.forEach((info) => {
-        if (info.InsertedBy == id) {
-          idRequest = info.RecordId
-        }
-      })
 
       swal("Bạn có chắc chắn phê duyệt chủ sân này không ?", {
         buttons: ["Hủy", "Đồng Ý"],
       }).then((value) => {
         if (value) {
-          VendorService.approveVendorRequest(idRequest)
+          VendorService.approveVendorRequest(id)
             .then((res) => {
               if (res.data) {
                 this.$toast.open({
@@ -666,9 +669,15 @@ export default {
               });
             });
         }
+
       });
     },
     showAlert(id) {
+
+      this.loading = true;
+
+
+
       swal("Bạn có chắc chắn sẽ từ chối chủ sân này không?", {
         icon: "warning",
         buttons: true,
@@ -690,14 +699,34 @@ export default {
             })
             .then((result) => {
               if (result.value.reason.length > 0) {
-                this.approveList.forEach((approve) => {
-                  if (approve.id === id) {
-                    approve.status = 3;
-                  }
-                });
-                swal("Từ Chối Thành Công !", {
-                  icon: "success",
-                });
+                let rejectReason = result.value.reason;
+
+                VendorService.rejectVendorRequest(id, rejectReason)
+                  .then(res => {
+                    if (res.data) {
+                      this.$toast.open({
+                        message: "Đã Từ Chối !",
+                        position: "top-right",
+                        type: "success",
+                      });
+
+                      this.approveRequestInfo = [];
+                      this.loadApproveRequest();
+                    }
+                  }).catch(err => {
+                    console.log(err)
+                    this.$toast.open({
+                      message: "Đã có lỗi xảy ra !",
+                      position: "top-right",
+                      type: "error",
+                    });
+
+                  }).finally(() => {
+                    this.loading = false;
+                  })
+
+              }else {
+                 this.loading = false;
               }
             });
         }
@@ -707,6 +736,7 @@ export default {
       this.loading = false;
     },
   },
+ 
 };
 </script>
 
