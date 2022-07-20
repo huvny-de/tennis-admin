@@ -135,7 +135,7 @@
         <div>
           <nav>
             <button
-              class="mx-auto bg-gray-500 hover:bg-gray-700 duration-200 text-white font-medium py-2 px-4 rounded w-20 text-md"
+              class="mx-auto bg-gray-500 hover:bg-gray-700 duration-200 text-white font-medium py-2 px-4 rounded w-25 text-md"
               type="button"
             >
               <router-link :to="{ name: 'Home' }" class="no-underline"

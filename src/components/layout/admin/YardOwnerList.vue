@@ -340,19 +340,18 @@
 
 
   <!--The Modal-->
-  <ModalOwnerDetail :class="isHiddenModal === false ? 'hidden' : ''" :detail="ownerDetail" :click="countClick"
-    :hiddenButton="true" :disabledInput="false" />
+  <!-- <ModalOwnerDetail :class="isHiddenModal === false ? 'hidden' : ''" :detail="ownerDetail" :click="countClick"
+    :hiddenButton="true" :disabledInput="false" /> -->
 </template>
 <script>
 
-import ModalOwnerDetail from "./ModalOwnerDetail.vue";
+// import ModalOwnerDetail from "./ModalOwnerDetail.vue";
 import { Icon } from "@iconify/vue";
 import swal from "sweetalert";
 
 export default {
   name: "YardOwnerList",
   components: {
-    ModalOwnerDetail,
     Icon,
   },
   mounted() {
