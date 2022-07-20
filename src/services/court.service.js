@@ -40,7 +40,15 @@ class CourtService {
   }
 
   deleteCourt(court_id) {
-    return api.delete(BASE_URL + `Court/${court_id}`)
+    return api.delete(BASE_URL + `Court/${court_id}`);
+  }
+
+  getCourtById(court_id) {
+    return api.get(BASE_URL + "Court/GetOne", {
+      params: {
+        Id: court_id,
+      },
+    });
   }
 }
 

@@ -25,6 +25,14 @@ class SlotService {
   createRatingForSlotByDate(rate_detail) {
     return api.put(BASE_URL + "CalendarConfig/BulkUpdate", rate_detail);
   }
+
+  getSlotById(slot_id) {
+    return api.get(BASE_URL + "Slot/GetOne", {
+      params : {
+        Id : slot_id
+      }
+    });
+  }
 }
 
 export default new SlotService();

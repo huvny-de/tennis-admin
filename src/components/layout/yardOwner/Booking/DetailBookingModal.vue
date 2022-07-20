@@ -21,24 +21,26 @@
                             <div class="grid grid-col gap-2">
                                 <span class="flex items-center">
                                     <div class="px-4 py-2 font-semibold">Tài khoản yêu cầu:</div>
-                                    <div class="px-1 py-2">sonnct</div>
+                                    <div class="px-1 py-2">{{ initData.UserData.UserName }}</div>
                                 </span>
 
                                 <span class="flex items-center">
                                     <div class="px-4 py-2 font-semibold w-44">Họ Tên:</div>
-                                    <div class="px-1 py-2">Nguyên Công Thái Sơn</div>
+                                    <div class="px-1 py-2">{{ initData.UserData.FullName }}</div>
                                 </span>
 
                                 <span class="flex items-center">
                                     <div class="px-4 py-2 font-semibold w-44">Email:</div>
-                                    <div class="px-1 py-2">hoangthien@gmail.com</div>
+                                    <div class="px-1 py-2">{{ initData.UserData.Email }}</div>
                                 </span>
 
                                 <span class="flex items-center">
                                     <div class="pl-4 pr-2 py-2 font-semibold w-44">
                                         Số điện thoại:
                                     </div>
-                                    <div class="px-1 py-2">0978-145-440</div>
+                                    <div class="px-1 py-2">
+                                        {{ initData.UserData.PhoneNumber }}
+                                    </div>
                                 </span>
 
                                 <span class="flex items-center">
@@ -51,7 +53,7 @@
                                     <div class="pl-4 pr-2 py-2 font-semibold w-44">
                                         Tên Sân Thuê:
                                     </div>
-                                    <div class="px-1 py-2">Sân 1A</div>
+                                    <div class="px-1 py-2">{{ textCourtName }}</div>
                                 </span>
                                 <span class="flex items-center">
                                     <div class="pl-4 pr-2 py-2 font-semibold w-44">
@@ -90,17 +92,19 @@
     </div>
 </template>
 <script>
-import { Icon } from "@iconify/vue";
+// import { Icon } from "@iconify/vue";
 import swal from "sweetalert";
+import CourtService from "@/services/court.service";
+import SlotService from "@/services/slot.service";
 
 export default {
     components: {
-        Icon,
+        // Icon,
     },
     props: {
-        profile: {
+        bookingDetail: {
             type: Object,
-            require: true,
+            require: false,
         },
         click: {
             type: Number,
@@ -110,7 +114,60 @@ export default {
     data() {
         return {
             isClose: false,
+            initData: {
+                Id: 3,
+                VendorId: 11,
+                TotalPrice: 200000,
+                InsertedDate: "2022-07-18T00:00:00+07:00",
+                InsertedBy: 1,
+                Note: "Love",
+                StatusId: 1,
+                Active: true,
+                PaymentId: 1,
+                UserData: {
+                    Id: 1,
+                    FirstName: "Henry",
+                    LastName: "Aaron",
+                    MiddleName: "de",
+                    FullName: "Aaron de Henry",
+                    DoB: "2000-04-15T00:00:00+07:00",
+                    Address: "Thủ Đức",
+                    PhoneNumber: "876543217",
+                    Avatar: "https://i.ibb.co/ByyCZT0/avatar.jpg",
+                    Password:
+                        "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9",
+                    UserName: "sys",
+                    LoginFailedCount: 0,
+                    LastLogin: "2022-07-20T10:04:36.7440062+07:00",
+                    LastFailedLogin: "2022-07-19T00:00:00+07:00",
+                    Email: "henri@gmail.com",
+                    GenderId: 1,
+                    Active: true,
+                    InsertedDate: "2022-06-19T00:00:00+07:00",
+                    InsertedBy: 1,
+                },
+            },
         };
+    },
+    computed: {
+        textCourtName() {
+            if (this.initData.BookingDetail) {
+               
+                return this.initData.BookingDetail[length-1].textCourtName;
+            } else {
+                return ''
+            }
+
+        },
+         textSlotName() {
+            if (this.initData.BookingDetail) {
+               
+                return this.initData.BookingDetail[length-1].textSlot;
+            } else {
+                return ''
+            }
+
+        }
     },
     methods: {
         hiddenModal() {
@@ -126,23 +183,22 @@ export default {
                     swal({
                         text: "Xin Hãy Nhập Lý Do :",
                         content: {
-                            element: "textarea", attributes: {
+                            element: "textarea",
+                            attributes: {
                                 placeholder: "Nhập Lý Do",
-                                required: true
-                            }
+                                required: true,
+                            },
                         },
-                        button: "Xác Nhận"
-                    })
+                        button: "Xác Nhận",
+                    }).then((value) => {
+                        if (value) {
+                            swal("Từ Chối Thành Công !", {
+                                icon: "success",
+                            });
 
-                        .then((value) => {
-                            if (value) {
-                                swal("Từ Chối Thành Công !", {
-                                    icon: "success",
-                                });
-
-                                this.hiddenModal();
-                            }
-                        });
+                            this.hiddenModal();
+                        }
+                    });
                 }
             });
         },
@@ -152,11 +208,40 @@ export default {
             });
 
             this.hiddenModal();
-        }
+        },
     },
     watch: {
-        profile() {
+        bookingDetail() {
             this.isClose = false;
+            this.initData = this.bookingDetail;
+            this.initData.textCourtName = "";
+            this.initData.textSlot = "";
+            let textCourtName = "";
+            let textSlot = "";
+
+            if (this.initData.BookingDetail) {
+                this.initData.BookingDetail.forEach((detail) => {
+                    CourtService.getCourtById(detail.CourtId).then((res) => {
+                        if (res.data) {
+                            let court = res.data;
+                            textCourtName += court.Name + ", ";
+                            detail.textCourtName = textCourtName;
+                        }
+                    });
+
+
+                    SlotService.getSlotById(detail.SlotId).then((res) => {
+                        if (res.data) {
+                            let slot = res.data;
+                            textSlot += `${slot.StartTime.slice(0, 5)}-${slot.EndTime.slice(0, 5)} ,`;
+                            detail.textSlot = textSlot;
+                        }
+                    });
+
+                });
+            }
+
+            console.log(this.initData)
         },
         click() {
             this.isClose = false;

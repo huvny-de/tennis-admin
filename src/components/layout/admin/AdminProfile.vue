@@ -139,7 +139,7 @@
               type="button"
             >
               <router-link :to="{ name: 'Home' }" class="no-underline"
-                >Back</router-link
+                >Quay lại</router-link
               >
             </button>
           </nav>
@@ -149,7 +149,7 @@
           <button
             class="mx-auto bg-green-500 hover:bg-green-700 duration-200 text-white font-medium py-2 px-4 rounded w-25 text-md ml-3"
           >
-            Update
+            Cập Nhật
           </button>
         </div>
       </div>
